@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+
+website:
+  title: "Ben Stockton's Stats Site"
+  search: true
+  cookie-consent: false
+  twitter-card: true
+  open-graph: true
+  site-url: https://benjamin-stockton.github.io
+  navbar:
+    left:
+      - blog.qmd
+      - projects.qmd
+      - publications.qmd
+      # - text: CV
+      #   href: "_site/2023_NSF_Resume_20230207.pdf"
+      - about.qmd
+    right:
+      - icon: github
+        href: https://github.com/benjamin-stockton
+      - icon: linkedin
+        href: https://linkedin.com/in/benjamin-stockton-329507160/
+  page-footer: 
+    left: ""
+
+format:
+  html:
+    theme: 
+      - cosmo
+      - custom.scss
+    css: styles.css
