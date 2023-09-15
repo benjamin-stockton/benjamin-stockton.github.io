@@ -25,5 +25,5 @@ title: "Projects"
 
 ## Presentations
 
-- NESS 2023 - "Multiple Imputation with Angular Covariates" ([pdf](_site/StocktonBenjamin_ENAR_Presentation2023 - Final.pdf))
-- ENAR 2023 - "Multiple Imputation with Angular Covariates" ([pdf](_site/NESS_Presentation - Edits - BS2023-06-05.pdf))
+- NESS 2023 - "Multiple Imputation with Angular Covariates" ([pdf](StocktonBenjamin_ENAR_Presentation2023 - Final.pdf))
+- ENAR 2023 - "Multiple Imputation with Angular Covariates" ([pdf](NESS_Presentation - Edits - BS2023-06-05.pdf))

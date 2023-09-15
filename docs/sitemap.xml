@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://benjamin-stockton.github.io/index.html</loc>
-    <lastmod>2023-09-15T13:56:21.337Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2023-09-15T13:56:14.482Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/projects.html</loc>
-    <lastmod>2023-09-15T13:55:05.678Z</lastmod>
+    <loc>https://benjamin-stockton.github.io/about.html</loc>
+    <lastmod>2023-09-15T15:45:32.654Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/blog.html</loc>
-    <lastmod>2023-09-15T13:55:02.339Z</lastmod>
+    <lastmod>2023-09-15T15:45:32.838Z</lastmod>
   </url>
   <url>
-    <loc>https://benjamin-stockton.github.io/about.html</loc>
-    <lastmod>2023-09-15T13:56:16.017Z</lastmod>
+    <loc>https://benjamin-stockton.github.io/index.html</loc>
+    <lastmod>2023-09-15T15:45:32.982Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
-    <lastmod>2023-09-15T13:51:50.549Z</lastmod>
+    <lastmod>2023-09-15T15:45:33.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/projects.html</loc>
+    <lastmod>2023-09-15T15:45:33.246Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/publications.html</loc>
+    <lastmod>2023-09-15T15:45:33.370Z</lastmod>
   </url>
 </urlset>

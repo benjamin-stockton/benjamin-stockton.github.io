@@ -1,5 +1,5 @@
 ---
-image: _site/boulders.jpg
+image: boulders.jpg
 about:
   template: marquee
   links:

@@ -2,7 +2,7 @@
 title: ""
 about:
     template: trestles
-    image: "_site/campsite.jpg"
+    image: "campsite.jpg"
     links:
         - icon: github
           text: GitHub
@@ -20,7 +20,7 @@ I am a PhD candidate in Statistics in my fifth year at the University of Connect
 
 ## CV & Other Files
 
--   [CV](_site/2023_NSF_Resume_20230207.pdf)
+-   [CV](2023_NSF_Resume_20230207.pdf)
 
 -   Research statement
 
