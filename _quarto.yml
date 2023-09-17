@@ -31,5 +31,5 @@ format:
   html:
     theme: 
       - cosmo
-      # - custom.scss
+      - custom.scss
     css: styles.css
