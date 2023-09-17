@@ -5,7 +5,7 @@ date: "2023-09-15"
 categories: [news]
 ---
 
-![](../../_site/miller-park.jpg)
+![](../../miller-park.jpg)
 
 Welcome to my blog!
 
