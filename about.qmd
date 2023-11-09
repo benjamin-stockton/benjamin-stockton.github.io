@@ -20,9 +20,9 @@ I am a PhD candidate in Statistics in my fifth year at the University of Connect
 
 ## CV & Other Files
 
--   [CV](Benjamin_Stockton_CV_20231109.pdf)
+-   [CV](Benjamin_Stockton_CV_20231109.pdf){target="_blank"}
 
--   [List of Statistics Journals](list_of_journals.pdf) for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic
+-   [List of Statistics Journals](list_of_journals.pdf){target="_blank"} for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic
 
 <!-- -   Research statement -->
 
