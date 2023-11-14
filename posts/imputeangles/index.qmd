@@ -51,11 +51,10 @@ library(broom.mixed)
 library(imputeangles)
 theme_set(theme_bw())
 
-pitches <- readr::read_csv()
+# pitches <- readr::read_csv()
 
 ```
 
 Now we'll take a look at an example of how to perform MI in practice in comparison to CCA. We have a data set of $N =$ caught pitches (swing and called strikes, balls, or hit by pitches) pitches from the 2023 MLB season with measurements for the pitch outcome, pitch velocity and spin direction and rate at release, release point, horizontal and vertical break, location at the plate, as well as the identity of the batter, pitcher, and ballpark. We will model the pitch outcome based on the other measurements while using random effects for the batter, pitcher, and ballpark. In this analysis our quantity of interest is the effect of spin rate $\beta_{SpinRate}$ on the pitch outcome given the pitch was not fouled off or put in play which will be estimated using a mixed effects logistic regression model.
 
 Multiple imputation will be performed using the chained equations or fully conditional specification with the `mice` R package [@buuren2010mice] with estimates pooled by the `broom.mixed` R package. The inline data will be imputed by `method = "norm"` which uses linear regression. The angular data, spin rate, will be imputed by `method = "bpnreg` which uses Bayesian projected normal regression [@cremers2021] from my `imputeangles` package.
-

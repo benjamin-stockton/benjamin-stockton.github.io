@@ -30,6 +30,6 @@ website:
 format:
   html:
     theme: 
-      - cosmo
+      - sandstone
       - custom.scss
     css: styles.css
