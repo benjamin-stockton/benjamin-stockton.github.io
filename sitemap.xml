@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2023-11-14T02:51:49.664Z</lastmod>
+    <lastmod>2023-11-14T16:59:38.845Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
-    <lastmod>2023-11-14T02:51:49.180Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/blog.html</loc>
-    <lastmod>2023-11-14T02:51:46.040Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/about.html</loc>
-    <lastmod>2023-11-14T02:51:45.364Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/index.html</loc>
-    <lastmod>2023-11-14T02:51:46.308Z</lastmod>
+    <lastmod>2023-11-14T16:59:38.389Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
-    <lastmod>2023-11-14T02:51:48.912Z</lastmod>
+    <lastmod>2023-11-14T16:59:36.701Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/index.html</loc>
+    <lastmod>2023-11-14T16:59:34.161Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/about.html</loc>
+    <lastmod>2023-11-14T16:59:33.169Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/blog.html</loc>
+    <lastmod>2023-11-14T16:59:33.897Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/stan_pres.html</loc>
+    <lastmod>2023-11-14T16:59:37.897Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/projects.html</loc>
-    <lastmod>2023-11-14T02:51:49.432Z</lastmod>
+    <lastmod>2023-11-14T16:59:38.625Z</lastmod>
   </url>
 </urlset>

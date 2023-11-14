@@ -14,69 +14,6 @@
     "text": "Welcome to my blog!\nIn this feed I will be making posts about both my statistical interests (missing data, Bayesian data analysis, etc) and possibly also about Major League Baseball. The posts will supplement my research and provide a space for sharing tutorials, interesting findings, and general thoughts."
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog Posts",
-    "section": "",
-    "text": "Getting to know Stan - SWOSC\n\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nBen Stockton\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 15, 2023\n\n\nBen Stockton\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "I am a PhD candidate in Statistics in my fifth year at the University of Connecticut under the supervision of Prof. Ofer Harel who serves as my major advisor. At UConn, I have served as a Teaching Assistant and Research Assistant. I graduated from the University of Wisconsin-Whitewater with a BS in mathematics (emphasis in statistics) and minor in computer science in the spring of 2015. I am originally from Fort Atkinson, WI.\n\n\n\n\nCV\nList of Statistics Journals for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic\n\n\n\n\n\n\n\n\nIn my non-stats time, I enjoy cooking, running, reading, and following Major League Baseball. I have run several 5ks, 10ks, half marathons, and the Madison Marathon in 2018."
-  },
-  {
-    "objectID": "about.html#bio",
-    "href": "about.html#bio",
-    "title": "About",
-    "section": "",
-    "text": "I am a PhD candidate in Statistics in my fifth year at the University of Connecticut under the supervision of Prof. Ofer Harel who serves as my major advisor. At UConn, I have served as a Teaching Assistant and Research Assistant. I graduated from the University of Wisconsin-Whitewater with a BS in mathematics (emphasis in statistics) and minor in computer science in the spring of 2015. I am originally from Fort Atkinson, WI."
-  },
-  {
-    "objectID": "about.html#cv-other-files",
-    "href": "about.html#cv-other-files",
-    "title": "About",
-    "section": "",
-    "text": "CV\nList of Statistics Journals for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic"
-  },
-  {
-    "objectID": "about.html#hobbies",
-    "href": "about.html#hobbies",
-    "title": "About",
-    "section": "",
-    "text": "In my non-stats time, I enjoy cooking, running, reading, and following Major League Baseball. I have run several 5ks, 10ks, half marathons, and the Madison Marathon in 2018."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Ben Stockton's Stats Site",
-    "section": "",
-    "text": "I am a 5th year PhD Candidate in the Department of Statistics at the University of Connecticut."
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "Ben Stockton's Stats Site",
-    "section": "",
-    "text": "I am a 5th year PhD Candidate in the Department of Statistics at the University of Connecticut."
-  },
-  {
-    "objectID": "index.html#research-interests",
-    "href": "index.html#research-interests",
-    "title": "Ben Stockton's Stats Site",
-    "section": "Research Interests",
-    "text": "Research Interests\n\nMissing data\nAir pollution\nDirectional statistics\nSpatial statistics\nCausal inference"
-  },
-  {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Ben Stockton's Stats Site",
-    "section": "Education",
-    "text": "Education\n\nGraduate\nUniversity of Connecticut | Storrs, CT\n\nPhD in Statistics (2019-Present)\n\n\n\nUndergraduate\nUniversity of Wisconsin-Whitewater | Whitewater, WI\n\nBS in Mathematics (emp. Statistics) with a minor in computer science (2016-2019)\n\nUniversity of Wisconsin-Madison | Madison, WI\n\nUndeclared (2015-2016)"
-  },
-  {
     "objectID": "posts/intro-to-stan/intro_to_stan.html",
     "href": "posts/intro-to-stan/intro_to_stan.html",
     "title": "Getting to know Stan - SWOSC",
@@ -117,6 +54,272 @@
     "title": "Getting to know Stan - SWOSC",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nSee wikipedia for more details and derivations: https://en.wikipedia.org/wiki/Bayesian_linear_regression↩︎\nSee White, Royston, and Wood (2011) for more details on incomplete data analysis.↩︎"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ben Stockton's Stats Site",
+    "section": "",
+    "text": "I am a 5th year PhD Candidate in the Department of Statistics at the University of Connecticut."
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Ben Stockton's Stats Site",
+    "section": "",
+    "text": "I am a 5th year PhD Candidate in the Department of Statistics at the University of Connecticut."
+  },
+  {
+    "objectID": "index.html#research-interests",
+    "href": "index.html#research-interests",
+    "title": "Ben Stockton's Stats Site",
+    "section": "Research Interests",
+    "text": "Research Interests\n\nMissing data\nAir pollution\nDirectional statistics\nSpatial statistics\nCausal inference"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Ben Stockton's Stats Site",
+    "section": "Education",
+    "text": "Education\n\nGraduate\nUniversity of Connecticut | Storrs, CT\n\nPhD in Statistics (2019-Present)\n\n\n\nUndergraduate\nUniversity of Wisconsin-Whitewater | Whitewater, WI\n\nBS in Mathematics (emp. Statistics) with a minor in computer science (2016-2019)\n\nUniversity of Wisconsin-Madison | Madison, WI\n\nUndeclared (2015-2016)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am a PhD candidate in Statistics in my fifth year at the University of Connecticut under the supervision of Prof. Ofer Harel who serves as my major advisor. At UConn, I have served as a Teaching Assistant and Research Assistant. I graduated from the University of Wisconsin-Whitewater with a BS in mathematics (emphasis in statistics) and minor in computer science in the spring of 2015. I am originally from Fort Atkinson, WI.\n\n\n\n\nCV\nList of Statistics Journals for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic\n\n\n\n\n\n\n\n\nIn my non-stats time, I enjoy cooking, running, reading, and following Major League Baseball. I have run several 5ks, 10ks, half marathons, and the Madison Marathon in 2018."
+  },
+  {
+    "objectID": "about.html#bio",
+    "href": "about.html#bio",
+    "title": "About",
+    "section": "",
+    "text": "I am a PhD candidate in Statistics in my fifth year at the University of Connecticut under the supervision of Prof. Ofer Harel who serves as my major advisor. At UConn, I have served as a Teaching Assistant and Research Assistant. I graduated from the University of Wisconsin-Whitewater with a BS in mathematics (emphasis in statistics) and minor in computer science in the spring of 2015. I am originally from Fort Atkinson, WI."
+  },
+  {
+    "objectID": "about.html#cv-other-files",
+    "href": "about.html#cv-other-files",
+    "title": "About",
+    "section": "",
+    "text": "CV\nList of Statistics Journals for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic"
+  },
+  {
+    "objectID": "about.html#hobbies",
+    "href": "about.html#hobbies",
+    "title": "About",
+    "section": "",
+    "text": "In my non-stats time, I enjoy cooking, running, reading, and following Major League Baseball. I have run several 5ks, 10ks, half marathons, and the Madison Marathon in 2018."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog Posts",
+    "section": "",
+    "text": "Getting to know Stan - SWOSC\n\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nBen Stockton\n\n\n\n\n\n\n  \n\n\n\n\nGetting to Know Stan\n\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nBen Stockton\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 15, 2023\n\n\nBen Stockton\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#installation",
+    "href": "posts/intro-to-stan/stan_pres.html#installation",
+    "title": "Getting to Know Stan",
+    "section": "Installation",
+    "text": "Installation\n\n\n\nI’ll use the CmdStan toolchain in R with the cmdstanr package (Gabry, Češnovar, and Johnson 2023).\nThere are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called CmdStanPy (“Cmdstanpy  Python Interface to CmdStan  CmdStanPy 1.1.0 Documentation,” n.d.).\n\n\n\n# install.packages(\"cmdstanr\",\n#                  repos = c(\"https://mc-stan.org/r-packages/\", \n#                            getOption(\"repos\")))\nlibrary(cmdstanr)\n# cmdstanr::install_cmdstan()\ncmdstanr::cmdstan_version()\n\n[1] \"2.33.1\"\n\ncmdstanr::cmdstan_path()\n\n[1] \"/home/stocb/.cmdstan/cmdstan-2.33.1\"\n\ncmdstanr::check_cmdstan_toolchain()"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#a-very-brief-introduction-to-bayesian-data-analysis",
+    "href": "posts/intro-to-stan/stan_pres.html#a-very-brief-introduction-to-bayesian-data-analysis",
+    "title": "Getting to Know Stan",
+    "section": "A Very Brief Introduction to Bayesian Data Analysis",
+    "text": "A Very Brief Introduction to Bayesian Data Analysis\n\nIncorporate prior knowledge about the model/data into our analysis\nBayesian inference treats the parameters of the model as random variables\n\n\n\n\n\n\n\nBayes Rule\n\n\nLet \\(\\theta\\) be a r.v. with (prior) distribution \\(p(\\theta)\\), \\(Y\\) be a r.v. with likelihood \\(p(y | \\theta)\\). Their joint distribution is \\(p(y, \\theta) = p(y|\\theta) p(\\theta)\\).\nBayes rule lets us flip the conditioning from the likelihood to get\n\\[\np(\\theta | y) = \\frac{p(y, \\theta)}{p(y)} = \\frac{p(y|\\theta) p(\\theta)}{\\int p(y, \\theta) d\\theta} \\approx p(y|\\theta) p(\\theta)\n\\]"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#the-components-of-bayesian-inference",
+    "href": "posts/intro-to-stan/stan_pres.html#the-components-of-bayesian-inference",
+    "title": "Getting to Know Stan",
+    "section": "The Components of Bayesian Inference",
+    "text": "The Components of Bayesian Inference\nTwo sets of random variables to model: parameters \\(\\theta\\) and data \\(Y\\)\n\nThe Prior: \\(p(\\theta)\\) does not depend on \\(Y\\)\nThe (Data) Likelihood: \\(p(y | \\theta)\\) models \\(Y\\) dependent on \\(\\theta\\)\nThe Posterior: \\(p(\\theta | y)\\) models \\(\\theta\\) given \\(Y\\) and the prior\n\n\\[\\begin{align*}\n    p(\\theta | y) &= \\frac{p(\\theta, y)}{p(y)} \\\\\n        &= \\frac{p(\\theta) \\times p(y | \\theta)}{\\int p(y|\\theta) p(\\theta)} \\\\\n        &\\propto p(\\theta) p(y | \\theta) \\\\\n\\end{align*}\\]\nMake inferences about \\(\\theta\\) with the posterior distribution"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#ncaa-womens-basketball",
+    "href": "posts/intro-to-stan/stan_pres.html#ncaa-womens-basketball",
+    "title": "Getting to Know Stan",
+    "section": "NCAA Women’s Basketball",
+    "text": "NCAA Women’s Basketball\n\n\nWe’ll model NCAA Women’s Basketball team’s total wins by their 3 point field goal percentage from the 2022-2023 season.\n\nlibrary(dplyr)\nlibrary(ggplot2)\nncaaw_file &lt;- file.path(\"Data\", \"NCAAW-freethrows-threes-2022-2023.csv\")\nncaaw &lt;- readr::read_csv(file = ncaaw_file)\n\nIn the 2022-2023 season there were \\(N = 350\\) teams.\n\n\n\n\n\n\nFigure 1: Scatter plot of the Total Wins by 3 pt Field Goal %. The OLS regression line is super-imposed in blue."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#baseline-ml-estimates",
+    "href": "posts/intro-to-stan/stan_pres.html#baseline-ml-estimates",
+    "title": "Getting to Know Stan",
+    "section": "Baseline ML Estimates",
+    "text": "Baseline ML Estimates\n\n\nAs a baseline, we’ll find the maximum likelihood estimates for the regression parameters and variance.\n\n\nfit_ml &lt;- lm(W ~ FG3pct, data = ncaaw)\n\ncoef(fit_ml)\n\n(Intercept)      FG3pct \n  -14.94468     1.00929 \n\nsmry_ml &lt;- summary(fit_ml)\nsmry_ml$sigma^2\n\n[1] 34.90616"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-set-up",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-set-up",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Set-up",
+    "text": "Model #1 Set-up\nLet’s consider the simple regression model \\(E(Y_i | X_i, \\boldsymbol{\\beta}, \\sigma^2) = \\beta_0 + \\beta_1 X_i\\) and \\(Var(Y_i | X_i = x_i, \\boldsymbol{\\beta}, \\sigma^2) = \\sigma^2\\) (Gelman et al. 2013, 354–58).\n\nThe Prior: \\(p(\\boldsymbol{\\beta}, \\log\\sigma) = 1 \\equiv p(\\boldsymbol{\\beta}, \\sigma^2) \\propto \\sigma^{-2}\\)\nThe (Data) Likelihood: \\(\\mathbf{Y} | \\boldsymbol{\\beta}, \\sigma^2 \\sim N_N(X\\boldsymbol{\\beta}, \\sigma^2 I_N).\\)\nThe Posterior:\n\n\\[\\begin{align*}\n    p(\\boldsymbol{\\beta}, \\sigma^2 | \\mathbf{y}) &= p(\\boldsymbol{\\beta} | \\sigma^2, \\mathbf{y}) \\times p(\\sigma^2 | \\mathbf{y}) \\\\\n        &= N_2(\\boldsymbol{\\beta} | \\hat{\\boldsymbol{\\beta}}, \\sigma^2 (X'X)^{-1}) \\times Inv-\\chi^2 (\\sigma^2 | N-2, s^2) \\\\\n    \\hat{\\boldsymbol{\\beta}} &= (X'X)^{-1} X'\\mathbf{y} \\\\\n    s^2 &= \\frac{1}{N-2} (\\mathbf{y} - X\\hat{\\boldsymbol{\\beta}})' (\\mathbf{y} - X\\hat{\\boldsymbol{\\beta}})   \n\\end{align*}\\]"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#non-informative-prior-regression-stan-code",
+    "href": "posts/intro-to-stan/stan_pres.html#non-informative-prior-regression-stan-code",
+    "title": "Getting to Know Stan",
+    "section": "Non-informative Prior Regression Stan Code",
+    "text": "Non-informative Prior Regression Stan Code\n\n\nnon-informative-regression.stan\n\n// The input data is two vectors 'y' and 'X' of length 'N'.\ndata {\n  int&lt;lower=0&gt; N;\n  vector[N] y;\n  vector[N] x;\n}\n\ntransformed data {\n    matrix[N, 2] X_c = append_col(rep_vector(1, N), x);\n    matrix[2,2] XtX_inv = inverse(X_c' * X_c);\n\n    vector[2] beta_hat = XtX_inv * X_c' * y;\n    vector[N] y_hat = X_C * beta_hat;\n    \n    real&lt;lower=0&gt; s_2 = 1 / (N - 2) * (y - y_hat)' * (y - y_hat);\n}\n\n// The parameters accepted by the model. Our model\n// accepts two parameters 'beta' and 'sigma'.\nparameters {\n  vector beta;\n  real&lt;lower=0&gt; sigma; // Note that this is the variance\n}\n\n// The model to be estimated. We model the output\n// 'y' ~ N(x beta, sigma) by specifying the analytic\n// posterior defined above.\nmodel {\n  beta ~ multi_normal(beta_hat, sigma^2 * XtX_inv);\n  \n  sigma^2 ~ scaled_inv_chi_square(N-2, sqrt(s_2));\n}\n\ngenerated quantities {\n    vector[N] y_ppd;\n    \n    for (i in 1:N) {\n        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);\n    }\n}"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-fitting",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-fitting",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Fitting",
+    "text": "Model #1 Fitting\n\n\n\nFirst we write the Stan code in a separate file1.\n1000 warmup iterations, 1000 sampling iterations\nNo thinning (thinning includes only every \\(k\\)th draw)\nRefresh the print screen to see progress every 500 iterations.\nRun several chains (in parallel)\n\n\n\ndata_list &lt;- list(\n    N = nrow(ncaaw),\n    y = ncaaw$W,\n    x = ncaaw$FG3pct\n)\n\nfile &lt;- file.path(\"non-informative-regression.stan\")\nnon_inf_model &lt;- cmdstan_model(file)\n\nfit1 &lt;- non_inf_model$sample(\n    data = data_list,\n    iter_warmup = 1000,\n    iter_sampling = 1000,\n    thin = 1,\n    refresh = 500,\n    chains = 2,\n    show_messages = TRUE,\n    show_exceptions = FALSE\n)\n\n\n\nRunning MCMC with 2 sequential chains...\n\nChain 1 Iteration:    1 / 2000 [  0%]  (Warmup) \nChain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) \nChain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) \nChain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) \nChain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) \nChain 1 Iteration: 2000 / 2000 [100%]  (Sampling) \nChain 1 finished in 0.1 seconds.\nChain 2 Iteration:    1 / 2000 [  0%]  (Warmup) \nChain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) \nChain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) \nChain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) \nChain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) \nChain 2 Iteration: 2000 / 2000 [100%]  (Sampling) \nChain 2 finished in 0.1 seconds.\n\nBoth chains finished successfully.\nMean chain execution time: 0.1 seconds.\nTotal execution time: 0.5 seconds.\n\n\n\n\n\nSee the Stan User’s Guide Part 1.1 for programming this model without the analytic posteriors."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-diagnostics",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-diagnostics",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Diagnostics",
+    "text": "Model #1 Diagnostics\n\n\n\nDiagnostic summary generated by Stan\nPlots created using the bayesplot package.\n\nTrace plots\nDensity Plots\nACF Plots\n\n\n\n\nfit1$diagnostic_summary()\n\n$num_divergent\n[1] 0 0\n\n$num_max_treedepth\n[1] 0 0\n\n$ebfmi\n[1] 1.109078 1.096121\n\n\n\nlibrary(bayesplot)\n\nmcmc_trace(fit1$draws(variables = c(\"beta\", \"sigma\")))\nmcmc_dens_overlay(fit1$draws(variables = c(\"beta\", \"sigma\")))\n\n\nFigure 2: ?(caption)"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-diagnostics-output",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-diagnostics-output",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Diagnostics",
+    "text": "Model #1 Diagnostics\n\n\n\n\n\nFigure 3: Traceplots for \\(\\beta\\) and \\(\\sigma\\).\n\n\n\n\n\n\n\nFigure 4: Approximate posterior densities for \\(\\beta\\) and \\(\\sigma\\).\n\n\n\n\n\n\nDiagnostic plots from the bayesplot package."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-inference",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-inference",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Inference",
+    "text": "Model #1 Inference\n\nThe summary statistics are displayed in Table 1.\nThe statistics rhat, ess_bulk, and ess_tail are additional diagnostics.\n\n\nfit1$summary(variables = c(\"beta\", \"sigma\")) |&gt; \n    kableExtra::kbl(booktabs = TRUE, format = \"html\")\n\n\n\n\n\nTable 1: Summary statistics for the posterior samples for \\(\\beta\\) and \\(\\sigma\\).\n\n\nvariable\nmean\nmedian\nsd\nmad\nq5\nq95\nrhat\ness_bulk\ness_tail\n\n\n\n\nbeta[1]\n-14.940440\n-14.941600\n2.8520116\n2.8023364\n-19.5733100\n-10.383880\n1.000553\n626.8657\n720.8715\n\n\nbeta[2]\n1.009259\n1.009525\n0.0913922\n0.0903400\n0.8619715\n1.154861\n1.000865\n615.4393\n738.3937\n\n\nsigma\n5.925041\n5.918085\n0.2182509\n0.2128717\n5.5609550\n6.291505\n1.006466\n751.7477\n877.3159"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-graphical-summaries",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-graphical-summaries",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Graphical Summaries",
+    "text": "Model #1 Graphical Summaries\n\nFigure 6 displays 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in Figure 7.\nPlots were made using the bayesplot package.\n\n\nmcmc_intervals(fit1$draws(variables = c(\"beta\", \"sigma\")))\nmcmc_areas_ridges(fit1$draws(variables = c(\"beta\", \"sigma\")),\n                  prob_outer = 0.95, prob = 0.5)\n\n\nFigure 5: ?(caption)\n\n\n\n\n\n\n\n\n\nFigure 6: Interval plots for \\(\\beta\\) and \\(\\sigma\\).\n\n\n\n\n\n\n\nFigure 7: Approximate posterior densities for \\(\\beta\\) and \\(\\sigma\\) in a ridgeline plot."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-posterior-predictive-checks",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-posterior-predictive-checks",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Posterior Predictive Checks",
+    "text": "Model #1 Posterior Predictive Checks\n\nOne way to check model fit is to assess posterior predictive distrubtion.\nDraw samples from the posterior predictive distribution \\(p(y^{new} | y) = \\int p(y^{new} | \\boldsymbol{\\beta}, \\sigma) p(\\boldsymbol{\\beta}, \\sigma | y) d\\boldsymbol{\\beta}d\\sigma\\) by\n\n\nSampling from the posterior (i.e. the draws in the MCMC chains)\nFor each set of draws sampling \\(y^{new}\\) given the corresponding values for \\(x^{new}\\)\n\n\nIn Stan this is easily accomplished using the generated quantities block.\n\ngenerated quantities {\n    // create a vector of N new observations\n    vector[N] y_ppd; \n    \n    // for each observation, sample from the regression likelihod\n    // using the posterior draws\n    for (i in 1:N) {\n        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);\n    }\n}"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-1-posterior-predictive-plots",
+    "href": "posts/intro-to-stan/stan_pres.html#model-1-posterior-predictive-plots",
+    "title": "Getting to Know Stan",
+    "section": "Model #1 Posterior Predictive Plots",
+    "text": "Model #1 Posterior Predictive Plots\n\nlibrary(posterior)\n\nfit1$draws(variables = \"y_ppd\") |&gt; \n    as_draws_df() |&gt;\n    as.matrix() -&gt; y_ppd\n\nppc_dens_overlay(ncaaw$W,\n                 y_ppd[1:50, 1:350]) +\n    labs(title = \"Density of PPD Draws of NCAAW Wins\",\n         x = \"Wins\")\nppc_intervals(ncaaw$W,\n                 y_ppd[1:50, 1:350],\n                 x = ncaaw$FG3pct) +\n    labs(title = \"Density of PPD Draws of NCAAW Wins by 3pt%\",\n         x = \"3pt%\", y = \"Wins\")\n\n\nFigure 8: ?(caption)\n\n\n\n\n\n\n\n\n\nFigure 9: PPD densities for the wins given 3pt%.\n\n\n\n\n\n\n\nFigure 10: PPD intervals for the wins plotted by 3pt%.\n\n\n\n\n\n\nPosterior Predictive Check plots from bayesplot."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-2-set-up",
+    "href": "posts/intro-to-stan/stan_pres.html#model-2-set-up",
+    "title": "Getting to Know Stan",
+    "section": "Model #2 Set-up",
+    "text": "Model #2 Set-up\nNext, we’ll implement the regression model with conjugate priors. Conjugacy refers to the situation where the prior and posterior distribution are from the same family.1\n\nConjugate prior: \\(p(\\boldsymbol{\\beta}, \\sigma^2) = p(\\boldsymbol{\\beta} | \\sigma^2) p(\\sigma^2)\\)\n\n\\(\\boldsymbol{\\beta} | \\sigma^2 ~ N_2(\\boldsymbol{\\beta}_0, \\sigma^2 \\Lambda_0^{-1})\\) where \\(\\boldsymbol{\\beta}_0 \\in \\mathbb{R}^2\\) is a vector of prior coefficients, and \\(\\Lambda_0\\) is a \\(2\\times2\\) prior correlation matrix. \\(\\boldsymbol{\\beta}_0 = 0\\) and \\(\\Lambda_0 = 10 I_2\\) to get a weakly informative prior that is equivalent to ridge regression.\n\\(\\sigma^2 \\sim InvGamma(\\frac{\\nu_0}{2}, \\frac{1}{2} \\nu_0 s_0^2)\\) where \\(\\nu_0\\) is a prior sample size and \\(s_0\\) is the prior standard deviation. We’ll set these to \\(\\nu_0 = 1\\) and \\(s_0^2 = 47\\) the sample variance of the teams’ wins.\nThe parameters \\(\\boldsymbol{\\beta}_0, \\Lambda_0, \\nu_0, s_0^2\\) are hyperparameters.\n\nThe (Data) Likelihood: \\(\\mathbf{Y} | \\boldsymbol{\\beta}, \\sigma^2 \\sim N_N(X\\boldsymbol{\\beta}, \\sigma^2 I_N).\\)\nPosterior:\n\n\\(\\boldsymbol{\\beta} | \\sigma^2, y \\sim N_2(\\boldsymbol{\\beta}_N, \\sigma^2 \\Lambda_N^{-1})\\) where \\(\\boldsymbol{\\beta}_N = \\Lambda_N^{-1}(\\mathbf{X}'\\mathbf{X} \\hat{\\boldsymbol{\\beta}} + \\Lambda_0 \\boldsymbol{\\beta}_0)\\) and \\(\\Lambda_N = (\\mathbf{X}'\\mathbf{X} + \\Lambda_0).\\)\n\\(\\sigma^2 | y) \\sim InvGamma(\\sigma^2 | \\frac{\\nu_0 + N}{2}, \\frac{1}{2} \\nu_0 s_0^2 + \\frac{1}{2}(\\mathbf{y}'\\mathbf{y} + \\boldsymbol{\\beta}_0'\\Lambda_0 \\boldsymbol{\\beta}_0 - \\boldsymbol{\\beta}_N' \\Lambda_N \\boldsymbol{\\beta}_N)).\\)\n\n\nSee wikipedia for more details and derivations: https://en.wikipedia.org/wiki/Bayesian_linear_regression"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#conjugate-prior-regression-stan-code",
+    "href": "posts/intro-to-stan/stan_pres.html#conjugate-prior-regression-stan-code",
+    "title": "Getting to Know Stan",
+    "section": "Conjugate Prior Regression Stan Code",
+    "text": "Conjugate Prior Regression Stan Code\n\n\nconjugate-regression.stan\n\n\n// The input data is a vector 'y' of length 'N'.\ndata {\n  int&lt;lower=0&gt; N;\n  int&lt;lower=0&gt; K;\n  vector[N] y;\n  matrix[N, K] X;\n  \n  // hyperparameters\n  real beta_0;\n  real&lt;lower=0&gt; lambda_0;\n  real&lt;lower=0&gt; nu_0;\n  real&lt;lower=0&gt; s_02;\n}\n\ntransformed data {\n    matrix[N, K+1] X_mat = append_col(rep_vector(1, N), X);\n    vector[K+1] beta_0_vec = rep_vector(beta_0, K+1);\n    matrix[K+1, K+1] Lambda_0 = lambda_0 * identity_matrix(K+1);\n}\n\n// The parameters accepted by the model. Our model\n// accepts two parameters 'mu' and 'sigma'.\nparameters {\n  vector[K+1] beta;\n  real&lt;lower=0&gt; sigma2;\n}\n\n// The model to be estimated. We model the output\n// 'y' to be normally distributed with mean 'mu'\n// and standard deviation 'sigma'.\nmodel {\n  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);\n  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);\n  \n  y ~ normal(X_mat * beta, sqrt(sigma2));\n}\n\ngenerated quantities {\n    real sigma = sqrt(sigma2);\n    vector[N] y_ppd;\n    \n    for (i in 1:N) {\n        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));\n    }\n}"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-2-fitting",
+    "href": "posts/intro-to-stan/stan_pres.html#model-2-fitting",
+    "title": "Getting to Know Stan",
+    "section": "Model #2 Fitting",
+    "text": "Model #2 Fitting\n\n\n\nProgram the model only through the priors and likelihood and let Stan approximate the posterior\n1000 warmup iterations, 1000 sampling iterations\nNo thinning (thinning includes only every \\(k\\)th draw)\nRefresh the print screen to see progress every 500 iterations.\nRun several chains (in parallel)\n\n\n\ndata_list2 &lt;- list(\n    N = nrow(ncaaw),\n    K = 1,\n    y = ncaaw$W,\n    X = as.matrix(ncaaw$FG3pct, nrow = nrow(ncaaw)),\n    \n    # hyperparameters\n    beta_0 = 0,\n    lambda_0 = 10,\n    nu_0 = 1,\n    s_02 = 47\n)\n\nfile2 &lt;- file.path(\"conjugate-regression.stan\")\nconj_model &lt;- cmdstan_model(file2)\n\nfit2 &lt;- conj_model$sample(\n    data = data_list2,\n    iter_warmup = 1000,\n    iter_sampling = 1000,\n    thin = 1,\n    refresh = 500,\n    chains = 2,\n    show_messages = TRUE,\n    show_exceptions = FALSE\n)\n\n\n\nRunning MCMC with 2 sequential chains...\n\nChain 1 Iteration:    1 / 2000 [  0%]  (Warmup) \nChain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) \nChain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) \nChain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) \nChain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) \nChain 1 Iteration: 2000 / 2000 [100%]  (Sampling) \nChain 1 finished in 0.3 seconds.\nChain 2 Iteration:    1 / 2000 [  0%]  (Warmup) \nChain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) \nChain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) \nChain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) \nChain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) \nChain 2 Iteration: 2000 / 2000 [100%]  (Sampling) \nChain 2 finished in 0.3 seconds.\n\nBoth chains finished successfully.\nMean chain execution time: 0.3 seconds.\nTotal execution time: 0.6 seconds."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-2-diagnostics",
+    "href": "posts/intro-to-stan/stan_pres.html#model-2-diagnostics",
+    "title": "Getting to Know Stan",
+    "section": "Model #2 Diagnostics",
+    "text": "Model #2 Diagnostics\n\nfit2$diagnostic_summary()\n\n$num_divergent\n[1] 0 0\n\n$num_max_treedepth\n[1] 0 0\n\n$ebfmi\n[1] 1.090207 0.923197\n\n\n\nmcmc_trace(fit2$draws(variables = c(\"beta\", \"sigma\")))\nmcmc_dens_overlay(fit2$draws(variables = c(\"beta\", \"sigma\")))\n\n\nFigure 11: ?(caption)\n\n\n\n\n\n\n\n\n\nFigure 12: Traceplots for \\(\\beta\\) and \\(\\sigma\\).\n\n\n\n\n\n\n\nFigure 13: Approximate posterior densities for \\(\\beta\\) and \\(\\sigma\\)."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-2-inference",
+    "href": "posts/intro-to-stan/stan_pres.html#model-2-inference",
+    "title": "Getting to Know Stan",
+    "section": "Model #2 Inference",
+    "text": "Model #2 Inference\n\nEstimates are similar to Model #1, but regression coefficients are shrunk slightly to zero and variance is slightly higher\nFigure 15 displayes credible intervals and densities are plotted as ridgelines in Figure 16.\n\n\nfit2$summary(variables = c(\"beta\", \"sigma\")) |&gt; \n    kableExtra::kbl(booktabs = TRUE, format = \"html\")\n\n\n\n\n\nTable 2: Summary statistics for the posterior samples for \\(\\beta\\) and \\(\\sigma\\).\n\n\nvariable\nmean\nmedian\nsd\nmad\nq5\nq95\nrhat\ness_bulk\ness_tail\n\n\n\n\nbeta[1]\n-14.691106\n-14.689800\n2.8432186\n2.7684590\n-19.3064350\n-9.992154\n1.006694\n603.2246\n672.8645\n\n\nbeta[2]\n1.001265\n1.001755\n0.0910815\n0.0903571\n0.8520539\n1.151337\n1.007041\n597.1370\n730.3235\n\n\nsigma\n6.407997\n6.406255\n0.2412035\n0.2239912\n6.0117310\n6.804346\n1.000334\n792.0443\n723.9148\n\n\n\n\n\n\n\n\n\nmcmc_intervals(fit2$draws(variables = c(\"beta\", \"sigma\")))\nmcmc_areas_ridges(fit2$draws(variables = c(\"beta\", \"sigma\")), prob_outer = 0.95, prob = 0.5)\n\n\nFigure 14: ?(caption)\n\n\n\n\n\n\n\n\n\nFigure 15: Interval plots for \\(\\beta\\) and \\(\\sigma\\).\n\n\n\n\n\n\n\nFigure 16: Approximate posterior densities for \\(\\beta\\) and \\(\\sigma\\) in a ridgeline plot.\n\n\n\n\n\n\nPlots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for \\(\\beta\\) and \\(\\sigma\\). Plots were made using the bayesplot package."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#model-2-posterior-predictive-distribution",
+    "href": "posts/intro-to-stan/stan_pres.html#model-2-posterior-predictive-distribution",
+    "title": "Getting to Know Stan",
+    "section": "Model #2 Posterior Predictive Distribution",
+    "text": "Model #2 Posterior Predictive Distribution\n\nfit2$draws(variables = \"y_ppd\") |&gt; \n    as_draws_df() |&gt;\n    as.matrix() -&gt; y_ppd\nppc_dens_overlay(ncaaw$W,\n                 y_ppd[1:50, 1:350]) +\n    labs(title = \"Density of PPD Draws of NCAAW Wins\",\n         x = \"Wins\")\nppc_intervals(ncaaw$W,\n                 y_ppd[1:50, 1:350],\n                 x = ncaaw$FG3pct) +\n    labs(title = \"Density of PPD Draws of NCAAW Wins by 3pt%\",\n         x = \"3pt%\",\n         y = \"Wins\")\n\n\n\n\n\n\n\n(a) PPD densities for the wins given 3pt%.\n\n\n\n\n\n\n\n(b) PPD intervals for the wins plotted by 3pt%.\n\n\n\n\nFigure 17: ?(caption)"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#guides-for-stan",
+    "href": "posts/intro-to-stan/stan_pres.html#guides-for-stan",
+    "title": "Getting to Know Stan",
+    "section": "Guides for Stan",
+    "text": "Guides for Stan\nFirst, here’s the three essential guides for using Stan:\n\nStan Function Guide - reference for all the built-in functions and distributions as well as guides for writing custom functions and distributions\nStan User’s Guide - reference for example models, how to build efficient models, and some inference techniques\nStan Reference Manual - reference for programming in Stan with a focus on how the language works\n\nOther Stan Packages\n\nbrms: Bayesian regression models using Stan\nposterior: Useful for working with Stan output\nbayesplot: ggplot2-based plotting functions for MCMC draws designed work well with Stan\nloo: Leave-one-out cross validation for model checking and selection that works with the log-posterior. Works best with rstanarm but can work with cmdstanr too.\n\nGuides to Debugging and Diagnostics\n\nStan’s Guide to Runtime warnings and convergence problems\nPrior Choices and Selection\nConvergence Diagnostics for MCMC\nOfficial Stan Forum"
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#bonus-regression-modeling-with-incomplete-data",
+    "href": "posts/intro-to-stan/stan_pres.html#bonus-regression-modeling-with-incomplete-data",
+    "title": "Getting to Know Stan",
+    "section": "Bonus: Regression Modeling with Incomplete Data",
+    "text": "Bonus: Regression Modeling with Incomplete Data\n\nLet’s use the brms package to fit a regression model with incomplete predictor observations.\nIncomplete data analysis ranges from complete case analysis to multiple imputation, joint modeling, and EM algorithm (Schafer and Graham 2002).1\nWe’re going to use mice (Buuren and Groothuis-Oudshoorn 2010) and brms (Bürkner 2018) to demonstrate the imputation and fitting Bayesian regression models.\n\nSee White, Royston, and Wood (2011) for more details on incomplete data analysis."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#ncaa-womens-basketball-players-junior-and-senior-years",
+    "href": "posts/intro-to-stan/stan_pres.html#ncaa-womens-basketball-players-junior-and-senior-years",
+    "title": "Getting to Know Stan",
+    "section": "NCAA Women’s Basketball Player’s Junior and Senior Years",
+    "text": "NCAA Women’s Basketball Player’s Junior and Senior Years\n\n\n\nWe’ll use junior year scoring (points per game/PPG) to predict senior year scoring for 2020-21 to the 2022-23 seasons.\nThe data set only contains players who played in at least 75% of games each season, so partial seasons due to injury or being a bench player are excluded.\nPlayers who only have a junior season are excluded from the analysis.\n\n\n\nncaaw_i &lt;- read.csv(\"Data/ncaaw-individuals.csv\", header = TRUE)\nhead(ncaaw_i)\n\n             Name Pos_jr Pos_sr G_jr G_sr PPG_jr PPG_sr Cl_jr\n1     A'Jah Davis      F      F   29   32   16.6   16.2   Jr.\n2 Abby Brockmeyer      F      F   NA   31     NA   16.3   Jr.\n3       Abby Feit      F      F   29   28   15.1   15.5   Jr.\n4     Abby Meyers      G      G   NA   30     NA   17.9   Jr.\n5     Abby Meyers      G      G   NA   35     NA   14.3   Jr.\n6   Adriana Shipp      G      G   NA   30     NA   13.9   Jr.\n\n\n\nggplot(ncaaw_i, aes(PPG_jr, PPG_sr, color = G_jr)) +\n    geom_point(size = 1.5) +\n    scale_color_viridis_c(name = \"G - Jr\") +\n    labs(x = \"PPG - Jr\", y = \"PPG - Sr\") +\n    theme_bw()\n\n\n\n\n\n\nFigure 18: Points per game (PPG) from Junior and Senior seasons."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#incomplete-data-structure-imputation-model",
+    "href": "posts/intro-to-stan/stan_pres.html#incomplete-data-structure-imputation-model",
+    "title": "Getting to Know Stan",
+    "section": "Incomplete Data Structure & Imputation Model",
+    "text": "Incomplete Data Structure & Imputation Model\n\nThe imputation model will be univariate linear regression that use all other variables as predictors.\n\nFor example, imputing \\(PPG_{jr}\\) will be done by regressing on \\(PPG_{sr}, G_{jr}, G_{sr}\\).\n\n\\(PPG_{jr}\\) and \\(G_{jr}\\) are incomplete for \\(n_{mis} = 176\\) players while \\(n_{obs} = 98\\) players have stats from both years as displayed in Figure 19.\n\n\nlibrary(mice)\nm_pat &lt;- md.pattern(ncaaw_i, plot = TRUE)\n\n\nFigure 19: Missing data patterns for the NCAA women’s basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#multiple-imputation-with-mice",
+    "href": "posts/intro-to-stan/stan_pres.html#multiple-imputation-with-mice",
+    "title": "Getting to Know Stan",
+    "section": "Multiple Imputation with mice",
+    "text": "Multiple Imputation with mice\nFirst, we’ll impute before model fitting using mice.\nMultiple Imputation (by Chained Equations) is a three stage procedure:\n\nEach incomplete variable is imputed \\(M\\) times with posterior predictive draws from a regression model with all other variables as predictors. The procedure iterates through the incomplete variables several times to converge to the posterior predictive distribution of the missing data given the observed.\nThese completed data sets are then analyzed individually with a standard complete data method.\nResults from each analysis are combined. Typically this is done with Rubin’s rules (Rubin 1987), but brms follows the advice of Zhou and Reiter (2010) and simply stacks the posterior draw matrices from each fitted model.\n\n\nlibrary(brms)\nimps &lt;- mice(ncaaw_i, m = 10, method = \"norm\", maxit = 10, printFlag = FALSE)\nfit_brm_mice &lt;- brm_multiple(PPG_sr ~ G_jr * PPG_jr, data = imps, chains = 2, refresh = 0)\nsummary(fit_brm_mice)\n\n\n\n Family: gaussian \n  Links: mu = identity; sigma = identity \nFormula: PPG_sr ~ G_jr * PPG_jr \n   Data: imps (Number of observations: 274) \n  Draws: 20 chains, each with iter = 2000; warmup = 1000; thin = 1;\n         total post-warmup draws = 20000\n\nPopulation-Level Effects: \n            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nIntercept      17.15      4.92     7.87    27.44 1.22       65      216\nG_jr           -0.24      0.19    -0.65     0.11 1.23       61      155\nPPG_jr         -0.04      0.28    -0.63     0.50 1.21       66      255\nG_jr:PPG_jr     0.01      0.01    -0.01     0.04 1.23       63      195\n\nFamily Specific Parameters: \n      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nsigma     2.17      0.10     1.98     2.38 1.07      171      724\n\nDraws were sampled using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#imputation-during-model-fitting",
+    "href": "posts/intro-to-stan/stan_pres.html#imputation-during-model-fitting",
+    "title": "Getting to Know Stan",
+    "section": "Imputation During Model Fitting",
+    "text": "Imputation During Model Fitting\n\nImputations are made for each incomplete variable using a different conditional model for each variable.\nThis approach differs from MI and MICE in two key ways:\n\nThe model is only fit once since the imputation model is part of the analysis model.\nThe model must be constructed uniquely for each analysis scenario.\n\n\n\n\nbform &lt;- bf(PPG_sr | mi() ~ mi(G_jr) * mi(PPG_jr)) +\n    bf(PPG_jr | mi() ~ G_sr + PPG_sr) +\n    bf(G_jr | mi() ~ G_sr + PPG_sr) + set_rescor(FALSE)\nfit_brm_mi &lt;- brm(bform, data = ncaaw_i, \n                  refresh = 500, iter = 2000, thin = 1,\n                  backend = \"cmdstanr\",\n                  control = list(show_exceptions = FALSE),\n                  chains = 2, cores = 2)\nsummary(fit_brm_mi)\n\n\n Family: MV(gaussian, gaussian, gaussian) \n  Links: mu = identity; sigma = identity\n         mu = identity; sigma = identity\n         mu = identity; sigma = identity \nFormula: PPG_sr | mi() ~ mi(G_jr) * mi(PPG_jr) \n         PPG_jr | mi() ~ G_sr + PPG_sr \n         G_jr | mi() ~ G_sr + PPG_sr \n   Data: ncaaw_i (Number of observations: 274) \n  Draws: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;\n         total post-warmup draws = 2000\n\nPopulation-Level Effects: \n                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS\nPPGsr_Intercept          15.98      2.24    11.52    20.67 1.00     1339\nPPGjr_Intercept           5.95      2.35     1.27    10.37 1.00     1746\nGjr_Intercept             2.96      6.17    -9.41    14.51 1.00     1695\nPPGjr_G_sr               -0.04      0.07    -0.17     0.10 1.00     2013\nPPGjr_PPG_sr              0.71      0.08     0.56     0.88 1.00     1260\nGjr_G_sr                  0.56      0.18     0.22     0.92 1.00     1715\nGjr_PPG_sr                0.27      0.22    -0.17     0.69 1.00     1000\nPPGsr_miG_jr             -0.29      0.09    -0.48    -0.11 1.00     1248\nPPGsr_miPPG_jr           -0.03      0.14    -0.31     0.26 1.00     1229\nPPGsr_miG_jr:miPPG_jr     0.02      0.01     0.01     0.03 1.00     1219\n                      Tail_ESS\nPPGsr_Intercept           1036\nPPGjr_Intercept           1829\nGjr_Intercept             1883\nPPGjr_G_sr                1621\nPPGjr_PPG_sr              1568\nGjr_G_sr                  1633\nGjr_PPG_sr                1399\nPPGsr_miG_jr              1072\nPPGsr_miPPG_jr            1134\nPPGsr_miG_jr:miPPG_jr     1088\n\nFamily Specific Parameters: \n            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nsigma_PPGsr     1.86      0.09     1.69     2.05 1.00     2653     1528\nsigma_PPGjr     2.30      0.15     2.04     2.59 1.00      904     1483\nsigma_Gjr       5.35      0.39     4.62     6.16 1.00      710     1113\n\nDraws were sampled using sample(hmc). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#diagnostics",
+    "href": "posts/intro-to-stan/stan_pres.html#diagnostics",
+    "title": "Getting to Know Stan",
+    "section": "Diagnostics",
+    "text": "Diagnostics\nSince brms is built on Stan we can also take a look at the traceplots of the samples in Figure 20.\n\n\n\nplot(fit_brm_mi, variable = c(\"b_PPGsr\", \"bsp_\"), regex = TRUE, ask = FALSE, N = 4)\n\n\n\n\nFigure 20: Traceplots of brms analysis model parameters.\n\n\n\n\n\n\nplot(fit_brm_mi, variable = c(\"b_PPGjr\", \"b_Gjr\"), regex = TRUE, ask = FALSE, N = 6)\n\n\n\n\nFigure 21: Traceplots of brms imputation model parameters."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#comparison-of-estimated-effects",
+    "href": "posts/intro-to-stan/stan_pres.html#comparison-of-estimated-effects",
+    "title": "Getting to Know Stan",
+    "section": "Comparison of Estimated Effects",
+    "text": "Comparison of Estimated Effects\n\nplot(brms::conditional_effects(fit_brm_mice, \"PPG_jr:G_jr\", resp = \"PPGsr\"))\nplot(brms::conditional_effects(fit_brm_mi, \"PPG_jr:G_jr\", resp = \"PPGsr\"))\n\n\n\n\n\n\n\n(a) Estimates after MICE imputation\n\n\n\n\n\n\n\n(b) Estimates with joint model\n\n\n\n\nFigure 22: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior."
+  },
+  {
+    "objectID": "posts/intro-to-stan/stan_pres.html#references",
+    "href": "posts/intro-to-stan/stan_pres.html#references",
+    "title": "Getting to Know Stan",
+    "section": "References",
+    "text": "References\n\n\nBürkner, Paul-Christian. 2018. “Advanced Bayesian Multilevel Modeling with the R Package Brms.” The R Journal 10 (1): 395. https://doi.org/10.32614/RJ-2018-017.\n\n\nBuuren, S van, and Karin Groothuis-Oudshoorn. 2010. “Mice: Multivariate Imputation by Chained Equations in r.” Journal of Statistical Software, 168.\n\n\n“Cmdstanpy  Python Interface to CmdStan  CmdStanPy 1.1.0 Documentation.” n.d. https://mc-stan.org/cmdstanpy/index.html.\n\n\nDempster, A. P., Martin Schatzoff, and Nanny Wermuth. 1977. “A Simulation Study of Alternatives to Ordinary Least Squares.” Journal of the American Statistical Association 72 (357): 77–91. https://doi.org/10.2307/2286909.\n\n\nGabry, Jonah, Rok Češnovar, and Andrew Johnson. 2023. Cmdstanr: R Inferfacet to ’CmdStan’. https://mc-stan.org/cmdstanr/, https://discourse.mc-stan.org.\n\n\nGelman, Andrew, Hal S Stern, John B Carlin, David B Dunson, Aki Vehtari, and Donald B Rubin. 2013. Bayesian Data Analysis. Chapman; Hall/CRC.\n\n\nHarel, Ofer, and Xiao-Hua Zhou. 2007. “Multiple Imputation: Review of Theory, Implementation and Software.” Statistics in Medicine 26 (16): 30573077.\n\n\nRubin, Donald B. 1976. “Inference and Missing Data.” Biometrika 63 (3): 581–92. https://www.jstor.org/stable/2335739.\n\n\n———. 1987. Multiple Imputation for Nonresponse in Surveys | Wiley Series in Probability and Statistics. Wiley series in probability and mathematical statistics : Applied probability and statistics. New York: Wiley. https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696.\n\n\nSchafer, Joseph L., and John W. Graham. 2002. “Missing Data: Our View of the State of the Art.” Psychological Methods 7 (2): 147–77. https://doi.org/10.1037/1082-989X.7.2.147.\n\n\nWhite, Ian R., Patrick Royston, and Angela M. Wood. 2011. “Multiple Imputation Using Chained Equations: Issues and Guidance for Practice.” Statistics in Medicine 30 (4): 377–99. https://doi.org/10.1002/sim.4067.\n\n\nZhou, Xiang, and Jerome P. Reiter. 2010. “A Note on Bayesian Inference After Multiple Imputation.” The American Statistician 64 (2): 159–63. https://doi.org/10.1198/tast.2010.09109."
   },
   {
     "objectID": "projects.html",

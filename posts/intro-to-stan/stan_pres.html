@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
+
+  <meta name="author" content="Ben Stockton">
+  <meta name="dcterms.date" content="2023-11-16">
+  <title>Ben Stockton’s Stats Site - Getting to Know Stan</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<meta property="og:title" content="Ben Stockton’s Stats Site - Getting to Know Stan">
+<meta property="og:site-name" content="Ben Stockton's Stats Site">
+<meta name="twitter:title" content="Ben Stockton’s Stats Site - Getting to Know Stan">
+<meta name="twitter:card" content="summary">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Getting to Know Stan</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Ben Stockton 
+</div>
+</div>
+</div>
+
+  <p class="date">2023-11-16</p>
+</section>
+<section>
+<section id="some-brief-set-up" class="title-slide slide level1 center">
+<h1>Some Brief Set-up</h1>
+
+</section>
+<section id="installation" class="slide level2">
+<h2>Installation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>I’ll use the CmdStan toolchain in R with the <code>cmdstanr</code> <a href="https://mc-stan.org/cmdstanr/">package</a> <span class="citation" data-cites="gabry2023">(<a href="#/references" role="doc-biblioref" onclick="">Gabry, Češnovar, and Johnson 2023</a>)</span>.</p></li>
+<li><p>There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <a href="https://github.com/stan-dev/cmdstanpy">CmdStanPy</a> <span class="citation" data-cites="cmdstanp">(<a href="#/references" role="doc-biblioref" onclick=""><span>“Cmdstanpy <span></span> Python Interface to CmdStan <span></span> CmdStanPy 1.1.0 Documentation,”</span> n.d.</a>)</span>.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("cmdstanr",</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#                  repos = c("https://mc-stan.org/r-packages/", </span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#                            getOption("repos")))</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(cmdstanr)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># cmdstanr::install_cmdstan()</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_version</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2.33.1"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_path</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/home/stocb/.cmdstan/cmdstan-2.33.1"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>cmdstanr<span class="sc">::</span><span class="fu">check_cmdstan_toolchain</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-very-brief-introduction-to-bayesian-data-analysis" class="slide level2">
+<h2>A Very Brief Introduction to Bayesian Data Analysis</h2>
+<ul>
+<li><p>Incorporate prior knowledge about the model/data into our analysis</p></li>
+<li><p>Bayesian inference treats the parameters of the model as random variables</p></li>
+</ul>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Bayes Rule</strong></p>
+</div>
+<div class="callout-content">
+<p>Let <span class="math inline">\(\theta\)</span> be a r.v. with (prior) distribution <span class="math inline">\(p(\theta)\)</span>, <span class="math inline">\(Y\)</span> be a r.v. with likelihood <span class="math inline">\(p(y | \theta)\)</span>. Their joint distribution is <span class="math inline">\(p(y, \theta) = p(y|\theta) p(\theta)\)</span>.</p>
+<p>Bayes rule lets us flip the conditioning from the likelihood to get</p>
+<p><span class="math display">\[
+p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(y, \theta) d\theta} \approx p(y|\theta) p(\theta)
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-components-of-bayesian-inference" class="slide level2">
+<h2>The Components of Bayesian Inference</h2>
+<p>Two sets of random variables to model: parameters <span class="math inline">\(\theta\)</span> and data <span class="math inline">\(Y\)</span></p>
+<ol type="1">
+<li><strong>The Prior:</strong> <span class="math inline">\(p(\theta)\)</span> does not depend on <span class="math inline">\(Y\)</span></li>
+<li><strong>The (Data) Likelihood:</strong> <span class="math inline">\(p(y | \theta)\)</span> models <span class="math inline">\(Y\)</span> dependent on <span class="math inline">\(\theta\)</span></li>
+<li><strong>The Posterior:</strong> <span class="math inline">\(p(\theta | y)\)</span> models <span class="math inline">\(\theta\)</span> given <span class="math inline">\(Y\)</span> and the prior</li>
+</ol>
+<span class="math display">\[\begin{align*}
+    p(\theta | y) &amp;= \frac{p(\theta, y)}{p(y)} \\
+        &amp;= \frac{p(\theta) \times p(y | \theta)}{\int p(y|\theta) p(\theta)} \\
+        &amp;\propto p(\theta) p(y | \theta) \\
+\end{align*}\]</span>
+<p>Make inferences about <span class="math inline">\(\theta\)</span> with the posterior distribution</p>
+</section></section>
+<section>
+<section id="example-time" class="title-slide slide level1 center">
+<h1>Example Time</h1>
+
+</section>
+<section id="ncaa-womens-basketball" class="slide level2">
+<h2>NCAA Women’s Basketball</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>We’ll model NCAA Women’s Basketball team’s total wins by their 3 point field goal percentage from the 2022-2023 season.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>ncaaw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"Data"</span>, <span class="st">"NCAAW-freethrows-threes-2022-2023.csv"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>ncaaw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> ncaaw_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the 2022-2023 season there were <span class="math inline">\(N = 350\)</span> teams.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-scatter" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-scatter-1.png" width="960"></p>
+<figcaption>Figure&nbsp;1: Scatter plot of the Total Wins by 3 pt Field Goal %. The OLS regression line is super-imposed in blue.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="baseline-ml-estimates" class="slide level2">
+<h2>Baseline ML Estimates</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>As a baseline, we’ll find the maximum likelihood estimates for the regression parameters and variance.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>fit_ml <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> FG3pct, <span class="at">data =</span> ncaaw)</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">coef</span>(fit_ml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)      FG3pct 
+  -14.94468     1.00929 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>smry_ml <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_ml)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>smry_ml<span class="sc">$</span>sigma<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34.90616</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="non-informative-prior-regression-model" class="title-slide slide level1 center">
+<h1>Non-informative Prior Regression Model</h1>
+
+</section>
+<section id="model-1-set-up" class="slide level2">
+<h2>Model #1 Set-up</h2>
+<p>Let’s consider the simple regression model <span class="math inline">\(E(Y_i | X_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i\)</span> and <span class="math inline">\(Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2\)</span> <span class="citation" data-cites="gelman2013bayesian">(<a href="#/references" role="doc-biblioref" onclick="">Gelman et al. 2013, 354–58</a>)</span>.</p>
+<ol type="1">
+<li><strong>The Prior:</strong> <span class="math inline">\(p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}\)</span></li>
+<li><strong>The (Data) Likelihood:</strong> <span class="math inline">\(\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).\)</span></li>
+<li><strong>The Posterior:</strong></li>
+</ol>
+<span class="math display">\[\begin{align*}
+    p(\boldsymbol{\beta}, \sigma^2 | \mathbf{y}) &amp;= p(\boldsymbol{\beta} | \sigma^2, \mathbf{y}) \times p(\sigma^2 | \mathbf{y}) \\
+        &amp;= N_2(\boldsymbol{\beta} | \hat{\boldsymbol{\beta}}, \sigma^2 (X'X)^{-1}) \times Inv-\chi^2 (\sigma^2 | N-2, s^2) \\
+    \hat{\boldsymbol{\beta}} &amp;= (X'X)^{-1} X'\mathbf{y} \\
+    s^2 &amp;= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   
+\end{align*}\]</span>
+</section>
+<section id="non-informative-prior-regression-stan-code" class="slide level2">
+<h2>Non-informative Prior Regression Stan Code</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>non-informative-regression.stan</strong></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource stan code-overflow-wrap number-lines code-with-copy"><code class="sourceCode stan"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">// The input data is two vectors 'y' and 'X' of length 'N'.</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">data</span> {</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="dt">vector</span>[N] y;</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="dt">vector</span>[N] x;</span>
+<span id="cb11-6"><a href="#cb11-6"></a>}</span>
+<span id="cb11-7"><a href="#cb11-7"></a></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="kw">transformed data</span> {</span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="dt">matrix</span>[N, <span class="dv">2</span>] X_c = append_col(rep_vector(<span class="dv">1</span>, N), x);</span>
+<span id="cb11-10"><a href="#cb11-10"></a>    <span class="dt">matrix</span>[<span class="dv">2</span>,<span class="dv">2</span>] XtX_inv = inverse(X_c' * X_c);</span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a>    <span class="dt">vector</span>[<span class="dv">2</span>] beta_hat = XtX_inv * X_c' * y;</span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="dt">vector</span>[N] y_hat = X_C * beta_hat;</span>
+<span id="cb11-14"><a href="#cb11-14"></a>    </span>
+<span id="cb11-15"><a href="#cb11-15"></a>    <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; s_2 = <span class="dv">1</span> / (N - <span class="dv">2</span>) * (y - y_hat)' * (y - y_hat);</span>
+<span id="cb11-16"><a href="#cb11-16"></a>}</span>
+<span id="cb11-17"><a href="#cb11-17"></a></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="co">// The parameters accepted by the model. Our model</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">// accepts two parameters 'beta' and 'sigma'.</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="kw">parameters</span> {</span>
+<span id="cb11-21"><a href="#cb11-21"></a>  <span class="dt">vector</span> beta;</span>
+<span id="cb11-22"><a href="#cb11-22"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma; <span class="co">// Note that this is the variance</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a>}</span>
+<span id="cb11-24"><a href="#cb11-24"></a></span>
+<span id="cb11-25"><a href="#cb11-25"></a><span class="co">// The model to be estimated. We model the output</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="co">// 'y' ~ N(x beta, sigma) by specifying the analytic</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="co">// posterior defined above.</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="kw">model</span> {</span>
+<span id="cb11-29"><a href="#cb11-29"></a>  beta ~ multi_normal(beta_hat, sigma^<span class="dv">2</span> * XtX_inv);</span>
+<span id="cb11-30"><a href="#cb11-30"></a>  </span>
+<span id="cb11-31"><a href="#cb11-31"></a>  sigma^<span class="dv">2</span> ~ scaled_inv_chi_square(N<span class="dv">-2</span>, sqrt(s_2));</span>
+<span id="cb11-32"><a href="#cb11-32"></a>}</span>
+<span id="cb11-33"><a href="#cb11-33"></a></span>
+<span id="cb11-34"><a href="#cb11-34"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb11-35"><a href="#cb11-35"></a>    <span class="dt">vector</span>[N] y_ppd;</span>
+<span id="cb11-36"><a href="#cb11-36"></a>    </span>
+<span id="cb11-37"><a href="#cb11-37"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb11-38"><a href="#cb11-38"></a>        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span>
+<span id="cb11-39"><a href="#cb11-39"></a>    }</span>
+<span id="cb11-40"><a href="#cb11-40"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-1-fitting" class="slide level2">
+<h2>Model #1 Fitting</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>First we write the Stan code in a separate file<sup>1</sup>.</p></li>
+<li><p>1000 warmup iterations, 1000 sampling iterations</p></li>
+<li><p>No thinning (thinning includes only every <span class="math inline">\(k\)</span>th draw)</p></li>
+<li><p>Refresh the print screen to see progress every 500 iterations.</p></li>
+<li><p>Run several chains (in parallel)</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct</span>
+<span id="cb12-5"><a href="#cb12-5"></a>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"non-informative-regression.stan"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>non_inf_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file)</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a>fit1 <span class="ot">&lt;-</span> non_inf_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb12-12"><a href="#cb12-12"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb12-13"><a href="#cb12-13"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb12-14"><a href="#cb12-14"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb12-16"><a href="#cb12-16"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb12-17"><a href="#cb12-17"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-18"><a href="#cb12-18"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
+Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
+Chain 1 finished in 0.1 seconds.
+Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
+Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
+Chain 2 finished in 0.1 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 0.1 seconds.
+Total execution time: 0.5 seconds.</code></pre>
+</div>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><ul>
+<li>See the <a href="https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section">Stan User’s Guide Part 1.1</a> for programming this model without the analytic posteriors.</li>
+</ul>
+</li></ol></aside></section>
+<section id="model-1-diagnostics" class="slide level2">
+<h2>Model #1 Diagnostics</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Diagnostic summary generated by Stan</p></li>
+<li><p>Plots created using the <code>bayesplot</code> package.</p>
+<ul>
+<li><p>Trace plots</p></li>
+<li><p>Density Plots</p></li>
+<li><p>ACF Plots</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>fit1<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$num_divergent
+[1] 0 0
+
+$num_max_treedepth
+[1] 0 0
+
+$ebfmi
+[1] 1.109078 1.096121</code></pre>
+</div>
+</div>
+<div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">mcmc_trace</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">mcmc_dens_overlay</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-traceplots-non-info" class="cell quarto-layout-panel">
+<figure>
+<p></p><figcaption>Figure&nbsp;2: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+<section id="model-1-diagnostics-output" class="slide level2 output-location-slide"><h2>Model #1 Diagnostics</h2><div class="cell output-location-slide quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-traceplots-non-info-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-1.png" width="576"></p>
+<figcaption>Figure&nbsp;3: Traceplots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-traceplots-non-info-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-2.png" width="576"></p>
+<figcaption>Figure&nbsp;4: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Diagnostic plots from the <code>bayesplot</code> package.</p>
+</div>
+</div>
+</div></section><section id="model-1-inference" class="slide level2">
+<h2>Model #1 Inference</h2>
+<ul>
+<li><p>The summary statistics are displayed in <a href="#/model-1-inference">Table&nbsp;1</a>.</p></li>
+<li><p>The statistics <code>rhat</code>, <code>ess_bulk</code>, and <code>ess_tail</code> are additional diagnostics.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div id="tbl-non-info-inf">
+<table data-quarto-postprocess="true">
+<caption>Table&nbsp;1: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sd</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mad</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">q5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">q95</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">rhat</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ess_bulk</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">beta[1]</td>
+<td style="text-align: right;">-14.940440</td>
+<td style="text-align: right;">-14.941600</td>
+<td style="text-align: right;">2.8520116</td>
+<td style="text-align: right;">2.8023364</td>
+<td style="text-align: right;">-19.5733100</td>
+<td style="text-align: right;">-10.383880</td>
+<td style="text-align: right;">1.000553</td>
+<td style="text-align: right;">626.8657</td>
+<td style="text-align: right;">720.8715</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">beta[2]</td>
+<td style="text-align: right;">1.009259</td>
+<td style="text-align: right;">1.009525</td>
+<td style="text-align: right;">0.0913922</td>
+<td style="text-align: right;">0.0903400</td>
+<td style="text-align: right;">0.8619715</td>
+<td style="text-align: right;">1.154861</td>
+<td style="text-align: right;">1.000865</td>
+<td style="text-align: right;">615.4393</td>
+<td style="text-align: right;">738.3937</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sigma</td>
+<td style="text-align: right;">5.925041</td>
+<td style="text-align: right;">5.918085</td>
+<td style="text-align: right;">0.2182509</td>
+<td style="text-align: right;">0.2128717</td>
+<td style="text-align: right;">5.5609550</td>
+<td style="text-align: right;">6.291505</td>
+<td style="text-align: right;">1.006466</td>
+<td style="text-align: right;">751.7477</td>
+<td style="text-align: right;">877.3159</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+<section id="model-1-graphical-summaries" class="slide level2">
+<h2>Model #1 Graphical Summaries</h2>
+<ul>
+<li><p><a href="#/model-1-graphical-summaries">Figure&nbsp;6</a> displays 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in <a href="#/model-1-graphical-summaries">Figure&nbsp;7</a>.</p></li>
+<li><p>Plots were made using the <code>bayesplot</code> package.</p></li>
+</ul>
+<div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">mcmc_intervals</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">mcmc_areas_ridges</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
+<span id="cb18-3"><a href="#cb18-3"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-non-info-ci" class="cell quarto-layout-panel">
+<figure>
+<p></p><figcaption>Figure&nbsp;5: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell fragment quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-non-info-ci-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-1.png" width="576"></p>
+<figcaption>Figure&nbsp;6: Interval plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-non-info-ci-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-2.png" width="576"></p>
+<figcaption>Figure&nbsp;7: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> in a ridgeline plot.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-1-posterior-predictive-checks" class="slide level2">
+<h2>Model #1 Posterior Predictive Checks</h2>
+<ul>
+<li><p>One way to check model fit is to assess posterior predictive distrubtion.</p></li>
+<li><p>Draw samples from the posterior predictive distribution <span class="math inline">\(p(y^{new} | y) = \int p(y^{new} | \boldsymbol{\beta}, \sigma) p(\boldsymbol{\beta}, \sigma | y) d\boldsymbol{\beta}d\sigma\)</span> by</p></li>
+</ul>
+<ol type="1">
+<li>Sampling from the posterior (i.e.&nbsp;the draws in the MCMC chains)</li>
+<li>For each set of draws sampling <span class="math inline">\(y^{new}\)</span> given the corresponding values for <span class="math inline">\(x^{new}\)</span></li>
+</ol>
+<ul>
+<li>In Stan this is easily accomplished using the generated quantities block.</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb19-2"><a href="#cb19-2"></a>    <span class="co">// create a vector of N new observations</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>    <span class="dt">vector</span>[N] y_ppd; </span>
+<span id="cb19-4"><a href="#cb19-4"></a>    </span>
+<span id="cb19-5"><a href="#cb19-5"></a>    <span class="co">// for each observation, sample from the regression likelihod</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>    <span class="co">// using the posterior draws</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb19-8"><a href="#cb19-8"></a>        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span>
+<span id="cb19-9"><a href="#cb19-9"></a>    }</span>
+<span id="cb19-10"><a href="#cb19-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="model-1-posterior-predictive-plots" class="slide level2">
+<h2>Model #1 Posterior Predictive Plots</h2>
+<div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a>fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="fu">as_draws_df</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="fu">as.matrix</span>() <span class="ot">-&gt;</span> y_ppd</span>
+<span id="cb20-6"><a href="#cb20-6"></a></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb20-8"><a href="#cb20-8"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb20-12"><a href="#cb20-12"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
+<span id="cb20-13"><a href="#cb20-13"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb20-15"><a href="#cb20-15"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-non-info-ppc" class="cell quarto-layout-panel">
+<figure>
+<p></p><figcaption>Figure&nbsp;8: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell fragment quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-non-info-ppc-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-1.png" width="960"></p>
+<figcaption>Figure&nbsp;9: PPD densities for the wins given 3pt%.</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-non-info-ppc-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-2.png" width="960"></p>
+<figcaption>Figure&nbsp;10: PPD intervals for the wins plotted by 3pt%.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Posterior Predictive Check plots from <code>bayesplot</code>.</p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="conjugate-prior-regression-model" class="title-slide slide level1 center">
+<h1>Conjugate Prior Regression Model</h1>
+
+</section>
+<section id="model-2-set-up" class="slide level2">
+<h2>Model #2 Set-up</h2>
+<p>Next, we’ll implement the regression model with conjugate priors. Conjugacy refers to the situation where the prior and posterior distribution are from the same family.<sup>1</sup></p>
+<ol type="1">
+<li><p><strong>Conjugate prior:</strong> <span class="math inline">\(p(\boldsymbol{\beta}, \sigma^2) = p(\boldsymbol{\beta} | \sigma^2) p(\sigma^2)\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(\boldsymbol{\beta} | \sigma^2 ~ N_2(\boldsymbol{\beta}_0, \sigma^2 \Lambda_0^{-1})\)</span> where <span class="math inline">\(\boldsymbol{\beta}_0 \in \mathbb{R}^2\)</span> is a vector of prior coefficients, and <span class="math inline">\(\Lambda_0\)</span> is a <span class="math inline">\(2\times2\)</span> prior correlation matrix. <span class="math inline">\(\boldsymbol{\beta}_0 = 0\)</span> and <span class="math inline">\(\Lambda_0 = 10 I_2\)</span> to get a weakly informative prior that is equivalent to ridge regression.</p></li>
+<li><p><span class="math inline">\(\sigma^2 \sim InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2)\)</span> where <span class="math inline">\(\nu_0\)</span> is a prior sample size and <span class="math inline">\(s_0\)</span> is the prior standard deviation. We’ll set these to <span class="math inline">\(\nu_0 = 1\)</span> and <span class="math inline">\(s_0^2 = 47\)</span> the sample variance of the teams’ wins.</p></li>
+<li><p>The parameters <span class="math inline">\(\boldsymbol{\beta}_0, \Lambda_0, \nu_0, s_0^2\)</span> are hyperparameters.</p></li>
+</ol></li>
+<li><p><strong>The (Data) Likelihood:</strong> <span class="math inline">\(\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).\)</span></p></li>
+<li><p><strong>Posterior:</strong></p>
+<ol type="1">
+<li><span class="math inline">\(\boldsymbol{\beta} | \sigma^2, y \sim N_2(\boldsymbol{\beta}_N, \sigma^2 \Lambda_N^{-1})\)</span> where <span class="math inline">\(\boldsymbol{\beta}_N = \Lambda_N^{-1}(\mathbf{X}'\mathbf{X} \hat{\boldsymbol{\beta}} + \Lambda_0 \boldsymbol{\beta}_0)\)</span> and <span class="math inline">\(\Lambda_N = (\mathbf{X}'\mathbf{X} + \Lambda_0).\)</span></li>
+<li><span class="math inline">\(\sigma^2 | y) \sim InvGamma(\sigma^2 | \frac{\nu_0 + N}{2}, \frac{1}{2} \nu_0 s_0^2 + \frac{1}{2}(\mathbf{y}'\mathbf{y} + \boldsymbol{\beta}_0'\Lambda_0 \boldsymbol{\beta}_0 - \boldsymbol{\beta}_N' \Lambda_N \boldsymbol{\beta}_N)).\)</span></li>
+</ol></li>
+</ol>
+<aside><ol class="aside-footnotes"><li id="fn2"><p>See wikipedia for more details and derivations: <a href="https://en.wikipedia.org/wiki/Bayesian_linear_regression" class="uri">https://en.wikipedia.org/wiki/Bayesian_linear_regression</a></p></li></ol></aside></section>
+<section id="conjugate-prior-regression-stan-code" class="slide level2">
+<h2>Conjugate Prior Regression Stan Code</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>conjugate-regression.stan</strong></pre>
+</div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb21-1"><a href="#cb21-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co">// The input data is a vector 'y' of length 'N'.</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">data</span> {</span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; K;</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="dt">vector</span>[N] y;</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="dt">matrix</span>[N, K] X;</span>
+<span id="cb21-8"><a href="#cb21-8"></a>  </span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="co">// hyperparameters</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="dt">real</span> beta_0;</span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; lambda_0;</span>
+<span id="cb21-12"><a href="#cb21-12"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; nu_0;</span>
+<span id="cb21-13"><a href="#cb21-13"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; s_02;</span>
+<span id="cb21-14"><a href="#cb21-14"></a>}</span>
+<span id="cb21-15"><a href="#cb21-15"></a></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="kw">transformed data</span> {</span>
+<span id="cb21-17"><a href="#cb21-17"></a>    <span class="dt">matrix</span>[N, K+<span class="dv">1</span>] X_mat = append_col(rep_vector(<span class="dv">1</span>, N), X);</span>
+<span id="cb21-18"><a href="#cb21-18"></a>    <span class="dt">vector</span>[K+<span class="dv">1</span>] beta_0_vec = rep_vector(beta_0, K+<span class="dv">1</span>);</span>
+<span id="cb21-19"><a href="#cb21-19"></a>    <span class="dt">matrix</span>[K+<span class="dv">1</span>, K+<span class="dv">1</span>] Lambda_0 = lambda_0 * identity_matrix(K+<span class="dv">1</span>);</span>
+<span id="cb21-20"><a href="#cb21-20"></a>}</span>
+<span id="cb21-21"><a href="#cb21-21"></a></span>
+<span id="cb21-22"><a href="#cb21-22"></a><span class="co">// The parameters accepted by the model. Our model</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a><span class="co">// accepts two parameters 'mu' and 'sigma'.</span></span>
+<span id="cb21-24"><a href="#cb21-24"></a><span class="kw">parameters</span> {</span>
+<span id="cb21-25"><a href="#cb21-25"></a>  <span class="dt">vector</span>[K+<span class="dv">1</span>] beta;</span>
+<span id="cb21-26"><a href="#cb21-26"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma2;</span>
+<span id="cb21-27"><a href="#cb21-27"></a>}</span>
+<span id="cb21-28"><a href="#cb21-28"></a></span>
+<span id="cb21-29"><a href="#cb21-29"></a><span class="co">// The model to be estimated. We model the output</span></span>
+<span id="cb21-30"><a href="#cb21-30"></a><span class="co">// 'y' to be normally distributed with mean 'mu'</span></span>
+<span id="cb21-31"><a href="#cb21-31"></a><span class="co">// and standard deviation 'sigma'.</span></span>
+<span id="cb21-32"><a href="#cb21-32"></a><span class="kw">model</span> {</span>
+<span id="cb21-33"><a href="#cb21-33"></a>  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);</span>
+<span id="cb21-34"><a href="#cb21-34"></a>  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);</span>
+<span id="cb21-35"><a href="#cb21-35"></a>  </span>
+<span id="cb21-36"><a href="#cb21-36"></a>  y ~ normal(X_mat * beta, sqrt(sigma2));</span>
+<span id="cb21-37"><a href="#cb21-37"></a>}</span>
+<span id="cb21-38"><a href="#cb21-38"></a></span>
+<span id="cb21-39"><a href="#cb21-39"></a><span class="kw">generated quantities</span> {</span>
+<span id="cb21-40"><a href="#cb21-40"></a>    <span class="dt">real</span> sigma = sqrt(sigma2);</span>
+<span id="cb21-41"><a href="#cb21-41"></a>    <span class="dt">vector</span>[N] y_ppd;</span>
+<span id="cb21-42"><a href="#cb21-42"></a>    </span>
+<span id="cb21-43"><a href="#cb21-43"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb21-44"><a href="#cb21-44"></a>        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));</span>
+<span id="cb21-45"><a href="#cb21-45"></a>    }</span>
+<span id="cb21-46"><a href="#cb21-46"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="model-2-fitting" class="slide level2">
+<h2>Model #2 Fitting</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Program the model only through the priors and likelihood and let Stan approximate the posterior</p></li>
+<li><p>1000 warmup iterations, 1000 sampling iterations</p></li>
+<li><p>No thinning (thinning includes only every <span class="math inline">\(k\)</span>th draw)</p></li>
+<li><p>Refresh the print screen to see progress every 500 iterations.</p></li>
+<li><p>Run several chains (in parallel)</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>data_list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="at">K =</span> <span class="dv">1</span>,</span>
+<span id="cb22-4"><a href="#cb22-4"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="at">X =</span> <span class="fu">as.matrix</span>(ncaaw<span class="sc">$</span>FG3pct, <span class="at">nrow =</span> <span class="fu">nrow</span>(ncaaw)),</span>
+<span id="cb22-6"><a href="#cb22-6"></a>    </span>
+<span id="cb22-7"><a href="#cb22-7"></a>    <span class="co"># hyperparameters</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>    <span class="at">beta_0 =</span> <span class="dv">0</span>,</span>
+<span id="cb22-9"><a href="#cb22-9"></a>    <span class="at">lambda_0 =</span> <span class="dv">10</span>,</span>
+<span id="cb22-10"><a href="#cb22-10"></a>    <span class="at">nu_0 =</span> <span class="dv">1</span>,</span>
+<span id="cb22-11"><a href="#cb22-11"></a>    <span class="at">s_02 =</span> <span class="dv">47</span></span>
+<span id="cb22-12"><a href="#cb22-12"></a>)</span>
+<span id="cb22-13"><a href="#cb22-13"></a></span>
+<span id="cb22-14"><a href="#cb22-14"></a>file2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"conjugate-regression.stan"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15"></a>conj_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file2)</span>
+<span id="cb22-16"><a href="#cb22-16"></a></span>
+<span id="cb22-17"><a href="#cb22-17"></a>fit2 <span class="ot">&lt;-</span> conj_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb22-18"><a href="#cb22-18"></a>    <span class="at">data =</span> data_list2,</span>
+<span id="cb22-19"><a href="#cb22-19"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb22-20"><a href="#cb22-20"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb22-21"><a href="#cb22-21"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb22-22"><a href="#cb22-22"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb22-23"><a href="#cb22-23"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb22-24"><a href="#cb22-24"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-25"><a href="#cb22-25"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-26"><a href="#cb22-26"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
+Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
+Chain 1 finished in 0.3 seconds.
+Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
+Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
+Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
+Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
+Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
+Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
+Chain 2 finished in 0.3 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 0.3 seconds.
+Total execution time: 0.6 seconds.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-2-diagnostics" class="slide level2">
+<h2>Model #2 Diagnostics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>fit2<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$num_divergent
+[1] 0 0
+
+$num_max_treedepth
+[1] 0 0
+
+$ebfmi
+[1] 1.090207 0.923197</code></pre>
+</div>
+</div>
+<div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mcmc_trace</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">mcmc_dens_overlay</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-traceplots-conj" class="cell quarto-layout-panel">
+<figure>
+<p></p><figcaption>Figure&nbsp;11: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell fragment quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-traceplots-conj-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-1.png" width="576"></p>
+<figcaption>Figure&nbsp;12: Traceplots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-traceplots-conj-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-2.png" width="576"></p>
+<figcaption>Figure&nbsp;13: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-2-inference" class="slide level2">
+<h2>Model #2 Inference</h2>
+<ul>
+<li><p>Estimates are similar to Model #1, but regression coefficients are shrunk slightly to zero and variance is slightly higher</p></li>
+<li><p><a href="#/model-2-inference">Figure&nbsp;15</a> displayes credible intervals and densities are plotted as ridgelines in <a href="#/model-2-inference">Figure&nbsp;16</a>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div id="tbl-conj-inf">
+<table data-quarto-postprocess="true">
+<caption>Table&nbsp;2: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sd</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mad</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">q5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">q95</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">rhat</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ess_bulk</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">ess_tail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">beta[1]</td>
+<td style="text-align: right;">-14.691106</td>
+<td style="text-align: right;">-14.689800</td>
+<td style="text-align: right;">2.8432186</td>
+<td style="text-align: right;">2.7684590</td>
+<td style="text-align: right;">-19.3064350</td>
+<td style="text-align: right;">-9.992154</td>
+<td style="text-align: right;">1.006694</td>
+<td style="text-align: right;">603.2246</td>
+<td style="text-align: right;">672.8645</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">beta[2]</td>
+<td style="text-align: right;">1.001265</td>
+<td style="text-align: right;">1.001755</td>
+<td style="text-align: right;">0.0910815</td>
+<td style="text-align: right;">0.0903571</td>
+<td style="text-align: right;">0.8520539</td>
+<td style="text-align: right;">1.151337</td>
+<td style="text-align: right;">1.007041</td>
+<td style="text-align: right;">597.1370</td>
+<td style="text-align: right;">730.3235</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sigma</td>
+<td style="text-align: right;">6.407997</td>
+<td style="text-align: right;">6.406255</td>
+<td style="text-align: right;">0.2412035</td>
+<td style="text-align: right;">0.2239912</td>
+<td style="text-align: right;">6.0117310</td>
+<td style="text-align: right;">6.804346</td>
+<td style="text-align: right;">1.000334</td>
+<td style="text-align: right;">792.0443</td>
+<td style="text-align: right;">723.9148</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">mcmc_intervals</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">mcmc_areas_ridges</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)), <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-conj-ci" class="cell quarto-layout-panel">
+<figure>
+<p></p><figcaption>Figure&nbsp;14: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="cell fragment quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-conj-ci-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-1.png" width="960"></p>
+<figcaption>Figure&nbsp;15: Interval plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-conj-ci-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-2.png" width="960"></p>
+<figcaption>Figure&nbsp;16: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> in a ridgeline plot.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p>Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>. Plots were made using the <code>bayesplot</code> package.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="model-2-posterior-predictive-distribution" class="slide level2">
+<h2>Model #2 Posterior Predictive Distribution</h2>
+<div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>    <span class="fu">as_draws_df</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>    <span class="fu">as.matrix</span>() <span class="ot">-&gt;</span> y_ppd</span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb29-5"><a href="#cb29-5"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb29-9"><a href="#cb29-9"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
+<span id="cb29-10"><a href="#cb29-10"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb29-12"><a href="#cb29-12"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
+<span id="cb29-13"><a href="#cb29-13"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-conj-ppc" class="cell quarto-layout-panel">
+<figure>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-conj-ppc-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-1.png" data-ref-parent="fig-conj-ppc" width="960"></p>
+<figcaption>(a) PPD densities for the wins given 3pt%.</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-conj-ppc-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-2.png" data-ref-parent="fig-conj-ppc" width="960"></p>
+<figcaption>(b) PPD intervals for the wins plotted by 3pt%.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption>Figure&nbsp;17: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</section></section>
+<section>
+<section id="additional-resources" class="title-slide slide level1 center">
+<h1>Additional Resources</h1>
+
+</section>
+<section id="guides-for-stan" class="slide level2">
+<h2>Guides for Stan</h2>
+<p>First, here’s the <strong>three essential guides</strong> for using Stan:</p>
+<ul>
+<li><p><a href="https://mc-stan.org/docs/functions-reference/index.html">Stan Function Guide</a> - reference for all the built-in functions and distributions as well as guides for writing custom functions and distributions</p></li>
+<li><p><a href="https://mc-stan.org/docs/stan-users-guide/index.html">Stan User’s Guide</a> - reference for example models, how to build efficient models, and some inference techniques</p></li>
+<li><p><a href="https://mc-stan.org/docs/reference-manual/index.html">Stan Reference Manual</a> - reference for programming in Stan with a focus on how the language works</p></li>
+</ul>
+<p><strong>Other Stan Packages</strong></p>
+<ul>
+<li><p><a href="https://paul-buerkner.github.io/brms/index.html">brms</a>: Bayesian regression models using Stan</p></li>
+<li><p><a href="https://mc-stan.org/posterior/">posterior</a>: Useful for working with Stan output</p></li>
+<li><p><a href="http://mc-stan.org/bayesplot">bayesplot</a>: ggplot2-based plotting functions for MCMC draws designed work well with Stan</p></li>
+<li><p><a href="http://mc-stan.org/loo">loo</a>: Leave-one-out cross validation for model checking and selection that works with the log-posterior. Works best with <code>rstanarm</code> but can work with <code>cmdstanr</code> too.</p></li>
+</ul>
+<p><strong>Guides to Debugging and Diagnostics</strong></p>
+<ul>
+<li><p><a href="https://mc-stan.org/misc/warnings.html">Stan’s Guide to Runtime warnings and convergence problems</a></p></li>
+<li><p><a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Prior Choices and Selection</a></p></li>
+<li><p><a href="https://arxiv.org/pdf/1909.11827.pdf">Convergence Diagnostics for MCMC</a></p></li>
+<li><p><a href="https://discourse.mc-stan.org/">Official Stan Forum</a></p></li>
+</ul>
+</section></section>
+<section>
+<section id="bonus" class="title-slide slide level1 center">
+<h1>Bonus!</h1>
+
+</section>
+<section id="bonus-regression-modeling-with-incomplete-data" class="slide level2">
+<h2>Bonus: Regression Modeling with Incomplete Data</h2>
+<ul>
+<li><p>Let’s use the <code>brms</code> package to fit a regression model with incomplete predictor observations.</p></li>
+<li><p>Incomplete data analysis ranges from complete case analysis to multiple imputation, joint modeling, and EM algorithm <span class="citation" data-cites="schafer2002">(<a href="#/references" role="doc-biblioref" onclick="">Schafer and Graham 2002</a>)</span>.<sup>1</sup></p></li>
+<li><p>We’re going to use <code>mice</code> <span class="citation" data-cites="buuren2010mice">(<a href="#/references" role="doc-biblioref" onclick="">Buuren and Groothuis-Oudshoorn 2010</a>)</span> and <code>brms</code> <span class="citation" data-cites="bürkner2018">(<a href="#/references" role="doc-biblioref" onclick="">Bürkner 2018</a>)</span> to demonstrate the imputation and fitting Bayesian regression models.</p></li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>See <span class="citation" data-cites="rubin1976">White, Royston, and Wood (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span> for more details on incomplete data analysis.</p></li></ol></aside></section>
+<section id="ncaa-womens-basketball-players-junior-and-senior-years" class="slide level2">
+<h2>NCAA Women’s Basketball Player’s Junior and Senior Years</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>We’ll use junior year scoring (points per game/PPG) to predict senior year scoring for 2020-21 to the 2022-23 seasons.</p></li>
+<li><p>The data set only contains players who played in at least 75% of games each season, so partial seasons due to injury or being a bench player are excluded.</p></li>
+<li><p>Players who only have a junior season are excluded from the analysis.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>ncaaw_i <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/ncaaw-individuals.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">head</span>(ncaaw_i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Name Pos_jr Pos_sr G_jr G_sr PPG_jr PPG_sr Cl_jr
+1     A'Jah Davis      F      F   29   32   16.6   16.2   Jr.
+2 Abby Brockmeyer      F      F   NA   31     NA   16.3   Jr.
+3       Abby Feit      F      F   29   28   15.1   15.5   Jr.
+4     Abby Meyers      G      G   NA   30     NA   17.9   Jr.
+5     Abby Meyers      G      G   NA   35     NA   14.3   Jr.
+6   Adriana Shipp      G      G   NA   30     NA   13.9   Jr.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(ncaaw_i, <span class="fu">aes</span>(PPG_jr, PPG_sr, <span class="at">color =</span> G_jr)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>    <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"G - Jr"</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PPG - Jr"</span>, <span class="at">y =</span> <span class="st">"PPG - Sr"</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div id="fig-ppg-jr-sr" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-ppg-jr-sr-1.png" width="960"></p>
+<figcaption>Figure&nbsp;18: Points per game (PPG) from Junior and Senior seasons.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="incomplete-data-structure-imputation-model" class="slide level2">
+<h2>Incomplete Data Structure &amp; Imputation Model</h2>
+<ul>
+<li><p>The imputation model will be univariate linear regression that use all other variables as predictors.</p>
+<ul>
+<li>For example, imputing <span class="math inline">\(PPG_{jr}\)</span> will be done by regressing on <span class="math inline">\(PPG_{sr}, G_{jr}, G_{sr}\)</span>.</li>
+</ul></li>
+<li><p><span class="math inline">\(PPG_{jr}\)</span> and <span class="math inline">\(G_{jr}\)</span> are incomplete for <span class="math inline">\(n_{mis} = 176\)</span> players while <span class="math inline">\(n_{obs} = 98\)</span> players have stats from both years as displayed in <a href="#/fig-miss-patt">Figure&nbsp;19</a>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb33-2"><a href="#cb33-2"></a>m_pat <span class="ot">&lt;-</span> <span class="fu">md.pattern</span>(ncaaw_i, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="stan_pres_files/figure-revealjs/fig-miss-patt-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;19: Missing data patterns for the NCAA women’s basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons.</p></section>
+<section id="multiple-imputation-with-mice" class="slide level2">
+<h2>Multiple Imputation with mice</h2>
+<p>First, we’ll impute before model fitting using <code>mice</code>.</p>
+<p>Multiple Imputation (by Chained Equations) is a three stage procedure:</p>
+<ol type="1">
+<li>Each incomplete variable is imputed <span class="math inline">\(M\)</span> times with posterior predictive draws from a regression model with all other variables as predictors. The procedure iterates through the incomplete variables several times to converge to the posterior predictive distribution of the missing data given the observed.</li>
+<li>These completed data sets are then analyzed individually with a standard complete data method.</li>
+<li>Results from each analysis are combined. Typically this is done with Rubin’s rules <span class="citation" data-cites="rubin1987">(<a href="#/references" role="doc-biblioref" onclick="">Rubin 1987</a>)</span>, but <code>brms</code> follows the advice of <span class="citation" data-cites="zhou2010">Zhou and Reiter (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span> and simply stacks the posterior draw matrices from each fitted model.</li>
+</ol>
+<div class="cell" data-hash="stan_pres_cache/revealjs/mice-fit_695340777f2c658d0ea8857125be0785">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb34-2"><a href="#cb34-2"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(ncaaw_i, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"norm"</span>, <span class="at">maxit =</span> <span class="dv">10</span>, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb34-3"><a href="#cb34-3"></a>fit_brm_mice <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(PPG_sr <span class="sc">~</span> G_jr <span class="sc">*</span> PPG_jr, <span class="at">data =</span> imps, <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">refresh =</span> <span class="dv">0</span>)</span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="fu">summary</span>(fit_brm_mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-hash="stan_pres_cache/revealjs/mice-fit_695340777f2c658d0ea8857125be0785">
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: PPG_sr ~ G_jr * PPG_jr 
+   Data: imps (Number of observations: 274) 
+  Draws: 20 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 20000
+
+Population-Level Effects: 
+            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept      17.15      4.92     7.87    27.44 1.22       65      216
+G_jr           -0.24      0.19    -0.65     0.11 1.23       61      155
+PPG_jr         -0.04      0.28    -0.63     0.50 1.21       66      255
+G_jr:PPG_jr     0.01      0.01    -0.01     0.04 1.23       63      195
+
+Family Specific Parameters: 
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     2.17      0.10     1.98     2.38 1.07      171      724
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+</section>
+<section id="imputation-during-model-fitting" class="slide level2">
+<h2>Imputation During Model Fitting</h2>
+<ul>
+<li><p>Imputations are made for each incomplete variable using a different conditional model for each variable.</p></li>
+<li><p>This approach differs from MI and MICE in two key ways:</p>
+<ol type="1">
+<li>The model is only fit once since the imputation model is part of the analysis model.</li>
+<li>The model must be constructed uniquely for each analysis scenario.</li>
+</ol></li>
+</ul>
+<div class="cell columns column-output-location" data-hash="stan_pres_cache/revealjs/brm-mi-fit_00f6f3712157170dabe4064db1f206ca">
+<div class="column">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>bform <span class="ot">&lt;-</span> <span class="fu">bf</span>(PPG_sr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> <span class="fu">mi</span>(G_jr) <span class="sc">*</span> <span class="fu">mi</span>(PPG_jr)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>    <span class="fu">bf</span>(PPG_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>    <span class="fu">bf</span>(G_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span> <span class="fu">set_rescor</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb36-4"><a href="#cb36-4"></a>fit_brm_mi <span class="ot">&lt;-</span> <span class="fu">brm</span>(bform, <span class="at">data =</span> ncaaw_i, </span>
+<span id="cb36-5"><a href="#cb36-5"></a>                  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb36-6"><a href="#cb36-6"></a>                  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb36-7"><a href="#cb36-7"></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">show_exceptions =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb36-8"><a href="#cb36-8"></a>                  <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="fu">summary</span>(fit_brm_mi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: MV(gaussian, gaussian, gaussian) 
+  Links: mu = identity; sigma = identity
+         mu = identity; sigma = identity
+         mu = identity; sigma = identity 
+Formula: PPG_sr | mi() ~ mi(G_jr) * mi(PPG_jr) 
+         PPG_jr | mi() ~ G_sr + PPG_sr 
+         G_jr | mi() ~ G_sr + PPG_sr 
+   Data: ncaaw_i (Number of observations: 274) 
+  Draws: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 2000
+
+Population-Level Effects: 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+PPGsr_Intercept          15.98      2.24    11.52    20.67 1.00     1339
+PPGjr_Intercept           5.95      2.35     1.27    10.37 1.00     1746
+Gjr_Intercept             2.96      6.17    -9.41    14.51 1.00     1695
+PPGjr_G_sr               -0.04      0.07    -0.17     0.10 1.00     2013
+PPGjr_PPG_sr              0.71      0.08     0.56     0.88 1.00     1260
+Gjr_G_sr                  0.56      0.18     0.22     0.92 1.00     1715
+Gjr_PPG_sr                0.27      0.22    -0.17     0.69 1.00     1000
+PPGsr_miG_jr             -0.29      0.09    -0.48    -0.11 1.00     1248
+PPGsr_miPPG_jr           -0.03      0.14    -0.31     0.26 1.00     1229
+PPGsr_miG_jr:miPPG_jr     0.02      0.01     0.01     0.03 1.00     1219
+                      Tail_ESS
+PPGsr_Intercept           1036
+PPGjr_Intercept           1829
+Gjr_Intercept             1883
+PPGjr_G_sr                1621
+PPGjr_PPG_sr              1568
+Gjr_G_sr                  1633
+Gjr_PPG_sr                1399
+PPGsr_miG_jr              1072
+PPGsr_miPPG_jr            1134
+PPGsr_miG_jr:miPPG_jr     1088
+
+Family Specific Parameters: 
+            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma_PPGsr     1.86      0.09     1.69     2.05 1.00     2653     1528
+sigma_PPGjr     2.30      0.15     2.04     2.59 1.00      904     1483
+sigma_Gjr       5.35      0.39     4.62     6.16 1.00      710     1113
+
+Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="diagnostics" class="slide level2">
+<h2>Diagnostics</h2>
+<p>Since <code>brms</code> is built on Stan we can also take a look at the traceplots of the samples in <a href="#/diagnostics">Figure&nbsp;20</a>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-brm-mi-trace" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-1.png" width="960"></p>
+<figcaption>Figure&nbsp;20: Traceplots of brms analysis model parameters.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-brm-mi-trace-imp" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-imp-1.png" width="960"></p>
+<figcaption>Figure&nbsp;21: Traceplots of brms imputation model parameters.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison-of-estimated-effects" class="slide level2">
+<h2>Comparison of Estimated Effects</h2>
+<div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mice, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mi, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-brm-mi-cond-eff" class="cell quarto-layout-panel">
+<figure>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-brm-mi-cond-eff-1" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-1.png" data-ref-parent="fig-brm-mi-cond-eff" width="576"></p>
+<figcaption>(a) Estimates after MICE imputation</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-brm-mi-cond-eff-2" class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-2.png" data-ref-parent="fig-brm-mi-cond-eff" width="576"></p>
+<figcaption>(b) Estimates with joint model</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption>Figure&nbsp;22: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-bürkner2018" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the R Package Brms.”</span> <em>The R Journal</em> 10 (1): 395. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
+</div>
+<div id="ref-buuren2010mice" class="csl-entry" role="listitem">
+Buuren, S van, and Karin Groothuis-Oudshoorn. 2010. <span>“Mice: Multivariate Imputation by Chained Equations in r.”</span> <em>Journal of Statistical Software</em>, 168.
+</div>
+<div id="ref-cmdstanp" class="csl-entry" role="listitem">
+<span>“Cmdstanpy <span></span> Python Interface to CmdStan <span></span> CmdStanPy 1.1.0 Documentation.”</span> n.d. <a href="https://mc-stan.org/cmdstanpy/index.html">https://mc-stan.org/cmdstanpy/index.html</a>.
+</div>
+<div id="ref-dempster1977" class="csl-entry" role="listitem">
+Dempster, A. P., Martin Schatzoff, and Nanny Wermuth. 1977. <span>“A Simulation Study of Alternatives to Ordinary Least Squares.”</span> <em>Journal of the American Statistical Association</em> 72 (357): 77–91. <a href="https://doi.org/10.2307/2286909">https://doi.org/10.2307/2286909</a>.
+</div>
+<div id="ref-gabry2023" class="csl-entry" role="listitem">
+Gabry, Jonah, Rok Češnovar, and Andrew Johnson. 2023. <em>Cmdstanr: R Inferfacet to ’CmdStan’</em>. <a href="https://mc-stan.org/cmdstanr/, https://discourse.mc-stan.org">https://mc-stan.org/cmdstanr/, https://discourse.mc-stan.org</a>.
+</div>
+<div id="ref-gelman2013bayesian" class="csl-entry" role="listitem">
+Gelman, Andrew, Hal S Stern, John B Carlin, David B Dunson, Aki Vehtari, and Donald B Rubin. 2013. <em>Bayesian Data Analysis</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-harel2007multiple" class="csl-entry" role="listitem">
+Harel, Ofer, and Xiao-Hua Zhou. 2007. <span>“Multiple Imputation: Review of Theory, Implementation and Software.”</span> <em>Statistics in Medicine</em> 26 (16): 30573077.
+</div>
+<div id="ref-rubin1976" class="csl-entry" role="listitem">
+Rubin, Donald B. 1976. <span>“Inference and Missing Data.”</span> <em>Biometrika</em> 63 (3): 581–92. <a href="https://www.jstor.org/stable/2335739">https://www.jstor.org/stable/2335739</a>.
+</div>
+<div id="ref-rubin1987" class="csl-entry" role="listitem">
+———. 1987. <em>Multiple Imputation for Nonresponse in Surveys | Wiley Series in Probability and Statistics</em>. Wiley series in probability and mathematical statistics : Applied probability and statistics. New York: Wiley. <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696</a>.
+</div>
+<div id="ref-schafer2002" class="csl-entry" role="listitem">
+Schafer, Joseph L., and John W. Graham. 2002. <span>“Missing Data: Our View of the State of the Art.”</span> <em>Psychological Methods</em> 7 (2): 147–77. <a href="https://doi.org/10.1037/1082-989X.7.2.147">https://doi.org/10.1037/1082-989X.7.2.147</a>.
+</div>
+<div id="ref-white2011" class="csl-entry" role="listitem">
+White, Ian R., Patrick Royston, and Angela M. Wood. 2011. <span>“Multiple Imputation Using Chained Equations: Issues and Guidance for Practice.”</span> <em>Statistics in Medicine</em> 30 (4): 377–99. <a href="https://doi.org/10.1002/sim.4067">https://doi.org/10.1002/sim.4067</a>.
+</div>
+<div id="ref-zhou2010" class="csl-entry" role="listitem">
+Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference After Multiple Imputation.”</span> <em>The American Statistician</em> 64 (2): 159–63. <a href="https://doi.org/10.1198/tast.2010.09109">https://doi.org/10.1198/tast.2010.09109</a>.
+</div>
+</div>
+
+<div class="footer footer-default">
+
+</div>
+</section></section>
+
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
