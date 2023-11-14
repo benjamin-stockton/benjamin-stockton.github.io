@@ -1785,591 +1785,589 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb75-16"><a href="#cb75-16" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> swosc-stan.bib</span></span>
 <span id="cb75-17"><a href="#cb75-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb75-18"><a href="#cb75-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-19"><a href="#cb75-19" aria-hidden="true" tabindex="-1"></a>This post is the second workshop in the 2023-2024 Student Workshop Series on Computing at UConn. I'm re-publishing it here.</span>
+<span id="cb75-19"><a href="#cb75-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
 <span id="cb75-20"><a href="#cb75-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-21"><a href="#cb75-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
+<span id="cb75-21"><a href="#cb75-21" aria-hidden="true" tabindex="-1"></a>To get started, we'll head over to Stan's <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://mc-stan.org/)</span> to see how to get set up in R. For this presentation, I'll use the CmdStan toolchain that's implemented in R by the <span class="in">`cmdstanr`</span> <span class="co">[</span><span class="ot">package</span><span class="co">](https://mc-stan.org/cmdstanr/)</span> <span class="co">[</span><span class="ot">@gabry2023</span><span class="co">]</span>. There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <span class="co">[</span><span class="ot">CmdStanPy</span><span class="co">](https://github.com/stan-dev/cmdstanpy)</span> <span class="co">[</span><span class="ot">@cmdstanp</span><span class="co">]</span>.</span>
 <span id="cb75-22"><a href="#cb75-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-23"><a href="#cb75-23" aria-hidden="true" tabindex="-1"></a>To get started, we'll head over to Stan's <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://mc-stan.org/)</span> to see how to get set up in R. For this presentation, I'll use the CmdStan toolchain that's implemented in R by the <span class="in">`cmdstanr`</span> <span class="co">[</span><span class="ot">package</span><span class="co">](https://mc-stan.org/cmdstanr/)</span> <span class="co">[</span><span class="ot">@gabry2023</span><span class="co">]</span>. There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <span class="co">[</span><span class="ot">CmdStanPy</span><span class="co">](https://github.com/stan-dev/cmdstanpy)</span> <span class="co">[</span><span class="ot">@cmdstanp</span><span class="co">]</span>.</span>
-<span id="cb75-24"><a href="#cb75-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-27"><a href="#cb75-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-28"><a href="#cb75-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: set-up</span></span>
-<span id="cb75-29"><a href="#cb75-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-30"><a href="#cb75-30" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))</span></span>
-<span id="cb75-31"><a href="#cb75-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
-<span id="cb75-32"><a href="#cb75-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-33"><a href="#cb75-33" aria-hidden="true" tabindex="-1"></a><span class="co"># cmdstanr::install_cmdstan()</span></span>
-<span id="cb75-34"><a href="#cb75-34" aria-hidden="true" tabindex="-1"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_version</span>()</span>
-<span id="cb75-35"><a href="#cb75-35" aria-hidden="true" tabindex="-1"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_path</span>()</span>
-<span id="cb75-36"><a href="#cb75-36" aria-hidden="true" tabindex="-1"></a>cmdstanr<span class="sc">::</span><span class="fu">check_cmdstan_toolchain</span>()</span>
-<span id="cb75-37"><a href="#cb75-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-25"><a href="#cb75-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-26"><a href="#cb75-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: set-up</span></span>
+<span id="cb75-27"><a href="#cb75-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-28"><a href="#cb75-28" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))</span></span>
+<span id="cb75-29"><a href="#cb75-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
+<span id="cb75-30"><a href="#cb75-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-31"><a href="#cb75-31" aria-hidden="true" tabindex="-1"></a><span class="co"># cmdstanr::install_cmdstan()</span></span>
+<span id="cb75-32"><a href="#cb75-32" aria-hidden="true" tabindex="-1"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_version</span>()</span>
+<span id="cb75-33"><a href="#cb75-33" aria-hidden="true" tabindex="-1"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_path</span>()</span>
+<span id="cb75-34"><a href="#cb75-34" aria-hidden="true" tabindex="-1"></a>cmdstanr<span class="sc">::</span><span class="fu">check_cmdstan_toolchain</span>()</span>
+<span id="cb75-35"><a href="#cb75-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-36"><a href="#cb75-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-37"><a href="#cb75-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Very Brief Introduction to Bayesian Data Analysis</span></span>
 <span id="cb75-38"><a href="#cb75-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-39"><a href="#cb75-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Very Brief Introduction to Bayesian Data Analysis</span></span>
+<span id="cb75-39"><a href="#cb75-39" aria-hidden="true" tabindex="-1"></a>The broadest conceptual overview of Bayesian data analysis is that this methodology allows us to incorporate prior knowledge about the model/data into our analysis which is based on a posterior distribution that is derived from the prior and likelihood. Bayesian inference treats the parameters of the model as random variables whose distribution we are interested in either deriving analytically or approximating through computation. This is a key distinction from frequentist methods taught in math stat and applied stat where parameters are fixed values and their estimators are functions of a random sample and the sampling distribution of the estimator is used for inference.</span>
 <span id="cb75-40"><a href="#cb75-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-41"><a href="#cb75-41" aria-hidden="true" tabindex="-1"></a>The broadest conceptual overview of Bayesian data analysis is that this methodology allows us to incorporate prior knowledge about the model/data into our analysis which is based on a posterior distribution that is derived from the prior and likelihood. Bayesian inference treats the parameters of the model as random variables whose distribution we are interested in either deriving analytically or approximating through computation. This is a key distinction from frequentist methods taught in math stat and applied stat where parameters are fixed values and their estimators are functions of a random sample and the sampling distribution of the estimator is used for inference.</span>
-<span id="cb75-42"><a href="#cb75-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-43"><a href="#cb75-43" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb75-44"><a href="#cb75-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bayes Rule</span></span>
+<span id="cb75-41"><a href="#cb75-41" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb75-42"><a href="#cb75-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bayes Rule</span></span>
+<span id="cb75-43"><a href="#cb75-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-44"><a href="#cb75-44" aria-hidden="true" tabindex="-1"></a>A quick reminder of Bayes Rule.</span>
 <span id="cb75-45"><a href="#cb75-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-46"><a href="#cb75-46" aria-hidden="true" tabindex="-1"></a>A quick reminder of Bayes Rule.</span>
+<span id="cb75-46"><a href="#cb75-46" aria-hidden="true" tabindex="-1"></a>Let $\theta$ be a random variable with (prior) distribution $p(\theta)$, $Y$ be a random variable that depends on $\theta$ with conditional distribution or likelihood $p(y | \theta)$. Then their joint distribution is $p(y, \theta) = p(y|\theta) p(\theta)$.</span>
 <span id="cb75-47"><a href="#cb75-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-48"><a href="#cb75-48" aria-hidden="true" tabindex="-1"></a>Let $\theta$ be a random variable with (prior) distribution $p(\theta)$, $Y$ be a random variable that depends on $\theta$ with conditional distribution or likelihood $p(y | \theta)$. Then their joint distribution is $p(y, \theta) = p(y|\theta) p(\theta)$.</span>
+<span id="cb75-48"><a href="#cb75-48" aria-hidden="true" tabindex="-1"></a>Bayes rule lets us flip the conditioning from the likelihood to get $p(\theta | y)$</span>
 <span id="cb75-49"><a href="#cb75-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-50"><a href="#cb75-50" aria-hidden="true" tabindex="-1"></a>Bayes rule lets us flip the conditioning from the likelihood to get $p(\theta | y)$</span>
-<span id="cb75-51"><a href="#cb75-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-50"><a href="#cb75-50" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb75-51"><a href="#cb75-51" aria-hidden="true" tabindex="-1"></a>p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(y, \theta) d\theta} \approx p(y|\theta) p(\theta)</span>
 <span id="cb75-52"><a href="#cb75-52" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb75-53"><a href="#cb75-53" aria-hidden="true" tabindex="-1"></a>p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(y, \theta) d\theta} \approx p(y|\theta) p(\theta)</span>
-<span id="cb75-54"><a href="#cb75-54" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb75-55"><a href="#cb75-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb75-53"><a href="#cb75-53" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb75-54"><a href="#cb75-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-55"><a href="#cb75-55" aria-hidden="true" tabindex="-1"></a>To be a little more specific, we have three central components to the model. For ease of exposition, let's consider the simple regression model $E(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ where we have $i = 1,\dots,N$ observations of $(Y_i, X_i)'$ from Ch. 14 of Bayesian Data Analysis <span class="co">[</span><span class="ot">@gelman2013bayesian, p. 354-358</span><span class="co">]</span>. From here on I will suppress conditioning on the observed predictor $X_i = x_i$ since we are considering the design matrix $X = (1_N, \mathbf{x})$ to be fixed and known where $\mathbf{x} = (x_1,\dots, x_N)'$.</span>
 <span id="cb75-56"><a href="#cb75-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-57"><a href="#cb75-57" aria-hidden="true" tabindex="-1"></a>To be a little more specific, we have three central components to the model. For ease of exposition, let's consider the simple regression model $E(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ where we have $i = 1,\dots,N$ observations of $(Y_i, X_i)'$ from Ch. 14 of Bayesian Data Analysis <span class="co">[</span><span class="ot">@gelman2013bayesian, p. 354-358</span><span class="co">]</span>. From here on I will suppress conditioning on the observed predictor $X_i = x_i$ since we are considering the design matrix $X = (1_N, \mathbf{x})$ to be fixed and known where $\mathbf{x} = (x_1,\dots, x_N)'$.</span>
-<span id="cb75-58"><a href="#cb75-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-59"><a href="#cb75-59" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The Prior:** a distribution for the parameters that doesn't depend on the data.</span>
-<span id="cb75-60"><a href="#cb75-60" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>For the regression model, we have three parameters $\beta_0, \beta_1, \sigma^2$. We assign a probability distribution $p(\beta_0, \beta_1, \sigma^2) \equiv p(\boldsymbol{\beta}, \sigma^2)$ to these parameters. Two common ways to do this are a non-informative prior so that the prior is uniform $p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$.</span>
-<span id="cb75-61"><a href="#cb75-61" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** a model for the data that depends on the parameters.</span>
-<span id="cb75-62"><a href="#cb75-62" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>For the regression, we have the model $Y_i | \boldsymbol{\beta}, \sigma^2 \sim N(\beta_0 + \beta_1 x_i, \sigma^2) \equiv p(y_i | \boldsymbol{\beta}, \sigma^2) = \phi(y_i | \beta_0 + \beta_1 x_i, \sigma^2).$ Note that we are conditioning on the parameters.</span>
-<span id="cb75-63"><a href="#cb75-63" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>In vector notation, this is $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
-<span id="cb75-64"><a href="#cb75-64" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**The Posterior:** a distribution that uses Bayes rule to define distribution of the parameters given the data.</span>
-<span id="cb75-65"><a href="#cb75-65" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>For the regression model we are able to find an analytic solution to the posterior when we have a non-informative prior $p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$, or for a conjugate prior $p(\boldsymbol{\beta} | \sigma^2) = \phi(\beta_0) \phi(\beta_1)$ and $p(\sigma^2) = InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2).$</span>
-<span id="cb75-66"><a href="#cb75-66" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>The joint posterior for the non-informative prior is expressed as</span>
-<span id="cb75-67"><a href="#cb75-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-68"><a href="#cb75-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{=tex}</span></span>
-<span id="cb75-69"><a href="#cb75-69" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{align*}</span></span>
-<span id="cb75-70"><a href="#cb75-70" aria-hidden="true" tabindex="-1"></a><span class="in">    p(\boldsymbol{\beta}, \sigma^2 | \mathbf{y}) &amp;= p(\boldsymbol{\beta} | \sigma^2, \mathbf{y}) \times p(\sigma^2 | \mathbf{y}) \\</span></span>
-<span id="cb75-71"><a href="#cb75-71" aria-hidden="true" tabindex="-1"></a><span class="in">        &amp;= N_2(\boldsymbol{\beta} | \hat{\boldsymbol{\beta}}, \sigma^2 (X'X)^{-1}) \times Inv-\chi^2 (\sigma^2 | N-2, s^2) \\</span></span>
-<span id="cb75-72"><a href="#cb75-72" aria-hidden="true" tabindex="-1"></a><span class="in">    \hat{\boldsymbol{\beta}} &amp;= (X'X)^{-1} X'\mathbf{y} \\</span></span>
-<span id="cb75-73"><a href="#cb75-73" aria-hidden="true" tabindex="-1"></a><span class="in">    s^2 &amp;= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   </span></span>
-<span id="cb75-74"><a href="#cb75-74" aria-hidden="true" tabindex="-1"></a><span class="in">\end{align*}</span></span>
-<span id="cb75-75"><a href="#cb75-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-76"><a href="#cb75-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some examples in Stan</span></span>
+<span id="cb75-57"><a href="#cb75-57" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The Prior:** a distribution for the parameters that doesn't depend on the data.</span>
+<span id="cb75-58"><a href="#cb75-58" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>For the regression model, we have three parameters $\beta_0, \beta_1, \sigma^2$. We assign a probability distribution $p(\beta_0, \beta_1, \sigma^2) \equiv p(\boldsymbol{\beta}, \sigma^2)$ to these parameters. One common way to do this are a non-informative prior so that the prior is uniform $p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$.</span>
+<span id="cb75-59"><a href="#cb75-59" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** a model for the data that depends on the parameters.</span>
+<span id="cb75-60"><a href="#cb75-60" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>For the regression, we have the model $Y_i | \boldsymbol{\beta}, \sigma^2 \sim N(\beta_0 + \beta_1 x_i, \sigma^2) \equiv p(y_i | \boldsymbol{\beta}, \sigma^2) = \phi(y_i | \beta_0 + \beta_1 x_i, \sigma^2).$ Note that we are conditioning on the parameters.</span>
+<span id="cb75-61"><a href="#cb75-61" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>In vector notation, this is $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
+<span id="cb75-62"><a href="#cb75-62" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**The Posterior:** a distribution that uses Bayes rule to define distribution of the parameters given the data.</span>
+<span id="cb75-63"><a href="#cb75-63" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>For the regression model we are able to find an analytic solution to the posterior when we have a non-informative prior $p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$, or for a conjugate prior $p(\boldsymbol{\beta} | \sigma^2) = \phi(\beta_0) \phi(\beta_1)$ and $p(\sigma^2) = InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2).$</span>
+<span id="cb75-64"><a href="#cb75-64" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>The joint posterior for the non-informative prior is expressed as</span>
+<span id="cb75-65"><a href="#cb75-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-66"><a href="#cb75-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{=tex}</span></span>
+<span id="cb75-67"><a href="#cb75-67" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{align*}</span></span>
+<span id="cb75-68"><a href="#cb75-68" aria-hidden="true" tabindex="-1"></a><span class="in">    p(\boldsymbol{\beta}, \sigma^2 | \mathbf{y}) &amp;= p(\boldsymbol{\beta} | \sigma^2, \mathbf{y}) \times p(\sigma^2 | \mathbf{y}) \\</span></span>
+<span id="cb75-69"><a href="#cb75-69" aria-hidden="true" tabindex="-1"></a><span class="in">        &amp;= N_2(\boldsymbol{\beta} | \hat{\boldsymbol{\beta}}, \sigma^2 (X'X)^{-1}) \times Inv-\chi^2 (\sigma^2 | N-2, s^2) \\</span></span>
+<span id="cb75-70"><a href="#cb75-70" aria-hidden="true" tabindex="-1"></a><span class="in">    \hat{\boldsymbol{\beta}} &amp;= (X'X)^{-1} X'\mathbf{y} \\</span></span>
+<span id="cb75-71"><a href="#cb75-71" aria-hidden="true" tabindex="-1"></a><span class="in">    s^2 &amp;= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   </span></span>
+<span id="cb75-72"><a href="#cb75-72" aria-hidden="true" tabindex="-1"></a><span class="in">\end{align*}</span></span>
+<span id="cb75-73"><a href="#cb75-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-74"><a href="#cb75-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some examples in Stan</span></span>
+<span id="cb75-75"><a href="#cb75-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-76"><a href="#cb75-76" aria-hidden="true" tabindex="-1"></a>We'll continue with the single predictor regression model to model NCAA Women's Basketball team's total wins by their 3 point field goal percentage from the 2022-2023 season. Data collected from <span class="co">[</span><span class="ot">NCAA</span><span class="co">](https://stats.ncaa.org/rankings?sport_code=WBB&amp;division=2)</span>.</span>
 <span id="cb75-77"><a href="#cb75-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-78"><a href="#cb75-78" aria-hidden="true" tabindex="-1"></a>We'll continue with the single predictor regression model to model NCAA Women's Basketball team's total wins by their 3 point field goal percentage from the 2022-2023 season. Data collected from <span class="co">[</span><span class="ot">NCAA</span><span class="co">](https://stats.ncaa.org/rankings?sport_code=WBB&amp;division=2)</span>.</span>
-<span id="cb75-79"><a href="#cb75-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-82"><a href="#cb75-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-83"><a href="#cb75-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-data</span></span>
-<span id="cb75-84"><a href="#cb75-84" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb75-85"><a href="#cb75-85" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb75-86"><a href="#cb75-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-87"><a href="#cb75-87" aria-hidden="true" tabindex="-1"></a>ncaaw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"Data/NCAAW-freethrows-threes-2022-2023.csv"</span>)</span>
-<span id="cb75-88"><a href="#cb75-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-80"><a href="#cb75-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-81"><a href="#cb75-81" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-data</span></span>
+<span id="cb75-82"><a href="#cb75-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb75-83"><a href="#cb75-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb75-84"><a href="#cb75-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-85"><a href="#cb75-85" aria-hidden="true" tabindex="-1"></a>ncaaw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"Data/NCAAW-freethrows-threes-2022-2023.csv"</span>)</span>
+<span id="cb75-86"><a href="#cb75-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-87"><a href="#cb75-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-88"><a href="#cb75-88" aria-hidden="true" tabindex="-1"></a>In the 2022-2023 season there were $N = 350$ teams. The relationship between their wins and three point percentage is displayed in @fig-scatter.</span>
 <span id="cb75-89"><a href="#cb75-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-90"><a href="#cb75-90" aria-hidden="true" tabindex="-1"></a>In the 2022-2023 season there were $N = 350$ teams. The relationship between their wins and three point percentage is displayed in @fig-scatter.</span>
-<span id="cb75-91"><a href="#cb75-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-94"><a href="#cb75-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-95"><a href="#cb75-95" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-scatter</span></span>
-<span id="cb75-96"><a href="#cb75-96" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Scatter plot of the Total Wins by 3 pt Field Goal %. The OLS regression line is super-imposed in blue.</span></span>
-<span id="cb75-97"><a href="#cb75-97" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ncaaw, <span class="fu">aes</span>(FG3pct, W)) <span class="sc">+</span></span>
-<span id="cb75-98"><a href="#cb75-98" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb75-99"><a href="#cb75-99" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb75-100"><a href="#cb75-100" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2022-23 NCAAW Wins by 3pt%"</span>, </span>
-<span id="cb75-101"><a href="#cb75-101" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"r = "</span>, <span class="fu">round</span>(<span class="fu">cor</span>(ncaaw<span class="sc">$</span>W, ncaaw<span class="sc">$</span>FG3pct), <span class="dv">3</span>)),</span>
-<span id="cb75-102"><a href="#cb75-102" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
-<span id="cb75-103"><a href="#cb75-103" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb75-104"><a href="#cb75-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-92"><a href="#cb75-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-93"><a href="#cb75-93" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-scatter</span></span>
+<span id="cb75-94"><a href="#cb75-94" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Scatter plot of the Total Wins by 3 pt Field Goal %. The OLS regression line is super-imposed in blue.</span></span>
+<span id="cb75-95"><a href="#cb75-95" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ncaaw, <span class="fu">aes</span>(FG3pct, W)) <span class="sc">+</span></span>
+<span id="cb75-96"><a href="#cb75-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb75-97"><a href="#cb75-97" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb75-98"><a href="#cb75-98" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2022-23 NCAAW Wins by 3pt%"</span>, </span>
+<span id="cb75-99"><a href="#cb75-99" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"r = "</span>, <span class="fu">round</span>(<span class="fu">cor</span>(ncaaw<span class="sc">$</span>W, ncaaw<span class="sc">$</span>FG3pct), <span class="dv">3</span>)),</span>
+<span id="cb75-100"><a href="#cb75-100" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
+<span id="cb75-101"><a href="#cb75-101" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb75-102"><a href="#cb75-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-103"><a href="#cb75-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-104"><a href="#cb75-104" aria-hidden="true" tabindex="-1"></a>As a baseline, we'll find the maximum likelihood estimates for the regression parameters and variance.</span>
 <span id="cb75-105"><a href="#cb75-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-106"><a href="#cb75-106" aria-hidden="true" tabindex="-1"></a>As a baseline, we'll find the maximum likelihood estimates for the regression parameters and variance.</span>
-<span id="cb75-107"><a href="#cb75-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-110"><a href="#cb75-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-111"><a href="#cb75-111" aria-hidden="true" tabindex="-1"></a>fit_ml <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> FG3pct, <span class="at">data =</span> ncaaw)</span>
-<span id="cb75-112"><a href="#cb75-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-113"><a href="#cb75-113" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit_ml)</span>
-<span id="cb75-114"><a href="#cb75-114" aria-hidden="true" tabindex="-1"></a>smry_ml <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_ml)</span>
-<span id="cb75-115"><a href="#cb75-115" aria-hidden="true" tabindex="-1"></a>smry_ml<span class="sc">$</span>sigma<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb75-116"><a href="#cb75-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-108"><a href="#cb75-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-109"><a href="#cb75-109" aria-hidden="true" tabindex="-1"></a>fit_ml <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> FG3pct, <span class="at">data =</span> ncaaw)</span>
+<span id="cb75-110"><a href="#cb75-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-111"><a href="#cb75-111" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit_ml)</span>
+<span id="cb75-112"><a href="#cb75-112" aria-hidden="true" tabindex="-1"></a>smry_ml <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_ml)</span>
+<span id="cb75-113"><a href="#cb75-113" aria-hidden="true" tabindex="-1"></a>smry_ml<span class="sc">$</span>sigma<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb75-114"><a href="#cb75-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-115"><a href="#cb75-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-116"><a href="#cb75-116" aria-hidden="true" tabindex="-1"></a><span class="fu">### Non-informative Prior Regression Model</span></span>
 <span id="cb75-117"><a href="#cb75-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-118"><a href="#cb75-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### Non-informative Prior Regression Model</span></span>
+<span id="cb75-118"><a href="#cb75-118" aria-hidden="true" tabindex="-1"></a>First we write the Stan code in a separate file. See the <span class="co">[</span><span class="ot">Stan User's Guide Part 1.1</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section)</span> for programming this model without the analytic posteriors.</span>
 <span id="cb75-119"><a href="#cb75-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-120"><a href="#cb75-120" aria-hidden="true" tabindex="-1"></a>First we write the Stan code in a separate file. See the <span class="co">[</span><span class="ot">Stan User's Guide Part 1.1</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section)</span> for programming this model without the analytic posteriors.</span>
-<span id="cb75-121"><a href="#cb75-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-122"><a href="#cb75-122" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="non-informative-regression.stan"}</span></span>
-<span id="cb75-123"><a href="#cb75-123" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is two vectors 'y' and 'X' of length 'N'.</span></span>
-<span id="cb75-124"><a href="#cb75-124" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
-<span id="cb75-125"><a href="#cb75-125" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
-<span id="cb75-126"><a href="#cb75-126" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
-<span id="cb75-127"><a href="#cb75-127" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] x;</span></span>
-<span id="cb75-128"><a href="#cb75-128" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-129"><a href="#cb75-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-130"><a href="#cb75-130" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
-<span id="cb75-131"><a href="#cb75-131" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, 2] X_c = append_col(rep_vector(1, N), x);</span></span>
-<span id="cb75-132"><a href="#cb75-132" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[2,2] XtX_inv = inverse(X_c' * X_c);</span></span>
-<span id="cb75-133"><a href="#cb75-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-134"><a href="#cb75-134" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[2] beta_hat = XtX_inv * X_c' * y;</span></span>
-<span id="cb75-135"><a href="#cb75-135" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_hat = X_C * beta_hat;</span></span>
-<span id="cb75-136"><a href="#cb75-136" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb75-137"><a href="#cb75-137" aria-hidden="true" tabindex="-1"></a><span class="in">    real&lt;lower=0&gt; s_2 = 1 / (N - 2) * (y - y_hat)' * (y - y_hat);</span></span>
-<span id="cb75-138"><a href="#cb75-138" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-139"><a href="#cb75-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-140"><a href="#cb75-140" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
-<span id="cb75-141"><a href="#cb75-141" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'beta' and 'sigma'.</span></span>
-<span id="cb75-142"><a href="#cb75-142" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
-<span id="cb75-143"><a href="#cb75-143" aria-hidden="true" tabindex="-1"></a><span class="in">  vector beta;</span></span>
-<span id="cb75-144"><a href="#cb75-144" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma; // Note that this is the variance</span></span>
-<span id="cb75-145"><a href="#cb75-145" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-146"><a href="#cb75-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-147"><a href="#cb75-147" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
-<span id="cb75-148"><a href="#cb75-148" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' ~ N(x beta, sigma) by specifying the analytic</span></span>
-<span id="cb75-149"><a href="#cb75-149" aria-hidden="true" tabindex="-1"></a><span class="in">// posterior defined above.</span></span>
-<span id="cb75-150"><a href="#cb75-150" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
-<span id="cb75-151"><a href="#cb75-151" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_hat, sigma^2 * XtX_inv);</span></span>
-<span id="cb75-152"><a href="#cb75-152" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb75-153"><a href="#cb75-153" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma^2 ~ scaled_inv_chi_square(N-2, sqrt(s_2));</span></span>
-<span id="cb75-154"><a href="#cb75-154" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-155"><a href="#cb75-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-156"><a href="#cb75-156" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
-<span id="cb75-157"><a href="#cb75-157" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
-<span id="cb75-158"><a href="#cb75-158" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb75-159"><a href="#cb75-159" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
-<span id="cb75-160"><a href="#cb75-160" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
-<span id="cb75-161"><a href="#cb75-161" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb75-162"><a href="#cb75-162" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-163"><a href="#cb75-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-120"><a href="#cb75-120" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="non-informative-regression.stan"}</span></span>
+<span id="cb75-121"><a href="#cb75-121" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is two vectors 'y' and 'X' of length 'N'.</span></span>
+<span id="cb75-122"><a href="#cb75-122" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
+<span id="cb75-123"><a href="#cb75-123" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
+<span id="cb75-124"><a href="#cb75-124" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
+<span id="cb75-125"><a href="#cb75-125" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] x;</span></span>
+<span id="cb75-126"><a href="#cb75-126" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-127"><a href="#cb75-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-128"><a href="#cb75-128" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
+<span id="cb75-129"><a href="#cb75-129" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, 2] X_c = append_col(rep_vector(1, N), x);</span></span>
+<span id="cb75-130"><a href="#cb75-130" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[2,2] XtX_inv = inverse(X_c' * X_c);</span></span>
+<span id="cb75-131"><a href="#cb75-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-132"><a href="#cb75-132" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[2] beta_hat = XtX_inv * X_c' * y;</span></span>
+<span id="cb75-133"><a href="#cb75-133" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_hat = X_C * beta_hat;</span></span>
+<span id="cb75-134"><a href="#cb75-134" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb75-135"><a href="#cb75-135" aria-hidden="true" tabindex="-1"></a><span class="in">    real&lt;lower=0&gt; s_2 = 1 / (N - 2) * (y - y_hat)' * (y - y_hat);</span></span>
+<span id="cb75-136"><a href="#cb75-136" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-137"><a href="#cb75-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-138"><a href="#cb75-138" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
+<span id="cb75-139"><a href="#cb75-139" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'beta' and 'sigma'.</span></span>
+<span id="cb75-140"><a href="#cb75-140" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
+<span id="cb75-141"><a href="#cb75-141" aria-hidden="true" tabindex="-1"></a><span class="in">  vector beta;</span></span>
+<span id="cb75-142"><a href="#cb75-142" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma; // Note that this is the variance</span></span>
+<span id="cb75-143"><a href="#cb75-143" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-144"><a href="#cb75-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-145"><a href="#cb75-145" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
+<span id="cb75-146"><a href="#cb75-146" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' ~ N(x beta, sigma) by specifying the analytic</span></span>
+<span id="cb75-147"><a href="#cb75-147" aria-hidden="true" tabindex="-1"></a><span class="in">// posterior defined above.</span></span>
+<span id="cb75-148"><a href="#cb75-148" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
+<span id="cb75-149"><a href="#cb75-149" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_hat, sigma^2 * XtX_inv);</span></span>
+<span id="cb75-150"><a href="#cb75-150" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb75-151"><a href="#cb75-151" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma^2 ~ scaled_inv_chi_square(N-2, sqrt(s_2));</span></span>
+<span id="cb75-152"><a href="#cb75-152" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-153"><a href="#cb75-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-154"><a href="#cb75-154" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
+<span id="cb75-155"><a href="#cb75-155" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
+<span id="cb75-156"><a href="#cb75-156" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb75-157"><a href="#cb75-157" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
+<span id="cb75-158"><a href="#cb75-158" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
+<span id="cb75-159"><a href="#cb75-159" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb75-160"><a href="#cb75-160" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-161"><a href="#cb75-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-162"><a href="#cb75-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-163"><a href="#cb75-163" aria-hidden="true" tabindex="-1"></a>Next we fit the model using <span class="in">`cmdstanr`</span>. In this case, I will use 1000 warmup iterations, 1000 sampling iterations, with no thinning (thinning includes only every $k$th draw), and will refresh the print screen to see progress every 500 iterations. We can run several chains to see if where the chains start dictates any part of the posterior shape or location, and chains can be run in parallel to get more draws <span class="sc">\&lt;</span>=<span class="sc">\&gt;</span> better posterior approximation more quickly.</span>
 <span id="cb75-164"><a href="#cb75-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-165"><a href="#cb75-165" aria-hidden="true" tabindex="-1"></a>Next we fit the model using <span class="in">`cmdstanr`</span>. In this case, I will use 1000 warmup iterations, 1000 sampling iterations, with no thinning (thinning includes only every $k$th draw), and will refresh the print screen to see progress every 500 iterations. We can run several chains to see if where the chains start dictates any part of the posterior shape or location, and chains can be run in parallel to get more draws <span class="sc">\&lt;</span>=<span class="sc">\&gt;</span> better posterior approximation more quickly.</span>
-<span id="cb75-166"><a href="#cb75-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-169"><a href="#cb75-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-170"><a href="#cb75-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-info-comp-fit</span></span>
-<span id="cb75-171"><a href="#cb75-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb75-172"><a href="#cb75-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-173"><a href="#cb75-173" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb75-174"><a href="#cb75-174" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
-<span id="cb75-175"><a href="#cb75-175" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
-<span id="cb75-176"><a href="#cb75-176" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct</span>
-<span id="cb75-177"><a href="#cb75-177" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb75-178"><a href="#cb75-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-179"><a href="#cb75-179" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"non-informative-regression.stan"</span>)</span>
-<span id="cb75-180"><a href="#cb75-180" aria-hidden="true" tabindex="-1"></a>non_inf_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file)</span>
-<span id="cb75-181"><a href="#cb75-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-182"><a href="#cb75-182" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> non_inf_model<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb75-183"><a href="#cb75-183" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
-<span id="cb75-184"><a href="#cb75-184" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb75-185"><a href="#cb75-185" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
-<span id="cb75-186"><a href="#cb75-186" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb75-187"><a href="#cb75-187" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
-<span id="cb75-188"><a href="#cb75-188" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb75-189"><a href="#cb75-189" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb75-190"><a href="#cb75-190" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
-<span id="cb75-191"><a href="#cb75-191" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb75-192"><a href="#cb75-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-167"><a href="#cb75-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-168"><a href="#cb75-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-info-comp-fit</span></span>
+<span id="cb75-169"><a href="#cb75-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb75-170"><a href="#cb75-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-171"><a href="#cb75-171" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb75-172"><a href="#cb75-172" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb75-173"><a href="#cb75-173" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb75-174"><a href="#cb75-174" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct</span>
+<span id="cb75-175"><a href="#cb75-175" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb75-176"><a href="#cb75-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-177"><a href="#cb75-177" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"non-informative-regression.stan"</span>)</span>
+<span id="cb75-178"><a href="#cb75-178" aria-hidden="true" tabindex="-1"></a>non_inf_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file)</span>
+<span id="cb75-179"><a href="#cb75-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-180"><a href="#cb75-180" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> non_inf_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb75-181"><a href="#cb75-181" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb75-182"><a href="#cb75-182" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb75-183"><a href="#cb75-183" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb75-184"><a href="#cb75-184" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb75-185"><a href="#cb75-185" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb75-186"><a href="#cb75-186" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb75-187"><a href="#cb75-187" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb75-188"><a href="#cb75-188" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
+<span id="cb75-189"><a href="#cb75-189" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb75-190"><a href="#cb75-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-191"><a href="#cb75-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-192"><a href="#cb75-192" aria-hidden="true" tabindex="-1"></a>Next we'll check diagnostics for the sampler. First, we will look at the numeric diagnostic output from the method <span class="in">`$diagnostic_summary()`</span> which reports if any transitions were divergent, if maximum tree depth was reached, and EBFMI. For this model and data set we don't see any issues in these summaries.</span>
 <span id="cb75-193"><a href="#cb75-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-194"><a href="#cb75-194" aria-hidden="true" tabindex="-1"></a>Next we'll check diagnostics for the sampler. First, we will look at the numeric diagnostic output from the method <span class="in">`$diagnostic_summary()`</span> which reports if any transitions were divergent, if maximum tree depth was reached, and EBFMI. For this model and data set we don't see any issues in these summaries.</span>
+<span id="cb75-194"><a href="#cb75-194" aria-hidden="true" tabindex="-1"></a>Next, we check the traceplots in @fig-traceplots-non-info-1. The MCMC draws can be collected from the <span class="in">`fit`</span> object using the <span class="in">`$draws()`</span> method. These plots display the sampled values for each parameter in a line plot. We are looking for a horizontal fuzzy bar. Then we can also look at density plots in @fig-traceplots-non-info-2 which will tell us if the chains reached reasonably similar densities. On both counts, we are in good shape. The plots are created using the <span class="in">`bayesplot`</span> package.</span>
 <span id="cb75-195"><a href="#cb75-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-196"><a href="#cb75-196" aria-hidden="true" tabindex="-1"></a>Next, we check the traceplots in @fig-traceplots-non-info-1. The MCMC draws can be collected from the <span class="in">`fit`</span> object using the <span class="in">`$draws()`</span> method. These plots display the sampled values for each parameter in a line plot. We are looking for a horizontal fuzzy bar. Then we can also look at density plots in @fig-traceplots-non-info-2 which will tell us if the chains reached reasonably similar densities. On both counts, we are in good shape. The plots are created using the <span class="in">`bayesplot`</span> package.</span>
-<span id="cb75-197"><a href="#cb75-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-200"><a href="#cb75-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-201"><a href="#cb75-201" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-inf-summary</span></span>
-<span id="cb75-202"><a href="#cb75-202" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
-<span id="cb75-203"><a href="#cb75-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-204"><a href="#cb75-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-207"><a href="#cb75-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-208"><a href="#cb75-208" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-non-info</span></span>
-<span id="cb75-209"><a href="#cb75-209" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb75-210"><a href="#cb75-210" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb75-211"><a href="#cb75-211" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-212"><a href="#cb75-212" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
-<span id="cb75-213"><a href="#cb75-213" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-198"><a href="#cb75-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-199"><a href="#cb75-199" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-inf-summary</span></span>
+<span id="cb75-200"><a href="#cb75-200" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
+<span id="cb75-201"><a href="#cb75-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-202"><a href="#cb75-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-205"><a href="#cb75-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-206"><a href="#cb75-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-non-info</span></span>
+<span id="cb75-207"><a href="#cb75-207" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb75-208"><a href="#cb75-208" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb75-209"><a href="#cb75-209" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-210"><a href="#cb75-210" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-211"><a href="#cb75-211" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-212"><a href="#cb75-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-213"><a href="#cb75-213" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
 <span id="cb75-214"><a href="#cb75-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-215"><a href="#cb75-215" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb75-215"><a href="#cb75-215" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
 <span id="cb75-216"><a href="#cb75-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-217"><a href="#cb75-217" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb75-218"><a href="#cb75-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-219"><a href="#cb75-219" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb75-220"><a href="#cb75-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-217"><a href="#cb75-217" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb75-218"><a href="#cb75-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-219"><a href="#cb75-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-220"><a href="#cb75-220" aria-hidden="true" tabindex="-1"></a>Finally, after checking that the MCMC chains and diagnostics look satisfactory, we can continue to inference. The summary statistics for the parameters are displayed in @tbl-non-info-inf. This are generated by default with the <span class="in">`$summary()`</span> method. The statistics include the posterior mean (<span class="in">`mean`</span>), median (<span class="in">`median`</span>), standard deviation (<span class="in">`sd`</span>), mean absolute deviation (<span class="in">`mad`</span>), and lower (<span class="in">`q5`</span>) and upper bounds (<span class="in">`q95`</span>) for a 90% credible interval. The statistics <span class="in">`rhat`</span>, <span class="in">`ess_bulk`</span>, and <span class="in">`ess_tail`</span> are additional diagnostic measures that indicate how well the chains are sampling the posterior and how many effective draws we have made. Ideally <span class="in">`rhat`</span> is very near 1, even 1.01 can be a significant problem. The effective sample sizes should be large/near the number of sampling iterations.</span>
 <span id="cb75-221"><a href="#cb75-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-222"><a href="#cb75-222" aria-hidden="true" tabindex="-1"></a>Finally, after checking that the MCMC chains and diagnostics look satisfactory, we can continue to inference. The summary statistics for the parameters are displayed in @tbl-non-info-inf. This are generated by default with the <span class="in">`$summary()`</span> method. The statistics include the posterior mean (<span class="in">`mean`</span>), median (<span class="in">`median`</span>), standard deviation (<span class="in">`sd`</span>), mean absolute deviation (<span class="in">`mad`</span>), and lower (<span class="in">`q5`</span>) and upper bounds (<span class="in">`q95`</span>) for a 90% credible interval. The statistics <span class="in">`rhat`</span>, <span class="in">`ess_bulk`</span>, and <span class="in">`ess_tail`</span> are additional diagnostic measures that indicate how well the chains are sampling the posterior and how many effective draws we have made. Ideally <span class="in">`rhat`</span> is very near 1, even 1.01 can be a significant problem. The effective sample sizes should be large/near the number of sampling iterations.</span>
-<span id="cb75-223"><a href="#cb75-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-226"><a href="#cb75-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-227"><a href="#cb75-227" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-non-info-inf</span></span>
-<span id="cb75-228"><a href="#cb75-228" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
-<span id="cb75-229"><a href="#cb75-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-230"><a href="#cb75-230" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb75-231"><a href="#cb75-231" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
-<span id="cb75-232"><a href="#cb75-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-224"><a href="#cb75-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-225"><a href="#cb75-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-non-info-inf</span></span>
+<span id="cb75-226"><a href="#cb75-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-227"><a href="#cb75-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-228"><a href="#cb75-228" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb75-229"><a href="#cb75-229" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb75-230"><a href="#cb75-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-231"><a href="#cb75-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-232"><a href="#cb75-232" aria-hidden="true" tabindex="-1"></a>We can also check graphical summaries of this same information such as interval plots for each parameter's credible intervals or density/area plots. In @fig-non-info-ci-1 we have the 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-non-info-ci-2 with areas shaded underneath to indicate the 50% interval and the width of the density indicates the 95% interval.</span>
 <span id="cb75-233"><a href="#cb75-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-234"><a href="#cb75-234" aria-hidden="true" tabindex="-1"></a>We can also check graphical summaries of this same information such as interval plots for each parameter's credible intervals or density/area plots. In @fig-non-info-ci-1 we have the 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-non-info-ci-2 with areas shaded underneath to indicate the 50% interval and the width of the density indicates the 95% interval.</span>
-<span id="cb75-235"><a href="#cb75-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-238"><a href="#cb75-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-239"><a href="#cb75-239" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ci</span></span>
-<span id="cb75-240"><a href="#cb75-240" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb75-241"><a href="#cb75-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb75-242"><a href="#cb75-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-243"><a href="#cb75-243" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
-<span id="cb75-244"><a href="#cb75-244" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
-<span id="cb75-245"><a href="#cb75-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-246"><a href="#cb75-246" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb75-247"><a href="#cb75-247" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
-<span id="cb75-248"><a href="#cb75-248" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb75-249"><a href="#cb75-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-236"><a href="#cb75-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-237"><a href="#cb75-237" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ci</span></span>
+<span id="cb75-238"><a href="#cb75-238" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb75-239"><a href="#cb75-239" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb75-240"><a href="#cb75-240" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-241"><a href="#cb75-241" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-242"><a href="#cb75-242" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
+<span id="cb75-243"><a href="#cb75-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-244"><a href="#cb75-244" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb75-245"><a href="#cb75-245" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
+<span id="cb75-246"><a href="#cb75-246" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb75-247"><a href="#cb75-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-248"><a href="#cb75-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-249"><a href="#cb75-249" aria-hidden="true" tabindex="-1"></a>One additional way to check model fit is to assess posterior predictive checks. To do so we draw samples from the posterior predictive distribution $p(y^{new} | y) = \int p(y^{new} | \boldsymbol{\beta}, \sigma) p(\boldsymbol{\beta}, \sigma | y) d\boldsymbol{\beta}d\sigma$ by first sampling from the posterior (i.e. the draws in the MCMC chains) and then for each set of draws sampling $y^{new}$ given the corresponding values for $x^{new}$. In Stan this is easily accomplished using the generated quantities block. The generated quantities block generates new samples that we define using the current iteration's posterior draws of $\beta$ and $\sigma$.</span>
 <span id="cb75-250"><a href="#cb75-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-251"><a href="#cb75-251" aria-hidden="true" tabindex="-1"></a>One additional way to check model fit is to assess posterior predictive checks. To do so we draw samples from the posterior predictive distribution $p(y^{new} | y) = \int p(y^{new} | \boldsymbol{\beta}, \sigma) p(\boldsymbol{\beta}, \sigma | y) d\boldsymbol{\beta}d\sigma$ by first sampling from the posterior (i.e. the draws in the MCMC chains) and then for each set of draws sampling $y^{new}$ given the corresponding values for $x^{new}$. In Stan this is easily accomplished using the generated quantities block. The generated quantities block generates new samples that we define using the current iteration's posterior draws of $\beta$ and $\sigma$.</span>
-<span id="cb75-252"><a href="#cb75-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-253"><a href="#cb75-253" aria-hidden="true" tabindex="-1"></a><span class="in">``` stan</span></span>
-<span id="cb75-254"><a href="#cb75-254" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
-<span id="cb75-255"><a href="#cb75-255" aria-hidden="true" tabindex="-1"></a><span class="in">    // create a vector of N new observations</span></span>
-<span id="cb75-256"><a href="#cb75-256" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd; </span></span>
-<span id="cb75-257"><a href="#cb75-257" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb75-258"><a href="#cb75-258" aria-hidden="true" tabindex="-1"></a><span class="in">    // for each observation, sample from the regression likelihod</span></span>
-<span id="cb75-259"><a href="#cb75-259" aria-hidden="true" tabindex="-1"></a><span class="in">    // using the posterior draws</span></span>
-<span id="cb75-260"><a href="#cb75-260" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
-<span id="cb75-261"><a href="#cb75-261" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
-<span id="cb75-262"><a href="#cb75-262" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb75-263"><a href="#cb75-263" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-264"><a href="#cb75-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-251"><a href="#cb75-251" aria-hidden="true" tabindex="-1"></a><span class="in">``` stan</span></span>
+<span id="cb75-252"><a href="#cb75-252" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
+<span id="cb75-253"><a href="#cb75-253" aria-hidden="true" tabindex="-1"></a><span class="in">    // create a vector of N new observations</span></span>
+<span id="cb75-254"><a href="#cb75-254" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd; </span></span>
+<span id="cb75-255"><a href="#cb75-255" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb75-256"><a href="#cb75-256" aria-hidden="true" tabindex="-1"></a><span class="in">    // for each observation, sample from the regression likelihod</span></span>
+<span id="cb75-257"><a href="#cb75-257" aria-hidden="true" tabindex="-1"></a><span class="in">    // using the posterior draws</span></span>
+<span id="cb75-258"><a href="#cb75-258" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
+<span id="cb75-259"><a href="#cb75-259" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
+<span id="cb75-260"><a href="#cb75-260" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb75-261"><a href="#cb75-261" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-262"><a href="#cb75-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-263"><a href="#cb75-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-264"><a href="#cb75-264" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-non-info-ppc we can see that while the predictive densities are centered in the correct location, the variances are far too large.</span>
 <span id="cb75-265"><a href="#cb75-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-266"><a href="#cb75-266" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-non-info-ppc we can see that while the predictive densities are centered in the correct location, the variances are far too large.</span>
-<span id="cb75-267"><a href="#cb75-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-270"><a href="#cb75-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-271"><a href="#cb75-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ppc</span></span>
-<span id="cb75-272"><a href="#cb75-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb75-273"><a href="#cb75-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
-<span id="cb75-274"><a href="#cb75-274" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-275"><a href="#cb75-275" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
-<span id="cb75-276"><a href="#cb75-276" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
-<span id="cb75-277"><a href="#cb75-277" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
-<span id="cb75-278"><a href="#cb75-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-279"><a href="#cb75-279" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb75-280"><a href="#cb75-280" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_draws_df</span>() <span class="sc">|&gt;</span></span>
-<span id="cb75-281"><a href="#cb75-281" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.matrix</span>() <span class="ot">-&gt;</span> y_ppd</span>
-<span id="cb75-282"><a href="#cb75-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-283"><a href="#cb75-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-284"><a href="#cb75-284" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb75-285"><a href="#cb75-285" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
-<span id="cb75-286"><a href="#cb75-286" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
-<span id="cb75-287"><a href="#cb75-287" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb75-288"><a href="#cb75-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-289"><a href="#cb75-289" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb75-290"><a href="#cb75-290" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
-<span id="cb75-291"><a href="#cb75-291" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
-<span id="cb75-292"><a href="#cb75-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
-<span id="cb75-293"><a href="#cb75-293" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
-<span id="cb75-294"><a href="#cb75-294" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb75-295"><a href="#cb75-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-268"><a href="#cb75-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-269"><a href="#cb75-269" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ppc</span></span>
+<span id="cb75-270"><a href="#cb75-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb75-271"><a href="#cb75-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
+<span id="cb75-272"><a href="#cb75-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-273"><a href="#cb75-273" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
+<span id="cb75-274"><a href="#cb75-274" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
+<span id="cb75-275"><a href="#cb75-275" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb75-276"><a href="#cb75-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-277"><a href="#cb75-277" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb75-278"><a href="#cb75-278" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_draws_df</span>() <span class="sc">|&gt;</span></span>
+<span id="cb75-279"><a href="#cb75-279" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.matrix</span>() <span class="ot">-&gt;</span> y_ppd</span>
+<span id="cb75-280"><a href="#cb75-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-281"><a href="#cb75-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-282"><a href="#cb75-282" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb75-283"><a href="#cb75-283" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb75-284"><a href="#cb75-284" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
+<span id="cb75-285"><a href="#cb75-285" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb75-286"><a href="#cb75-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-287"><a href="#cb75-287" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb75-288"><a href="#cb75-288" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
+<span id="cb75-289"><a href="#cb75-289" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb75-290"><a href="#cb75-290" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb75-291"><a href="#cb75-291" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
+<span id="cb75-292"><a href="#cb75-292" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb75-293"><a href="#cb75-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-294"><a href="#cb75-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-295"><a href="#cb75-295" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conjugate Prior Regression Model</span></span>
 <span id="cb75-296"><a href="#cb75-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-297"><a href="#cb75-297" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conjugate Prior Regression Model</span></span>
+<span id="cb75-297"><a href="#cb75-297" aria-hidden="true" tabindex="-1"></a>Next, we'll implement the regression model with conjugate priors. Conjugacy refers to the situation where the prior and posterior distribution are from the same family. We'll start by re-defining our model.<span class="ot">[^1]</span></span>
 <span id="cb75-298"><a href="#cb75-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-299"><a href="#cb75-299" aria-hidden="true" tabindex="-1"></a>Next, we'll implement the regression model with conjugate priors. Conjugacy refers to the situation where the prior and posterior distribution are from the same family. We'll start by re-defining our model.<span class="ot">[^1]</span></span>
+<span id="cb75-299"><a href="#cb75-299" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>See wikipedia for more details and derivations: <span class="ot">&lt;https://en.wikipedia.org/wiki/Bayesian_linear_regression&gt;</span></span>
 <span id="cb75-300"><a href="#cb75-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-301"><a href="#cb75-301" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>See wikipedia for more details and derivations: <span class="ot">&lt;https://en.wikipedia.org/wiki/Bayesian_linear_regression&gt;</span></span>
+<span id="cb75-301"><a href="#cb75-301" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Conjugate prior:** $p(\boldsymbol{\beta}, \sigma^2) = p(\boldsymbol{\beta} | \sigma^2) p(\sigma^2)$</span>
 <span id="cb75-302"><a href="#cb75-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-303"><a href="#cb75-303" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Conjugate prior:** $p(\boldsymbol{\beta}, \sigma^2) = p(\boldsymbol{\beta} | \sigma^2) p(\sigma^2)$</span>
+<span id="cb75-303"><a href="#cb75-303" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2 ~ N_2(\boldsymbol{\beta}_0, \sigma^2 \Lambda_0^{-1})$ where $\boldsymbol{\beta}_0 \in \mathbb{R}^2$ is a vector of prior coefficients, we'll set it to zero, and $\Lambda_0$ is a $2\times2$ prior correlation matrix. We will set $\Lambda_0 = 10 I_2$ to get a weakly informative prior that is equivalent to ridge regression.</span>
 <span id="cb75-304"><a href="#cb75-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-305"><a href="#cb75-305" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2 ~ N_2(\boldsymbol{\beta}_0, \sigma^2 \Lambda_0^{-1})$ where $\boldsymbol{\beta}_0 \in \mathbb{R}^2$ is a vector of prior coefficients, we'll set it to zero, and $\Lambda_0$ is a $2\times2$ prior correlation matrix. We will set $\Lambda_0 = 10 I_2$ to get a weakly informative prior that is equivalent to ridge regression.</span>
+<span id="cb75-305"><a href="#cb75-305" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 \sim InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2)$ where $\nu_0$ is a prior sample size and $s_0$ is the prior standard deviation. We'll set these to $\nu_0 = 1$ and $s_0^2 = 47$ which is approximately the sample variance of the NCAA women's basketball teams' wins.</span>
 <span id="cb75-306"><a href="#cb75-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-307"><a href="#cb75-307" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 \sim InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2)$ where $\nu_0$ is a prior sample size and $s_0$ is the prior standard deviation. We'll set these to $\nu_0 = 1$ and $s_0^2 = 47$ which is approximately the sample variance of the NCAA women's basketball teams' wins.</span>
+<span id="cb75-307"><a href="#cb75-307" aria-hidden="true" tabindex="-1"></a><span class="ss">    3.  </span>The parameters $\boldsymbol{\beta}_0, \Lambda_0, \nu_0, s_0^2$ that define the prior are referred to as hyperparameters. We will set them before running the model, although they could also be modeled if we wanted.</span>
 <span id="cb75-308"><a href="#cb75-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-309"><a href="#cb75-309" aria-hidden="true" tabindex="-1"></a><span class="ss">    3.  </span>The parameters $\boldsymbol{\beta}_0, \Lambda_0, \nu_0, s_0^2$ that define the prior are referred to as hyperparameters. We will set them before running the model, although they could also be modeled if we wanted.</span>
+<span id="cb75-309"><a href="#cb75-309" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** the same as before, $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
 <span id="cb75-310"><a href="#cb75-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-311"><a href="#cb75-311" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** the same as before, $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
+<span id="cb75-311"><a href="#cb75-311" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Posterior:**</span>
 <span id="cb75-312"><a href="#cb75-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-313"><a href="#cb75-313" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Posterior:**</span>
-<span id="cb75-314"><a href="#cb75-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-315"><a href="#cb75-315" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2, y \sim N_2(\boldsymbol{\beta}_N, \sigma^2 \Lambda_N^{-1})$ where $\boldsymbol{\beta}_N = \Lambda_N^{-1}(\mathbf{X}'\mathbf{X} \hat{\boldsymbol{\beta}} + \Lambda_0 \boldsymbol{\beta}_0)$ and $\Lambda_N = (\mathbf{X}'\mathbf{X} + \Lambda_0).$</span>
-<span id="cb75-316"><a href="#cb75-316" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 | y) \sim InvGamma(\sigma^2 | \frac{\nu_0 + N}{2}, \frac{1}{2} \nu_0 s_0^2 + \frac{1}{2}(\mathbf{y}'\mathbf{y} + \boldsymbol{\beta}_0'\Lambda_0 \boldsymbol{\beta}_0 - \boldsymbol{\beta}_N' \Lambda_N \boldsymbol{\beta}_N)).$</span>
+<span id="cb75-313"><a href="#cb75-313" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2, y \sim N_2(\boldsymbol{\beta}_N, \sigma^2 \Lambda_N^{-1})$ where $\boldsymbol{\beta}_N = \Lambda_N^{-1}(\mathbf{X}'\mathbf{X} \hat{\boldsymbol{\beta}} + \Lambda_0 \boldsymbol{\beta}_0)$ and $\Lambda_N = (\mathbf{X}'\mathbf{X} + \Lambda_0).$</span>
+<span id="cb75-314"><a href="#cb75-314" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 | y) \sim InvGamma(\sigma^2 | \frac{\nu_0 + N}{2}, \frac{1}{2} \nu_0 s_0^2 + \frac{1}{2}(\mathbf{y}'\mathbf{y} + \boldsymbol{\beta}_0'\Lambda_0 \boldsymbol{\beta}_0 - \boldsymbol{\beta}_N' \Lambda_N \boldsymbol{\beta}_N)).$</span>
+<span id="cb75-315"><a href="#cb75-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-316"><a href="#cb75-316" aria-hidden="true" tabindex="-1"></a>We could again program this model using the analytic posterior. Instead, we'll program it only through the priors and likelihood and let Stan approximate the posterior. I will also allow the model to include more than one predictor so that $\mathbf{X}$ is a $N \times (K+1)$ matrix augmented with a column of ones.</span>
 <span id="cb75-317"><a href="#cb75-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-318"><a href="#cb75-318" aria-hidden="true" tabindex="-1"></a>We could again program this model using the analytic posterior. Instead, we'll program it only through the priors and likelihood and let Stan approximate the posterior. I will also allow the model to include more than one predictor so that $\mathbf{X}$ is a $N \times (K+1)$ matrix augmented with a column of ones.</span>
+<span id="cb75-318"><a href="#cb75-318" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="conjugate-regression.stan"}</span></span>
 <span id="cb75-319"><a href="#cb75-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-320"><a href="#cb75-320" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="conjugate-regression.stan"}</span></span>
-<span id="cb75-321"><a href="#cb75-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-322"><a href="#cb75-322" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is a vector 'y' of length 'N'.</span></span>
-<span id="cb75-323"><a href="#cb75-323" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
-<span id="cb75-324"><a href="#cb75-324" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
-<span id="cb75-325"><a href="#cb75-325" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; K;</span></span>
-<span id="cb75-326"><a href="#cb75-326" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
-<span id="cb75-327"><a href="#cb75-327" aria-hidden="true" tabindex="-1"></a><span class="in">  matrix[N, K] X;</span></span>
-<span id="cb75-328"><a href="#cb75-328" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb75-329"><a href="#cb75-329" aria-hidden="true" tabindex="-1"></a><span class="in">  // hyperparameters</span></span>
-<span id="cb75-330"><a href="#cb75-330" aria-hidden="true" tabindex="-1"></a><span class="in">  real beta_0;</span></span>
-<span id="cb75-331"><a href="#cb75-331" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; lambda_0;</span></span>
-<span id="cb75-332"><a href="#cb75-332" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; nu_0;</span></span>
-<span id="cb75-333"><a href="#cb75-333" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; s_02;</span></span>
-<span id="cb75-334"><a href="#cb75-334" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-335"><a href="#cb75-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-336"><a href="#cb75-336" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
-<span id="cb75-337"><a href="#cb75-337" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, K+1] X_mat = append_col(rep_vector(1, N), X);</span></span>
-<span id="cb75-338"><a href="#cb75-338" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[K+1] beta_0_vec = rep_vector(beta_0, K+1);</span></span>
-<span id="cb75-339"><a href="#cb75-339" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[K+1, K+1] Lambda_0 = lambda_0 * identity_matrix(K+1);</span></span>
-<span id="cb75-340"><a href="#cb75-340" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-341"><a href="#cb75-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-342"><a href="#cb75-342" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
-<span id="cb75-343"><a href="#cb75-343" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'mu' and 'sigma'.</span></span>
-<span id="cb75-344"><a href="#cb75-344" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
-<span id="cb75-345"><a href="#cb75-345" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[K+1] beta;</span></span>
-<span id="cb75-346"><a href="#cb75-346" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma2;</span></span>
-<span id="cb75-347"><a href="#cb75-347" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-348"><a href="#cb75-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-349"><a href="#cb75-349" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
-<span id="cb75-350"><a href="#cb75-350" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' to be normally distributed with mean 'mu'</span></span>
-<span id="cb75-351"><a href="#cb75-351" aria-hidden="true" tabindex="-1"></a><span class="in">// and standard deviation 'sigma'.</span></span>
-<span id="cb75-352"><a href="#cb75-352" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
-<span id="cb75-353"><a href="#cb75-353" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);</span></span>
-<span id="cb75-354"><a href="#cb75-354" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);</span></span>
-<span id="cb75-355"><a href="#cb75-355" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb75-356"><a href="#cb75-356" aria-hidden="true" tabindex="-1"></a><span class="in">  y ~ normal(X_mat * beta, sqrt(sigma2));</span></span>
-<span id="cb75-357"><a href="#cb75-357" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-358"><a href="#cb75-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-359"><a href="#cb75-359" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
-<span id="cb75-360"><a href="#cb75-360" aria-hidden="true" tabindex="-1"></a><span class="in">    real sigma = sqrt(sigma2);</span></span>
-<span id="cb75-361"><a href="#cb75-361" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
-<span id="cb75-362"><a href="#cb75-362" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb75-363"><a href="#cb75-363" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
-<span id="cb75-364"><a href="#cb75-364" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));</span></span>
-<span id="cb75-365"><a href="#cb75-365" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb75-366"><a href="#cb75-366" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb75-367"><a href="#cb75-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-368"><a href="#cb75-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-371"><a href="#cb75-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-372"><a href="#cb75-372" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-comp-fit</span></span>
-<span id="cb75-373"><a href="#cb75-373" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb75-374"><a href="#cb75-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-375"><a href="#cb75-375" aria-hidden="true" tabindex="-1"></a>data_list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb75-376"><a href="#cb75-376" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
-<span id="cb75-377"><a href="#cb75-377" aria-hidden="true" tabindex="-1"></a>    <span class="at">K =</span> <span class="dv">1</span>,</span>
-<span id="cb75-378"><a href="#cb75-378" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
-<span id="cb75-379"><a href="#cb75-379" aria-hidden="true" tabindex="-1"></a>    <span class="at">X =</span> <span class="fu">as.matrix</span>(ncaaw<span class="sc">$</span>FG3pct, <span class="at">nrow =</span> <span class="fu">nrow</span>(ncaaw)),</span>
-<span id="cb75-380"><a href="#cb75-380" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb75-381"><a href="#cb75-381" aria-hidden="true" tabindex="-1"></a>    <span class="co"># hyperparameters</span></span>
-<span id="cb75-382"><a href="#cb75-382" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta_0 =</span> <span class="dv">0</span>,</span>
-<span id="cb75-383"><a href="#cb75-383" aria-hidden="true" tabindex="-1"></a>    <span class="at">lambda_0 =</span> <span class="dv">10</span>,</span>
-<span id="cb75-384"><a href="#cb75-384" aria-hidden="true" tabindex="-1"></a>    <span class="at">nu_0 =</span> <span class="dv">1</span>,</span>
-<span id="cb75-385"><a href="#cb75-385" aria-hidden="true" tabindex="-1"></a>    <span class="at">s_02 =</span> <span class="dv">47</span></span>
-<span id="cb75-386"><a href="#cb75-386" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb75-387"><a href="#cb75-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-388"><a href="#cb75-388" aria-hidden="true" tabindex="-1"></a>file2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"conjugate-regression.stan"</span>)</span>
-<span id="cb75-389"><a href="#cb75-389" aria-hidden="true" tabindex="-1"></a>conj_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file2)</span>
-<span id="cb75-390"><a href="#cb75-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-391"><a href="#cb75-391" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> conj_model<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb75-392"><a href="#cb75-392" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list2,</span>
-<span id="cb75-393"><a href="#cb75-393" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb75-394"><a href="#cb75-394" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
-<span id="cb75-395"><a href="#cb75-395" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb75-396"><a href="#cb75-396" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
-<span id="cb75-397"><a href="#cb75-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb75-398"><a href="#cb75-398" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb75-399"><a href="#cb75-399" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
-<span id="cb75-400"><a href="#cb75-400" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb75-401"><a href="#cb75-401" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-402"><a href="#cb75-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-405"><a href="#cb75-405" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-406"><a href="#cb75-406" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-summary</span></span>
-<span id="cb75-407"><a href="#cb75-407" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
-<span id="cb75-408"><a href="#cb75-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-409"><a href="#cb75-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-412"><a href="#cb75-412" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-413"><a href="#cb75-413" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-conj</span></span>
-<span id="cb75-414"><a href="#cb75-414" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb75-415"><a href="#cb75-415" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb75-416"><a href="#cb75-416" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-417"><a href="#cb75-417" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
-<span id="cb75-418"><a href="#cb75-418" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-320"><a href="#cb75-320" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is a vector 'y' of length 'N'.</span></span>
+<span id="cb75-321"><a href="#cb75-321" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
+<span id="cb75-322"><a href="#cb75-322" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
+<span id="cb75-323"><a href="#cb75-323" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; K;</span></span>
+<span id="cb75-324"><a href="#cb75-324" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
+<span id="cb75-325"><a href="#cb75-325" aria-hidden="true" tabindex="-1"></a><span class="in">  matrix[N, K] X;</span></span>
+<span id="cb75-326"><a href="#cb75-326" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb75-327"><a href="#cb75-327" aria-hidden="true" tabindex="-1"></a><span class="in">  // hyperparameters</span></span>
+<span id="cb75-328"><a href="#cb75-328" aria-hidden="true" tabindex="-1"></a><span class="in">  real beta_0;</span></span>
+<span id="cb75-329"><a href="#cb75-329" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; lambda_0;</span></span>
+<span id="cb75-330"><a href="#cb75-330" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; nu_0;</span></span>
+<span id="cb75-331"><a href="#cb75-331" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; s_02;</span></span>
+<span id="cb75-332"><a href="#cb75-332" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-333"><a href="#cb75-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-334"><a href="#cb75-334" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
+<span id="cb75-335"><a href="#cb75-335" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, K+1] X_mat = append_col(rep_vector(1, N), X);</span></span>
+<span id="cb75-336"><a href="#cb75-336" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[K+1] beta_0_vec = rep_vector(beta_0, K+1);</span></span>
+<span id="cb75-337"><a href="#cb75-337" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[K+1, K+1] Lambda_0 = lambda_0 * identity_matrix(K+1);</span></span>
+<span id="cb75-338"><a href="#cb75-338" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-339"><a href="#cb75-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-340"><a href="#cb75-340" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
+<span id="cb75-341"><a href="#cb75-341" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'mu' and 'sigma'.</span></span>
+<span id="cb75-342"><a href="#cb75-342" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
+<span id="cb75-343"><a href="#cb75-343" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[K+1] beta;</span></span>
+<span id="cb75-344"><a href="#cb75-344" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma2;</span></span>
+<span id="cb75-345"><a href="#cb75-345" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-346"><a href="#cb75-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-347"><a href="#cb75-347" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
+<span id="cb75-348"><a href="#cb75-348" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' to be normally distributed with mean 'mu'</span></span>
+<span id="cb75-349"><a href="#cb75-349" aria-hidden="true" tabindex="-1"></a><span class="in">// and standard deviation 'sigma'.</span></span>
+<span id="cb75-350"><a href="#cb75-350" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
+<span id="cb75-351"><a href="#cb75-351" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);</span></span>
+<span id="cb75-352"><a href="#cb75-352" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);</span></span>
+<span id="cb75-353"><a href="#cb75-353" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb75-354"><a href="#cb75-354" aria-hidden="true" tabindex="-1"></a><span class="in">  y ~ normal(X_mat * beta, sqrt(sigma2));</span></span>
+<span id="cb75-355"><a href="#cb75-355" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-356"><a href="#cb75-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-357"><a href="#cb75-357" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
+<span id="cb75-358"><a href="#cb75-358" aria-hidden="true" tabindex="-1"></a><span class="in">    real sigma = sqrt(sigma2);</span></span>
+<span id="cb75-359"><a href="#cb75-359" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
+<span id="cb75-360"><a href="#cb75-360" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb75-361"><a href="#cb75-361" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
+<span id="cb75-362"><a href="#cb75-362" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));</span></span>
+<span id="cb75-363"><a href="#cb75-363" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb75-364"><a href="#cb75-364" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb75-365"><a href="#cb75-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-366"><a href="#cb75-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-369"><a href="#cb75-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-370"><a href="#cb75-370" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-comp-fit</span></span>
+<span id="cb75-371"><a href="#cb75-371" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb75-372"><a href="#cb75-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-373"><a href="#cb75-373" aria-hidden="true" tabindex="-1"></a>data_list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb75-374"><a href="#cb75-374" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb75-375"><a href="#cb75-375" aria-hidden="true" tabindex="-1"></a>    <span class="at">K =</span> <span class="dv">1</span>,</span>
+<span id="cb75-376"><a href="#cb75-376" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb75-377"><a href="#cb75-377" aria-hidden="true" tabindex="-1"></a>    <span class="at">X =</span> <span class="fu">as.matrix</span>(ncaaw<span class="sc">$</span>FG3pct, <span class="at">nrow =</span> <span class="fu">nrow</span>(ncaaw)),</span>
+<span id="cb75-378"><a href="#cb75-378" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb75-379"><a href="#cb75-379" aria-hidden="true" tabindex="-1"></a>    <span class="co"># hyperparameters</span></span>
+<span id="cb75-380"><a href="#cb75-380" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta_0 =</span> <span class="dv">0</span>,</span>
+<span id="cb75-381"><a href="#cb75-381" aria-hidden="true" tabindex="-1"></a>    <span class="at">lambda_0 =</span> <span class="dv">10</span>,</span>
+<span id="cb75-382"><a href="#cb75-382" aria-hidden="true" tabindex="-1"></a>    <span class="at">nu_0 =</span> <span class="dv">1</span>,</span>
+<span id="cb75-383"><a href="#cb75-383" aria-hidden="true" tabindex="-1"></a>    <span class="at">s_02 =</span> <span class="dv">47</span></span>
+<span id="cb75-384"><a href="#cb75-384" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb75-385"><a href="#cb75-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-386"><a href="#cb75-386" aria-hidden="true" tabindex="-1"></a>file2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"conjugate-regression.stan"</span>)</span>
+<span id="cb75-387"><a href="#cb75-387" aria-hidden="true" tabindex="-1"></a>conj_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file2)</span>
+<span id="cb75-388"><a href="#cb75-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-389"><a href="#cb75-389" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> conj_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb75-390"><a href="#cb75-390" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list2,</span>
+<span id="cb75-391"><a href="#cb75-391" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb75-392"><a href="#cb75-392" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb75-393"><a href="#cb75-393" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb75-394"><a href="#cb75-394" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb75-395"><a href="#cb75-395" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb75-396"><a href="#cb75-396" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb75-397"><a href="#cb75-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
+<span id="cb75-398"><a href="#cb75-398" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb75-399"><a href="#cb75-399" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-400"><a href="#cb75-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-403"><a href="#cb75-403" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-404"><a href="#cb75-404" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-summary</span></span>
+<span id="cb75-405"><a href="#cb75-405" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
+<span id="cb75-406"><a href="#cb75-406" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-407"><a href="#cb75-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-410"><a href="#cb75-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-411"><a href="#cb75-411" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-conj</span></span>
+<span id="cb75-412"><a href="#cb75-412" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb75-413"><a href="#cb75-413" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb75-414"><a href="#cb75-414" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-415"><a href="#cb75-415" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-416"><a href="#cb75-416" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-417"><a href="#cb75-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-418"><a href="#cb75-418" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
 <span id="cb75-419"><a href="#cb75-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-420"><a href="#cb75-420" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb75-420"><a href="#cb75-420" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
 <span id="cb75-421"><a href="#cb75-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-422"><a href="#cb75-422" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb75-423"><a href="#cb75-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-424"><a href="#cb75-424" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb75-425"><a href="#cb75-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-422"><a href="#cb75-422" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb75-423"><a href="#cb75-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-424"><a href="#cb75-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-425"><a href="#cb75-425" aria-hidden="true" tabindex="-1"></a>Again the MCMC chains and diagnostics look satisfactory. The summary statistics for the parameters are displayed in @tbl-conj-inf.</span>
 <span id="cb75-426"><a href="#cb75-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-427"><a href="#cb75-427" aria-hidden="true" tabindex="-1"></a>Again the MCMC chains and diagnostics look satisfactory. The summary statistics for the parameters are displayed in @tbl-conj-inf.</span>
-<span id="cb75-428"><a href="#cb75-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-431"><a href="#cb75-431" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-432"><a href="#cb75-432" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-conj-inf</span></span>
-<span id="cb75-433"><a href="#cb75-433" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
-<span id="cb75-434"><a href="#cb75-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-435"><a href="#cb75-435" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb75-436"><a href="#cb75-436" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
-<span id="cb75-437"><a href="#cb75-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-429"><a href="#cb75-429" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-430"><a href="#cb75-430" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-conj-inf</span></span>
+<span id="cb75-431"><a href="#cb75-431" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-432"><a href="#cb75-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-433"><a href="#cb75-433" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb75-434"><a href="#cb75-434" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb75-435"><a href="#cb75-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-436"><a href="#cb75-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-437"><a href="#cb75-437" aria-hidden="true" tabindex="-1"></a>In @fig-conj-ci-1 we have the 50% and 95% CIs with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-conj-ci-2.</span>
 <span id="cb75-438"><a href="#cb75-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-439"><a href="#cb75-439" aria-hidden="true" tabindex="-1"></a>In @fig-conj-ci-1 we have the 50% and 95% CIs with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-conj-ci-2.</span>
-<span id="cb75-440"><a href="#cb75-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-443"><a href="#cb75-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-444"><a href="#cb75-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ci</span></span>
-<span id="cb75-445"><a href="#cb75-445" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb75-446"><a href="#cb75-446" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb75-447"><a href="#cb75-447" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-448"><a href="#cb75-448" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
-<span id="cb75-449"><a href="#cb75-449" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
-<span id="cb75-450"><a href="#cb75-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-451"><a href="#cb75-451" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb75-452"><a href="#cb75-452" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
-<span id="cb75-453"><a href="#cb75-453" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb75-454"><a href="#cb75-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-441"><a href="#cb75-441" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-442"><a href="#cb75-442" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ci</span></span>
+<span id="cb75-443"><a href="#cb75-443" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb75-444"><a href="#cb75-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb75-445"><a href="#cb75-445" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-446"><a href="#cb75-446" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
+<span id="cb75-447"><a href="#cb75-447" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
+<span id="cb75-448"><a href="#cb75-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-449"><a href="#cb75-449" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb75-450"><a href="#cb75-450" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
+<span id="cb75-451"><a href="#cb75-451" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb75-452"><a href="#cb75-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-453"><a href="#cb75-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-454"><a href="#cb75-454" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-conj-ppc we can see that while the predictive densities match pretty well and the intervals are centered on the OLS line of best fit.</span>
 <span id="cb75-455"><a href="#cb75-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-456"><a href="#cb75-456" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-conj-ppc we can see that while the predictive densities match pretty well and the intervals are centered on the OLS line of best fit.</span>
-<span id="cb75-457"><a href="#cb75-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-460"><a href="#cb75-460" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-461"><a href="#cb75-461" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ppc</span></span>
-<span id="cb75-462"><a href="#cb75-462" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb75-463"><a href="#cb75-463" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
-<span id="cb75-464"><a href="#cb75-464" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-465"><a href="#cb75-465" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
-<span id="cb75-466"><a href="#cb75-466" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
-<span id="cb75-467"><a href="#cb75-467" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
-<span id="cb75-468"><a href="#cb75-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-469"><a href="#cb75-469" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb75-470"><a href="#cb75-470" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_draws_df</span>() <span class="sc">|&gt;</span></span>
-<span id="cb75-471"><a href="#cb75-471" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.matrix</span>() <span class="ot">-&gt;</span> y_ppd</span>
-<span id="cb75-472"><a href="#cb75-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-473"><a href="#cb75-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-474"><a href="#cb75-474" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb75-475"><a href="#cb75-475" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
-<span id="cb75-476"><a href="#cb75-476" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
-<span id="cb75-477"><a href="#cb75-477" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb75-478"><a href="#cb75-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-479"><a href="#cb75-479" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb75-480"><a href="#cb75-480" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
-<span id="cb75-481"><a href="#cb75-481" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
-<span id="cb75-482"><a href="#cb75-482" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
-<span id="cb75-483"><a href="#cb75-483" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
-<span id="cb75-484"><a href="#cb75-484" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb75-485"><a href="#cb75-485" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-458"><a href="#cb75-458" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-459"><a href="#cb75-459" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ppc</span></span>
+<span id="cb75-460"><a href="#cb75-460" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb75-461"><a href="#cb75-461" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
+<span id="cb75-462"><a href="#cb75-462" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-463"><a href="#cb75-463" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
+<span id="cb75-464"><a href="#cb75-464" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
+<span id="cb75-465"><a href="#cb75-465" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb75-466"><a href="#cb75-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-467"><a href="#cb75-467" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb75-468"><a href="#cb75-468" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_draws_df</span>() <span class="sc">|&gt;</span></span>
+<span id="cb75-469"><a href="#cb75-469" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.matrix</span>() <span class="ot">-&gt;</span> y_ppd</span>
+<span id="cb75-470"><a href="#cb75-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-471"><a href="#cb75-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-472"><a href="#cb75-472" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb75-473"><a href="#cb75-473" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb75-474"><a href="#cb75-474" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
+<span id="cb75-475"><a href="#cb75-475" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb75-476"><a href="#cb75-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-477"><a href="#cb75-477" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb75-478"><a href="#cb75-478" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
+<span id="cb75-479"><a href="#cb75-479" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb75-480"><a href="#cb75-480" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb75-481"><a href="#cb75-481" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
+<span id="cb75-482"><a href="#cb75-482" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb75-483"><a href="#cb75-483" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-484"><a href="#cb75-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-485"><a href="#cb75-485" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bonus: Regression Modeling with Incomplete Data</span></span>
 <span id="cb75-486"><a href="#cb75-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-487"><a href="#cb75-487" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bonus: Regression Modeling with Incomplete Data</span></span>
+<span id="cb75-487"><a href="#cb75-487" aria-hidden="true" tabindex="-1"></a>As a bonus section, we'll use the <span class="in">`brms`</span> package to fit a regression model where we have incomplete predictor observations. Incomplete data analysis ranges from complete case analysis (incomplete cases are dropped) and mean imputation to multiple imputation, joint modeling, and EM algorithm <span class="co">[</span><span class="ot">@schafer2002</span><span class="co">]</span>.<span class="ot">[^2]</span> We're going to use <span class="in">`mice`</span> <span class="co">[</span><span class="ot">@buuren2010mice</span><span class="co">]</span> and <span class="in">`brms`</span> <span class="co">[</span><span class="ot">@bürkner2018</span><span class="co">]</span> to demonstrate the imputation and fitting Bayesian regression models with a convenient front-end that writes the Stan code for us.</span>
 <span id="cb75-488"><a href="#cb75-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-489"><a href="#cb75-489" aria-hidden="true" tabindex="-1"></a>As a bonus section, we'll use the <span class="in">`brms`</span> package to fit a regression model where we have incomplete predictor observations. Incomplete data analysis ranges from complete case analysis (incomplete cases are dropped) and mean imputation to multiple imputation, joint modeling, and EM algorithm <span class="co">[</span><span class="ot">@schafer2002</span><span class="co">]</span>.<span class="ot">[^2]</span> We're going to use <span class="in">`mice`</span> <span class="co">[</span><span class="ot">@buuren2010mice</span><span class="co">]</span> and <span class="in">`brms`</span> <span class="co">[</span><span class="ot">@bürkner2018</span><span class="co">]</span> to demonstrate the imputation and fitting Bayesian regression models with a convenient front-end that writes the Stan code for us.</span>
+<span id="cb75-489"><a href="#cb75-489" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>See <span class="co">[</span><span class="ot">@rubin1976, @dempster1977, @rubin1987, @harel2007multiple, @white2011</span><span class="co">]</span> for more details on incomplete data analysis.</span>
 <span id="cb75-490"><a href="#cb75-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-491"><a href="#cb75-491" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>See <span class="co">[</span><span class="ot">@rubin1976, @dempster1977, @rubin1987, @harel2007multiple, @white2011</span><span class="co">]</span> for more details on incomplete data analysis.</span>
+<span id="cb75-491"><a href="#cb75-491" aria-hidden="true" tabindex="-1"></a>In our case, we are going to use junior year scoring (points per game) to predict senior year scoring for women's college basketball players from 2020-21 to the 2022-23 seasons. The data set only contains players who played in at least 75% of games each season, so partial seasons due to injury or being a bench player are excluded. Players who only have a junior season are excluded from the analysis.</span>
 <span id="cb75-492"><a href="#cb75-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-493"><a href="#cb75-493" aria-hidden="true" tabindex="-1"></a>In our case, we are going to use junior year scoring (points per game) to predict senior year scoring for women's college basketball players from 2020-21 to the 2022-23 seasons. The data set only contains players who played in at least 75% of games each season, so partial seasons due to injury or being a bench player are excluded. Players who only have a junior season are excluded from the analysis.</span>
-<span id="cb75-494"><a href="#cb75-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-497"><a href="#cb75-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-498"><a href="#cb75-498" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-ncaaw-i</span></span>
-<span id="cb75-499"><a href="#cb75-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-500"><a href="#cb75-500" aria-hidden="true" tabindex="-1"></a>ncaaw_i <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/ncaaw-individuals.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb75-501"><a href="#cb75-501" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ncaaw_i)</span>
-<span id="cb75-502"><a href="#cb75-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-495"><a href="#cb75-495" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-496"><a href="#cb75-496" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-ncaaw-i</span></span>
+<span id="cb75-497"><a href="#cb75-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-498"><a href="#cb75-498" aria-hidden="true" tabindex="-1"></a>ncaaw_i <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/ncaaw-individuals.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb75-499"><a href="#cb75-499" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ncaaw_i)</span>
+<span id="cb75-500"><a href="#cb75-500" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-501"><a href="#cb75-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-502"><a href="#cb75-502" aria-hidden="true" tabindex="-1"></a>Our imputation model will be univariate linear regression that use all other variables as predictors. For example, imputing $PPG_{jr}$ will be done by regressing on $PPG_{sr}, G_{jr}, G_{sr}$. $PPG_{jr}$ and $G_{jr}$ are incomplete for $n_{mis} = 176$ players while $n_{obs} = 98$ players have stats from both years. This missing data pattern is displayed in @fig-miss-patt.</span>
 <span id="cb75-503"><a href="#cb75-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-504"><a href="#cb75-504" aria-hidden="true" tabindex="-1"></a>Our imputation model will be univariate linear regression that use all other variables as predictors. For example, imputing $PPG_{jr}$ will be done by regressing on $PPG_{sr}, G_{jr}, G_{sr}$. $PPG_{jr}$ and $G_{jr}$ are incomplete for $n_{mis} = 176$ players while $n_{obs} = 98$ players have stats from both years. This missing data pattern is displayed in @fig-miss-patt.</span>
-<span id="cb75-505"><a href="#cb75-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-508"><a href="#cb75-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-509"><a href="#cb75-509" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-miss-patt</span></span>
-<span id="cb75-510"><a href="#cb75-510" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Missing data patterns for the NCAA women's basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons.</span></span>
-<span id="cb75-511"><a href="#cb75-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-512"><a href="#cb75-512" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
-<span id="cb75-513"><a href="#cb75-513" aria-hidden="true" tabindex="-1"></a>m_pat <span class="ot">&lt;-</span> <span class="fu">md.pattern</span>(ncaaw_i, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb75-514"><a href="#cb75-514" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-515"><a href="#cb75-515" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-518"><a href="#cb75-518" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-519"><a href="#cb75-519" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ppg-jr-sr</span></span>
-<span id="cb75-520"><a href="#cb75-520" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Points per game (PPG) from Junior and Senior seasons.</span></span>
-<span id="cb75-521"><a href="#cb75-521" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb75-522"><a href="#cb75-522" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ncaaw_i, <span class="fu">aes</span>(PPG_jr, PPG_sr, <span class="at">color =</span> G_jr)) <span class="sc">+</span></span>
-<span id="cb75-523"><a href="#cb75-523" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb75-524"><a href="#cb75-524" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"G - Jr"</span>) <span class="sc">+</span></span>
-<span id="cb75-525"><a href="#cb75-525" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PPG - Jr"</span>,</span>
-<span id="cb75-526"><a href="#cb75-526" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"PPG - Sr"</span>) <span class="sc">+</span></span>
-<span id="cb75-527"><a href="#cb75-527" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span>
-<span id="cb75-528"><a href="#cb75-528" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-506"><a href="#cb75-506" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-507"><a href="#cb75-507" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-miss-patt</span></span>
+<span id="cb75-508"><a href="#cb75-508" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Missing data patterns for the NCAA women's basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons.</span></span>
+<span id="cb75-509"><a href="#cb75-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-510"><a href="#cb75-510" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb75-511"><a href="#cb75-511" aria-hidden="true" tabindex="-1"></a>m_pat <span class="ot">&lt;-</span> <span class="fu">md.pattern</span>(ncaaw_i, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb75-512"><a href="#cb75-512" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-513"><a href="#cb75-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-516"><a href="#cb75-516" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-517"><a href="#cb75-517" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ppg-jr-sr</span></span>
+<span id="cb75-518"><a href="#cb75-518" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Points per game (PPG) from Junior and Senior seasons.</span></span>
+<span id="cb75-519"><a href="#cb75-519" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb75-520"><a href="#cb75-520" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ncaaw_i, <span class="fu">aes</span>(PPG_jr, PPG_sr, <span class="at">color =</span> G_jr)) <span class="sc">+</span></span>
+<span id="cb75-521"><a href="#cb75-521" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb75-522"><a href="#cb75-522" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"G - Jr"</span>) <span class="sc">+</span></span>
+<span id="cb75-523"><a href="#cb75-523" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PPG - Jr"</span>,</span>
+<span id="cb75-524"><a href="#cb75-524" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"PPG - Sr"</span>) <span class="sc">+</span></span>
+<span id="cb75-525"><a href="#cb75-525" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span>
+<span id="cb75-526"><a href="#cb75-526" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-527"><a href="#cb75-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-528"><a href="#cb75-528" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Multiple Imputation with mice</span></span>
 <span id="cb75-529"><a href="#cb75-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-530"><a href="#cb75-530" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Multiple Imputation with mice</span></span>
+<span id="cb75-530"><a href="#cb75-530" aria-hidden="true" tabindex="-1"></a>First, we'll try out imputing before model fitting using <span class="in">`mice`</span>. MICE stands for Multiple Imputation by Chained Equations and is procedure that creates a set of $M$ completed data sets from an incomplete data set. Multiple Imputation is a three stage procedure:</span>
 <span id="cb75-531"><a href="#cb75-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-532"><a href="#cb75-532" aria-hidden="true" tabindex="-1"></a>First, we'll try out imputing before model fitting using <span class="in">`mice`</span>. MICE stands for Multiple Imputation by Chained Equations and is procedure that creates a set of $M$ completed data sets from an incomplete data set. Multiple Imputation is a three stage procedure:</span>
-<span id="cb75-533"><a href="#cb75-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-534"><a href="#cb75-534" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Each incomplete variable is imputed with posterior predictive draws from a regression model with all other variables as predictors. The procedure iterates through the incomplete variables several times to converge to the posterior predictive distribution of the missing data given the observed.</span>
-<span id="cb75-535"><a href="#cb75-535" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>These completed data sets are then analyzed individually with a standard complete data method.</span>
-<span id="cb75-536"><a href="#cb75-536" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Results from each analysis are combined. Typically this is done with Rubin's rules <span class="co">[</span><span class="ot">@rubin1987</span><span class="co">]</span>, but <span class="in">`brms`</span> follows the advice of @zhou2010 and simply stacks the posterior draw matrices from each fitted model.</span>
-<span id="cb75-537"><a href="#cb75-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-540"><a href="#cb75-540" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-541"><a href="#cb75-541" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mice-fit</span></span>
-<span id="cb75-542"><a href="#cb75-542" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb75-543"><a href="#cb75-543" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
-<span id="cb75-544"><a href="#cb75-544" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb75-532"><a href="#cb75-532" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Each incomplete variable is imputed with posterior predictive draws from a regression model with all other variables as predictors. The procedure iterates through the incomplete variables several times to converge to the posterior predictive distribution of the missing data given the observed.</span>
+<span id="cb75-533"><a href="#cb75-533" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>These completed data sets are then analyzed individually with a standard complete data method.</span>
+<span id="cb75-534"><a href="#cb75-534" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Results from each analysis are combined. Typically this is done with Rubin's rules <span class="co">[</span><span class="ot">@rubin1987</span><span class="co">]</span>, but <span class="in">`brms`</span> follows the advice of @zhou2010 and simply stacks the posterior draw matrices from each fitted model.</span>
+<span id="cb75-535"><a href="#cb75-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-538"><a href="#cb75-538" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-539"><a href="#cb75-539" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mice-fit</span></span>
+<span id="cb75-540"><a href="#cb75-540" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb75-541"><a href="#cb75-541" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb75-542"><a href="#cb75-542" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb75-543"><a href="#cb75-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-544"><a href="#cb75-544" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(ncaaw_i, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"norm"</span>, <span class="at">maxit =</span> <span class="dv">10</span>, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb75-545"><a href="#cb75-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-546"><a href="#cb75-546" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(ncaaw_i, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"norm"</span>, <span class="at">maxit =</span> <span class="dv">10</span>, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb75-547"><a href="#cb75-547" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-548"><a href="#cb75-548" aria-hidden="true" tabindex="-1"></a>fit_brm_mice <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(PPG_sr <span class="sc">~</span> G_jr <span class="sc">*</span> PPG_jr, <span class="at">data =</span> imps, <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb75-549"><a href="#cb75-549" aria-hidden="true" tabindex="-1"></a>                             <span class="at">refresh =</span> <span class="dv">0</span>)</span>
-<span id="cb75-550"><a href="#cb75-550" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mice)</span>
-<span id="cb75-551"><a href="#cb75-551" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-552"><a href="#cb75-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-555"><a href="#cb75-555" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-556"><a href="#cb75-556" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-mice-cond-eff</span></span>
-<span id="cb75-557"><a href="#cb75-557" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</span></span>
-<span id="cb75-558"><a href="#cb75-558" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-559"><a href="#cb75-559" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-560"><a href="#cb75-560" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mice, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>)) <span class="sc">+</span></span>
-<span id="cb75-561"><a href="#cb75-561" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">30</span>))</span>
-<span id="cb75-562"><a href="#cb75-562" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-546"><a href="#cb75-546" aria-hidden="true" tabindex="-1"></a>fit_brm_mice <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(PPG_sr <span class="sc">~</span> G_jr <span class="sc">*</span> PPG_jr, <span class="at">data =</span> imps, <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb75-547"><a href="#cb75-547" aria-hidden="true" tabindex="-1"></a>                             <span class="at">refresh =</span> <span class="dv">0</span>)</span>
+<span id="cb75-548"><a href="#cb75-548" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mice)</span>
+<span id="cb75-549"><a href="#cb75-549" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-550"><a href="#cb75-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-553"><a href="#cb75-553" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-554"><a href="#cb75-554" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-mice-cond-eff</span></span>
+<span id="cb75-555"><a href="#cb75-555" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</span></span>
+<span id="cb75-556"><a href="#cb75-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-557"><a href="#cb75-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-558"><a href="#cb75-558" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mice, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>)) <span class="sc">+</span></span>
+<span id="cb75-559"><a href="#cb75-559" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">30</span>))</span>
+<span id="cb75-560"><a href="#cb75-560" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-561"><a href="#cb75-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-562"><a href="#cb75-562" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Imputation During Model Fitting</span></span>
 <span id="cb75-563"><a href="#cb75-563" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-564"><a href="#cb75-564" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Imputation During Model Fitting</span></span>
+<span id="cb75-564"><a href="#cb75-564" aria-hidden="true" tabindex="-1"></a>Imputation during model fitting takes a different approach. Imputations are made for each incomplete variable using a different conditional model for each variable. This approach differs from MI and MICE in two key ways: (i) the model is only fit once since the imputation model is part of the analysis model, (ii) the model must be constructed uniquely for each analysis scenario whereas MI completed data sets can be re-used with different analyses.</span>
 <span id="cb75-565"><a href="#cb75-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-566"><a href="#cb75-566" aria-hidden="true" tabindex="-1"></a>Imputation during model fitting takes a different approach. Imputations are made for each incomplete variable using a different conditional model for each variable. This approach differs from MI and MICE in two key ways: (i) the model is only fit once since the imputation model is part of the analysis model, (ii) the model must be constructed uniquely for each analysis scenario whereas MI completed data sets can be re-used with different analyses.</span>
-<span id="cb75-567"><a href="#cb75-567" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-570"><a href="#cb75-570" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-571"><a href="#cb75-571" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: brm-mi-fit</span></span>
-<span id="cb75-572"><a href="#cb75-572" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb75-573"><a href="#cb75-573" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
-<span id="cb75-574"><a href="#cb75-574" aria-hidden="true" tabindex="-1"></a>bform <span class="ot">&lt;-</span> <span class="fu">bf</span>(PPG_sr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> <span class="fu">mi</span>(G_jr) <span class="sc">*</span> <span class="fu">mi</span>(PPG_jr)) <span class="sc">+</span></span>
-<span id="cb75-575"><a href="#cb75-575" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(PPG_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span></span>
-<span id="cb75-576"><a href="#cb75-576" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(G_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span> <span class="fu">set_rescor</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb75-577"><a href="#cb75-577" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-578"><a href="#cb75-578" aria-hidden="true" tabindex="-1"></a>fit_brm_mi <span class="ot">&lt;-</span> <span class="fu">brm</span>(bform, <span class="at">data =</span> ncaaw_i, </span>
-<span id="cb75-579"><a href="#cb75-579" aria-hidden="true" tabindex="-1"></a>                  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb75-580"><a href="#cb75-580" aria-hidden="true" tabindex="-1"></a>                  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>, </span>
-<span id="cb75-581"><a href="#cb75-581" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.8</span>, </span>
-<span id="cb75-582"><a href="#cb75-582" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">max_depth =</span> <span class="dv">10</span>,</span>
-<span id="cb75-583"><a href="#cb75-583" aria-hidden="true" tabindex="-1"></a>                                <span class="at">show_exceptions =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb75-584"><a href="#cb75-584" aria-hidden="true" tabindex="-1"></a>                  <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb75-585"><a href="#cb75-585" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb75-586"><a href="#cb75-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-587"><a href="#cb75-587" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mi)</span>
-<span id="cb75-588"><a href="#cb75-588" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-568"><a href="#cb75-568" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-569"><a href="#cb75-569" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: brm-mi-fit</span></span>
+<span id="cb75-570"><a href="#cb75-570" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb75-571"><a href="#cb75-571" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb75-572"><a href="#cb75-572" aria-hidden="true" tabindex="-1"></a>bform <span class="ot">&lt;-</span> <span class="fu">bf</span>(PPG_sr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> <span class="fu">mi</span>(G_jr) <span class="sc">*</span> <span class="fu">mi</span>(PPG_jr)) <span class="sc">+</span></span>
+<span id="cb75-573"><a href="#cb75-573" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(PPG_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span></span>
+<span id="cb75-574"><a href="#cb75-574" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(G_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span> <span class="fu">set_rescor</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb75-575"><a href="#cb75-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-576"><a href="#cb75-576" aria-hidden="true" tabindex="-1"></a>fit_brm_mi <span class="ot">&lt;-</span> <span class="fu">brm</span>(bform, <span class="at">data =</span> ncaaw_i, </span>
+<span id="cb75-577"><a href="#cb75-577" aria-hidden="true" tabindex="-1"></a>                  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb75-578"><a href="#cb75-578" aria-hidden="true" tabindex="-1"></a>                  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>, </span>
+<span id="cb75-579"><a href="#cb75-579" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.8</span>, </span>
+<span id="cb75-580"><a href="#cb75-580" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">max_depth =</span> <span class="dv">10</span>,</span>
+<span id="cb75-581"><a href="#cb75-581" aria-hidden="true" tabindex="-1"></a>                                <span class="at">show_exceptions =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb75-582"><a href="#cb75-582" aria-hidden="true" tabindex="-1"></a>                  <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb75-583"><a href="#cb75-583" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb75-584"><a href="#cb75-584" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-585"><a href="#cb75-585" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mi)</span>
+<span id="cb75-586"><a href="#cb75-586" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-587"><a href="#cb75-587" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-588"><a href="#cb75-588" aria-hidden="true" tabindex="-1"></a><span class="in">`brms`</span> is built on Stan, so we can also take a look at the traceplots of the samples in @fig-brm-mi-trace.</span>
 <span id="cb75-589"><a href="#cb75-589" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-590"><a href="#cb75-590" aria-hidden="true" tabindex="-1"></a>Stan is reporting large rhat values and divergent transitions, so we can also take a look at the traceplots of the samples in @fig-brm-mi-trace.</span>
-<span id="cb75-591"><a href="#cb75-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-594"><a href="#cb75-594" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-595"><a href="#cb75-595" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace</span></span>
-<span id="cb75-596"><a href="#cb75-596" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
-<span id="cb75-597"><a href="#cb75-597" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms analysis model parameters.</span></span>
-<span id="cb75-598"><a href="#cb75-598" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-599"><a href="#cb75-599" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
-<span id="cb75-600"><a href="#cb75-600" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
-<span id="cb75-601"><a href="#cb75-601" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
-<span id="cb75-602"><a href="#cb75-602" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-603"><a href="#cb75-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-606"><a href="#cb75-606" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-607"><a href="#cb75-607" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace-imp</span></span>
-<span id="cb75-608"><a href="#cb75-608" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
-<span id="cb75-609"><a href="#cb75-609" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms imputation model parameters.</span></span>
-<span id="cb75-610"><a href="#cb75-610" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb75-611"><a href="#cb75-611" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $PPG_{jr}$ imputation model parameters</span></span>
-<span id="cb75-612"><a href="#cb75-612" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $G_{jr}$ imputation model parameters</span></span>
-<span id="cb75-613"><a href="#cb75-613" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
-<span id="cb75-614"><a href="#cb75-614" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb75-615"><a href="#cb75-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-618"><a href="#cb75-618" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb75-619"><a href="#cb75-619" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-cond-eff</span></span>
-<span id="cb75-620"><a href="#cb75-620" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</span></span>
-<span id="cb75-621"><a href="#cb75-621" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-622"><a href="#cb75-622" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mi, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
-<span id="cb75-623"><a href="#cb75-623" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-592"><a href="#cb75-592" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-593"><a href="#cb75-593" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace</span></span>
+<span id="cb75-594"><a href="#cb75-594" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
+<span id="cb75-595"><a href="#cb75-595" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms analysis model parameters.</span></span>
+<span id="cb75-596"><a href="#cb75-596" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-597"><a href="#cb75-597" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
+<span id="cb75-598"><a href="#cb75-598" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
+<span id="cb75-599"><a href="#cb75-599" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
+<span id="cb75-600"><a href="#cb75-600" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-601"><a href="#cb75-601" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-604"><a href="#cb75-604" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-605"><a href="#cb75-605" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace-imp</span></span>
+<span id="cb75-606"><a href="#cb75-606" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
+<span id="cb75-607"><a href="#cb75-607" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms imputation model parameters.</span></span>
+<span id="cb75-608"><a href="#cb75-608" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb75-609"><a href="#cb75-609" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $PPG_{jr}$ imputation model parameters</span></span>
+<span id="cb75-610"><a href="#cb75-610" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $G_{jr}$ imputation model parameters</span></span>
+<span id="cb75-611"><a href="#cb75-611" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
+<span id="cb75-612"><a href="#cb75-612" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-613"><a href="#cb75-613" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-616"><a href="#cb75-616" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb75-617"><a href="#cb75-617" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-cond-eff</span></span>
+<span id="cb75-618"><a href="#cb75-618" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</span></span>
+<span id="cb75-619"><a href="#cb75-619" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-620"><a href="#cb75-620" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mi, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
+<span id="cb75-621"><a href="#cb75-621" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb75-622"><a href="#cb75-622" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-623"><a href="#cb75-623" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Other Useful Resources for Stan</span></span>
 <span id="cb75-624"><a href="#cb75-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-625"><a href="#cb75-625" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Other Useful Resources for Stan</span></span>
+<span id="cb75-625"><a href="#cb75-625" aria-hidden="true" tabindex="-1"></a>First, here's the three essential guides for using Stan:</span>
 <span id="cb75-626"><a href="#cb75-626" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-627"><a href="#cb75-627" aria-hidden="true" tabindex="-1"></a>First, here's the three essential guides for using Stan:</span>
+<span id="cb75-627"><a href="#cb75-627" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Function Guide</span><span class="co">](https://mc-stan.org/docs/functions-reference/index.html)</span> - reference for all the built-in functions and distributions as well as guides for writing custom functions and distributions</span>
 <span id="cb75-628"><a href="#cb75-628" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-629"><a href="#cb75-629" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Function Guide</span><span class="co">](https://mc-stan.org/docs/functions-reference/index.html)</span> - reference for all the built-in functions and distributions as well as guides for writing custom functions and distributions</span>
+<span id="cb75-629"><a href="#cb75-629" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan User's Guide</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/index.html)</span> - reference for example models, how to build efficient models, and some inference techniques</span>
 <span id="cb75-630"><a href="#cb75-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-631"><a href="#cb75-631" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan User's Guide</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/index.html)</span> - reference for example models, how to build efficient models, and some inference techniques</span>
+<span id="cb75-631"><a href="#cb75-631" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Reference Manual</span><span class="co">](https://mc-stan.org/docs/reference-manual/index.html)</span> - reference for programming in Stan with a focus on how the language works</span>
 <span id="cb75-632"><a href="#cb75-632" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-633"><a href="#cb75-633" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Reference Manual</span><span class="co">](https://mc-stan.org/docs/reference-manual/index.html)</span> - reference for programming in Stan with a focus on how the language works</span>
+<span id="cb75-633"><a href="#cb75-633" aria-hidden="true" tabindex="-1"></a>Here are some other useful packages to use for Bayesian data analysis with Stan (or other packages). We used some of these in this tutorial!</span>
 <span id="cb75-634"><a href="#cb75-634" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-635"><a href="#cb75-635" aria-hidden="true" tabindex="-1"></a>Here are some other useful packages to use for Bayesian data analysis with Stan (or other packages). We used some of these in this tutorial!</span>
+<span id="cb75-635"><a href="#cb75-635" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">brms</span><span class="co">](https://paul-buerkner.github.io/brms/index.html)</span>: Bayesian regression models using Stan</span>
 <span id="cb75-636"><a href="#cb75-636" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-637"><a href="#cb75-637" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">brms</span><span class="co">](https://paul-buerkner.github.io/brms/index.html)</span>: Bayesian regression models using Stan</span>
+<span id="cb75-637"><a href="#cb75-637" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">posterior</span><span class="co">](https://mc-stan.org/posterior/)</span>: Useful for working with Stan output</span>
 <span id="cb75-638"><a href="#cb75-638" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-639"><a href="#cb75-639" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">posterior</span><span class="co">](https://mc-stan.org/posterior/)</span>: Useful for working with Stan output</span>
+<span id="cb75-639"><a href="#cb75-639" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">bayesplot</span><span class="co">](http://mc-stan.org/bayesplot)</span>: ggplot2-based plotting functions for MCMC draws designed work well with Stan</span>
 <span id="cb75-640"><a href="#cb75-640" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-641"><a href="#cb75-641" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">bayesplot</span><span class="co">](http://mc-stan.org/bayesplot)</span>: ggplot2-based plotting functions for MCMC draws designed work well with Stan</span>
+<span id="cb75-641"><a href="#cb75-641" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">loo</span><span class="co">](http://mc-stan.org/loo)</span>: Leave-one-out cross validation for model checking and selection that works with the log-posterior. Works best with <span class="in">`rstanarm`</span> but can work with <span class="in">`cmdstanr`</span> too.</span>
 <span id="cb75-642"><a href="#cb75-642" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-643"><a href="#cb75-643" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">loo</span><span class="co">](http://mc-stan.org/loo)</span>: Leave-one-out cross validation for model checking and selection that works with the log-posterior. Works best with <span class="in">`rstanarm`</span> but can work with <span class="in">`cmdstanr`</span> too.</span>
+<span id="cb75-643"><a href="#cb75-643" aria-hidden="true" tabindex="-1"></a>Here's a list of useful resources for debugging issues with divergences, hitting maximum tree-depth, low EBFMI, and understanding diagnostics:</span>
 <span id="cb75-644"><a href="#cb75-644" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-645"><a href="#cb75-645" aria-hidden="true" tabindex="-1"></a>Here's a list of useful resources for debugging issues with divergences, hitting maximum tree-depth, low EBFMI, and understanding diagnostics:</span>
+<span id="cb75-645"><a href="#cb75-645" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan's Guide to Runtime warnings and convergence problems</span><span class="co">](https://mc-stan.org/misc/warnings.html)</span></span>
 <span id="cb75-646"><a href="#cb75-646" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-647"><a href="#cb75-647" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan's Guide to Runtime warnings and convergence problems</span><span class="co">](https://mc-stan.org/misc/warnings.html)</span></span>
+<span id="cb75-647"><a href="#cb75-647" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Prior Choices and Selection</span><span class="co">](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)</span></span>
 <span id="cb75-648"><a href="#cb75-648" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-649"><a href="#cb75-649" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Prior Choices and Selection</span><span class="co">](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)</span></span>
+<span id="cb75-649"><a href="#cb75-649" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Convergence Diagnostics for MCMC</span><span class="co">](https://arxiv.org/pdf/1909.11827.pdf)</span></span>
 <span id="cb75-650"><a href="#cb75-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-651"><a href="#cb75-651" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Convergence Diagnostics for MCMC</span><span class="co">](https://arxiv.org/pdf/1909.11827.pdf)</span></span>
-<span id="cb75-652"><a href="#cb75-652" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-653"><a href="#cb75-653" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Official Stan Forum</span><span class="co">](https://discourse.mc-stan.org/)</span></span>
+<span id="cb75-651"><a href="#cb75-651" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Official Stan Forum</span><span class="co">](https://discourse.mc-stan.org/)</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

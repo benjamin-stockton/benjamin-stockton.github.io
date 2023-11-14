@@ -16,8 +16,6 @@ editor: visual
 bibliography: swosc-stan.bib
 ---
 
-This post is the second workshop in the 2023-2024 Student Workshop Series on Computing at UConn. I'm re-publishing it here.
-
 ## Installation
 
 To get started, we'll head over to Stan's [documentation](https://mc-stan.org/) to see how to get set up in R. For this presentation, I'll use the CmdStan toolchain that's implemented in R by the `cmdstanr` [package](https://mc-stan.org/cmdstanr/) [@gabry2023]. There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called [CmdStanPy](https://github.com/stan-dev/cmdstanpy) [@cmdstanp].
@@ -55,7 +53,7 @@ $$
 To be a little more specific, we have three central components to the model. For ease of exposition, let's consider the simple regression model $E(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ where we have $i = 1,\dots,N$ observations of $(Y_i, X_i)'$ from Ch. 14 of Bayesian Data Analysis [@gelman2013bayesian, p. 354-358]. From here on I will suppress conditioning on the observed predictor $X_i = x_i$ since we are considering the design matrix $X = (1_N, \mathbf{x})$ to be fixed and known where $\mathbf{x} = (x_1,\dots, x_N)'$.
 
 1.  **The Prior:** a distribution for the parameters that doesn't depend on the data.
-    1.  For the regression model, we have three parameters $\beta_0, \beta_1, \sigma^2$. We assign a probability distribution $p(\beta_0, \beta_1, \sigma^2) \equiv p(\boldsymbol{\beta}, \sigma^2)$ to these parameters. Two common ways to do this are a non-informative prior so that the prior is uniform $p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$.
+    1.  For the regression model, we have three parameters $\beta_0, \beta_1, \sigma^2$. We assign a probability distribution $p(\beta_0, \beta_1, \sigma^2) \equiv p(\boldsymbol{\beta}, \sigma^2)$ to these parameters. One common way to do this are a non-informative prior so that the prior is uniform $p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$.
 2.  **The (Data) Likelihood:** a model for the data that depends on the parameters.
     1.  For the regression, we have the model $Y_i | \boldsymbol{\beta}, \sigma^2 \sim N(\beta_0 + \beta_1 x_i, \sigma^2) \equiv p(y_i | \boldsymbol{\beta}, \sigma^2) = \phi(y_i | \beta_0 + \beta_1 x_i, \sigma^2).$ Note that we are conditioning on the parameters.
     2.  In vector notation, this is $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$
@@ -543,7 +541,7 @@ fit_brm_mi <- brm(bform, data = ncaaw_i,
 summary(fit_brm_mi)
 ```
 
-Stan is reporting large rhat values and divergent transitions, so we can also take a look at the traceplots of the samples in @fig-brm-mi-trace.
+`brms` is built on Stan, so we can also take a look at the traceplots of the samples in @fig-brm-mi-trace.
 
 ```{r}
 #| label: fig-brm-mi-trace

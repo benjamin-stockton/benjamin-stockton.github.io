@@ -1,0 +1,768 @@
+---
+title: "Getting to Know Stan"
+author: "Ben Stockton"
+date: 11-16-2023
+format: 
+    revealjs:
+        theme: white
+        smaller: true
+        code-overflow: wrap
+        slide-number: true
+editor: visual
+results: hold
+warnings: false
+echo: true
+bibliography: swosc-stan.bib
+draft: false
+---
+
+# Some Brief Set-up
+
+## Installation
+
+::: columns
+::: {.column width="50%"}
+-   I'll use the CmdStan toolchain in R with the `cmdstanr` [package](https://mc-stan.org/cmdstanr/) [@gabry2023].
+
+-   There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called [CmdStanPy](https://github.com/stan-dev/cmdstanpy) [@cmdstanp].
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: set-up
+
+# install.packages("cmdstanr",
+#                  repos = c("https://mc-stan.org/r-packages/", 
+#                            getOption("repos")))
+library(cmdstanr)
+# cmdstanr::install_cmdstan()
+cmdstanr::cmdstan_version()
+cmdstanr::cmdstan_path()
+cmdstanr::check_cmdstan_toolchain()
+```
+:::
+:::
+
+## A Very Brief Introduction to Bayesian Data Analysis
+
+-   Incorporate prior knowledge about the model/data into our analysis
+
+-   Bayesian inference treats the parameters of the model as random variables
+
+::: callout-important
+## Bayes Rule
+
+Let $\theta$ be a r.v. with (prior) distribution $p(\theta)$, $Y$ be a r.v. with likelihood $p(y | \theta)$. Their joint distribution is $p(y, \theta) = p(y|\theta) p(\theta)$.
+
+Bayes rule lets us flip the conditioning from the likelihood to get
+
+$$
+p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(y, \theta) d\theta} \approx p(y|\theta) p(\theta)
+$$
+:::
+
+## The Components of Bayesian Inference
+
+Two sets of random variables to model: parameters $\theta$ and data $Y$
+
+1.  **The Prior:** $p(\theta)$ does not depend on $Y$
+2.  **The (Data) Likelihood:** $p(y | \theta)$ models $Y$ dependent on $\theta$
+3.  **The Posterior:** $p(\theta | y)$ models $\theta$ given $Y$ and the prior
+
+```{=tex}
+\begin{align*}
+    p(\theta | y) &= \frac{p(\theta, y)}{p(y)} \\
+        &= \frac{p(\theta) \times p(y | \theta)}{\int p(y|\theta) p(\theta)} \\
+        &\propto p(\theta) p(y | \theta) \\
+\end{align*}
+```
+Make inferences about $\theta$ with the posterior distribution
+
+# Example Time
+
+## NCAA Women's Basketball
+
+::: columns
+::: {.column width="50%"}
+We'll model NCAA Women's Basketball team's total wins by their 3 point field goal percentage from the 2022-2023 season.
+
+```{r}
+#| label: load-data
+library(dplyr)
+library(ggplot2)
+ncaaw_file <- file.path("Data", "NCAAW-freethrows-threes-2022-2023.csv")
+ncaaw <- readr::read_csv(file = ncaaw_file)
+```
+
+In the 2022-2023 season there were $N = 350$ teams.
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: fig-scatter
+#| fig-cap: Scatter plot of the Total Wins by 3 pt Field Goal %. The OLS regression line is super-imposed in blue.
+#| echo: false
+ggplot(ncaaw, aes(FG3pct, W)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    labs(title = "2022-23 NCAAW Wins by 3pt%", 
+         subtitle = paste0("r = ", round(cor(ncaaw$W, ncaaw$FG3pct), 3)),
+         x = "3pt%",
+         y = "Wins") +
+    theme_bw()
+
+```
+:::
+:::
+
+## Baseline ML Estimates
+
+::: columns
+::: {.column width="50%"}
+As a baseline, we'll find the maximum likelihood estimates for the regression parameters and variance.
+:::
+
+::: {.column width="50%"}
+```{r}
+fit_ml <- lm(W ~ FG3pct, data = ncaaw)
+
+coef(fit_ml)
+smry_ml <- summary(fit_ml)
+smry_ml$sigma^2
+```
+:::
+:::
+
+# Non-informative Prior Regression Model
+
+## Model #1 Set-up
+
+Let's consider the simple regression model $E(Y_i | X_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ [@gelman2013bayesian, p. 354-358].
+
+1.  **The Prior:** $p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$
+2.  **The (Data) Likelihood:** $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$
+3.  **The Posterior:**
+
+```{=tex}
+\begin{align*}
+    p(\boldsymbol{\beta}, \sigma^2 | \mathbf{y}) &= p(\boldsymbol{\beta} | \sigma^2, \mathbf{y}) \times p(\sigma^2 | \mathbf{y}) \\
+        &= N_2(\boldsymbol{\beta} | \hat{\boldsymbol{\beta}}, \sigma^2 (X'X)^{-1}) \times Inv-\chi^2 (\sigma^2 | N-2, s^2) \\
+    \hat{\boldsymbol{\beta}} &= (X'X)^{-1} X'\mathbf{y} \\
+    s^2 &= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   
+\end{align*}
+```
+
+## Non-informative Prior Regression Stan Code
+
+``` {.stan .code-overflow-wrap filename="non-informative-regression.stan"}
+// The input data is two vectors 'y' and 'X' of length 'N'.
+data {
+  int<lower=0> N;
+  vector[N] y;
+  vector[N] x;
+}
+
+transformed data {
+    matrix[N, 2] X_c = append_col(rep_vector(1, N), x);
+    matrix[2,2] XtX_inv = inverse(X_c' * X_c);
+
+    vector[2] beta_hat = XtX_inv * X_c' * y;
+    vector[N] y_hat = X_C * beta_hat;
+    
+    real<lower=0> s_2 = 1 / (N - 2) * (y - y_hat)' * (y - y_hat);
+}
+
+// The parameters accepted by the model. Our model
+// accepts two parameters 'beta' and 'sigma'.
+parameters {
+  vector beta;
+  real<lower=0> sigma; // Note that this is the variance
+}
+
+// The model to be estimated. We model the output
+// 'y' ~ N(x beta, sigma) by specifying the analytic
+// posterior defined above.
+model {
+  beta ~ multi_normal(beta_hat, sigma^2 * XtX_inv);
+  
+  sigma^2 ~ scaled_inv_chi_square(N-2, sqrt(s_2));
+}
+
+generated quantities {
+    vector[N] y_ppd;
+    
+    for (i in 1:N) {
+        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);
+    }
+}
+```
+
+## Model #1 Fitting
+
+::: columns
+::: {.column width="50%"}
+-   First we write the Stan code in a separate file[^1].
+
+-   1000 warmup iterations, 1000 sampling iterations
+
+-   No thinning (thinning includes only every $k$th draw)
+
+-   Refresh the print screen to see progress every 500 iterations.
+
+-   Run several chains (in parallel)
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: non-info-comp-fit
+#| output-location: fragment
+#| warning: false
+
+data_list <- list(
+    N = nrow(ncaaw),
+    y = ncaaw$W,
+    x = ncaaw$FG3pct
+)
+
+file <- file.path("non-informative-regression.stan")
+non_inf_model <- cmdstan_model(file)
+
+fit1 <- non_inf_model$sample(
+    data = data_list,
+    iter_warmup = 1000,
+    iter_sampling = 1000,
+    thin = 1,
+    refresh = 500,
+    chains = 2,
+    show_messages = TRUE,
+    show_exceptions = FALSE
+)
+```
+:::
+:::
+
+[^1]:
+    -   See the [Stan User's Guide Part 1.1](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section) for programming this model without the analytic posteriors.
+
+## Model #1 Diagnostics
+
+::: columns
+::: {.column width="50%"}
+-   Diagnostic summary generated by Stan
+
+-   Plots created using the `bayesplot` package.
+
+    -   Trace plots
+
+    -   Density Plots
+
+    -   ACF Plots
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: non-inf-summary
+fit1$diagnostic_summary()
+```
+
+```{r}
+#| label: fig-traceplots-non-info
+#| output-location:  slide
+#| layout-ncol: 2
+#| fig-cap: Diagnostic plots from the `bayesplot` package.
+#| fig-subcap: 
+#|    - Traceplots for $\beta$ and $\sigma$.
+#|    - Approximate posterior densities for $\beta$ and $\sigma$.
+#| fig-width: 6
+#| fig-height: 6
+
+library(bayesplot)
+
+mcmc_trace(fit1$draws(variables = c("beta", "sigma")))
+mcmc_dens_overlay(fit1$draws(variables = c("beta", "sigma")))
+```
+:::
+:::
+
+## Model #1 Inference
+
+-   The summary statistics are displayed in @tbl-non-info-inf.
+
+-   The statistics `rhat`, `ess_bulk`, and `ess_tail` are additional diagnostics.
+
+```{r}
+#| label: tbl-non-info-inf
+#| output-location: fragment
+#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.
+
+fit1$summary(variables = c("beta", "sigma")) |> 
+    kableExtra::kbl(booktabs = TRUE, format = "html")
+```
+
+## Model #1 Graphical Summaries
+
+-   @fig-non-info-ci-1 displays 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-non-info-ci-2.
+
+- Plots were made using the `bayesplot` package.
+
+```{r}
+#| label: fig-non-info-ci
+#| output-location:  fragment
+#| layout-ncol: 2
+#| fig-cap: ""
+#| fig-subcap: 
+#|    - Interval plots for $\beta$ and $\sigma$.
+#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.
+#| fig-width: 6
+#| fig-height: 4
+
+mcmc_intervals(fit1$draws(variables = c("beta", "sigma")))
+mcmc_areas_ridges(fit1$draws(variables = c("beta", "sigma")),
+                  prob_outer = 0.95, prob = 0.5)
+```
+
+## Model #1 Posterior Predictive Checks
+
+- One way to check model fit is to assess posterior predictive distrubtion.
+
+- Draw samples from the posterior predictive distribution $p(y^{new} | y) = \int p(y^{new} | \boldsymbol{\beta}, \sigma) p(\boldsymbol{\beta}, \sigma | y) d\boldsymbol{\beta}d\sigma$ by 
+
+1. Sampling from the posterior (i.e. the draws in the MCMC chains)
+2. For each set of draws sampling $y^{new}$ given the corresponding values for $x^{new}$
+
+- In Stan this is easily accomplished using the generated quantities block.
+
+``` stan
+generated quantities {
+    // create a vector of N new observations
+    vector[N] y_ppd; 
+    
+    // for each observation, sample from the regression likelihod
+    // using the posterior draws
+    for (i in 1:N) {
+        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);
+    }
+}
+```
+
+## Model #1 Posterior Predictive Plots
+
+```{r}
+#| label: fig-non-info-ppc
+#| output-location: fragment
+#| layout-ncol: 2
+#| fig-cap: Posterior Predictive Check plots from `bayesplot`.
+#| fig-subcap: 
+#|     - PPD densities for the wins given 3pt%.
+#|     - PPD intervals for the wins plotted by 3pt%.
+library(posterior)
+
+fit1$draws(variables = "y_ppd") |> 
+    as_draws_df() |>
+    as.matrix() -> y_ppd
+
+ppc_dens_overlay(ncaaw$W,
+                 y_ppd[1:50, 1:350]) +
+    labs(title = "Density of PPD Draws of NCAAW Wins",
+         x = "Wins")
+ppc_intervals(ncaaw$W,
+                 y_ppd[1:50, 1:350],
+                 x = ncaaw$FG3pct) +
+    labs(title = "Density of PPD Draws of NCAAW Wins by 3pt%",
+         x = "3pt%", y = "Wins")
+```
+
+# Conjugate Prior Regression Model
+
+## Model #2 Set-up
+
+Next, we'll implement the regression model with conjugate priors. Conjugacy refers to the situation where the prior and posterior distribution are from the same family.[^2]
+
+[^2]: See wikipedia for more details and derivations: <https://en.wikipedia.org/wiki/Bayesian_linear_regression>
+
+1.  **Conjugate prior:** $p(\boldsymbol{\beta}, \sigma^2) = p(\boldsymbol{\beta} | \sigma^2) p(\sigma^2)$
+
+    1.  $\boldsymbol{\beta} | \sigma^2 ~ N_2(\boldsymbol{\beta}_0, \sigma^2 \Lambda_0^{-1})$ where $\boldsymbol{\beta}_0 \in \mathbb{R}^2$ is a vector of prior coefficients, and $\Lambda_0$ is a $2\times2$ prior correlation matrix. $\boldsymbol{\beta}_0 = 0$ and $\Lambda_0 = 10 I_2$ to get a weakly informative prior that is equivalent to ridge regression.
+
+    2.  $\sigma^2 \sim InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2)$ where $\nu_0$ is a prior sample size and $s_0$ is the prior standard deviation. We'll set these to $\nu_0 = 1$ and $s_0^2 = 47$ the sample variance of the teams' wins.
+
+    3.  The parameters $\boldsymbol{\beta}_0, \Lambda_0, \nu_0, s_0^2$ are hyperparameters.
+
+2.  **The (Data) Likelihood:** $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$
+
+3.  **Posterior:**
+
+    1.  $\boldsymbol{\beta} | \sigma^2, y \sim N_2(\boldsymbol{\beta}_N, \sigma^2 \Lambda_N^{-1})$ where $\boldsymbol{\beta}_N = \Lambda_N^{-1}(\mathbf{X}'\mathbf{X} \hat{\boldsymbol{\beta}} + \Lambda_0 \boldsymbol{\beta}_0)$ and $\Lambda_N = (\mathbf{X}'\mathbf{X} + \Lambda_0).$
+    2.  $\sigma^2 | y) \sim InvGamma(\sigma^2 | \frac{\nu_0 + N}{2}, \frac{1}{2} \nu_0 s_0^2 + \frac{1}{2}(\mathbf{y}'\mathbf{y} + \boldsymbol{\beta}_0'\Lambda_0 \boldsymbol{\beta}_0 - \boldsymbol{\beta}_N' \Lambda_N \boldsymbol{\beta}_N)).$
+
+## Conjugate Prior Regression Stan Code
+
+``` {.stan filename="conjugate-regression.stan"}
+
+// The input data is a vector 'y' of length 'N'.
+data {
+  int<lower=0> N;
+  int<lower=0> K;
+  vector[N] y;
+  matrix[N, K] X;
+  
+  // hyperparameters
+  real beta_0;
+  real<lower=0> lambda_0;
+  real<lower=0> nu_0;
+  real<lower=0> s_02;
+}
+
+transformed data {
+    matrix[N, K+1] X_mat = append_col(rep_vector(1, N), X);
+    vector[K+1] beta_0_vec = rep_vector(beta_0, K+1);
+    matrix[K+1, K+1] Lambda_0 = lambda_0 * identity_matrix(K+1);
+}
+
+// The parameters accepted by the model. Our model
+// accepts two parameters 'mu' and 'sigma'.
+parameters {
+  vector[K+1] beta;
+  real<lower=0> sigma2;
+}
+
+// The model to be estimated. We model the output
+// 'y' to be normally distributed with mean 'mu'
+// and standard deviation 'sigma'.
+model {
+  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);
+  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);
+  
+  y ~ normal(X_mat * beta, sqrt(sigma2));
+}
+
+generated quantities {
+    real sigma = sqrt(sigma2);
+    vector[N] y_ppd;
+    
+    for (i in 1:N) {
+        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));
+    }
+}
+```
+
+## Model #2 Fitting
+
+::: columns
+::: {.column width="50%"}
+-   Program the model only through the priors and likelihood and let Stan approximate the posterior
+
+-   1000 warmup iterations, 1000 sampling iterations
+
+-   No thinning (thinning includes only every $k$th draw)
+
+-   Refresh the print screen to see progress every 500 iterations.
+
+-   Run several chains (in parallel)
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| label: conj-comp-fit
+#| output-location: fragment
+#| warning: false
+
+data_list2 <- list(
+    N = nrow(ncaaw),
+    K = 1,
+    y = ncaaw$W,
+    X = as.matrix(ncaaw$FG3pct, nrow = nrow(ncaaw)),
+    
+    # hyperparameters
+    beta_0 = 0,
+    lambda_0 = 10,
+    nu_0 = 1,
+    s_02 = 47
+)
+
+file2 <- file.path("conjugate-regression.stan")
+conj_model <- cmdstan_model(file2)
+
+fit2 <- conj_model$sample(
+    data = data_list2,
+    iter_warmup = 1000,
+    iter_sampling = 1000,
+    thin = 1,
+    refresh = 500,
+    chains = 2,
+    show_messages = TRUE,
+    show_exceptions = FALSE
+)
+```
+
+:::
+:::
+
+## Model #2 Diagnostics
+
+```{r}
+#| label: conj-summary
+fit2$diagnostic_summary()
+```
+
+```{r}
+#| label: fig-traceplots-conj
+#| output-location:  fragment
+#| layout-ncol: 2
+#| fig-cap: ""
+#| fig-subcap: 
+#|    - Traceplots for $\beta$ and $\sigma$.
+#|    - Approximate posterior densities for $\beta$ and $\sigma$.
+#| fig-width: 6
+#| fig-height: 4
+
+mcmc_trace(fit2$draws(variables = c("beta", "sigma")))
+mcmc_dens_overlay(fit2$draws(variables = c("beta", "sigma")))
+```
+
+## Model #2 Inference
+
+- Estimates are similar to Model #1, but regression coefficients are shrunk slightly to zero and variance is slightly higher
+
+-   @fig-conj-ci-1 displayes credible intervals and densities are plotted as ridgelines in @fig-conj-ci-2.
+
+```{r}
+#| label: tbl-conj-inf
+#| output-location: fragment
+#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.
+
+fit2$summary(variables = c("beta", "sigma")) |> 
+    kableExtra::kbl(booktabs = TRUE, format = "html")
+```
+
+
+```{r}
+#| label: fig-conj-ci
+#| layout-ncol: 2
+#| output-location: fragment
+#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.
+#| fig-subcap: 
+#|    - Interval plots for $\beta$ and $\sigma$.
+#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.
+#| fig-height: 4
+
+mcmc_intervals(fit2$draws(variables = c("beta", "sigma")))
+mcmc_areas_ridges(fit2$draws(variables = c("beta", "sigma")), prob_outer = 0.95, prob = 0.5)
+```
+
+## Model #2 Posterior Predictive Distribution
+
+```{r}
+#| label: fig-conj-ppc
+#| layout-ncol: 2
+#| fig-cap: ""
+#| fig-subcap: 
+#|     - PPD densities for the wins given 3pt%.
+#|     - PPD intervals for the wins plotted by 3pt%.
+
+fit2$draws(variables = "y_ppd") |> 
+    as_draws_df() |>
+    as.matrix() -> y_ppd
+ppc_dens_overlay(ncaaw$W,
+                 y_ppd[1:50, 1:350]) +
+    labs(title = "Density of PPD Draws of NCAAW Wins",
+         x = "Wins")
+ppc_intervals(ncaaw$W,
+                 y_ppd[1:50, 1:350],
+                 x = ncaaw$FG3pct) +
+    labs(title = "Density of PPD Draws of NCAAW Wins by 3pt%",
+         x = "3pt%",
+         y = "Wins")
+```
+
+# Additional Resources
+
+## Guides for Stan
+
+First, here's the **three essential guides** for using Stan:
+
+-   [Stan Function Guide](https://mc-stan.org/docs/functions-reference/index.html) - reference for all the built-in functions and distributions as well as guides for writing custom functions and distributions
+
+-   [Stan User's Guide](https://mc-stan.org/docs/stan-users-guide/index.html) - reference for example models, how to build efficient models, and some inference techniques
+
+-   [Stan Reference Manual](https://mc-stan.org/docs/reference-manual/index.html) - reference for programming in Stan with a focus on how the language works
+
+**Other Stan Packages**
+
+-   [brms](https://paul-buerkner.github.io/brms/index.html): Bayesian regression models using Stan
+
+-   [posterior](https://mc-stan.org/posterior/): Useful for working with Stan output
+
+-   [bayesplot](http://mc-stan.org/bayesplot): ggplot2-based plotting functions for MCMC draws designed work well with Stan
+
+-   [loo](http://mc-stan.org/loo): Leave-one-out cross validation for model checking and selection that works with the log-posterior. Works best with `rstanarm` but can work with `cmdstanr` too.
+
+**Guides to Debugging and Diagnostics**
+
+-   [Stan's Guide to Runtime warnings and convergence problems](https://mc-stan.org/misc/warnings.html)
+
+-   [Prior Choices and Selection](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
+
+-   [Convergence Diagnostics for MCMC](https://arxiv.org/pdf/1909.11827.pdf)
+
+-   [Official Stan Forum](https://discourse.mc-stan.org/)
+
+# Bonus!
+
+## Bonus: Regression Modeling with Incomplete Data
+
+- Let's use the `brms` package to fit a regression model with incomplete predictor observations.
+
+- Incomplete data analysis ranges from complete case analysis to multiple imputation, joint modeling, and EM algorithm [@schafer2002].[^3]
+
+- We're going to use `mice` [@buuren2010mice] and `brms` [@bürkner2018] to demonstrate the imputation and fitting Bayesian regression models.
+
+[^3]: See [@rubin1976, @dempster1977, @rubin1987, @harel2007multiple, @white2011] for more details on incomplete data analysis.
+
+## NCAA Women's Basketball Player's Junior and Senior Years
+
+
+::: columns
+::: {.column width="50%"}
+
+- We'll use junior year scoring (points per game/PPG) to predict senior year scoring for 2020-21 to the 2022-23 seasons.
+
+- The data set only contains players who played in at least 75% of games each season, so partial seasons due to injury or being a bench player are excluded. 
+
+- Players who only have a junior season are excluded from the analysis.
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| label: load-ncaaw-i
+
+ncaaw_i <- read.csv("Data/ncaaw-individuals.csv", header = TRUE)
+head(ncaaw_i)
+```
+
+
+```{r}
+#| label: fig-ppg-jr-sr
+#| fig-cap: Points per game (PPG) from Junior and Senior seasons.
+#| output-location: fragment
+#| warning: false
+ggplot(ncaaw_i, aes(PPG_jr, PPG_sr, color = G_jr)) +
+    geom_point(size = 1.5) +
+    scale_color_viridis_c(name = "G - Jr") +
+    labs(x = "PPG - Jr", y = "PPG - Sr") +
+    theme_bw()
+```
+
+:::
+:::
+
+## Incomplete Data Structure & Imputation Model
+
+- The imputation model will be univariate linear regression that use all other variables as predictors. 
+
+    - For example, imputing $PPG_{jr}$ will be done by regressing on $PPG_{sr}, G_{jr}, G_{sr}$.
+    
+- $PPG_{jr}$ and $G_{jr}$ are incomplete for $n_{mis} = 176$ players while $n_{obs} = 98$ players have stats from both years as displayed in @fig-miss-patt.
+
+```{r}
+#| label: fig-miss-patt
+#| fig-cap: Missing data patterns for the NCAA women's basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in >75% of total games) but missing or shortened junior seasons.
+
+library(mice)
+m_pat <- md.pattern(ncaaw_i, plot = TRUE)
+```
+
+
+## Multiple Imputation with mice
+
+First, we'll impute before model fitting using `mice`. 
+
+Multiple Imputation (by Chained Equations) is a three stage procedure:
+
+1.  Each incomplete variable is imputed $M$ times with posterior predictive draws from a regression model with all other variables as predictors. The procedure iterates through the incomplete variables several times to converge to the posterior predictive distribution of the missing data given the observed.
+2.  These completed data sets are then analyzed individually with a standard complete data method.
+3.  Results from each analysis are combined. Typically this is done with Rubin's rules [@rubin1987], but `brms` follows the advice of @zhou2010 and simply stacks the posterior draw matrices from each fitted model.
+
+```{r}
+#| label: mice-fit
+#| warning: false
+#| output-location: fragment
+#| cache: true
+library(brms)
+imps <- mice(ncaaw_i, m = 10, method = "norm", maxit = 10, printFlag = FALSE)
+fit_brm_mice <- brm_multiple(PPG_sr ~ G_jr * PPG_jr, data = imps, chains = 2, refresh = 0)
+summary(fit_brm_mice)
+```
+
+
+## Imputation During Model Fitting
+
+- Imputations are made for each incomplete variable using a different conditional model for each variable. 
+
+- This approach differs from MI and MICE in two key ways: 
+
+    1. The model is only fit once since the imputation model is part of the analysis model.
+    2. The model must be constructed uniquely for each analysis scenario.
+
+```{r}
+#| label: brm-mi-fit
+#| warning: false
+#| output-location: column-fragment
+#| cache: true
+bform <- bf(PPG_sr | mi() ~ mi(G_jr) * mi(PPG_jr)) +
+    bf(PPG_jr | mi() ~ G_sr + PPG_sr) +
+    bf(G_jr | mi() ~ G_sr + PPG_sr) + set_rescor(FALSE)
+fit_brm_mi <- brm(bform, data = ncaaw_i, 
+                  refresh = 500, iter = 2000, thin = 1,
+                  backend = "cmdstanr",
+                  control = list(show_exceptions = FALSE),
+                  chains = 2, cores = 2)
+summary(fit_brm_mi)
+```
+
+## Diagnostics
+
+Since `brms` is built on Stan we can also take a look at the traceplots of the samples in @fig-brm-mi-trace.
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| label: fig-brm-mi-trace
+#| fig-cap: Traceplots of brms analysis model parameters.
+#| fig-height: 8
+plot(fit_brm_mi, variable = c("b_PPGsr", "bsp_"), regex = TRUE, ask = FALSE, N = 4)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: fig-brm-mi-trace-imp
+#| fig-cap: Traceplots of brms imputation model parameters.
+#| fig-height: 8
+plot(fit_brm_mi, variable = c("b_PPGjr", "b_Gjr"), regex = TRUE, ask = FALSE, N = 6)
+```
+:::
+:::
+
+## Comparison of Estimated Effects
+
+```{r}
+#| label: fig-brm-mi-cond-eff
+#| layout-ncol: 2
+#| fig-cap: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.
+#| fig-subcap: 
+#|   - Estimates after MICE imputation
+#|   - Estimates with joint model
+#| fig-height: 5
+#| fig-width: 6
+
+plot(brms::conditional_effects(fit_brm_mice, "PPG_jr:G_jr", resp = "PPGsr"))
+plot(brms::conditional_effects(fit_brm_mi, "PPG_jr:G_jr", resp = "PPGsr"))
+```
+
+## References
+
+::: {#refs}
+:::
