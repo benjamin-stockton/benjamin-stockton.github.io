@@ -458,11 +458,13 @@ Ben Stockton
 <span id="cb1-7"><a href="#cb1-7"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_path</span>()</span>
 <span id="cb1-8"><a href="#cb1-8"></a>cmdstanr<span class="sc">::</span><span class="fu">check_cmdstan_toolchain</span>(<span class="at">fix =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># install.packages(c("bayesplot", "ggplot2", "posterior"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># install.packages(c("bayesplot", "ggplot2", "posterior"))</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">set.seed</span>(<span class="dv">98463</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2.33.1"
-[1] "/home/stocb/.cmdstan/cmdstan-2.33.1"</code></pre>
+[1] "C:/Users/stocb/OneDrive/Documents/.cmdstan/cmdstan-2.33.1"</code></pre>
 </div>
 </div>
 </div>
@@ -835,18 +837,18 @@ Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup)
 Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 0.1 seconds.
+Chain 1 finished in 0.4 seconds.
 Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
 Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 0.1 seconds.
+Chain 2 finished in 0.4 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 0.1 seconds.
-Total execution time: 0.5 seconds.</code></pre>
+Mean chain execution time: 0.4 seconds.
+Total execution time: 1.0 seconds.</code></pre>
 </div>
 </div>
 </div>
@@ -905,7 +907,7 @@ $num_max_treedepth
 [1] 0 0
 
 $ebfmi
-[1] 0.9559799 1.0012814</code></pre>
+[1] 1.158642 1.141270</code></pre>
 </div>
 </div>
 <div id="fig-traceplots-non-info" class="cell quarto-layout-panel">
@@ -1000,39 +1002,39 @@ $ebfmi
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">beta[1]</td>
-<td style="text-align: right;">-14.764</td>
-<td style="text-align: right;">-14.671</td>
-<td style="text-align: right;">2.891</td>
-<td style="text-align: right;">2.949</td>
-<td style="text-align: right;">-19.605</td>
-<td style="text-align: right;">-10.193</td>
+<td style="text-align: right;">-15.011</td>
+<td style="text-align: right;">-15.004</td>
+<td style="text-align: right;">2.840</td>
+<td style="text-align: right;">2.733</td>
+<td style="text-align: right;">-19.745</td>
+<td style="text-align: right;">-10.360</td>
 <td style="text-align: right;">1.003</td>
-<td style="text-align: right;">636.814</td>
-<td style="text-align: right;">837.657</td>
+<td style="text-align: right;">650.741</td>
+<td style="text-align: right;">632.850</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">beta[2]</td>
+<td style="text-align: right;">1.011</td>
+<td style="text-align: right;">1.011</td>
+<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">0.087</td>
+<td style="text-align: right;">0.865</td>
+<td style="text-align: right;">1.163</td>
 <td style="text-align: right;">1.003</td>
-<td style="text-align: right;">1.002</td>
-<td style="text-align: right;">0.093</td>
-<td style="text-align: right;">0.096</td>
-<td style="text-align: right;">0.856</td>
-<td style="text-align: right;">1.159</td>
-<td style="text-align: right;">1.004</td>
-<td style="text-align: right;">629.430</td>
-<td style="text-align: right;">867.388</td>
+<td style="text-align: right;">643.710</td>
+<td style="text-align: right;">581.296</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">sigma</td>
-<td style="text-align: right;">5.915</td>
-<td style="text-align: right;">5.913</td>
-<td style="text-align: right;">0.240</td>
-<td style="text-align: right;">0.241</td>
-<td style="text-align: right;">5.521</td>
-<td style="text-align: right;">6.315</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">865.433</td>
-<td style="text-align: right;">593.155</td>
+<td style="text-align: right;">5.916</td>
+<td style="text-align: right;">5.916</td>
+<td style="text-align: right;">0.213</td>
+<td style="text-align: right;">0.220</td>
+<td style="text-align: right;">5.578</td>
+<td style="text-align: right;">6.280</td>
+<td style="text-align: right;">1.003</td>
+<td style="text-align: right;">735.732</td>
+<td style="text-align: right;">664.384</td>
 </tr>
 </tbody>
 </table>
@@ -1379,18 +1381,18 @@ Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup)
 Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 0.3 seconds.
+Chain 1 finished in 0.6 seconds.
 Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
 Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 0.3 seconds.
+Chain 2 finished in 0.5 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 0.3 seconds.
-Total execution time: 0.6 seconds.</code></pre>
+Mean chain execution time: 0.5 seconds.
+Total execution time: 1.2 seconds.</code></pre>
 </div>
 </div>
 </div>
@@ -1413,7 +1415,7 @@ $num_max_treedepth
 [1] 0 0
 
 $ebfmi
-[1] 1.097658 1.036561</code></pre>
+[1] 1.059917 1.022045</code></pre>
 </div>
 </div>
 <div id="fig-traceplots-conj" class="cell quarto-layout-panel">
@@ -1504,28 +1506,28 @@ $ebfmi
 <td style="text-align: left;">(Intercept)</td>
 <td style="text-align: left;">beta_0</td>
 <td style="text-align: right;">-14.945</td>
-<td style="text-align: right;">-14.764</td>
-<td style="text-align: right;">2.891</td>
-<td style="text-align: right;">-10.060</td>
-<td style="text-align: right;">2.363</td>
+<td style="text-align: right;">-15.011</td>
+<td style="text-align: right;">2.840</td>
+<td style="text-align: right;">-10.077</td>
+<td style="text-align: right;">2.373</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">FG3pct</td>
 <td style="text-align: left;">beta_1</td>
 <td style="text-align: right;">1.009</td>
-<td style="text-align: right;">1.003</td>
-<td style="text-align: right;">0.093</td>
-<td style="text-align: right;">0.853</td>
+<td style="text-align: right;">1.011</td>
+<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">0.854</td>
 <td style="text-align: right;">0.076</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">sigma</td>
 <td style="text-align: right;">5.908</td>
-<td style="text-align: right;">5.915</td>
-<td style="text-align: right;">0.240</td>
-<td style="text-align: right;">5.970</td>
-<td style="text-align: right;">0.222</td>
+<td style="text-align: right;">5.916</td>
+<td style="text-align: right;">0.213</td>
+<td style="text-align: right;">5.986</td>
+<td style="text-align: right;">0.228</td>
 </tr>
 </tbody>
 </table>

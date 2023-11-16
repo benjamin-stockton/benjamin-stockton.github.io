@@ -8,10 +8,8 @@ format:
         code-tools: true
         toc: true
         toc-location: left
-        anchor-sections: true
         link-external-newwindow: true
         citations-hover: true
-        results: hold
 editor: visual
 bibliography: swosc-stan.bib
 ---
@@ -25,6 +23,8 @@ To get started, we'll head over to Stan's [documentation](https://mc-stan.org/) 
 ```{r filename="intro-to-stan.R"}
 #| label: set-up
 #| results: hold
+
+set.seed(98463)
 
 # install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
 library(cmdstanr)
@@ -63,14 +63,14 @@ To be a little more specific, we have three central components to the model. For
 
 ## Why Stan?
 
-- Stan is one of several ways to run MCMC for Bayesian inference
-  
-  - Nimble and OpenBUGS are two other languages dedicated to probabilistic programming
-  - R, Rcpp, Julia, and Python are other more general purpose options for writing the sampler from scratch
+-   Stan is one of several ways to run MCMC for Bayesian inference
 
-- Other methods use combinations of Gibbs, Metropolis-Hastings, and slice sampling; Stan uses Hamiltonian Monte Carlo and the No-U-Turn Sampler (NUTS) which is more efficient and typically requires less thinning
+    -   Nimble and OpenBUGS are two other languages dedicated to probabilistic programming
+    -   R, Rcpp, Julia, and Python are other more general purpose options for writing the sampler from scratch
 
-- Stan only allows for continuous parameters
+-   Other methods use combinations of Gibbs, Metropolis-Hastings, and slice sampling; Stan uses Hamiltonian Monte Carlo and the No-U-Turn Sampler (NUTS) which is more efficient and typically requires less thinning
+
+-   Stan only allows for continuous parameters
 
 ## Some examples in Stan
 
@@ -143,7 +143,6 @@ Let's consider the simple regression model $E(Y_i | X_i, \boldsymbol{\beta}, \si
     s^2 &= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   
 \end{align*}
 ```
-
 First we write the Stan code in a separate file. See the [Stan User's Guide Part 1.1](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section) for programming this model without the analytic posteriors. ([Download the file here](non-informative-regression.stan){target="_blank"})
 
 ``` {.stan filename="non-informative-regression.stan"}
@@ -547,7 +546,6 @@ Here's a list of useful resources for debugging issues with divergences, hitting
 
 -   [Official Stan Forum](https://discourse.mc-stan.org/)
 
-
 ## Bonus: Regression Modeling with Incomplete Data
 
 As a bonus section, we'll use the `brms` package to fit a regression model where we have incomplete predictor observations. Incomplete data analysis ranges from complete case analysis (incomplete cases are dropped) and mean imputation to multiple imputation, joint modeling, and EM algorithm [@schafer2002].[^2] We're going to use `mice` [@buuren2010mice] and `brms` [@bürkner2018] to demonstrate the imputation and fitting Bayesian regression models with a convenient front-end that writes the Stan code for us.
@@ -609,7 +607,6 @@ fit_brm_mice <- brm_multiple(PPG_sr ~ G_jr * PPG_jr, data = imps, chains = 2,
                              refresh = 0)
 summary(fit_brm_mice)
 ```
-
 
 ### Imputation During Model Fitting
 
@@ -673,4 +670,3 @@ plot(fit_brm_mi, variable = c("b_PPGjr", "b_Gjr"), regex = TRUE, ask = FALSE, N 
 plot(brms::conditional_effects(fit_brm_mice, "PPG_jr:G_jr", resp = "PPGsr"))
 plot(brms::conditional_effects(fit_brm_mi, "PPG_jr:G_jr", resp = "PPGsr"))
 ```
-
