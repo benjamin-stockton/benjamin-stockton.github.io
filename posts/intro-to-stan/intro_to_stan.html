@@ -270,7 +270,7 @@ div.csl-indent {
 <pre><code>- CmdStanR documentation and vignettes: mc-stan.org/cmdstanr</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>- CmdStan path: /home/stocb/.cmdstan/cmdstan-2.33.1</code></pre>
+<pre><code>- CmdStan path: C:/Users/stocb/OneDrive/Documents/.cmdstan/cmdstan-2.33.1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>- CmdStan version: 2.33.1</code></pre>
@@ -291,7 +291,7 @@ div.csl-indent {
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2.33.1"
-[1] "/home/stocb/.cmdstan/cmdstan-2.33.1"</code></pre>
+[1] "C:/Users/stocb/OneDrive/Documents/.cmdstan/cmdstan-2.33.1"</code></pre>
 </div>
 </div>
 </section>
@@ -520,18 +520,18 @@ Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup)
 Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 0.1 seconds.
+Chain 1 finished in 0.4 seconds.
 Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
 Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 0.1 seconds.
+Chain 2 finished in 0.3 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 0.1 seconds.
-Total execution time: 0.5 seconds.</code></pre>
+Mean chain execution time: 0.4 seconds.
+Total execution time: 0.8 seconds.</code></pre>
 </div>
 </div>
 <p>Next we’ll check diagnostics for the sampler. First, we will look at the numeric diagnostic output from the method <code>$diagnostic_summary()</code> which reports if any transitions were divergent, if maximum tree depth was reached, and EBFMI. For this model and data set we don’t see any issues in these summaries.</p>
@@ -551,7 +551,7 @@ $num_max_treedepth
 [1] 0 0
 
 $ebfmi
-[1] 1.009781 1.080098</code></pre>
+[1] 0.9055741 0.9696095</code></pre>
 </div>
 </div>
 <div>
@@ -640,39 +640,39 @@ $ebfmi
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">beta[1]</td>
-<td style="text-align: right;">-14.809101</td>
-<td style="text-align: right;">-14.885750</td>
-<td style="text-align: right;">2.8298188</td>
-<td style="text-align: right;">2.7127873</td>
-<td style="text-align: right;">-19.3079900</td>
-<td style="text-align: right;">-9.919586</td>
-<td style="text-align: right;">1.001596</td>
-<td style="text-align: right;">624.1544</td>
-<td style="text-align: right;">703.0164</td>
+<td style="text-align: right;">-14.940853</td>
+<td style="text-align: right;">-14.771750</td>
+<td style="text-align: right;">2.9177118</td>
+<td style="text-align: right;">2.8490383</td>
+<td style="text-align: right;">-19.9840400</td>
+<td style="text-align: right;">-10.374380</td>
+<td style="text-align: right;">1.003402</td>
+<td style="text-align: right;">512.4856</td>
+<td style="text-align: right;">565.7716</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">beta[2]</td>
-<td style="text-align: right;">1.005234</td>
-<td style="text-align: right;">1.007575</td>
-<td style="text-align: right;">0.0906121</td>
-<td style="text-align: right;">0.0860701</td>
-<td style="text-align: right;">0.8462082</td>
-<td style="text-align: right;">1.149758</td>
-<td style="text-align: right;">1.003211</td>
-<td style="text-align: right;">625.1147</td>
-<td style="text-align: right;">645.1442</td>
+<td style="text-align: right;">1.009340</td>
+<td style="text-align: right;">1.004240</td>
+<td style="text-align: right;">0.0939917</td>
+<td style="text-align: right;">0.0920695</td>
+<td style="text-align: right;">0.8611076</td>
+<td style="text-align: right;">1.172376</td>
+<td style="text-align: right;">1.003732</td>
+<td style="text-align: right;">514.6353</td>
+<td style="text-align: right;">588.2289</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">sigma</td>
-<td style="text-align: right;">5.922296</td>
-<td style="text-align: right;">5.919935</td>
-<td style="text-align: right;">0.2144505</td>
-<td style="text-align: right;">0.2088613</td>
-<td style="text-align: right;">5.5820255</td>
-<td style="text-align: right;">6.301893</td>
-<td style="text-align: right;">1.001081</td>
-<td style="text-align: right;">797.9826</td>
-<td style="text-align: right;">660.6951</td>
+<td style="text-align: right;">5.925999</td>
+<td style="text-align: right;">5.918135</td>
+<td style="text-align: right;">0.2236521</td>
+<td style="text-align: right;">0.2201587</td>
+<td style="text-align: right;">5.5837765</td>
+<td style="text-align: right;">6.285894</td>
+<td style="text-align: right;">1.003035</td>
+<td style="text-align: right;">851.3098</td>
+<td style="text-align: right;">882.5707</td>
 </tr>
 </tbody>
 </table>
@@ -956,18 +956,18 @@ Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup)
 Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 0.3 seconds.
+Chain 1 finished in 0.5 seconds.
 Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
 Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
 Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
 Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
 Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
 Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 0.2 seconds.
+Chain 2 finished in 0.5 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 0.3 seconds.
-Total execution time: 0.6 seconds.</code></pre>
+Mean chain execution time: 0.5 seconds.
+Total execution time: 1.2 seconds.</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -985,7 +985,7 @@ $num_max_treedepth
 [1] 0 0
 
 $ebfmi
-[1] 1.0888298 0.9127757</code></pre>
+[1] 1.0364028 0.9960432</code></pre>
 </div>
 </div>
 <div id="fig-traceplots-conj" class="cell quarto-layout-panel">
@@ -1053,39 +1053,39 @@ $ebfmi
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">beta[1]</td>
-<td style="text-align: right;">-10.1308437</td>
-<td style="text-align: right;">-10.1691000</td>
-<td style="text-align: right;">2.6941101</td>
-<td style="text-align: right;">2.6452623</td>
-<td style="text-align: right;">-14.4399900</td>
-<td style="text-align: right;">-5.4187125</td>
-<td style="text-align: right;">1.005995</td>
-<td style="text-align: right;">531.1569</td>
-<td style="text-align: right;">672.1082</td>
+<td style="text-align: right;">-10.1178700</td>
+<td style="text-align: right;">-10.074400</td>
+<td style="text-align: right;">2.7173978</td>
+<td style="text-align: right;">2.7260344</td>
+<td style="text-align: right;">-14.7107800</td>
+<td style="text-align: right;">-5.652784</td>
+<td style="text-align: right;">1.006625</td>
+<td style="text-align: right;">592.7172</td>
+<td style="text-align: right;">451.3850</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">beta[2]</td>
-<td style="text-align: right;">0.8554101</td>
-<td style="text-align: right;">0.8572015</td>
-<td style="text-align: right;">0.0865022</td>
-<td style="text-align: right;">0.0853815</td>
-<td style="text-align: right;">0.7059793</td>
-<td style="text-align: right;">0.9928746</td>
-<td style="text-align: right;">1.005816</td>
-<td style="text-align: right;">540.1879</td>
-<td style="text-align: right;">635.1863</td>
+<td style="text-align: right;">0.8551082</td>
+<td style="text-align: right;">0.854433</td>
+<td style="text-align: right;">0.0877531</td>
+<td style="text-align: right;">0.0871072</td>
+<td style="text-align: right;">0.7073338</td>
+<td style="text-align: right;">1.003221</td>
+<td style="text-align: right;">1.006364</td>
+<td style="text-align: right;">572.1093</td>
+<td style="text-align: right;">422.1261</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">sigma</td>
-<td style="text-align: right;">6.4782553</td>
-<td style="text-align: right;">6.4685100</td>
-<td style="text-align: right;">0.2447288</td>
-<td style="text-align: right;">0.2511895</td>
-<td style="text-align: right;">6.0933855</td>
-<td style="text-align: right;">6.8910475</td>
-<td style="text-align: right;">1.004160</td>
-<td style="text-align: right;">637.2434</td>
-<td style="text-align: right;">628.7752</td>
+<td style="text-align: right;">6.4818093</td>
+<td style="text-align: right;">6.476295</td>
+<td style="text-align: right;">0.2415529</td>
+<td style="text-align: right;">0.2368972</td>
+<td style="text-align: right;">6.0947140</td>
+<td style="text-align: right;">6.876340</td>
+<td style="text-align: right;">1.004944</td>
+<td style="text-align: right;">684.6294</td>
+<td style="text-align: right;">774.8860</td>
 </tr>
 </tbody>
 </table>
@@ -1129,28 +1129,28 @@ $ebfmi
 <td style="text-align: left;">(Intercept)</td>
 <td style="text-align: left;">beta_0</td>
 <td style="text-align: right;">-14.945</td>
-<td style="text-align: right;">-14.809</td>
-<td style="text-align: right;">2.830</td>
-<td style="text-align: right;">-10.131</td>
-<td style="text-align: right;">2.694</td>
+<td style="text-align: right;">-14.941</td>
+<td style="text-align: right;">2.918</td>
+<td style="text-align: right;">-10.118</td>
+<td style="text-align: right;">2.717</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">FG3pct</td>
 <td style="text-align: left;">beta_1</td>
 <td style="text-align: right;">1.009</td>
-<td style="text-align: right;">1.005</td>
-<td style="text-align: right;">0.091</td>
+<td style="text-align: right;">1.009</td>
+<td style="text-align: right;">0.094</td>
 <td style="text-align: right;">0.855</td>
-<td style="text-align: right;">0.087</td>
+<td style="text-align: right;">0.088</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"></td>
 <td style="text-align: left;">sigma</td>
 <td style="text-align: right;">5.908</td>
-<td style="text-align: right;">5.922</td>
-<td style="text-align: right;">0.214</td>
-<td style="text-align: right;">6.478</td>
-<td style="text-align: right;">0.245</td>
+<td style="text-align: right;">5.926</td>
+<td style="text-align: right;">0.224</td>
+<td style="text-align: right;">6.482</td>
+<td style="text-align: right;">0.242</td>
 </tr>
 </tbody>
 </table>
@@ -1916,23 +1916,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="co">        code-tools: true</span></span>
 <span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="co">        toc: true</span></span>
 <span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="co">        toc-location: left</span></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="co">        anchor-sections: true</span></span>
-<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="co">        link-external-newwindow: true</span></span>
-<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="co">        citations-hover: true</span></span>
-<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a><span class="co">        results: hold</span></span>
-<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> swosc-stan.bib</span></span>
-<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="co">        link-external-newwindow: true</span></span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="co">        citations-hover: true</span></span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> swosc-stan.bib</span></span>
+<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a><span class="al">![](stan_logo.png)</span></span>
 <span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a><span class="al">![](stan_logo.png)</span></span>
+<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
 <span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
+<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>To get started, we'll head over to Stan's <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://mc-stan.org/)</span> to see how to get set up in R. For this presentation, I'll use the CmdStan toolchain that's implemented in R by the <span class="in">`cmdstanr`</span> <span class="co">[</span><span class="ot">package</span><span class="co">](https://mc-stan.org/cmdstanr/)</span> <span class="co">[</span><span class="ot">@gabry2023</span><span class="co">]</span>. There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <span class="co">[</span><span class="ot">CmdStanPy</span><span class="co">](https://github.com/stan-dev/cmdstanpy)</span> <span class="co">[</span><span class="ot">@cmdstanp</span><span class="co">]</span>.</span>
 <span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a>To get started, we'll head over to Stan's <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://mc-stan.org/)</span> to see how to get set up in R. For this presentation, I'll use the CmdStan toolchain that's implemented in R by the <span class="in">`cmdstanr`</span> <span class="co">[</span><span class="ot">package</span><span class="co">](https://mc-stan.org/cmdstanr/)</span> <span class="co">[</span><span class="ot">@gabry2023</span><span class="co">]</span>. There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <span class="co">[</span><span class="ot">CmdStanPy</span><span class="co">](https://github.com/stan-dev/cmdstanpy)</span> <span class="co">[</span><span class="ot">@cmdstanp</span><span class="co">]</span>.</span>
-<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: set-up</span></span>
-<span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: set-up</span></span>
+<span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">98463</span>)</span>
 <span id="cb65-28"><a href="#cb65-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-29"><a href="#cb65-29" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))</span></span>
 <span id="cb65-30"><a href="#cb65-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmdstanr)</span>
@@ -1971,14 +1971,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb65-63"><a href="#cb65-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-64"><a href="#cb65-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Stan?</span></span>
 <span id="cb65-65"><a href="#cb65-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-66"><a href="#cb65-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Stan is one of several ways to run MCMC for Bayesian inference</span>
-<span id="cb65-67"><a href="#cb65-67" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb65-68"><a href="#cb65-68" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Nimble and OpenBUGS are two other languages dedicated to probabilistic programming</span>
-<span id="cb65-69"><a href="#cb65-69" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>R, Rcpp, Julia, and Python are other more general purpose options for writing the sampler from scratch</span>
+<span id="cb65-66"><a href="#cb65-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Stan is one of several ways to run MCMC for Bayesian inference</span>
+<span id="cb65-67"><a href="#cb65-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-68"><a href="#cb65-68" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Nimble and OpenBUGS are two other languages dedicated to probabilistic programming</span>
+<span id="cb65-69"><a href="#cb65-69" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>R, Rcpp, Julia, and Python are other more general purpose options for writing the sampler from scratch</span>
 <span id="cb65-70"><a href="#cb65-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-71"><a href="#cb65-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Other methods use combinations of Gibbs, Metropolis-Hastings, and slice sampling; Stan uses Hamiltonian Monte Carlo and the No-U-Turn Sampler (NUTS) which is more efficient and typically requires less thinning</span>
+<span id="cb65-71"><a href="#cb65-71" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Other methods use combinations of Gibbs, Metropolis-Hastings, and slice sampling; Stan uses Hamiltonian Monte Carlo and the No-U-Turn Sampler (NUTS) which is more efficient and typically requires less thinning</span>
 <span id="cb65-72"><a href="#cb65-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-73"><a href="#cb65-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Stan only allows for continuous parameters</span>
+<span id="cb65-73"><a href="#cb65-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Stan only allows for continuous parameters</span>
 <span id="cb65-74"><a href="#cb65-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-75"><a href="#cb65-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some examples in Stan</span></span>
 <span id="cb65-76"><a href="#cb65-76" aria-hidden="true" tabindex="-1"></a></span>
@@ -2051,536 +2051,533 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb65-143"><a href="#cb65-143" aria-hidden="true" tabindex="-1"></a><span class="in">    s^2 &amp;= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   </span></span>
 <span id="cb65-144"><a href="#cb65-144" aria-hidden="true" tabindex="-1"></a><span class="in">\end{align*}</span></span>
 <span id="cb65-145"><a href="#cb65-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-146"><a href="#cb65-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-147"><a href="#cb65-147" aria-hidden="true" tabindex="-1"></a>First we write the Stan code in a separate file. See the <span class="co">[</span><span class="ot">Stan User's Guide Part 1.1</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section)</span> for programming this model without the analytic posteriors. (<span class="co">[</span><span class="ot">Download the file here</span><span class="co">](non-informative-regression.stan)</span>{target="_blank"})</span>
-<span id="cb65-148"><a href="#cb65-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-149"><a href="#cb65-149" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="non-informative-regression.stan"}</span></span>
-<span id="cb65-150"><a href="#cb65-150" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is two vectors 'y' and 'X' of length 'N'.</span></span>
-<span id="cb65-151"><a href="#cb65-151" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
-<span id="cb65-152"><a href="#cb65-152" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
-<span id="cb65-153"><a href="#cb65-153" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
-<span id="cb65-154"><a href="#cb65-154" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] x;</span></span>
-<span id="cb65-155"><a href="#cb65-155" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-156"><a href="#cb65-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-157"><a href="#cb65-157" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
-<span id="cb65-158"><a href="#cb65-158" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, 2] X_c = append_col(rep_vector(1, N), x);</span></span>
-<span id="cb65-159"><a href="#cb65-159" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[2,2] XtX_inv = inverse(X_c' * X_c);</span></span>
-<span id="cb65-160"><a href="#cb65-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-161"><a href="#cb65-161" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[2] beta_hat = XtX_inv * X_c' * y;</span></span>
-<span id="cb65-162"><a href="#cb65-162" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_hat = X_C * beta_hat;</span></span>
-<span id="cb65-163"><a href="#cb65-163" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb65-164"><a href="#cb65-164" aria-hidden="true" tabindex="-1"></a><span class="in">    real&lt;lower=0&gt; s_2 = 1 / (N - 2) * (y - y_hat)' * (y - y_hat);</span></span>
-<span id="cb65-165"><a href="#cb65-165" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-166"><a href="#cb65-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-167"><a href="#cb65-167" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
-<span id="cb65-168"><a href="#cb65-168" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'beta' and 'sigma'.</span></span>
-<span id="cb65-169"><a href="#cb65-169" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
-<span id="cb65-170"><a href="#cb65-170" aria-hidden="true" tabindex="-1"></a><span class="in">  vector beta;</span></span>
-<span id="cb65-171"><a href="#cb65-171" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma; // Note that this is the variance</span></span>
-<span id="cb65-172"><a href="#cb65-172" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-173"><a href="#cb65-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-174"><a href="#cb65-174" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
-<span id="cb65-175"><a href="#cb65-175" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' ~ N(x beta, sigma) by specifying the analytic</span></span>
-<span id="cb65-176"><a href="#cb65-176" aria-hidden="true" tabindex="-1"></a><span class="in">// posterior defined above.</span></span>
-<span id="cb65-177"><a href="#cb65-177" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
-<span id="cb65-178"><a href="#cb65-178" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_hat, sigma^2 * XtX_inv);</span></span>
-<span id="cb65-179"><a href="#cb65-179" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb65-180"><a href="#cb65-180" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma^2 ~ scaled_inv_chi_square(N-2, sqrt(s_2));</span></span>
-<span id="cb65-181"><a href="#cb65-181" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-182"><a href="#cb65-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-183"><a href="#cb65-183" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
-<span id="cb65-184"><a href="#cb65-184" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
-<span id="cb65-185"><a href="#cb65-185" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb65-186"><a href="#cb65-186" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
-<span id="cb65-187"><a href="#cb65-187" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
-<span id="cb65-188"><a href="#cb65-188" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb65-189"><a href="#cb65-189" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-190"><a href="#cb65-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-191"><a href="#cb65-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-192"><a href="#cb65-192" aria-hidden="true" tabindex="-1"></a>Next we fit the model using <span class="in">`cmdstanr`</span>. In this case, I will use 1000 warmup iterations, 1000 sampling iterations, with no thinning (thinning includes only every $k$th draw), and will refresh the print screen to see progress every 500 iterations. We can run several chains to see if where the chains start dictates any part of the posterior shape or location, and chains can be run in parallel to get more draws <span class="sc">\&lt;</span>=<span class="sc">\&gt;</span> better posterior approximation more quickly.</span>
-<span id="cb65-193"><a href="#cb65-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-194"><a href="#cb65-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-195"><a href="#cb65-195" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-info-comp-fit</span></span>
-<span id="cb65-196"><a href="#cb65-196" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-197"><a href="#cb65-197" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb65-198"><a href="#cb65-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-199"><a href="#cb65-199" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb65-200"><a href="#cb65-200" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
-<span id="cb65-201"><a href="#cb65-201" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
-<span id="cb65-202"><a href="#cb65-202" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct</span>
-<span id="cb65-203"><a href="#cb65-203" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb65-204"><a href="#cb65-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-205"><a href="#cb65-205" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"non-informative-regression.stan"</span>)</span>
-<span id="cb65-206"><a href="#cb65-206" aria-hidden="true" tabindex="-1"></a>non_inf_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file)</span>
-<span id="cb65-207"><a href="#cb65-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-208"><a href="#cb65-208" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> non_inf_model<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb65-209"><a href="#cb65-209" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
-<span id="cb65-210"><a href="#cb65-210" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb65-211"><a href="#cb65-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
-<span id="cb65-212"><a href="#cb65-212" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb65-213"><a href="#cb65-213" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
-<span id="cb65-214"><a href="#cb65-214" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb65-215"><a href="#cb65-215" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb65-216"><a href="#cb65-216" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
-<span id="cb65-217"><a href="#cb65-217" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb65-218"><a href="#cb65-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-219"><a href="#cb65-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-220"><a href="#cb65-220" aria-hidden="true" tabindex="-1"></a>Next we'll check diagnostics for the sampler. First, we will look at the numeric diagnostic output from the method <span class="in">`$diagnostic_summary()`</span> which reports if any transitions were divergent, if maximum tree depth was reached, and EBFMI. For this model and data set we don't see any issues in these summaries.</span>
-<span id="cb65-221"><a href="#cb65-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-222"><a href="#cb65-222" aria-hidden="true" tabindex="-1"></a>Next, we check the traceplots in @fig-traceplots-non-info-1. The MCMC draws can be collected from the <span class="in">`fit`</span> object using the <span class="in">`$draws()`</span> method. These plots display the sampled values for each parameter in a line plot. We are looking for a horizontal fuzzy bar. Then we can also look at density plots in @fig-traceplots-non-info-2 which will tell us if the chains reached reasonably similar densities. On both counts, we are in good shape. The plots are created using the <span class="in">`bayesplot`</span> package.</span>
-<span id="cb65-223"><a href="#cb65-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-224"><a href="#cb65-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-225"><a href="#cb65-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-inf-summary</span></span>
-<span id="cb65-226"><a href="#cb65-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-227"><a href="#cb65-227" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
-<span id="cb65-228"><a href="#cb65-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-229"><a href="#cb65-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-230"><a href="#cb65-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-231"><a href="#cb65-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-non-info</span></span>
-<span id="cb65-232"><a href="#cb65-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-233"><a href="#cb65-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb65-234"><a href="#cb65-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb65-235"><a href="#cb65-235" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-236"><a href="#cb65-236" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-237"><a href="#cb65-237" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-238"><a href="#cb65-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-239"><a href="#cb65-239" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
-<span id="cb65-240"><a href="#cb65-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-241"><a href="#cb65-241" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb65-242"><a href="#cb65-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-243"><a href="#cb65-243" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb65-244"><a href="#cb65-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-245"><a href="#cb65-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-246"><a href="#cb65-246" aria-hidden="true" tabindex="-1"></a>Finally, after checking that the MCMC chains and diagnostics look satisfactory, we can continue to inference. The summary statistics for the parameters are displayed in @tbl-non-info-inf. This are generated by default with the <span class="in">`$summary()`</span> method. The statistics include the posterior mean (<span class="in">`mean`</span>), median (<span class="in">`median`</span>), standard deviation (<span class="in">`sd`</span>), mean absolute deviation (<span class="in">`mad`</span>), and lower (<span class="in">`q5`</span>) and upper bounds (<span class="in">`q95`</span>) for a 90% credible interval. The statistics <span class="in">`rhat`</span>, <span class="in">`ess_bulk`</span>, and <span class="in">`ess_tail`</span> are additional diagnostic measures that indicate how well the chains are sampling the posterior and how many effective draws we have made. Ideally <span class="in">`rhat`</span> is very near 1, even 1.01 can be a significant problem. The effective sample sizes should be large/near the number of sampling iterations.</span>
-<span id="cb65-247"><a href="#cb65-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-248"><a href="#cb65-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-249"><a href="#cb65-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-non-info-inf</span></span>
-<span id="cb65-250"><a href="#cb65-250" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-251"><a href="#cb65-251" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-252"><a href="#cb65-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-253"><a href="#cb65-253" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb65-254"><a href="#cb65-254" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
-<span id="cb65-255"><a href="#cb65-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-256"><a href="#cb65-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-257"><a href="#cb65-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-258"><a href="#cb65-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-mle-res-1</span></span>
-<span id="cb65-259"><a href="#cb65-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| output-location: column-fragment</span></span>
-<span id="cb65-260"><a href="#cb65-260" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: MLE estimates for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-261"><a href="#cb65-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-262"><a href="#cb65-262" aria-hidden="true" tabindex="-1"></a>mles <span class="sc">|&gt;</span> </span>
-<span id="cb65-263"><a href="#cb65-263" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb65-264"><a href="#cb65-264" aria-hidden="true" tabindex="-1"></a>                    <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb65-265"><a href="#cb65-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-266"><a href="#cb65-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-267"><a href="#cb65-267" aria-hidden="true" tabindex="-1"></a>We can also check graphical summaries of this same information such as interval plots for each parameter's credible intervals or density/area plots. In @fig-non-info-ci-1 we have the 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-non-info-ci-2 with areas shaded underneath to indicate the 50% interval and the width of the density indicates the 95% interval.</span>
-<span id="cb65-268"><a href="#cb65-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-269"><a href="#cb65-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-270"><a href="#cb65-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ci</span></span>
-<span id="cb65-271"><a href="#cb65-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-272"><a href="#cb65-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb65-273"><a href="#cb65-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb65-274"><a href="#cb65-274" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-275"><a href="#cb65-275" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-276"><a href="#cb65-276" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
-<span id="cb65-277"><a href="#cb65-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-278"><a href="#cb65-278" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb65-279"><a href="#cb65-279" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
-<span id="cb65-280"><a href="#cb65-280" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb65-281"><a href="#cb65-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-282"><a href="#cb65-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-283"><a href="#cb65-283" aria-hidden="true" tabindex="-1"></a>One additional way to check model fit is to assess posterior predictive checks. To do so we draw samples from the posterior predictive distribution $p(y^{new} | y) = \int p(y^{new} | \boldsymbol{\beta}, \sigma) p(\boldsymbol{\beta}, \sigma | y) d\boldsymbol{\beta}d\sigma$ by first sampling from the posterior (i.e. the draws in the MCMC chains) and then for each set of draws sampling $y^{new}$ given the corresponding values for $x^{new}$. In Stan this is easily accomplished using the generated quantities block. The generated quantities block generates new samples that we define using the current iteration's posterior draws of $\beta$ and $\sigma$.</span>
-<span id="cb65-284"><a href="#cb65-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-285"><a href="#cb65-285" aria-hidden="true" tabindex="-1"></a><span class="in">``` stan</span></span>
-<span id="cb65-286"><a href="#cb65-286" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
-<span id="cb65-287"><a href="#cb65-287" aria-hidden="true" tabindex="-1"></a><span class="in">    // create a vector of N new observations</span></span>
-<span id="cb65-288"><a href="#cb65-288" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd; </span></span>
-<span id="cb65-289"><a href="#cb65-289" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb65-290"><a href="#cb65-290" aria-hidden="true" tabindex="-1"></a><span class="in">    // for each observation, sample from the regression likelihod</span></span>
-<span id="cb65-291"><a href="#cb65-291" aria-hidden="true" tabindex="-1"></a><span class="in">    // using the posterior draws</span></span>
-<span id="cb65-292"><a href="#cb65-292" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
-<span id="cb65-293"><a href="#cb65-293" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
-<span id="cb65-294"><a href="#cb65-294" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb65-295"><a href="#cb65-295" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-296"><a href="#cb65-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-297"><a href="#cb65-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-298"><a href="#cb65-298" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-non-info-ppc we can see that while the predictive densities are centered in the correct location, the variances are far too large.</span>
-<span id="cb65-299"><a href="#cb65-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-300"><a href="#cb65-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-301"><a href="#cb65-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ppc</span></span>
-<span id="cb65-302"><a href="#cb65-302" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-303"><a href="#cb65-303" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb65-304"><a href="#cb65-304" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
-<span id="cb65-305"><a href="#cb65-305" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-306"><a href="#cb65-306" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
-<span id="cb65-307"><a href="#cb65-307" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
-<span id="cb65-308"><a href="#cb65-308" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
-<span id="cb65-309"><a href="#cb65-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-310"><a href="#cb65-310" aria-hidden="true" tabindex="-1"></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
-<span id="cb65-311"><a href="#cb65-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-312"><a href="#cb65-312" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb65-313"><a href="#cb65-313" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
-<span id="cb65-314"><a href="#cb65-314" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
-<span id="cb65-315"><a href="#cb65-315" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb65-316"><a href="#cb65-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-317"><a href="#cb65-317" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb65-318"><a href="#cb65-318" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
-<span id="cb65-319"><a href="#cb65-319" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
-<span id="cb65-320"><a href="#cb65-320" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
-<span id="cb65-321"><a href="#cb65-321" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
-<span id="cb65-322"><a href="#cb65-322" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb65-323"><a href="#cb65-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-324"><a href="#cb65-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-325"><a href="#cb65-325" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conjugate Prior Regression Model</span></span>
-<span id="cb65-326"><a href="#cb65-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-327"><a href="#cb65-327" aria-hidden="true" tabindex="-1"></a>Next, we'll implement the regression model with conjugate priors. Conjugacy refers to the situation where the prior and posterior distribution are from the same family. We'll start by re-defining our model.<span class="ot">[^1]</span></span>
-<span id="cb65-328"><a href="#cb65-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-329"><a href="#cb65-329" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>See wikipedia for more details and derivations: <span class="ot">&lt;https://en.wikipedia.org/wiki/Bayesian_linear_regression&gt;</span></span>
-<span id="cb65-330"><a href="#cb65-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-331"><a href="#cb65-331" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Conjugate prior:** $p(\boldsymbol{\beta}, \sigma^2) = p(\boldsymbol{\beta} | \sigma^2) p(\sigma^2)$</span>
-<span id="cb65-332"><a href="#cb65-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-333"><a href="#cb65-333" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2 ~ N_2(\boldsymbol{\beta}_0, \sigma^2 \Lambda_0^{-1})$ where $\boldsymbol{\beta}_0 \in \mathbb{R}^2$ is a vector of prior coefficients, we'll set it to zero, and $\Lambda_0$ is a $2\times2$ prior correlation matrix. We will set $\Lambda_0 = 10 I_2$ to get a weakly informative prior that is equivalent to ridge regression.</span>
-<span id="cb65-334"><a href="#cb65-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-335"><a href="#cb65-335" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 \sim InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2)$ where $\nu_0$ is a prior sample size and $s_0$ is the prior standard deviation. We'll set these to $\nu_0 = 1$ and $s_0^2 = 47$ which is approximately the sample variance of the NCAA women's basketball teams' wins.</span>
-<span id="cb65-336"><a href="#cb65-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-337"><a href="#cb65-337" aria-hidden="true" tabindex="-1"></a><span class="ss">    3.  </span>The parameters $\boldsymbol{\beta}_0, \Lambda_0, \nu_0, s_0^2$ that define the prior are referred to as hyperparameters. We will set them before running the model, although they could also be modeled if we wanted.</span>
-<span id="cb65-338"><a href="#cb65-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-339"><a href="#cb65-339" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** the same as before, $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
-<span id="cb65-340"><a href="#cb65-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-341"><a href="#cb65-341" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Posterior:**</span>
-<span id="cb65-342"><a href="#cb65-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-343"><a href="#cb65-343" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2, y \sim N_2(\boldsymbol{\beta}_N, \sigma^2 \Lambda_N^{-1})$ where $\boldsymbol{\beta}_N = \Lambda_N^{-1}(\mathbf{X}'\mathbf{X} \hat{\boldsymbol{\beta}} + \Lambda_0 \boldsymbol{\beta}_0)$ and $\Lambda_N = (\mathbf{X}'\mathbf{X} + \Lambda_0).$</span>
-<span id="cb65-344"><a href="#cb65-344" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 | y \sim InvGamma(\sigma^2 | \frac{\nu_0 + N}{2}, \frac{1}{2} \nu_0 s_0^2 + \frac{1}{2}(\mathbf{y}'\mathbf{y} + \boldsymbol{\beta}_0'\Lambda_0 \boldsymbol{\beta}_0 - \boldsymbol{\beta}_N' \Lambda_N \boldsymbol{\beta}_N)).$</span>
-<span id="cb65-345"><a href="#cb65-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-346"><a href="#cb65-346" aria-hidden="true" tabindex="-1"></a>We could again program this model using the analytic posterior. Instead, we'll program it only through the priors and likelihood and let Stan approximate the posterior. I will also allow the model to include more than one predictor so that $\mathbf{X}$ is a $N \times (K+1)$ matrix augmented with a column of ones. (<span class="co">[</span><span class="ot">Download the file here</span><span class="co">](conjugate-regression.stan)</span>{target="_blank"})</span>
-<span id="cb65-347"><a href="#cb65-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-348"><a href="#cb65-348" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="conjugate-regression.stan"}</span></span>
-<span id="cb65-349"><a href="#cb65-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-350"><a href="#cb65-350" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is a vector 'y' of length 'N'.</span></span>
-<span id="cb65-351"><a href="#cb65-351" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
-<span id="cb65-352"><a href="#cb65-352" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
-<span id="cb65-353"><a href="#cb65-353" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; K;</span></span>
-<span id="cb65-354"><a href="#cb65-354" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
-<span id="cb65-355"><a href="#cb65-355" aria-hidden="true" tabindex="-1"></a><span class="in">  matrix[N, K] X;</span></span>
-<span id="cb65-356"><a href="#cb65-356" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb65-357"><a href="#cb65-357" aria-hidden="true" tabindex="-1"></a><span class="in">  // hyperparameters</span></span>
-<span id="cb65-358"><a href="#cb65-358" aria-hidden="true" tabindex="-1"></a><span class="in">  real beta_0;</span></span>
-<span id="cb65-359"><a href="#cb65-359" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; lambda_0;</span></span>
-<span id="cb65-360"><a href="#cb65-360" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; nu_0;</span></span>
-<span id="cb65-361"><a href="#cb65-361" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; s_02;</span></span>
-<span id="cb65-362"><a href="#cb65-362" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-363"><a href="#cb65-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-364"><a href="#cb65-364" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
-<span id="cb65-365"><a href="#cb65-365" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, K+1] X_mat = append_col(rep_vector(1, N), X);</span></span>
-<span id="cb65-366"><a href="#cb65-366" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[K+1] beta_0_vec = rep_vector(beta_0, K+1);</span></span>
-<span id="cb65-367"><a href="#cb65-367" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[K+1, K+1] Lambda_0 = lambda_0 * identity_matrix(K+1);</span></span>
-<span id="cb65-368"><a href="#cb65-368" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-369"><a href="#cb65-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-370"><a href="#cb65-370" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
-<span id="cb65-371"><a href="#cb65-371" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'mu' and 'sigma'.</span></span>
-<span id="cb65-372"><a href="#cb65-372" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
-<span id="cb65-373"><a href="#cb65-373" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[K+1] beta;</span></span>
-<span id="cb65-374"><a href="#cb65-374" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma2;</span></span>
-<span id="cb65-375"><a href="#cb65-375" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-376"><a href="#cb65-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-377"><a href="#cb65-377" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
-<span id="cb65-378"><a href="#cb65-378" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' to be normally distributed with mean 'mu'</span></span>
-<span id="cb65-379"><a href="#cb65-379" aria-hidden="true" tabindex="-1"></a><span class="in">// and standard deviation 'sigma'.</span></span>
-<span id="cb65-380"><a href="#cb65-380" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
-<span id="cb65-381"><a href="#cb65-381" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);</span></span>
-<span id="cb65-382"><a href="#cb65-382" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);</span></span>
-<span id="cb65-383"><a href="#cb65-383" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb65-384"><a href="#cb65-384" aria-hidden="true" tabindex="-1"></a><span class="in">  y ~ normal(X_mat * beta, sqrt(sigma2));</span></span>
-<span id="cb65-385"><a href="#cb65-385" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-386"><a href="#cb65-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-387"><a href="#cb65-387" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
-<span id="cb65-388"><a href="#cb65-388" aria-hidden="true" tabindex="-1"></a><span class="in">    real sigma = sqrt(sigma2);</span></span>
-<span id="cb65-389"><a href="#cb65-389" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
-<span id="cb65-390"><a href="#cb65-390" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb65-391"><a href="#cb65-391" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
-<span id="cb65-392"><a href="#cb65-392" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));</span></span>
-<span id="cb65-393"><a href="#cb65-393" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb65-394"><a href="#cb65-394" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb65-395"><a href="#cb65-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-396"><a href="#cb65-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-397"><a href="#cb65-397" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-398"><a href="#cb65-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-comp-fit</span></span>
-<span id="cb65-399"><a href="#cb65-399" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-400"><a href="#cb65-400" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb65-401"><a href="#cb65-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-402"><a href="#cb65-402" aria-hidden="true" tabindex="-1"></a>data_list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb65-403"><a href="#cb65-403" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
-<span id="cb65-404"><a href="#cb65-404" aria-hidden="true" tabindex="-1"></a>    <span class="at">K =</span> <span class="dv">1</span>,</span>
-<span id="cb65-405"><a href="#cb65-405" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
-<span id="cb65-406"><a href="#cb65-406" aria-hidden="true" tabindex="-1"></a>    <span class="at">X =</span> <span class="fu">as.matrix</span>(ncaaw<span class="sc">$</span>FG3pct, <span class="at">nrow =</span> <span class="fu">nrow</span>(ncaaw)),</span>
-<span id="cb65-407"><a href="#cb65-407" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb65-408"><a href="#cb65-408" aria-hidden="true" tabindex="-1"></a>    <span class="co"># hyperparameters</span></span>
-<span id="cb65-409"><a href="#cb65-409" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta_0 =</span> <span class="dv">0</span>,</span>
-<span id="cb65-410"><a href="#cb65-410" aria-hidden="true" tabindex="-1"></a>    <span class="at">lambda_0 =</span> <span class="fl">0.5</span>,</span>
-<span id="cb65-411"><a href="#cb65-411" aria-hidden="true" tabindex="-1"></a>    <span class="at">nu_0 =</span> <span class="dv">1</span>,</span>
-<span id="cb65-412"><a href="#cb65-412" aria-hidden="true" tabindex="-1"></a>    <span class="at">s_02 =</span> <span class="dv">47</span></span>
-<span id="cb65-413"><a href="#cb65-413" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb65-414"><a href="#cb65-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-415"><a href="#cb65-415" aria-hidden="true" tabindex="-1"></a>file2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"conjugate-regression.stan"</span>)</span>
-<span id="cb65-416"><a href="#cb65-416" aria-hidden="true" tabindex="-1"></a>conj_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file2)</span>
-<span id="cb65-417"><a href="#cb65-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-418"><a href="#cb65-418" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> conj_model<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb65-419"><a href="#cb65-419" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list2,</span>
-<span id="cb65-420"><a href="#cb65-420" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb65-421"><a href="#cb65-421" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
-<span id="cb65-422"><a href="#cb65-422" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb65-423"><a href="#cb65-423" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
-<span id="cb65-424"><a href="#cb65-424" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb65-425"><a href="#cb65-425" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb65-426"><a href="#cb65-426" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
-<span id="cb65-427"><a href="#cb65-427" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb65-428"><a href="#cb65-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-429"><a href="#cb65-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-430"><a href="#cb65-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-431"><a href="#cb65-431" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-summary</span></span>
-<span id="cb65-432"><a href="#cb65-432" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-433"><a href="#cb65-433" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
-<span id="cb65-434"><a href="#cb65-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-435"><a href="#cb65-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-436"><a href="#cb65-436" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-437"><a href="#cb65-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-conj</span></span>
-<span id="cb65-438"><a href="#cb65-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-439"><a href="#cb65-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb65-440"><a href="#cb65-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb65-441"><a href="#cb65-441" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-442"><a href="#cb65-442" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-443"><a href="#cb65-443" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-444"><a href="#cb65-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-445"><a href="#cb65-445" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb65-446"><a href="#cb65-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-447"><a href="#cb65-447" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb65-448"><a href="#cb65-448" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-449"><a href="#cb65-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-450"><a href="#cb65-450" aria-hidden="true" tabindex="-1"></a>Again the MCMC chains and diagnostics look satisfactory. The summary statistics for the parameters are displayed in @tbl-conj-inf.</span>
-<span id="cb65-451"><a href="#cb65-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-452"><a href="#cb65-452" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-453"><a href="#cb65-453" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-conj-inf</span></span>
-<span id="cb65-454"><a href="#cb65-454" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-455"><a href="#cb65-455" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-456"><a href="#cb65-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-457"><a href="#cb65-457" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb65-458"><a href="#cb65-458" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
-<span id="cb65-459"><a href="#cb65-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-460"><a href="#cb65-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-461"><a href="#cb65-461" aria-hidden="true" tabindex="-1"></a>And here's a quick reminder of our results for the non-informative prior and MLE fits in @tbl-fit-comp.</span>
-<span id="cb65-462"><a href="#cb65-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-463"><a href="#cb65-463" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-464"><a href="#cb65-464" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-fit-comp</span></span>
-<span id="cb65-465"><a href="#cb65-465" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-466"><a href="#cb65-466" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Comparison of the estimates for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-467"><a href="#cb65-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-468"><a href="#cb65-468" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mles,</span>
-<span id="cb65-469"><a href="#cb65-469" aria-hidden="true" tabindex="-1"></a>  fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
-<span id="cb65-470"><a href="#cb65-470" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mcmc_summary,</span>
-<span id="cb65-471"><a href="#cb65-471" aria-hidden="true" tabindex="-1"></a>  fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
-<span id="cb65-472"><a href="#cb65-472" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mcmc_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"MLE"</span>, <span class="st">"Non-info Est"</span>, <span class="st">"Non-info SD"</span>, <span class="st">"Conj Est"</span>, <span class="st">"Conj SD"</span>)</span>
-<span id="cb65-473"><a href="#cb65-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-474"><a href="#cb65-474" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="sc">|&gt;</span></span>
-<span id="cb65-475"><a href="#cb65-475" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb65-476"><a href="#cb65-476" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-477"><a href="#cb65-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-478"><a href="#cb65-478" aria-hidden="true" tabindex="-1"></a>In @fig-conj-ci-1 we have the 50% and 95% CIs with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-conj-ci-2.</span>
-<span id="cb65-479"><a href="#cb65-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-480"><a href="#cb65-480" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-481"><a href="#cb65-481" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ci</span></span>
-<span id="cb65-482"><a href="#cb65-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-483"><a href="#cb65-483" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb65-484"><a href="#cb65-484" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
-<span id="cb65-485"><a href="#cb65-485" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-486"><a href="#cb65-486" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
-<span id="cb65-487"><a href="#cb65-487" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
-<span id="cb65-488"><a href="#cb65-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-489"><a href="#cb65-489" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb65-490"><a href="#cb65-490" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
-<span id="cb65-491"><a href="#cb65-491" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb65-492"><a href="#cb65-492" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-493"><a href="#cb65-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-494"><a href="#cb65-494" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-conj-ppc we can see that while the predictive densities match pretty well and the intervals are centered on the OLS line of best fit.</span>
-<span id="cb65-495"><a href="#cb65-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-496"><a href="#cb65-496" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-497"><a href="#cb65-497" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ppc</span></span>
-<span id="cb65-498"><a href="#cb65-498" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-499"><a href="#cb65-499" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb65-500"><a href="#cb65-500" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
-<span id="cb65-501"><a href="#cb65-501" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-502"><a href="#cb65-502" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
-<span id="cb65-503"><a href="#cb65-503" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
-<span id="cb65-504"><a href="#cb65-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-505"><a href="#cb65-505" aria-hidden="true" tabindex="-1"></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
-<span id="cb65-506"><a href="#cb65-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-507"><a href="#cb65-507" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb65-508"><a href="#cb65-508" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
-<span id="cb65-509"><a href="#cb65-509" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
-<span id="cb65-510"><a href="#cb65-510" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb65-511"><a href="#cb65-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-512"><a href="#cb65-512" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb65-513"><a href="#cb65-513" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
-<span id="cb65-514"><a href="#cb65-514" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
-<span id="cb65-515"><a href="#cb65-515" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
-<span id="cb65-516"><a href="#cb65-516" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
-<span id="cb65-517"><a href="#cb65-517" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb65-518"><a href="#cb65-518" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-519"><a href="#cb65-519" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-520"><a href="#cb65-520" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Other Useful Resources for Stan</span></span>
-<span id="cb65-521"><a href="#cb65-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-522"><a href="#cb65-522" aria-hidden="true" tabindex="-1"></a>First, here's the three essential guides for using Stan:</span>
-<span id="cb65-523"><a href="#cb65-523" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-524"><a href="#cb65-524" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Function Guide</span><span class="co">](https://mc-stan.org/docs/functions-reference/index.html)</span> - reference for all the built-in functions and distributions as well as guides for writing custom functions and distributions</span>
-<span id="cb65-525"><a href="#cb65-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-526"><a href="#cb65-526" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan User's Guide</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/index.html)</span> - reference for example models, how to build efficient models, and some inference techniques</span>
-<span id="cb65-527"><a href="#cb65-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-528"><a href="#cb65-528" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Reference Manual</span><span class="co">](https://mc-stan.org/docs/reference-manual/index.html)</span> - reference for programming in Stan with a focus on how the language works</span>
-<span id="cb65-529"><a href="#cb65-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-530"><a href="#cb65-530" aria-hidden="true" tabindex="-1"></a>Here are some other useful packages to use for Bayesian data analysis with Stan (or other packages). We used some of these in this tutorial!</span>
-<span id="cb65-531"><a href="#cb65-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-532"><a href="#cb65-532" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">brms</span><span class="co">](https://paul-buerkner.github.io/brms/index.html)</span>: Bayesian regression models using Stan</span>
-<span id="cb65-533"><a href="#cb65-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-534"><a href="#cb65-534" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">posterior</span><span class="co">](https://mc-stan.org/posterior/)</span>: Useful for working with Stan output</span>
-<span id="cb65-535"><a href="#cb65-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-536"><a href="#cb65-536" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">bayesplot</span><span class="co">](http://mc-stan.org/bayesplot)</span>: ggplot2-based plotting functions for MCMC draws designed work well with Stan</span>
-<span id="cb65-537"><a href="#cb65-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-538"><a href="#cb65-538" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">loo</span><span class="co">](http://mc-stan.org/loo)</span>: Leave-one-out cross validation for model checking and selection that works with the log-posterior. Works best with <span class="in">`rstanarm`</span> but can work with <span class="in">`cmdstanr`</span> too.</span>
-<span id="cb65-539"><a href="#cb65-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-540"><a href="#cb65-540" aria-hidden="true" tabindex="-1"></a>Here's a list of useful resources for debugging issues with divergences, hitting maximum tree-depth, low EBFMI, and understanding diagnostics:</span>
-<span id="cb65-541"><a href="#cb65-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-542"><a href="#cb65-542" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan's Guide to Runtime warnings and convergence problems</span><span class="co">](https://mc-stan.org/misc/warnings.html)</span></span>
-<span id="cb65-543"><a href="#cb65-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-544"><a href="#cb65-544" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Prior Choices and Selection</span><span class="co">](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)</span></span>
-<span id="cb65-545"><a href="#cb65-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-546"><a href="#cb65-546" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Convergence Diagnostics for MCMC</span><span class="co">](https://arxiv.org/pdf/1909.11827.pdf)</span></span>
-<span id="cb65-547"><a href="#cb65-547" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-548"><a href="#cb65-548" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Official Stan Forum</span><span class="co">](https://discourse.mc-stan.org/)</span></span>
-<span id="cb65-549"><a href="#cb65-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-146"><a href="#cb65-146" aria-hidden="true" tabindex="-1"></a>First we write the Stan code in a separate file. See the <span class="co">[</span><span class="ot">Stan User's Guide Part 1.1</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section)</span> for programming this model without the analytic posteriors. (<span class="co">[</span><span class="ot">Download the file here</span><span class="co">](non-informative-regression.stan)</span>{target="_blank"})</span>
+<span id="cb65-147"><a href="#cb65-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-148"><a href="#cb65-148" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="non-informative-regression.stan"}</span></span>
+<span id="cb65-149"><a href="#cb65-149" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is two vectors 'y' and 'X' of length 'N'.</span></span>
+<span id="cb65-150"><a href="#cb65-150" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
+<span id="cb65-151"><a href="#cb65-151" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
+<span id="cb65-152"><a href="#cb65-152" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
+<span id="cb65-153"><a href="#cb65-153" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] x;</span></span>
+<span id="cb65-154"><a href="#cb65-154" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-155"><a href="#cb65-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-156"><a href="#cb65-156" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
+<span id="cb65-157"><a href="#cb65-157" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, 2] X_c = append_col(rep_vector(1, N), x);</span></span>
+<span id="cb65-158"><a href="#cb65-158" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[2,2] XtX_inv = inverse(X_c' * X_c);</span></span>
+<span id="cb65-159"><a href="#cb65-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-160"><a href="#cb65-160" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[2] beta_hat = XtX_inv * X_c' * y;</span></span>
+<span id="cb65-161"><a href="#cb65-161" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_hat = X_C * beta_hat;</span></span>
+<span id="cb65-162"><a href="#cb65-162" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb65-163"><a href="#cb65-163" aria-hidden="true" tabindex="-1"></a><span class="in">    real&lt;lower=0&gt; s_2 = 1 / (N - 2) * (y - y_hat)' * (y - y_hat);</span></span>
+<span id="cb65-164"><a href="#cb65-164" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-165"><a href="#cb65-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-166"><a href="#cb65-166" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
+<span id="cb65-167"><a href="#cb65-167" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'beta' and 'sigma'.</span></span>
+<span id="cb65-168"><a href="#cb65-168" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
+<span id="cb65-169"><a href="#cb65-169" aria-hidden="true" tabindex="-1"></a><span class="in">  vector beta;</span></span>
+<span id="cb65-170"><a href="#cb65-170" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma; // Note that this is the variance</span></span>
+<span id="cb65-171"><a href="#cb65-171" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-172"><a href="#cb65-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-173"><a href="#cb65-173" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
+<span id="cb65-174"><a href="#cb65-174" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' ~ N(x beta, sigma) by specifying the analytic</span></span>
+<span id="cb65-175"><a href="#cb65-175" aria-hidden="true" tabindex="-1"></a><span class="in">// posterior defined above.</span></span>
+<span id="cb65-176"><a href="#cb65-176" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
+<span id="cb65-177"><a href="#cb65-177" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_hat, sigma^2 * XtX_inv);</span></span>
+<span id="cb65-178"><a href="#cb65-178" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb65-179"><a href="#cb65-179" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma^2 ~ scaled_inv_chi_square(N-2, sqrt(s_2));</span></span>
+<span id="cb65-180"><a href="#cb65-180" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-181"><a href="#cb65-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-182"><a href="#cb65-182" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
+<span id="cb65-183"><a href="#cb65-183" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
+<span id="cb65-184"><a href="#cb65-184" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb65-185"><a href="#cb65-185" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
+<span id="cb65-186"><a href="#cb65-186" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
+<span id="cb65-187"><a href="#cb65-187" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb65-188"><a href="#cb65-188" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-189"><a href="#cb65-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-190"><a href="#cb65-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-191"><a href="#cb65-191" aria-hidden="true" tabindex="-1"></a>Next we fit the model using <span class="in">`cmdstanr`</span>. In this case, I will use 1000 warmup iterations, 1000 sampling iterations, with no thinning (thinning includes only every $k$th draw), and will refresh the print screen to see progress every 500 iterations. We can run several chains to see if where the chains start dictates any part of the posterior shape or location, and chains can be run in parallel to get more draws <span class="sc">\&lt;</span>=<span class="sc">\&gt;</span> better posterior approximation more quickly.</span>
+<span id="cb65-192"><a href="#cb65-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-193"><a href="#cb65-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-194"><a href="#cb65-194" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-info-comp-fit</span></span>
+<span id="cb65-195"><a href="#cb65-195" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-196"><a href="#cb65-196" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb65-197"><a href="#cb65-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-198"><a href="#cb65-198" aria-hidden="true" tabindex="-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb65-199"><a href="#cb65-199" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb65-200"><a href="#cb65-200" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb65-201"><a href="#cb65-201" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct</span>
+<span id="cb65-202"><a href="#cb65-202" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb65-203"><a href="#cb65-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-204"><a href="#cb65-204" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"non-informative-regression.stan"</span>)</span>
+<span id="cb65-205"><a href="#cb65-205" aria-hidden="true" tabindex="-1"></a>non_inf_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file)</span>
+<span id="cb65-206"><a href="#cb65-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-207"><a href="#cb65-207" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> non_inf_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb65-208"><a href="#cb65-208" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb65-209"><a href="#cb65-209" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb65-210"><a href="#cb65-210" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb65-211"><a href="#cb65-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb65-212"><a href="#cb65-212" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb65-213"><a href="#cb65-213" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb65-214"><a href="#cb65-214" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb65-215"><a href="#cb65-215" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
+<span id="cb65-216"><a href="#cb65-216" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb65-217"><a href="#cb65-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-218"><a href="#cb65-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-219"><a href="#cb65-219" aria-hidden="true" tabindex="-1"></a>Next we'll check diagnostics for the sampler. First, we will look at the numeric diagnostic output from the method <span class="in">`$diagnostic_summary()`</span> which reports if any transitions were divergent, if maximum tree depth was reached, and EBFMI. For this model and data set we don't see any issues in these summaries.</span>
+<span id="cb65-220"><a href="#cb65-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-221"><a href="#cb65-221" aria-hidden="true" tabindex="-1"></a>Next, we check the traceplots in @fig-traceplots-non-info-1. The MCMC draws can be collected from the <span class="in">`fit`</span> object using the <span class="in">`$draws()`</span> method. These plots display the sampled values for each parameter in a line plot. We are looking for a horizontal fuzzy bar. Then we can also look at density plots in @fig-traceplots-non-info-2 which will tell us if the chains reached reasonably similar densities. On both counts, we are in good shape. The plots are created using the <span class="in">`bayesplot`</span> package.</span>
+<span id="cb65-222"><a href="#cb65-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-223"><a href="#cb65-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-224"><a href="#cb65-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: non-inf-summary</span></span>
+<span id="cb65-225"><a href="#cb65-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-226"><a href="#cb65-226" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
+<span id="cb65-227"><a href="#cb65-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-228"><a href="#cb65-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-229"><a href="#cb65-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-230"><a href="#cb65-230" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-non-info</span></span>
+<span id="cb65-231"><a href="#cb65-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-232"><a href="#cb65-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb65-233"><a href="#cb65-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb65-234"><a href="#cb65-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-235"><a href="#cb65-235" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-236"><a href="#cb65-236" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-237"><a href="#cb65-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-238"><a href="#cb65-238" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb65-239"><a href="#cb65-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-240"><a href="#cb65-240" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb65-241"><a href="#cb65-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-242"><a href="#cb65-242" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb65-243"><a href="#cb65-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-244"><a href="#cb65-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-245"><a href="#cb65-245" aria-hidden="true" tabindex="-1"></a>Finally, after checking that the MCMC chains and diagnostics look satisfactory, we can continue to inference. The summary statistics for the parameters are displayed in @tbl-non-info-inf. This are generated by default with the <span class="in">`$summary()`</span> method. The statistics include the posterior mean (<span class="in">`mean`</span>), median (<span class="in">`median`</span>), standard deviation (<span class="in">`sd`</span>), mean absolute deviation (<span class="in">`mad`</span>), and lower (<span class="in">`q5`</span>) and upper bounds (<span class="in">`q95`</span>) for a 90% credible interval. The statistics <span class="in">`rhat`</span>, <span class="in">`ess_bulk`</span>, and <span class="in">`ess_tail`</span> are additional diagnostic measures that indicate how well the chains are sampling the posterior and how many effective draws we have made. Ideally <span class="in">`rhat`</span> is very near 1, even 1.01 can be a significant problem. The effective sample sizes should be large/near the number of sampling iterations.</span>
+<span id="cb65-246"><a href="#cb65-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-247"><a href="#cb65-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-248"><a href="#cb65-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-non-info-inf</span></span>
+<span id="cb65-249"><a href="#cb65-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-250"><a href="#cb65-250" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-251"><a href="#cb65-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-252"><a href="#cb65-252" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb65-253"><a href="#cb65-253" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb65-254"><a href="#cb65-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-255"><a href="#cb65-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-256"><a href="#cb65-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-257"><a href="#cb65-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-mle-res-1</span></span>
+<span id="cb65-258"><a href="#cb65-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| output-location: column-fragment</span></span>
+<span id="cb65-259"><a href="#cb65-259" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: MLE estimates for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-260"><a href="#cb65-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-261"><a href="#cb65-261" aria-hidden="true" tabindex="-1"></a>mles <span class="sc">|&gt;</span> </span>
+<span id="cb65-262"><a href="#cb65-262" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb65-263"><a href="#cb65-263" aria-hidden="true" tabindex="-1"></a>                    <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb65-264"><a href="#cb65-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-265"><a href="#cb65-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-266"><a href="#cb65-266" aria-hidden="true" tabindex="-1"></a>We can also check graphical summaries of this same information such as interval plots for each parameter's credible intervals or density/area plots. In @fig-non-info-ci-1 we have the 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-non-info-ci-2 with areas shaded underneath to indicate the 50% interval and the width of the density indicates the 95% interval.</span>
+<span id="cb65-267"><a href="#cb65-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-268"><a href="#cb65-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-269"><a href="#cb65-269" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ci</span></span>
+<span id="cb65-270"><a href="#cb65-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-271"><a href="#cb65-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb65-272"><a href="#cb65-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb65-273"><a href="#cb65-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-274"><a href="#cb65-274" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-275"><a href="#cb65-275" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
+<span id="cb65-276"><a href="#cb65-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-277"><a href="#cb65-277" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb65-278"><a href="#cb65-278" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
+<span id="cb65-279"><a href="#cb65-279" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb65-280"><a href="#cb65-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-281"><a href="#cb65-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-282"><a href="#cb65-282" aria-hidden="true" tabindex="-1"></a>One additional way to check model fit is to assess posterior predictive checks. To do so we draw samples from the posterior predictive distribution $p(y^{new} | y) = \int p(y^{new} | \boldsymbol{\beta}, \sigma) p(\boldsymbol{\beta}, \sigma | y) d\boldsymbol{\beta}d\sigma$ by first sampling from the posterior (i.e. the draws in the MCMC chains) and then for each set of draws sampling $y^{new}$ given the corresponding values for $x^{new}$. In Stan this is easily accomplished using the generated quantities block. The generated quantities block generates new samples that we define using the current iteration's posterior draws of $\beta$ and $\sigma$.</span>
+<span id="cb65-283"><a href="#cb65-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-284"><a href="#cb65-284" aria-hidden="true" tabindex="-1"></a><span class="in">``` stan</span></span>
+<span id="cb65-285"><a href="#cb65-285" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
+<span id="cb65-286"><a href="#cb65-286" aria-hidden="true" tabindex="-1"></a><span class="in">    // create a vector of N new observations</span></span>
+<span id="cb65-287"><a href="#cb65-287" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd; </span></span>
+<span id="cb65-288"><a href="#cb65-288" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb65-289"><a href="#cb65-289" aria-hidden="true" tabindex="-1"></a><span class="in">    // for each observation, sample from the regression likelihod</span></span>
+<span id="cb65-290"><a href="#cb65-290" aria-hidden="true" tabindex="-1"></a><span class="in">    // using the posterior draws</span></span>
+<span id="cb65-291"><a href="#cb65-291" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
+<span id="cb65-292"><a href="#cb65-292" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span></span>
+<span id="cb65-293"><a href="#cb65-293" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb65-294"><a href="#cb65-294" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-295"><a href="#cb65-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-296"><a href="#cb65-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-297"><a href="#cb65-297" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-non-info-ppc we can see that while the predictive densities are centered in the correct location, the variances are far too large.</span>
+<span id="cb65-298"><a href="#cb65-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-299"><a href="#cb65-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-300"><a href="#cb65-300" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-non-info-ppc</span></span>
+<span id="cb65-301"><a href="#cb65-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-302"><a href="#cb65-302" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb65-303"><a href="#cb65-303" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
+<span id="cb65-304"><a href="#cb65-304" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-305"><a href="#cb65-305" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
+<span id="cb65-306"><a href="#cb65-306" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
+<span id="cb65-307"><a href="#cb65-307" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb65-308"><a href="#cb65-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-309"><a href="#cb65-309" aria-hidden="true" tabindex="-1"></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
+<span id="cb65-310"><a href="#cb65-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-311"><a href="#cb65-311" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb65-312"><a href="#cb65-312" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb65-313"><a href="#cb65-313" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
+<span id="cb65-314"><a href="#cb65-314" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb65-315"><a href="#cb65-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-316"><a href="#cb65-316" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb65-317"><a href="#cb65-317" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
+<span id="cb65-318"><a href="#cb65-318" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb65-319"><a href="#cb65-319" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb65-320"><a href="#cb65-320" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
+<span id="cb65-321"><a href="#cb65-321" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb65-322"><a href="#cb65-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-323"><a href="#cb65-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-324"><a href="#cb65-324" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conjugate Prior Regression Model</span></span>
+<span id="cb65-325"><a href="#cb65-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-326"><a href="#cb65-326" aria-hidden="true" tabindex="-1"></a>Next, we'll implement the regression model with conjugate priors. Conjugacy refers to the situation where the prior and posterior distribution are from the same family. We'll start by re-defining our model.<span class="ot">[^1]</span></span>
+<span id="cb65-327"><a href="#cb65-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-328"><a href="#cb65-328" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>See wikipedia for more details and derivations: <span class="ot">&lt;https://en.wikipedia.org/wiki/Bayesian_linear_regression&gt;</span></span>
+<span id="cb65-329"><a href="#cb65-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-330"><a href="#cb65-330" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Conjugate prior:** $p(\boldsymbol{\beta}, \sigma^2) = p(\boldsymbol{\beta} | \sigma^2) p(\sigma^2)$</span>
+<span id="cb65-331"><a href="#cb65-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-332"><a href="#cb65-332" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2 ~ N_2(\boldsymbol{\beta}_0, \sigma^2 \Lambda_0^{-1})$ where $\boldsymbol{\beta}_0 \in \mathbb{R}^2$ is a vector of prior coefficients, we'll set it to zero, and $\Lambda_0$ is a $2\times2$ prior correlation matrix. We will set $\Lambda_0 = 10 I_2$ to get a weakly informative prior that is equivalent to ridge regression.</span>
+<span id="cb65-333"><a href="#cb65-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-334"><a href="#cb65-334" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 \sim InvGamma(\frac{\nu_0}{2}, \frac{1}{2} \nu_0 s_0^2)$ where $\nu_0$ is a prior sample size and $s_0$ is the prior standard deviation. We'll set these to $\nu_0 = 1$ and $s_0^2 = 47$ which is approximately the sample variance of the NCAA women's basketball teams' wins.</span>
+<span id="cb65-335"><a href="#cb65-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-336"><a href="#cb65-336" aria-hidden="true" tabindex="-1"></a><span class="ss">    3.  </span>The parameters $\boldsymbol{\beta}_0, \Lambda_0, \nu_0, s_0^2$ that define the prior are referred to as hyperparameters. We will set them before running the model, although they could also be modeled if we wanted.</span>
+<span id="cb65-337"><a href="#cb65-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-338"><a href="#cb65-338" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** the same as before, $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
+<span id="cb65-339"><a href="#cb65-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-340"><a href="#cb65-340" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Posterior:**</span>
+<span id="cb65-341"><a href="#cb65-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-342"><a href="#cb65-342" aria-hidden="true" tabindex="-1"></a><span class="ss">    1.  </span>$\boldsymbol{\beta} | \sigma^2, y \sim N_2(\boldsymbol{\beta}_N, \sigma^2 \Lambda_N^{-1})$ where $\boldsymbol{\beta}_N = \Lambda_N^{-1}(\mathbf{X}'\mathbf{X} \hat{\boldsymbol{\beta}} + \Lambda_0 \boldsymbol{\beta}_0)$ and $\Lambda_N = (\mathbf{X}'\mathbf{X} + \Lambda_0).$</span>
+<span id="cb65-343"><a href="#cb65-343" aria-hidden="true" tabindex="-1"></a><span class="ss">    2.  </span>$\sigma^2 | y \sim InvGamma(\sigma^2 | \frac{\nu_0 + N}{2}, \frac{1}{2} \nu_0 s_0^2 + \frac{1}{2}(\mathbf{y}'\mathbf{y} + \boldsymbol{\beta}_0'\Lambda_0 \boldsymbol{\beta}_0 - \boldsymbol{\beta}_N' \Lambda_N \boldsymbol{\beta}_N)).$</span>
+<span id="cb65-344"><a href="#cb65-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-345"><a href="#cb65-345" aria-hidden="true" tabindex="-1"></a>We could again program this model using the analytic posterior. Instead, we'll program it only through the priors and likelihood and let Stan approximate the posterior. I will also allow the model to include more than one predictor so that $\mathbf{X}$ is a $N \times (K+1)$ matrix augmented with a column of ones. (<span class="co">[</span><span class="ot">Download the file here</span><span class="co">](conjugate-regression.stan)</span>{target="_blank"})</span>
+<span id="cb65-346"><a href="#cb65-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-347"><a href="#cb65-347" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="conjugate-regression.stan"}</span></span>
+<span id="cb65-348"><a href="#cb65-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-349"><a href="#cb65-349" aria-hidden="true" tabindex="-1"></a><span class="in">// The input data is a vector 'y' of length 'N'.</span></span>
+<span id="cb65-350"><a href="#cb65-350" aria-hidden="true" tabindex="-1"></a><span class="in">data {</span></span>
+<span id="cb65-351"><a href="#cb65-351" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; N;</span></span>
+<span id="cb65-352"><a href="#cb65-352" aria-hidden="true" tabindex="-1"></a><span class="in">  int&lt;lower=0&gt; K;</span></span>
+<span id="cb65-353"><a href="#cb65-353" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[N] y;</span></span>
+<span id="cb65-354"><a href="#cb65-354" aria-hidden="true" tabindex="-1"></a><span class="in">  matrix[N, K] X;</span></span>
+<span id="cb65-355"><a href="#cb65-355" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb65-356"><a href="#cb65-356" aria-hidden="true" tabindex="-1"></a><span class="in">  // hyperparameters</span></span>
+<span id="cb65-357"><a href="#cb65-357" aria-hidden="true" tabindex="-1"></a><span class="in">  real beta_0;</span></span>
+<span id="cb65-358"><a href="#cb65-358" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; lambda_0;</span></span>
+<span id="cb65-359"><a href="#cb65-359" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; nu_0;</span></span>
+<span id="cb65-360"><a href="#cb65-360" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; s_02;</span></span>
+<span id="cb65-361"><a href="#cb65-361" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-362"><a href="#cb65-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-363"><a href="#cb65-363" aria-hidden="true" tabindex="-1"></a><span class="in">transformed data {</span></span>
+<span id="cb65-364"><a href="#cb65-364" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[N, K+1] X_mat = append_col(rep_vector(1, N), X);</span></span>
+<span id="cb65-365"><a href="#cb65-365" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[K+1] beta_0_vec = rep_vector(beta_0, K+1);</span></span>
+<span id="cb65-366"><a href="#cb65-366" aria-hidden="true" tabindex="-1"></a><span class="in">    matrix[K+1, K+1] Lambda_0 = lambda_0 * identity_matrix(K+1);</span></span>
+<span id="cb65-367"><a href="#cb65-367" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-368"><a href="#cb65-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-369"><a href="#cb65-369" aria-hidden="true" tabindex="-1"></a><span class="in">// The parameters accepted by the model. Our model</span></span>
+<span id="cb65-370"><a href="#cb65-370" aria-hidden="true" tabindex="-1"></a><span class="in">// accepts two parameters 'mu' and 'sigma'.</span></span>
+<span id="cb65-371"><a href="#cb65-371" aria-hidden="true" tabindex="-1"></a><span class="in">parameters {</span></span>
+<span id="cb65-372"><a href="#cb65-372" aria-hidden="true" tabindex="-1"></a><span class="in">  vector[K+1] beta;</span></span>
+<span id="cb65-373"><a href="#cb65-373" aria-hidden="true" tabindex="-1"></a><span class="in">  real&lt;lower=0&gt; sigma2;</span></span>
+<span id="cb65-374"><a href="#cb65-374" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-375"><a href="#cb65-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-376"><a href="#cb65-376" aria-hidden="true" tabindex="-1"></a><span class="in">// The model to be estimated. We model the output</span></span>
+<span id="cb65-377"><a href="#cb65-377" aria-hidden="true" tabindex="-1"></a><span class="in">// 'y' to be normally distributed with mean 'mu'</span></span>
+<span id="cb65-378"><a href="#cb65-378" aria-hidden="true" tabindex="-1"></a><span class="in">// and standard deviation 'sigma'.</span></span>
+<span id="cb65-379"><a href="#cb65-379" aria-hidden="true" tabindex="-1"></a><span class="in">model {</span></span>
+<span id="cb65-380"><a href="#cb65-380" aria-hidden="true" tabindex="-1"></a><span class="in">  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);</span></span>
+<span id="cb65-381"><a href="#cb65-381" aria-hidden="true" tabindex="-1"></a><span class="in">  sigma2 ~ scaled_inv_chi_square(nu_0, s_02);</span></span>
+<span id="cb65-382"><a href="#cb65-382" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb65-383"><a href="#cb65-383" aria-hidden="true" tabindex="-1"></a><span class="in">  y ~ normal(X_mat * beta, sqrt(sigma2));</span></span>
+<span id="cb65-384"><a href="#cb65-384" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-385"><a href="#cb65-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-386"><a href="#cb65-386" aria-hidden="true" tabindex="-1"></a><span class="in">generated quantities {</span></span>
+<span id="cb65-387"><a href="#cb65-387" aria-hidden="true" tabindex="-1"></a><span class="in">    real sigma = sqrt(sigma2);</span></span>
+<span id="cb65-388"><a href="#cb65-388" aria-hidden="true" tabindex="-1"></a><span class="in">    vector[N] y_ppd;</span></span>
+<span id="cb65-389"><a href="#cb65-389" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb65-390"><a href="#cb65-390" aria-hidden="true" tabindex="-1"></a><span class="in">    for (i in 1:N) {</span></span>
+<span id="cb65-391"><a href="#cb65-391" aria-hidden="true" tabindex="-1"></a><span class="in">        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));</span></span>
+<span id="cb65-392"><a href="#cb65-392" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb65-393"><a href="#cb65-393" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb65-394"><a href="#cb65-394" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-395"><a href="#cb65-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-396"><a href="#cb65-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-397"><a href="#cb65-397" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-comp-fit</span></span>
+<span id="cb65-398"><a href="#cb65-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-399"><a href="#cb65-399" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb65-400"><a href="#cb65-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-401"><a href="#cb65-401" aria-hidden="true" tabindex="-1"></a>data_list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb65-402"><a href="#cb65-402" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb65-403"><a href="#cb65-403" aria-hidden="true" tabindex="-1"></a>    <span class="at">K =</span> <span class="dv">1</span>,</span>
+<span id="cb65-404"><a href="#cb65-404" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb65-405"><a href="#cb65-405" aria-hidden="true" tabindex="-1"></a>    <span class="at">X =</span> <span class="fu">as.matrix</span>(ncaaw<span class="sc">$</span>FG3pct, <span class="at">nrow =</span> <span class="fu">nrow</span>(ncaaw)),</span>
+<span id="cb65-406"><a href="#cb65-406" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb65-407"><a href="#cb65-407" aria-hidden="true" tabindex="-1"></a>    <span class="co"># hyperparameters</span></span>
+<span id="cb65-408"><a href="#cb65-408" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta_0 =</span> <span class="dv">0</span>,</span>
+<span id="cb65-409"><a href="#cb65-409" aria-hidden="true" tabindex="-1"></a>    <span class="at">lambda_0 =</span> <span class="fl">0.5</span>,</span>
+<span id="cb65-410"><a href="#cb65-410" aria-hidden="true" tabindex="-1"></a>    <span class="at">nu_0 =</span> <span class="dv">1</span>,</span>
+<span id="cb65-411"><a href="#cb65-411" aria-hidden="true" tabindex="-1"></a>    <span class="at">s_02 =</span> <span class="dv">47</span></span>
+<span id="cb65-412"><a href="#cb65-412" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb65-413"><a href="#cb65-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-414"><a href="#cb65-414" aria-hidden="true" tabindex="-1"></a>file2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"conjugate-regression.stan"</span>)</span>
+<span id="cb65-415"><a href="#cb65-415" aria-hidden="true" tabindex="-1"></a>conj_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file2)</span>
+<span id="cb65-416"><a href="#cb65-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-417"><a href="#cb65-417" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> conj_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb65-418"><a href="#cb65-418" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_list2,</span>
+<span id="cb65-419"><a href="#cb65-419" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb65-420"><a href="#cb65-420" aria-hidden="true" tabindex="-1"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb65-421"><a href="#cb65-421" aria-hidden="true" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb65-422"><a href="#cb65-422" aria-hidden="true" tabindex="-1"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb65-423"><a href="#cb65-423" aria-hidden="true" tabindex="-1"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb65-424"><a href="#cb65-424" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb65-425"><a href="#cb65-425" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_exceptions =</span> <span class="cn">FALSE</span></span>
+<span id="cb65-426"><a href="#cb65-426" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb65-427"><a href="#cb65-427" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-428"><a href="#cb65-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-429"><a href="#cb65-429" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-430"><a href="#cb65-430" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: conj-summary</span></span>
+<span id="cb65-431"><a href="#cb65-431" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-432"><a href="#cb65-432" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span>
+<span id="cb65-433"><a href="#cb65-433" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-434"><a href="#cb65-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-435"><a href="#cb65-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-436"><a href="#cb65-436" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-traceplots-conj</span></span>
+<span id="cb65-437"><a href="#cb65-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-438"><a href="#cb65-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb65-439"><a href="#cb65-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Diagnostic plots for the posterior samples. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb65-440"><a href="#cb65-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-441"><a href="#cb65-441" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Traceplots for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-442"><a href="#cb65-442" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-443"><a href="#cb65-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-444"><a href="#cb65-444" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb65-445"><a href="#cb65-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-446"><a href="#cb65-446" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_dens_overlay</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb65-447"><a href="#cb65-447" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-448"><a href="#cb65-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-449"><a href="#cb65-449" aria-hidden="true" tabindex="-1"></a>Again the MCMC chains and diagnostics look satisfactory. The summary statistics for the parameters are displayed in @tbl-conj-inf.</span>
+<span id="cb65-450"><a href="#cb65-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-451"><a href="#cb65-451" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-452"><a href="#cb65-452" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-conj-inf</span></span>
+<span id="cb65-453"><a href="#cb65-453" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-454"><a href="#cb65-454" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Summary statistics for the posterior samples for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-455"><a href="#cb65-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-456"><a href="#cb65-456" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb65-457"><a href="#cb65-457" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>)</span>
+<span id="cb65-458"><a href="#cb65-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-459"><a href="#cb65-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-460"><a href="#cb65-460" aria-hidden="true" tabindex="-1"></a>And here's a quick reminder of our results for the non-informative prior and MLE fits in @tbl-fit-comp.</span>
+<span id="cb65-461"><a href="#cb65-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-462"><a href="#cb65-462" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-463"><a href="#cb65-463" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-fit-comp</span></span>
+<span id="cb65-464"><a href="#cb65-464" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-465"><a href="#cb65-465" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Comparison of the estimates for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-466"><a href="#cb65-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-467"><a href="#cb65-467" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mles,</span>
+<span id="cb65-468"><a href="#cb65-468" aria-hidden="true" tabindex="-1"></a>  fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
+<span id="cb65-469"><a href="#cb65-469" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mcmc_summary,</span>
+<span id="cb65-470"><a href="#cb65-470" aria-hidden="true" tabindex="-1"></a>  fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
+<span id="cb65-471"><a href="#cb65-471" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mcmc_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"MLE"</span>, <span class="st">"Non-info Est"</span>, <span class="st">"Non-info SD"</span>, <span class="st">"Conj Est"</span>, <span class="st">"Conj SD"</span>)</span>
+<span id="cb65-472"><a href="#cb65-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-473"><a href="#cb65-473" aria-hidden="true" tabindex="-1"></a>mcmc_summary <span class="sc">|&gt;</span></span>
+<span id="cb65-474"><a href="#cb65-474" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb65-475"><a href="#cb65-475" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-476"><a href="#cb65-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-477"><a href="#cb65-477" aria-hidden="true" tabindex="-1"></a>In @fig-conj-ci-1 we have the 50% and 95% CIs with the posterior mean displayed as a point. The densities are plotted in ridgelines in @fig-conj-ci-2.</span>
+<span id="cb65-478"><a href="#cb65-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-479"><a href="#cb65-479" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-480"><a href="#cb65-480" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ci</span></span>
+<span id="cb65-481"><a href="#cb65-481" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-482"><a href="#cb65-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb65-483"><a href="#cb65-483" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for $\beta$ and $\sigma$. Plots were made using the `bayesplot` package.</span></span>
+<span id="cb65-484"><a href="#cb65-484" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-485"><a href="#cb65-485" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Interval plots for $\beta$ and $\sigma$.</span></span>
+<span id="cb65-486"><a href="#cb65-486" aria-hidden="true" tabindex="-1"></a><span class="co">#|    - Approximate posterior densities for $\beta$ and $\sigma$ in a ridgeline plot.</span></span>
+<span id="cb65-487"><a href="#cb65-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-488"><a href="#cb65-488" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb65-489"><a href="#cb65-489" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_areas_ridges</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
+<span id="cb65-490"><a href="#cb65-490" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb65-491"><a href="#cb65-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-492"><a href="#cb65-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-493"><a href="#cb65-493" aria-hidden="true" tabindex="-1"></a>We collect the PPD draws from the fit object using the draws method. From @fig-conj-ppc we can see that while the predictive densities match pretty well and the intervals are centered on the OLS line of best fit.</span>
+<span id="cb65-494"><a href="#cb65-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-495"><a href="#cb65-495" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-496"><a href="#cb65-496" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-conj-ppc</span></span>
+<span id="cb65-497"><a href="#cb65-497" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-498"><a href="#cb65-498" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb65-499"><a href="#cb65-499" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Posterior Predictive Check plots from `bayesplot`.</span></span>
+<span id="cb65-500"><a href="#cb65-500" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-501"><a href="#cb65-501" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD densities for the wins given 3pt%.</span></span>
+<span id="cb65-502"><a href="#cb65-502" aria-hidden="true" tabindex="-1"></a><span class="co">#|     - PPD intervals for the wins plotted by 3pt%.</span></span>
+<span id="cb65-503"><a href="#cb65-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-504"><a href="#cb65-504" aria-hidden="true" tabindex="-1"></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
+<span id="cb65-505"><a href="#cb65-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-506"><a href="#cb65-506" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb65-507"><a href="#cb65-507" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb65-508"><a href="#cb65-508" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>,</span>
+<span id="cb65-509"><a href="#cb65-509" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb65-510"><a href="#cb65-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-511"><a href="#cb65-511" aria-hidden="true" tabindex="-1"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb65-512"><a href="#cb65-512" aria-hidden="true" tabindex="-1"></a>                 y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>],</span>
+<span id="cb65-513"><a href="#cb65-513" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb65-514"><a href="#cb65-514" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb65-515"><a href="#cb65-515" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>,</span>
+<span id="cb65-516"><a href="#cb65-516" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb65-517"><a href="#cb65-517" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-518"><a href="#cb65-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-519"><a href="#cb65-519" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Other Useful Resources for Stan</span></span>
+<span id="cb65-520"><a href="#cb65-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-521"><a href="#cb65-521" aria-hidden="true" tabindex="-1"></a>First, here's the three essential guides for using Stan:</span>
+<span id="cb65-522"><a href="#cb65-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-523"><a href="#cb65-523" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Function Guide</span><span class="co">](https://mc-stan.org/docs/functions-reference/index.html)</span> - reference for all the built-in functions and distributions as well as guides for writing custom functions and distributions</span>
+<span id="cb65-524"><a href="#cb65-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-525"><a href="#cb65-525" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan User's Guide</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/index.html)</span> - reference for example models, how to build efficient models, and some inference techniques</span>
+<span id="cb65-526"><a href="#cb65-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-527"><a href="#cb65-527" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan Reference Manual</span><span class="co">](https://mc-stan.org/docs/reference-manual/index.html)</span> - reference for programming in Stan with a focus on how the language works</span>
+<span id="cb65-528"><a href="#cb65-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-529"><a href="#cb65-529" aria-hidden="true" tabindex="-1"></a>Here are some other useful packages to use for Bayesian data analysis with Stan (or other packages). We used some of these in this tutorial!</span>
+<span id="cb65-530"><a href="#cb65-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-531"><a href="#cb65-531" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">brms</span><span class="co">](https://paul-buerkner.github.io/brms/index.html)</span>: Bayesian regression models using Stan</span>
+<span id="cb65-532"><a href="#cb65-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-533"><a href="#cb65-533" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">posterior</span><span class="co">](https://mc-stan.org/posterior/)</span>: Useful for working with Stan output</span>
+<span id="cb65-534"><a href="#cb65-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-535"><a href="#cb65-535" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">bayesplot</span><span class="co">](http://mc-stan.org/bayesplot)</span>: ggplot2-based plotting functions for MCMC draws designed work well with Stan</span>
+<span id="cb65-536"><a href="#cb65-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-537"><a href="#cb65-537" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">loo</span><span class="co">](http://mc-stan.org/loo)</span>: Leave-one-out cross validation for model checking and selection that works with the log-posterior. Works best with <span class="in">`rstanarm`</span> but can work with <span class="in">`cmdstanr`</span> too.</span>
+<span id="cb65-538"><a href="#cb65-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-539"><a href="#cb65-539" aria-hidden="true" tabindex="-1"></a>Here's a list of useful resources for debugging issues with divergences, hitting maximum tree-depth, low EBFMI, and understanding diagnostics:</span>
+<span id="cb65-540"><a href="#cb65-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-541"><a href="#cb65-541" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Stan's Guide to Runtime warnings and convergence problems</span><span class="co">](https://mc-stan.org/misc/warnings.html)</span></span>
+<span id="cb65-542"><a href="#cb65-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-543"><a href="#cb65-543" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Prior Choices and Selection</span><span class="co">](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)</span></span>
+<span id="cb65-544"><a href="#cb65-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-545"><a href="#cb65-545" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Convergence Diagnostics for MCMC</span><span class="co">](https://arxiv.org/pdf/1909.11827.pdf)</span></span>
+<span id="cb65-546"><a href="#cb65-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-547"><a href="#cb65-547" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Official Stan Forum</span><span class="co">](https://discourse.mc-stan.org/)</span></span>
+<span id="cb65-548"><a href="#cb65-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-549"><a href="#cb65-549" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bonus: Regression Modeling with Incomplete Data</span></span>
 <span id="cb65-550"><a href="#cb65-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-551"><a href="#cb65-551" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bonus: Regression Modeling with Incomplete Data</span></span>
+<span id="cb65-551"><a href="#cb65-551" aria-hidden="true" tabindex="-1"></a>As a bonus section, we'll use the <span class="in">`brms`</span> package to fit a regression model where we have incomplete predictor observations. Incomplete data analysis ranges from complete case analysis (incomplete cases are dropped) and mean imputation to multiple imputation, joint modeling, and EM algorithm <span class="co">[</span><span class="ot">@schafer2002</span><span class="co">]</span>.<span class="ot">[^2]</span> We're going to use <span class="in">`mice`</span> <span class="co">[</span><span class="ot">@buuren2010mice</span><span class="co">]</span> and <span class="in">`brms`</span> <span class="co">[</span><span class="ot">@bürkner2018</span><span class="co">]</span> to demonstrate the imputation and fitting Bayesian regression models with a convenient front-end that writes the Stan code for us.</span>
 <span id="cb65-552"><a href="#cb65-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-553"><a href="#cb65-553" aria-hidden="true" tabindex="-1"></a>As a bonus section, we'll use the <span class="in">`brms`</span> package to fit a regression model where we have incomplete predictor observations. Incomplete data analysis ranges from complete case analysis (incomplete cases are dropped) and mean imputation to multiple imputation, joint modeling, and EM algorithm <span class="co">[</span><span class="ot">@schafer2002</span><span class="co">]</span>.<span class="ot">[^2]</span> We're going to use <span class="in">`mice`</span> <span class="co">[</span><span class="ot">@buuren2010mice</span><span class="co">]</span> and <span class="in">`brms`</span> <span class="co">[</span><span class="ot">@bürkner2018</span><span class="co">]</span> to demonstrate the imputation and fitting Bayesian regression models with a convenient front-end that writes the Stan code for us.</span>
+<span id="cb65-553"><a href="#cb65-553" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>See <span class="co">[</span><span class="ot">@rubin1976, @dempster1977, @rubin1987, @harel2007multiple, @white2011</span><span class="co">]</span> for more details on incomplete data analysis.</span>
 <span id="cb65-554"><a href="#cb65-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-555"><a href="#cb65-555" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>See <span class="co">[</span><span class="ot">@rubin1976, @dempster1977, @rubin1987, @harel2007multiple, @white2011</span><span class="co">]</span> for more details on incomplete data analysis.</span>
+<span id="cb65-555"><a href="#cb65-555" aria-hidden="true" tabindex="-1"></a>In our case, we are going to use junior year scoring (points per game) to predict senior year scoring for women's college basketball players from 2020-21 to the 2022-23 seasons. The data set only contains players who played in at least 75% of games each season, so partial seasons due to injury or being a bench player are excluded. Players who only have a junior season are excluded from the analysis.</span>
 <span id="cb65-556"><a href="#cb65-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-557"><a href="#cb65-557" aria-hidden="true" tabindex="-1"></a>In our case, we are going to use junior year scoring (points per game) to predict senior year scoring for women's college basketball players from 2020-21 to the 2022-23 seasons. The data set only contains players who played in at least 75% of games each season, so partial seasons due to injury or being a bench player are excluded. Players who only have a junior season are excluded from the analysis.</span>
-<span id="cb65-558"><a href="#cb65-558" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-559"><a href="#cb65-559" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-560"><a href="#cb65-560" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-ncaaw-i</span></span>
-<span id="cb65-561"><a href="#cb65-561" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-562"><a href="#cb65-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-563"><a href="#cb65-563" aria-hidden="true" tabindex="-1"></a>ncaaw_i <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/ncaaw-individuals.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb65-564"><a href="#cb65-564" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ncaaw_i)</span>
-<span id="cb65-565"><a href="#cb65-565" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-557"><a href="#cb65-557" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-558"><a href="#cb65-558" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-ncaaw-i</span></span>
+<span id="cb65-559"><a href="#cb65-559" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-560"><a href="#cb65-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-561"><a href="#cb65-561" aria-hidden="true" tabindex="-1"></a>ncaaw_i <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/ncaaw-individuals.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb65-562"><a href="#cb65-562" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ncaaw_i)</span>
+<span id="cb65-563"><a href="#cb65-563" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-564"><a href="#cb65-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-565"><a href="#cb65-565" aria-hidden="true" tabindex="-1"></a>Our imputation model will be univariate linear regression that use all other variables as predictors. For example, imputing $PPG_{jr}$ will be done by regressing on $PPG_{sr}, G_{jr}, G_{sr}$. $PPG_{jr}$ and $G_{jr}$ are incomplete for $n_{mis} = 176$ players while $n_{obs} = 98$ players have stats from both years. This missing data pattern is displayed in @fig-miss-patt.</span>
 <span id="cb65-566"><a href="#cb65-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-567"><a href="#cb65-567" aria-hidden="true" tabindex="-1"></a>Our imputation model will be univariate linear regression that use all other variables as predictors. For example, imputing $PPG_{jr}$ will be done by regressing on $PPG_{sr}, G_{jr}, G_{sr}$. $PPG_{jr}$ and $G_{jr}$ are incomplete for $n_{mis} = 176$ players while $n_{obs} = 98$ players have stats from both years. This missing data pattern is displayed in @fig-miss-patt.</span>
-<span id="cb65-568"><a href="#cb65-568" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-569"><a href="#cb65-569" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-570"><a href="#cb65-570" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-miss-patt</span></span>
-<span id="cb65-571"><a href="#cb65-571" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-572"><a href="#cb65-572" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Missing data patterns for the NCAA women's basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons.</span></span>
-<span id="cb65-573"><a href="#cb65-573" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-574"><a href="#cb65-574" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
-<span id="cb65-575"><a href="#cb65-575" aria-hidden="true" tabindex="-1"></a>m_pat <span class="ot">&lt;-</span> <span class="fu">md.pattern</span>(ncaaw_i, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb65-576"><a href="#cb65-576" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-577"><a href="#cb65-577" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-578"><a href="#cb65-578" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-579"><a href="#cb65-579" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ppg-jr-sr</span></span>
-<span id="cb65-580"><a href="#cb65-580" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-581"><a href="#cb65-581" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Points per game (PPG) from Junior and Senior seasons.</span></span>
-<span id="cb65-582"><a href="#cb65-582" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb65-583"><a href="#cb65-583" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ncaaw_i, <span class="fu">aes</span>(PPG_jr, PPG_sr, <span class="at">color =</span> G_jr)) <span class="sc">+</span></span>
-<span id="cb65-584"><a href="#cb65-584" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb65-585"><a href="#cb65-585" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"G - Jr"</span>) <span class="sc">+</span></span>
-<span id="cb65-586"><a href="#cb65-586" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PPG - Jr"</span>,</span>
-<span id="cb65-587"><a href="#cb65-587" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"PPG - Sr"</span>) <span class="sc">+</span></span>
-<span id="cb65-588"><a href="#cb65-588" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span>
-<span id="cb65-589"><a href="#cb65-589" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-567"><a href="#cb65-567" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-568"><a href="#cb65-568" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-miss-patt</span></span>
+<span id="cb65-569"><a href="#cb65-569" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-570"><a href="#cb65-570" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Missing data patterns for the NCAA women's basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons.</span></span>
+<span id="cb65-571"><a href="#cb65-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-572"><a href="#cb65-572" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb65-573"><a href="#cb65-573" aria-hidden="true" tabindex="-1"></a>m_pat <span class="ot">&lt;-</span> <span class="fu">md.pattern</span>(ncaaw_i, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb65-574"><a href="#cb65-574" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-575"><a href="#cb65-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-576"><a href="#cb65-576" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-577"><a href="#cb65-577" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-ppg-jr-sr</span></span>
+<span id="cb65-578"><a href="#cb65-578" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-579"><a href="#cb65-579" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Points per game (PPG) from Junior and Senior seasons.</span></span>
+<span id="cb65-580"><a href="#cb65-580" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb65-581"><a href="#cb65-581" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ncaaw_i, <span class="fu">aes</span>(PPG_jr, PPG_sr, <span class="at">color =</span> G_jr)) <span class="sc">+</span></span>
+<span id="cb65-582"><a href="#cb65-582" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb65-583"><a href="#cb65-583" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"G - Jr"</span>) <span class="sc">+</span></span>
+<span id="cb65-584"><a href="#cb65-584" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PPG - Jr"</span>,</span>
+<span id="cb65-585"><a href="#cb65-585" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"PPG - Sr"</span>) <span class="sc">+</span></span>
+<span id="cb65-586"><a href="#cb65-586" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()</span>
+<span id="cb65-587"><a href="#cb65-587" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-588"><a href="#cb65-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-589"><a href="#cb65-589" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple Imputation with mice</span></span>
 <span id="cb65-590"><a href="#cb65-590" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-591"><a href="#cb65-591" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple Imputation with mice</span></span>
+<span id="cb65-591"><a href="#cb65-591" aria-hidden="true" tabindex="-1"></a>First, we'll try out imputing before model fitting using <span class="in">`mice`</span>. MICE stands for Multiple Imputation by Chained Equations and is procedure that creates a set of $M$ completed data sets from an incomplete data set. Multiple Imputation is a three stage procedure:</span>
 <span id="cb65-592"><a href="#cb65-592" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-593"><a href="#cb65-593" aria-hidden="true" tabindex="-1"></a>First, we'll try out imputing before model fitting using <span class="in">`mice`</span>. MICE stands for Multiple Imputation by Chained Equations and is procedure that creates a set of $M$ completed data sets from an incomplete data set. Multiple Imputation is a three stage procedure:</span>
-<span id="cb65-594"><a href="#cb65-594" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-595"><a href="#cb65-595" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Each incomplete variable is imputed with posterior predictive draws from a regression model with all other variables as predictors. The procedure iterates through the incomplete variables several times to converge to the posterior predictive distribution of the missing data given the observed.</span>
-<span id="cb65-596"><a href="#cb65-596" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>These completed data sets are then analyzed individually with a standard complete data method.</span>
-<span id="cb65-597"><a href="#cb65-597" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Results from each analysis are combined. Typically this is done with Rubin's rules <span class="co">[</span><span class="ot">@rubin1987</span><span class="co">]</span>, but <span class="in">`brms`</span> follows the advice of @zhou2010 and simply stacks the posterior draw matrices from each fitted model.</span>
-<span id="cb65-598"><a href="#cb65-598" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-599"><a href="#cb65-599" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-600"><a href="#cb65-600" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mice-fit</span></span>
-<span id="cb65-601"><a href="#cb65-601" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-602"><a href="#cb65-602" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb65-603"><a href="#cb65-603" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
-<span id="cb65-604"><a href="#cb65-604" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb65-593"><a href="#cb65-593" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Each incomplete variable is imputed with posterior predictive draws from a regression model with all other variables as predictors. The procedure iterates through the incomplete variables several times to converge to the posterior predictive distribution of the missing data given the observed.</span>
+<span id="cb65-594"><a href="#cb65-594" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>These completed data sets are then analyzed individually with a standard complete data method.</span>
+<span id="cb65-595"><a href="#cb65-595" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Results from each analysis are combined. Typically this is done with Rubin's rules <span class="co">[</span><span class="ot">@rubin1987</span><span class="co">]</span>, but <span class="in">`brms`</span> follows the advice of @zhou2010 and simply stacks the posterior draw matrices from each fitted model.</span>
+<span id="cb65-596"><a href="#cb65-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-597"><a href="#cb65-597" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-598"><a href="#cb65-598" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: mice-fit</span></span>
+<span id="cb65-599"><a href="#cb65-599" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-600"><a href="#cb65-600" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb65-601"><a href="#cb65-601" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb65-602"><a href="#cb65-602" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb65-603"><a href="#cb65-603" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-604"><a href="#cb65-604" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(ncaaw_i, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"norm"</span>, <span class="at">maxit =</span> <span class="dv">10</span>, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb65-605"><a href="#cb65-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-606"><a href="#cb65-606" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(ncaaw_i, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"norm"</span>, <span class="at">maxit =</span> <span class="dv">10</span>, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb65-607"><a href="#cb65-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-608"><a href="#cb65-608" aria-hidden="true" tabindex="-1"></a>fit_brm_mice <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(PPG_sr <span class="sc">~</span> G_jr <span class="sc">*</span> PPG_jr, <span class="at">data =</span> imps, <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb65-609"><a href="#cb65-609" aria-hidden="true" tabindex="-1"></a>                             <span class="at">refresh =</span> <span class="dv">0</span>)</span>
-<span id="cb65-610"><a href="#cb65-610" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mice)</span>
-<span id="cb65-611"><a href="#cb65-611" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-606"><a href="#cb65-606" aria-hidden="true" tabindex="-1"></a>fit_brm_mice <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(PPG_sr <span class="sc">~</span> G_jr <span class="sc">*</span> PPG_jr, <span class="at">data =</span> imps, <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb65-607"><a href="#cb65-607" aria-hidden="true" tabindex="-1"></a>                             <span class="at">refresh =</span> <span class="dv">0</span>)</span>
+<span id="cb65-608"><a href="#cb65-608" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mice)</span>
+<span id="cb65-609"><a href="#cb65-609" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-610"><a href="#cb65-610" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-611"><a href="#cb65-611" aria-hidden="true" tabindex="-1"></a><span class="fu">### Imputation During Model Fitting</span></span>
 <span id="cb65-612"><a href="#cb65-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-613"><a href="#cb65-613" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-614"><a href="#cb65-614" aria-hidden="true" tabindex="-1"></a><span class="fu">### Imputation During Model Fitting</span></span>
-<span id="cb65-615"><a href="#cb65-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-616"><a href="#cb65-616" aria-hidden="true" tabindex="-1"></a>Imputation during model fitting takes a different approach. Imputations are made for each incomplete variable using a different conditional model for each variable. This approach differs from MI and MICE in two key ways: (i) the model is only fit once since the imputation model is part of the analysis model, (ii) the model must be constructed uniquely for each analysis scenario whereas MI completed data sets can be re-used with different analyses.</span>
-<span id="cb65-617"><a href="#cb65-617" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-618"><a href="#cb65-618" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-619"><a href="#cb65-619" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: brm-mi-fit</span></span>
-<span id="cb65-620"><a href="#cb65-620" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-621"><a href="#cb65-621" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb65-622"><a href="#cb65-622" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
-<span id="cb65-623"><a href="#cb65-623" aria-hidden="true" tabindex="-1"></a>bform <span class="ot">&lt;-</span> <span class="fu">bf</span>(PPG_sr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> <span class="fu">mi</span>(G_jr) <span class="sc">*</span> <span class="fu">mi</span>(PPG_jr)) <span class="sc">+</span></span>
-<span id="cb65-624"><a href="#cb65-624" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(PPG_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span></span>
-<span id="cb65-625"><a href="#cb65-625" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(G_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span> <span class="fu">set_rescor</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb65-626"><a href="#cb65-626" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-627"><a href="#cb65-627" aria-hidden="true" tabindex="-1"></a>fit_brm_mi <span class="ot">&lt;-</span> <span class="fu">brm</span>(bform, <span class="at">data =</span> ncaaw_i, </span>
-<span id="cb65-628"><a href="#cb65-628" aria-hidden="true" tabindex="-1"></a>                  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb65-629"><a href="#cb65-629" aria-hidden="true" tabindex="-1"></a>                  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>, </span>
-<span id="cb65-630"><a href="#cb65-630" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.8</span>, </span>
-<span id="cb65-631"><a href="#cb65-631" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">max_depth =</span> <span class="dv">10</span>,</span>
-<span id="cb65-632"><a href="#cb65-632" aria-hidden="true" tabindex="-1"></a>                                <span class="at">show_exceptions =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb65-633"><a href="#cb65-633" aria-hidden="true" tabindex="-1"></a>                  <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb65-634"><a href="#cb65-634" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb65-613"><a href="#cb65-613" aria-hidden="true" tabindex="-1"></a>Imputation during model fitting takes a different approach. Imputations are made for each incomplete variable using a different conditional model for each variable. This approach differs from MI and MICE in two key ways: (i) the model is only fit once since the imputation model is part of the analysis model, (ii) the model must be constructed uniquely for each analysis scenario whereas MI completed data sets can be re-used with different analyses.</span>
+<span id="cb65-614"><a href="#cb65-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-615"><a href="#cb65-615" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-616"><a href="#cb65-616" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: brm-mi-fit</span></span>
+<span id="cb65-617"><a href="#cb65-617" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-618"><a href="#cb65-618" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb65-619"><a href="#cb65-619" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb65-620"><a href="#cb65-620" aria-hidden="true" tabindex="-1"></a>bform <span class="ot">&lt;-</span> <span class="fu">bf</span>(PPG_sr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> <span class="fu">mi</span>(G_jr) <span class="sc">*</span> <span class="fu">mi</span>(PPG_jr)) <span class="sc">+</span></span>
+<span id="cb65-621"><a href="#cb65-621" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(PPG_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span></span>
+<span id="cb65-622"><a href="#cb65-622" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bf</span>(G_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span> <span class="fu">set_rescor</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb65-623"><a href="#cb65-623" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-624"><a href="#cb65-624" aria-hidden="true" tabindex="-1"></a>fit_brm_mi <span class="ot">&lt;-</span> <span class="fu">brm</span>(bform, <span class="at">data =</span> ncaaw_i, </span>
+<span id="cb65-625"><a href="#cb65-625" aria-hidden="true" tabindex="-1"></a>                  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb65-626"><a href="#cb65-626" aria-hidden="true" tabindex="-1"></a>                  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>, </span>
+<span id="cb65-627"><a href="#cb65-627" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.8</span>, </span>
+<span id="cb65-628"><a href="#cb65-628" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">max_depth =</span> <span class="dv">10</span>,</span>
+<span id="cb65-629"><a href="#cb65-629" aria-hidden="true" tabindex="-1"></a>                                <span class="at">show_exceptions =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb65-630"><a href="#cb65-630" aria-hidden="true" tabindex="-1"></a>                  <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb65-631"><a href="#cb65-631" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb65-632"><a href="#cb65-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-633"><a href="#cb65-633" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mi)</span>
+<span id="cb65-634"><a href="#cb65-634" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb65-635"><a href="#cb65-635" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-636"><a href="#cb65-636" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_brm_mi)</span>
-<span id="cb65-637"><a href="#cb65-637" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-638"><a href="#cb65-638" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-639"><a href="#cb65-639" aria-hidden="true" tabindex="-1"></a><span class="in">`brms`</span> is built on Stan, so we can also take a look at the traceplots of the samples in @fig-brm-mi-trace.</span>
-<span id="cb65-640"><a href="#cb65-640" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-641"><a href="#cb65-641" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-642"><a href="#cb65-642" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace</span></span>
-<span id="cb65-643"><a href="#cb65-643" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-644"><a href="#cb65-644" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
-<span id="cb65-645"><a href="#cb65-645" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms analysis model parameters.</span></span>
-<span id="cb65-646"><a href="#cb65-646" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-647"><a href="#cb65-647" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
-<span id="cb65-648"><a href="#cb65-648" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
-<span id="cb65-649"><a href="#cb65-649" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
-<span id="cb65-650"><a href="#cb65-650" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-651"><a href="#cb65-651" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-652"><a href="#cb65-652" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-653"><a href="#cb65-653" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace-imp</span></span>
-<span id="cb65-654"><a href="#cb65-654" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-655"><a href="#cb65-655" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
-<span id="cb65-656"><a href="#cb65-656" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms imputation model parameters.</span></span>
-<span id="cb65-657"><a href="#cb65-657" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-658"><a href="#cb65-658" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $PPG_{jr}$ imputation model parameters</span></span>
-<span id="cb65-659"><a href="#cb65-659" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $G_{jr}$ imputation model parameters</span></span>
-<span id="cb65-660"><a href="#cb65-660" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
-<span id="cb65-661"><a href="#cb65-661" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-662"><a href="#cb65-662" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-663"><a href="#cb65-663" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-664"><a href="#cb65-664" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-cond-eff</span></span>
-<span id="cb65-665"><a href="#cb65-665" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb65-666"><a href="#cb65-666" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</span></span>
-<span id="cb65-667"><a href="#cb65-667" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
-<span id="cb65-668"><a href="#cb65-668" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - Estimates after MICE imputation</span></span>
-<span id="cb65-669"><a href="#cb65-669" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - Estimates with joint model</span></span>
-<span id="cb65-670"><a href="#cb65-670" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
-<span id="cb65-671"><a href="#cb65-671" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
-<span id="cb65-672"><a href="#cb65-672" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-673"><a href="#cb65-673" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mice, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
-<span id="cb65-674"><a href="#cb65-674" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mi, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
-<span id="cb65-675"><a href="#cb65-675" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb65-636"><a href="#cb65-636" aria-hidden="true" tabindex="-1"></a><span class="in">`brms`</span> is built on Stan, so we can also take a look at the traceplots of the samples in @fig-brm-mi-trace.</span>
+<span id="cb65-637"><a href="#cb65-637" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-638"><a href="#cb65-638" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-639"><a href="#cb65-639" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace</span></span>
+<span id="cb65-640"><a href="#cb65-640" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-641"><a href="#cb65-641" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
+<span id="cb65-642"><a href="#cb65-642" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms analysis model parameters.</span></span>
+<span id="cb65-643"><a href="#cb65-643" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-644"><a href="#cb65-644" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
+<span id="cb65-645"><a href="#cb65-645" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - ""</span></span>
+<span id="cb65-646"><a href="#cb65-646" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
+<span id="cb65-647"><a href="#cb65-647" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-648"><a href="#cb65-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-649"><a href="#cb65-649" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-650"><a href="#cb65-650" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-trace-imp</span></span>
+<span id="cb65-651"><a href="#cb65-651" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-652"><a href="#cb65-652" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-nrow: 2</span></span>
+<span id="cb65-653"><a href="#cb65-653" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Traceplots of brms imputation model parameters.</span></span>
+<span id="cb65-654"><a href="#cb65-654" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-655"><a href="#cb65-655" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $PPG_{jr}$ imputation model parameters</span></span>
+<span id="cb65-656"><a href="#cb65-656" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - $G_{jr}$ imputation model parameters</span></span>
+<span id="cb65-657"><a href="#cb65-657" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">3</span>)</span>
+<span id="cb65-658"><a href="#cb65-658" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-659"><a href="#cb65-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-660"><a href="#cb65-660" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-661"><a href="#cb65-661" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-brm-mi-cond-eff</span></span>
+<span id="cb65-662"><a href="#cb65-662" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb65-663"><a href="#cb65-663" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</span></span>
+<span id="cb65-664"><a href="#cb65-664" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-subcap: </span></span>
+<span id="cb65-665"><a href="#cb65-665" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - Estimates after MICE imputation</span></span>
+<span id="cb65-666"><a href="#cb65-666" aria-hidden="true" tabindex="-1"></a><span class="co">#|   - Estimates with joint model</span></span>
+<span id="cb65-667"><a href="#cb65-667" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb65-668"><a href="#cb65-668" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
+<span id="cb65-669"><a href="#cb65-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-670"><a href="#cb65-670" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mice, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
+<span id="cb65-671"><a href="#cb65-671" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mi, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
+<span id="cb65-672"><a href="#cb65-672" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
