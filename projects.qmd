@@ -25,5 +25,6 @@ title: "Projects"
 
 ## Presentations
 
+- Student Workshop on Statistical Computing - "Getting to Know Stan" ([post](docs/posts/intro-to-stan.html){target="_blank"})
 - NESS 2023 - "Multiple Imputation with Angular Covariates" ([pdf](StocktonBenjamin_ENAR_Presentation2023 - Final.pdf){target="_blank"})
 - ENAR 2023 - "Multiple Imputation with Angular Covariates" ([pdf](NESS_Presentation - Edits - BS2023-06-05.pdf){target="_blank"})
