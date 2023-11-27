@@ -39,3 +39,6 @@ dist/
 # Flycheck
 flycheck_*.el
 .Rproj.user
+
+*.exe
+
