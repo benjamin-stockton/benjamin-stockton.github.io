@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/imputeangles/index.html",
       "/posts/intro-to-stan/intro_to_stan.html",
       "/posts/stan-pres-swosc/stan_pres.html",
       "/posts/welcome/index.html"
