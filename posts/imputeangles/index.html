@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -99,7 +100,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -108,6 +115,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -117,22 +125,49 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Ben Stockton’s Stats Site - How to Use imputeangles">
 <meta property="og:description" content="">
-<meta property="og:site-name" content="Ben Stockton's Stats Site">
+<meta property="og:site_name" content="Ben Stockton's Stats Site">
 <meta name="twitter:title" content="Ben Stockton’s Stats Site - How to Use imputeangles">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Ben Stockton’s Stats Site</span>
     </a>
@@ -144,45 +179,45 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html" rel="" target="">
- <span class="menu-text">Blog Posts</span></a>
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../projects.html" rel="" target="">
- <span class="menu-text">Projects</span></a>
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/benjamin-stockton" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/benjamin-stockton"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://linkedin.com/in/benjamin-stockton-329507160/" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://linkedin.com/in/benjamin-stockton-329507160/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">How to Use imputeangles</h1>
+      <div class="quarto-title-block"><div><h1 class="title">How to Use imputeangles</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
                       </div>
   </div>
     
@@ -203,10 +238,23 @@ div.csl-indent {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#multiple-imputation" id="toc-multiple-imputation" class="nav-link active" data-scroll-target="#multiple-imputation">Multiple Imputation</a></li>
+  <li><a href="#pitch-movement" id="toc-pitch-movement" class="nav-link" data-scroll-target="#pitch-movement">Pitch Movement</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
 
 
 
@@ -232,7 +280,9 @@ div.csl-indent {
 </section>
 <section id="pitch-movement" class="level2">
 <h2 class="anchored" data-anchor-id="pitch-movement">Pitch Movement</h2>
-<div class="cell">
+<div class="cell" data-hash="index_cache/html/load-pitch-data-no-run_426973969b9d1d903ebd8b0c9ee54eee">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Amelia)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -242,28 +292,401 @@ div.csl-indent {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(imputeangles)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># pitches &lt;- readr::read_csv()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>peralta_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Peralta"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">first_name =</span> <span class="st">"Freddy"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>burnes_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Burnes"</span>, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">first_name =</span> <span class="st">"Corbin"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>miley_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Miley"</span>, </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">first_name =</span> <span class="st">"Wade"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>rea_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Rea"</span>, </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">first_name =</span> <span class="st">"Colin"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>teheran_id <span class="ot">&lt;-</span> <span class="dv">527054</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>houser_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Houser"</span>, </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">first_name =</span> <span class="st">"Adrian"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>woodruff_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Woodruff"</span>, </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">first_name =</span> <span class="st">"Brandon"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>ids_list <span class="ot">&lt;-</span> <span class="fu">list</span>(peralta_id, burnes_id, rea_id, houser_id, </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                 miley_id, teheran_id, woodruff_id)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># pitches &lt;- readr::read_csv()</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>pitches <span class="ot">&lt;-</span> <span class="fu">lapply</span>(ids_list, <span class="cf">function</span>(id) {</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    baseballr<span class="sc">::</span><span class="fu">statcast_search</span>(<span class="at">start_date =</span> <span class="st">"2023-03-01"</span>,</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                               <span class="at">end_dat =</span> <span class="st">"2023-10-31"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                               <span class="at">player_type =</span> <span class="st">"pitcher"</span>, <span class="at">playerid =</span> id)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    }) <span class="sc">|&gt;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        game_date, pitcher, batter, game_type, home_team, away_team, </span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>       pitch_type, type, release_speed, release_spin_rate, release_extension,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>       spin_axis, release_pos_x, release_pos_z, plate_x, plate_z,</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>       player_name, events, description, launch_angle, launch_speed</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        game_type <span class="sc">==</span> <span class="st">"R"</span>, </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        type <span class="sc">!=</span> <span class="st">"X"</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>game_type)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(pitches, <span class="st">"data/brewers_sp_2023_pitches.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>Now we’ll take a look at an example of how to perform MI in practice in comparison to CCA. We have a data set of <span class="math inline">\(N =\)</span> caught pitches (swing and called strikes, balls, or hit by pitches) pitches from the 2023 MLB season with measurements for the pitch outcome, pitch velocity and spin direction and rate at release, release point, horizontal and vertical break, location at the plate, as well as the identity of the batter, pitcher, and ballpark. We will model the pitch outcome based on the other measurements while using random effects for the batter, pitcher, and ballpark. In this analysis our quantity of interest is the effect of spin rate <span class="math inline">\(\beta_{SpinRate}\)</span> on the pitch outcome given the pitch was not fouled off or put in play which will be estimated using a mixed effects logistic regression model.</p>
-<p>Multiple imputation will be performed using the chained equations or fully conditional specification with the <code>mice</code> R package <span class="citation" data-cites="buuren2010mice">(<a href="#ref-buuren2010mice" role="doc-biblioref">S. van Buuren and Groothuis-Oudshoorn 2010</a>)</span> with estimates pooled by the <code>broom.mixed</code> R package. The inline data will be imputed by <code>method = "norm"</code> which uses linear regression. The angular data, spin rate, will be imputed by <code>method = "bpnreg</code> which uses Bayesian projected normal regression <span class="citation" data-cites="cremers2021">(<a href="#ref-cremers2021" role="doc-biblioref">Cremers 2021</a>)</span> from my <code>imputeangles</code> package.</p>
+<div class="cell" data-hash="index_cache/html/fig-miss-map_70cdbbd8318ef3665629ca71ed776c97">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pitches <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        pitch_type, release_speed, release_spin_rate, spin_axis,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        release_extension, plate_x, plate_z  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    VIM<span class="sc">::</span><span class="fu">matrixplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-miss-map" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-miss-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-miss-map-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miss-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Missinginess matrix plot where red indicates missingness in that observation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we’ll take a look at an example of how to perform MI in practice in comparison to CCA. We have a data set of <span class="math inline">\(N =\)</span> 10544 caught pitches (swing and called strikes, balls, or hit by pitches) pitches from the 2023 MLB season with measurements for the pitch outcome, pitch velocity and spin direction and rate at release, release point, horizontal and vertical break, location at the plate, as well as the identity of the batter, pitcher, and ballpark. We will model the pitch outcome based on the other measurements while using random effects for the batter, pitcher, and ballpark. In this analysis our quantity of interest is the effect of spin rate <span class="math inline">\(\beta_{SpinRate}\)</span> on the pitch outcome given the pitch was not fouled off or put in play which will be estimated using a mixed effects logistic regression model.</p>
+<div class="cell" data-hash="index_cache/html/pitches-thrown-norun_6f72abb74a9142b014a5d2676006a60e">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pitches <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n_pitches =</span> <span class="fu">n</span>(),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_fastball =</span> <span class="fu">sum</span>(pitch_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FC"</span>, <span class="st">"FF"</span>, <span class="st">"FS"</span>, <span class="st">"SI"</span>)),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_offspeed =</span> <span class="fu">sum</span>(pitch_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CH"</span>, <span class="st">"CU"</span>, <span class="st">"SL"</span>, <span class="st">"ST"</span>)),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(pitch_type))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-hash="index_cache/html/tbl-pitches-thrown_79d066bdc195e13cb5ce3280c2058e19">
+<div id="tbl-pitches-thrown" class="cell quarto-float anchored" data-hash="index_cache/html/tbl-pitches-thrown_79d066bdc195e13cb5ce3280c2058e19">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pitches-thrown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Number of pitches thrown by each starting pitcher.
+</figcaption>
+<div aria-describedby="tbl-pitches-thrown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div>
+<table class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">player_name</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n_pitches</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n_fastball</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n_offspeed</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n_missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Burnes, Corbin</td>
+<td style="text-align: right;">2569</td>
+<td style="text-align: right;">1583</td>
+<td style="text-align: right;">986</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Houser, Adrian</td>
+<td style="text-align: right;">1506</td>
+<td style="text-align: right;">1005</td>
+<td style="text-align: right;">427</td>
+<td style="text-align: right;">74</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Miley, Wade</td>
+<td style="text-align: right;">1506</td>
+<td style="text-align: right;">1040</td>
+<td style="text-align: right;">466</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Peralta, Freddy</td>
+<td style="text-align: right;">2430</td>
+<td style="text-align: right;">1253</td>
+<td style="text-align: right;">1177</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rea, Colin</td>
+<td style="text-align: right;">1651</td>
+<td style="text-align: right;">1334</td>
+<td style="text-align: right;">317</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Woodruff, Brandon</td>
+<td style="text-align: right;">882</td>
+<td style="text-align: right;">554</td>
+<td style="text-align: right;">328</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Multiple imputation will be performed using the chained equations or fully conditional specification with the <code>mice</code> R package <span class="citation" data-cites="buuren2010mice">(<a href="#ref-buuren2010mice" role="doc-biblioref">S. van Buuren and Groothuis-Oudshoorn 2010</a>)</span> with estimates pooled by the <code>broom.mixed</code> R package <span class="citation" data-cites="bolkerBroomMixed2022">(<a href="#ref-bolkerBroomMixed2022" role="doc-biblioref">Bolker and Robinson 2022</a>)</span>. The inline data will be imputed by <code>method = "pmm"</code> which uses predictive mean matching. The angular data, spin rate, will be imputed by <code>method = "pnregid"</code> which uses Bayesian projected normal regression with a constrained covariance matrix <span class="math inline">\(\Sigma\)</span> <span class="citation" data-cites="hernandez-stumpfhauser2017">(<a href="#ref-hernandez-stumpfhauser2017" role="doc-biblioref">Hernandez-Stumpfhauser, Breidt, and Woerd 2017</a>)</span> from my <code>imputeangles</code> package.</p>
+<p>To impute with the projected normal regression, we have to specify to <code>mice</code> which variable is angular and which variables are the <span class="math inline">\(\cos\)</span> and <span class="math inline">\(\sin\)</span> of the angular variable. We can do this by doing an empty run of <code>mice()</code> by setting the maximum number of cycles to 0. Then we extract the methods vector and predictor matrix to modify and then pass to our actual run of <code>mice()</code> with <span class="math inline">\(M = 5\)</span> imputations and <span class="math inline">\(c = 10\)</span> cycles.</p>
+<div class="cell" data-hash="index_cache/html/set-up-mice_ca2bcfa006de2b6a89b45be092f6fe1b">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pitches[,<span class="fu">c</span>(<span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>, <span class="st">"release_spin_rate"</span>)] <span class="ot">&lt;-</span> <span class="fu">scale</span>(pitches[,<span class="fu">c</span>(<span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>, <span class="st">"release_spin_rate"</span>)])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pitches <span class="ot">&lt;-</span> pitches <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">rate_cos_spin =</span> release_spin_rate <span class="sc">*</span> <span class="fu">cos</span>(spin_axis),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">rate_sin_spin =</span> release_spin_rate <span class="sc">*</span> <span class="fu">sin</span>(spin_axis)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>imp0 <span class="ot">&lt;-</span> <span class="fu">mice</span>(pitches, <span class="at">m =</span> <span class="dv">1</span>, <span class="at">maxit =</span> <span class="dv">0</span>, <span class="at">method =</span> <span class="st">"pmm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Number of logged events: 6</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> imp0<span class="sc">$</span>method</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"spin_axis"</span>] <span class="ot">&lt;-</span> <span class="st">"bpnreg"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"cos_spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~cos(spin_axis)"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"sin_spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~sin(spin_axis)"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"cos_2spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~cos(2*spin_axis)"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"sin_2spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~sin(2*spin_axis)"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>methods</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          game_date             pitcher              batter           home_team 
+                 ""                  ""                  ""                  "" 
+          away_team          pitch_type                type       release_speed 
+                 ""                  ""                  ""               "pmm" 
+  release_spin_rate   release_extension           spin_axis       release_pos_x 
+              "pmm"               "pmm"            "bpnreg"               "pmm" 
+      release_pos_z             plate_x             plate_z         player_name 
+              "pmm"               "pmm"               "pmm"                  "" 
+             events         description            cos_spin            sin_spin 
+                 ""                  ""   "~cos(spin_axis)"   "~sin(spin_axis)" 
+          cos_2spin           sin_2spin       rate_cos_spin       rate_sin_spin 
+"~cos(2*spin_axis)" "~sin(2*spin_axis)"               "pmm"               "pmm" </code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pred_mat <span class="ot">&lt;-</span> imp0<span class="sc">$</span>predictorMatrix</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pred_mat[,<span class="fu">c</span>(<span class="st">"game_date"</span>, <span class="st">"pitcher"</span>, <span class="st">"batter"</span>, <span class="st">"home_team"</span>, <span class="st">"away_team"</span>, <span class="st">"type"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"events"</span>, <span class="st">"player_name"</span>, <span class="st">"description"</span>, <span class="st">"spin_axis"</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="st">"spin_axis"</span>, <span class="fu">c</span>(<span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"cos_2spin"</span>, <span class="st">"sin_2spin"</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="fu">c</span>(<span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"cos_2spin"</span>, <span class="st">"sin_2spin"</span>), ] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="fu">c</span>(<span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"cos_2spin"</span>, <span class="st">"sin_2spin"</span>), <span class="st">"spin_axis"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="fu">c</span>(<span class="st">"spin_axis"</span>, <span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>), <span class="fu">c</span>(<span class="st">"spin_axis"</span>, <span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          spin_axis cos_spin sin_spin release_speed release_extension
+spin_axis         0        0        0             1                 1
+cos_spin          1        0        0             0                 0
+sin_spin          1        0        0             0                 0</code></pre>
+</div>
+</div>
+<p>After setting up the methods vector and predictor matrix, we can run <code>mice()</code>.</p>
+<div class="cell" data-hash="index_cache/html/run-mice-norun_e224cebb058cf84205fa44a43b303879">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(pitches, <span class="at">m =</span> <span class="dv">5</span>, <span class="at">maxit =</span> <span class="dv">5</span>, <span class="at">method =</span> methods,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">predictorMatrix =</span> pred_mat, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The logistic regression mixed effects model is then fit to each of the completed data sets. Estimates and their variances are combined with <code>broom.mixed</code>.</p>
+<div class="cell" data-hash="index_cache/html/fit-glmm-imps-norun_1b9299f856f738d33df1f32a0cc5af9d">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(imps, lme4<span class="sc">::</span><span class="fu">glmer</span>(type <span class="sc">~</span> cos_spin <span class="sc">+</span> sin_spin <span class="sc">+</span> cos_2spin <span class="sc">+</span> sin_2spin </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_speed <span class="sc">+</span> release_extension </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> plate_x <span class="sc">*</span> plate_z <span class="sc">+</span> release_pos_x <span class="sc">*</span> release_pos_z</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> pitch_type <span class="sc">|</span> player_name),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>pooled <span class="ot">&lt;-</span> <span class="fu">pool</span>(fit)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pooled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-hash="index_cache/html/tbl-glmm-pooled_e23eaeb087f294af42cef2293433ba05">
+<div id="tbl-glmm-pooled" class="cell quarto-float anchored" data-hash="index_cache/html/tbl-glmm-pooled_e23eaeb087f294af42cef2293433ba05">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-glmm-pooled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Pooled summary of the fits for the GLMM.
+</figcaption>
+<div aria-describedby="tbl-glmm-pooled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 17%">
+<col style="width: 22%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;"><span class="math inline">\(\hat{\beta}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(se(\hat{\beta})\)</span></th>
+<th style="text-align: right;">LB 95% CI</th>
+<th style="text-align: right;">UB 95% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-1.8988</td>
+<td style="text-align: right;">1.7676</td>
+<td style="text-align: right;">-5.3654</td>
+<td style="text-align: right;">1.5678</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cos_spin</td>
+<td style="text-align: right;">0.0643</td>
+<td style="text-align: right;">0.3563</td>
+<td style="text-align: right;">-0.6341</td>
+<td style="text-align: right;">0.7628</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sin_spin</td>
+<td style="text-align: right;">0.2623</td>
+<td style="text-align: right;">1.4698</td>
+<td style="text-align: right;">-2.6239</td>
+<td style="text-align: right;">3.1485</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cos_2spin</td>
+<td style="text-align: right;">-0.0039</td>
+<td style="text-align: right;">0.4929</td>
+<td style="text-align: right;">-0.9718</td>
+<td style="text-align: right;">0.9640</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sin_2spin</td>
+<td style="text-align: right;">0.1724</td>
+<td style="text-align: right;">0.2551</td>
+<td style="text-align: right;">-0.3276</td>
+<td style="text-align: right;">0.6725</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">release_speed</td>
+<td style="text-align: right;">-0.0314</td>
+<td style="text-align: right;">0.0561</td>
+<td style="text-align: right;">-0.1414</td>
+<td style="text-align: right;">0.0786</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">release_extension</td>
+<td style="text-align: right;">0.0012</td>
+<td style="text-align: right;">0.0341</td>
+<td style="text-align: right;">-0.0656</td>
+<td style="text-align: right;">0.0681</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rate_cos_spin</td>
+<td style="text-align: right;">-0.1007</td>
+<td style="text-align: right;">0.0840</td>
+<td style="text-align: right;">-0.2654</td>
+<td style="text-align: right;">0.0640</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rate_sin_spin</td>
+<td style="text-align: right;">0.1008</td>
+<td style="text-align: right;">0.0446</td>
+<td style="text-align: right;">0.0134</td>
+<td style="text-align: right;">0.1882</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">plate_x</td>
+<td style="text-align: right;">-1.1104</td>
+<td style="text-align: right;">0.0659</td>
+<td style="text-align: right;">-1.2396</td>
+<td style="text-align: right;">-0.9811</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">plate_z</td>
+<td style="text-align: right;">0.4396</td>
+<td style="text-align: right;">0.0272</td>
+<td style="text-align: right;">0.3863</td>
+<td style="text-align: right;">0.4929</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">release_pos_x</td>
+<td style="text-align: right;">-0.6002</td>
+<td style="text-align: right;">0.4430</td>
+<td style="text-align: right;">-1.4689</td>
+<td style="text-align: right;">0.2684</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">release_pos_z</td>
+<td style="text-align: right;">0.1745</td>
+<td style="text-align: right;">0.2194</td>
+<td style="text-align: right;">-0.2555</td>
+<td style="text-align: right;">0.6046</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">plate_x:plate_z</td>
+<td style="text-align: right;">0.5631</td>
+<td style="text-align: right;">0.0291</td>
+<td style="text-align: right;">0.5061</td>
+<td style="text-align: right;">0.6201</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">release_pos_x:release_pos_z</td>
+<td style="text-align: right;">0.0806</td>
+<td style="text-align: right;">0.0717</td>
+<td style="text-align: right;">-0.0600</td>
+<td style="text-align: right;">0.2212</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+
+
+<!-- -->
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bolkerBroomMixed2022" class="csl-entry" role="listitem">
+Bolker, Ben, and David Robinson. 2022. <em>Broom.mixed: Tidying Methods for Mixed Models</em>. <a href="https://CRAN.R-project.org/package=broom.mixed">https://CRAN.R-project.org/package=broom.mixed</a>.
+</div>
 <div id="ref-buuren2010mice" class="csl-entry" role="listitem">
 Buuren, S van, and Karin Groothuis-Oudshoorn. 2010. <span>“Mice: Multivariate Imputation by Chained Equations in r.”</span> <em>Journal of Statistical Software</em>, 168.
 </div>
 <div id="ref-buuren2018" class="csl-entry" role="listitem">
 Buuren, Stef van. 2018. <em>Flexible Imputation of Missing Data</em>. 2nd ed. Interdisciplinary Statistics Series. Chapman; Hall/CRC. <a href="https://stefvanbuuren.name/fimd/">https://stefvanbuuren.name/fimd/</a>.
 </div>
-<div id="ref-cremers2021" class="csl-entry" role="listitem">
-Cremers, Jolien. 2021. <em>Bpnreg: Bayesian Projected Normal Regression Models for Circular Data</em>. <a href="https://CRAN.R-project.org/package=bpnreg">https://CRAN.R-project.org/package=bpnreg</a>.
-</div>
 <div id="ref-harel2003strategies" class="csl-entry" role="listitem">
 Harel, Ofer. 2009. <em>Strategies for Data Analysis with Two Types of Missing Values</em>. Lap Lambert Academic Publishing GmbH KG.
+</div>
+<div id="ref-hernandez-stumpfhauser2017" class="csl-entry" role="listitem">
+Hernandez-Stumpfhauser, Daniel, F. Jay Breidt, and Mark J. van der Woerd. 2017. <span>“The General Projected Normal Distribution of Arbitrary Dimension: Modeling and Bayesian Inference.”</span> <em>Bayesian Analysis</em> 12 (1): 113–33. <a href="https://doi.org/10.1214/15-BA989">https://doi.org/10.1214/15-BA989</a>.
 </div>
 <div id="ref-li2006analysis" class="csl-entry" role="listitem">
 Li, Xiaoming, Devan V Mehrotra, and John Barnard. 2006. <span>“Analysis of Incomplete Longitudinal Binary Data Using Multiple Imputation.”</span> <em>Statistics in Medicine</em> 25 (12): 21072124.
@@ -368,10 +791,78 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/benjamin-stockton\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -381,8 +872,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -395,6 +895,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -438,6 +1057,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -463,6 +1083,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -521,8 +1167,389 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "How to Use imputeangles"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Ben Stockton"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">    html:</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">        code-fold: show</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">        code-tools: true</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">        toc: true</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">        toc-location: left</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">        link-external-newwindow: true</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">        citations-hover: true</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="an">cache:</span><span class="co"> true</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>In this post, I will provide a brief introduction to using multiple imputation (MI) and then share an example analysis of pitch movement using my <span class="in">`imputeangles`</span> package.</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>Most statistical analysis methods are designed with complete data in mind, however real-world data is often incomplete with observations missing due to nonresponse, censoring, or measurement issues. The incomplete data cannot be directly analyzed with the complete data statistical methods. While there are methods designed to model the incomplete data with a modified method, the convenience and widely available of implementations it would be highly beneficial to complete the incomplete data. This could be accomplished by removing incomplete cases and performing complete case analysis (CCA), but this could throw out lots of useful data <span class="co">[</span><span class="ot">@schafer2002</span><span class="co">]</span>.</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple Imputation</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>Imputation is the process of replacing the missing values with values deterministically calculated by the observed data or with values drawn from a probability distribution shaped by the observed data. Two common, but not theoretically valid way to do this are mean imputation (replace with the sample mean or regression predicted values) <span class="co">[</span><span class="ot">@schafer1999multiple</span><span class="co">]</span> or last observation carried forward (LOCF) for time series or longitudinal data <span class="co">[</span><span class="ot">@moritz2022</span><span class="co">]</span>. These methods are performed a single time to create a singly imputed (SI) data set. Alternatively, we could with random draws from the observed data or from a predictive distribution based on the observed data. These imputations are worse in terms of providing accurate predictions for the missing value, however they do reflect the uncertainty of the missing value. So repeatedly imputing the missing values to create multiple imputed data sets can propagate the uncertainty to the analysis.</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>This process is called by Multiple Imputation (MI) and was initially developed by Donald Rubin in the 1970s and 1980s for nonresponse in surveys <span class="co">[</span><span class="ot">@rubin1978, @rubin1987</span><span class="co">]</span>, and then extended to more analysis contexts since the 1990s <span class="co">[</span><span class="ot">@li2006analysis, @harel2003strategies</span><span class="co">]</span>. The foundation of MI is a three stage process.</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Impute - Fill in the missing values with random samples from a predictive distribution (posterior predictive draws theoretically preferred) to create $M$ completed data sets.</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Analyze - Analyze each of the $M$ data sets with a complete data method to estimate a quantity of interest $Q$ using estimate $\hat{Q}_m$ and its squared standard error $U_m = SE(\hat{Q})^2$.</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Combine - Use Rubin's Rules to combine the estimates and variances to perform inference on the quantity of interest $Q$.</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="in">```{=tex}</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="in">    \begin{align*} \label{eq-rubins-rules}</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="in">        \bar{Q} &amp;= \frac{1}{M} \sum_{m=1}^M \hat{Q}_m \\</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="in">        \bar{U} &amp;= \frac{1}{M} \sum_{m=1}^M U_m \\</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="in">        B &amp;= \frac{1}{M-1} \sum_{m=1}^M (\hat{Q}_m - \bar{Q})^2 \\</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="in">        T &amp;= \bar{U} + (1 + \frac{1}{M}) B</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="in">    \end{align*}</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>Under a set of assumptions<span class="ot">[^1]</span>, the inferences produced by MI will be unbiased, more efficient than CCA, and confidence valid. These combination rules have been developed for sample means, sample mean differences, regression coefficients, correlation coefficients, and more <span class="co">[</span><span class="ot">@buuren2018 Sec. 5.2</span><span class="co">]</span>.</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>Without making modifications to the core MI procedure, we have to assume normality for $\hat{Q}$, ignorability (missing at random and independent priors for the missingness mechanism and data model), and that all assumptions for the imputation procedure are satisfied.</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pitch Movement</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### Loading Pitch Data</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-pitch-data-no-run</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Amelia)</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(imputeangles)</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>peralta_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Peralta"</span>,</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">first_name =</span> <span class="st">"Freddy"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>burnes_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Burnes"</span>, </span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">first_name =</span> <span class="st">"Corbin"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>miley_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Miley"</span>, </span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">first_name =</span> <span class="st">"Wade"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>rea_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Rea"</span>, </span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">first_name =</span> <span class="st">"Colin"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>teheran_id <span class="ot">&lt;-</span> <span class="dv">527054</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>houser_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Houser"</span>, </span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">first_name =</span> <span class="st">"Adrian"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>woodruff_id <span class="ot">&lt;-</span> baseballr<span class="sc">::</span><span class="fu">playerid_lookup</span>(<span class="at">last_name =</span> <span class="st">"Woodruff"</span>, </span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">first_name =</span> <span class="st">"Brandon"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(mlbam_id)</span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>ids_list <span class="ot">&lt;-</span> <span class="fu">list</span>(peralta_id, burnes_id, rea_id, houser_id, </span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>                 miley_id, teheran_id, woodruff_id)</span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a><span class="co"># pitches &lt;- readr::read_csv()</span></span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>pitches <span class="ot">&lt;-</span> <span class="fu">lapply</span>(ids_list, <span class="cf">function</span>(id) {</span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>    baseballr<span class="sc">::</span><span class="fu">statcast_search</span>(<span class="at">start_date =</span> <span class="st">"2023-03-01"</span>,</span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a>                               <span class="at">end_dat =</span> <span class="st">"2023-10-31"</span>,</span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a>                               <span class="at">player_type =</span> <span class="st">"pitcher"</span>, <span class="at">playerid =</span> id)</span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>    }) <span class="sc">|&gt;</span></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>        game_date, pitcher, batter, game_type, home_team, away_team, </span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a>       pitch_type, type, release_speed, release_spin_rate, release_extension,</span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>       spin_axis, release_pos_x, release_pos_z, plate_x, plate_z,</span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a>       player_name, events, description, launch_angle, launch_speed</span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>        game_type <span class="sc">==</span> <span class="st">"R"</span>, </span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>        type <span class="sc">!=</span> <span class="st">"X"</span></span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>        <span class="at">spin_axis =</span> spin_axis <span class="sc">*</span> pi <span class="sc">/</span> <span class="dv">360</span>,</span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a>        <span class="at">cos_spin =</span> <span class="fu">cos</span>(spin_axis),</span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a>        <span class="at">sin_spin =</span> <span class="fu">sin</span>(spin_axis),</span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a>        <span class="at">cos_2spin =</span> <span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>spin_axis),</span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>        <span class="at">sin_2spin =</span> <span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>spin_axis),</span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a>        <span class="at">strike =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a>            type <span class="sc">==</span> <span class="st">"S"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a>            type <span class="sc">==</span> <span class="st">"B"</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>game_type)</span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(pitches, <span class="st">"data/brewers_sp_2023_pitches.csv"</span>)</span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-pitch-data</span></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Amelia)</span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.mixed)</span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(imputeangles)</span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>pitches <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/brewers_sp_2023_pitches.csv"</span>)</span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>pitches <span class="ot">&lt;-</span> pitches <span class="sc">|&gt;</span></span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>        game_date, pitcher, batter, game_type, home_team, away_team, </span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a>       pitch_type, type, release_speed, release_spin_rate, release_extension,</span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a>       spin_axis, release_pos_x, release_pos_z, plate_x, plate_z,</span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a>       player_name, events, description</span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>     ) <span class="sc">|&gt;</span></span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(game_type <span class="sc">==</span> <span class="st">"R"</span>, </span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a>           type <span class="sc">!=</span> <span class="st">"X"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a>        <span class="at">spin_axis =</span> spin_axis <span class="sc">*</span> pi <span class="sc">/</span> <span class="dv">360</span>,</span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>        <span class="at">cos_spin =</span> <span class="fu">cos</span>(spin_axis),</span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a>        <span class="at">sin_spin =</span> <span class="fu">sin</span>(spin_axis),</span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a>        <span class="at">cos_2spin =</span> <span class="fu">cos</span>(<span class="dv">2</span><span class="sc">*</span>spin_axis),</span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a>        <span class="at">sin_2spin =</span> <span class="fu">sin</span>(<span class="dv">2</span><span class="sc">*</span>spin_axis),</span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a>        <span class="at">strike =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a>            type <span class="sc">==</span> <span class="st">"S"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a>            type <span class="sc">==</span> <span class="st">"B"</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>game_type)</span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-miss-map</span></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Missinginess matrix plot where red indicates missingness in that observation.</span></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a>pitches <span class="sc">|&gt;</span></span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a>        pitch_type, release_speed, release_spin_rate, spin_axis,</span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a>        release_extension, plate_x, plate_z  </span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a>    VIM<span class="sc">::</span><span class="fu">matrixplot</span>()</span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a>Now we'll take a look at an example of how to perform MI in practice in comparison to CCA. We have a data set of $N =$ <span class="in">`r nrow(pitches)`</span> caught pitches (swing and called strikes, balls, or hit by pitches) pitches from the 2023 MLB season with measurements for the pitch outcome, pitch velocity and spin direction and rate at release, release point, horizontal and vertical break, location at the plate, as well as the identity of the batter, pitcher, and ballpark. We will model the pitch outcome based on the other measurements while using random effects for the batter, pitcher, and ballpark. In this analysis our quantity of interest is the effect of spin rate $\beta_{SpinRate}$ on the pitch outcome given the pitch was not fouled off or put in play which will be estimated using a mixed effects logistic regression model.</span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: pitches-thrown-norun</span></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a>pitches <span class="sc">|&gt;</span></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name) <span class="sc">|&gt;</span></span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n_pitches =</span> <span class="fu">n</span>(),</span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_fastball =</span> <span class="fu">sum</span>(pitch_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FC"</span>, <span class="st">"FF"</span>, <span class="st">"FS"</span>, <span class="st">"SI"</span>)),</span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_offspeed =</span> <span class="fu">sum</span>(pitch_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CH"</span>, <span class="st">"CU"</span>, <span class="st">"SL"</span>, <span class="st">"ST"</span>)),</span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(pitch_type))) </span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-pitches-thrown</span></span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Number of pitches thrown by each starting pitcher.</span></span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a>pitches<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">factor</span>(pitches<span class="sc">$</span>type)</span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a>pitches <span class="sc">|&gt;</span></span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name) <span class="sc">|&gt;</span></span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">n_pitches =</span> <span class="fu">n</span>(),</span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_fastball =</span> <span class="fu">sum</span>(pitch_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"FC"</span>, <span class="st">"FF"</span>, <span class="st">"FS"</span>, <span class="st">"SI"</span>)),</span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_offspeed =</span> <span class="fu">sum</span>(pitch_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CH"</span>, <span class="st">"CU"</span>, <span class="st">"SL"</span>, <span class="st">"ST"</span>)),</span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(pitch_type))) <span class="sc">|&gt;</span></span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kable</span>(<span class="at">format =</span> <span class="st">"html"</span>, </span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a>                      <span class="at">colnames =</span> <span class="fu">c</span>(<span class="st">"Name"</span>, <span class="st">"N Pitches"</span>, <span class="st">"N Fastball"</span>, <span class="st">"N Offspeed"</span>, <span class="st">"N Missing"</span>))</span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### Imputing Incomplete Pitch Data</span></span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a>Multiple imputation will be performed using the chained equations or fully conditional specification with the <span class="in">`mice`</span> R package <span class="co">[</span><span class="ot">@buuren2010mice</span><span class="co">]</span> with estimates pooled by the <span class="in">`broom.mixed`</span> R package <span class="co">[</span><span class="ot">@bolkerBroomMixed2022</span><span class="co">]</span>. The inline data will be imputed by <span class="in">`method = "pmm"`</span> which uses predictive mean matching. The angular data, spin rate, will be imputed by <span class="in">`method = "pnregid"`</span> which uses Bayesian projected normal regression with a constrained covariance matrix $\Sigma$ <span class="co">[</span><span class="ot">@hernandez-stumpfhauser2017</span><span class="co">]</span> from my <span class="in">`imputeangles`</span> package.</span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a>To impute with the projected normal regression, we have to specify to <span class="in">`mice`</span> which variable is angular and which variables are the $\cos$ and $\sin$ of the angular variable. We can do this by doing an empty run of <span class="in">`mice()`</span> by setting the maximum number of cycles to 0. Then we extract the methods vector and predictor matrix to modify and then pass to our actual run of <span class="in">`mice()`</span> with $M = 5$ imputations and $c = 10$ cycles.</span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: set-up-mice</span></span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a>pitches[,<span class="fu">c</span>(<span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>, <span class="st">"release_spin_rate"</span>)] <span class="ot">&lt;-</span> <span class="fu">scale</span>(pitches[,<span class="fu">c</span>(<span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>, <span class="st">"release_spin_rate"</span>)])</span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a>pitches <span class="ot">&lt;-</span> pitches <span class="sc">|&gt;</span></span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a>        <span class="at">rate_cos_spin =</span> release_spin_rate <span class="sc">*</span> <span class="fu">cos</span>(spin_axis),</span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a>        <span class="at">rate_sin_spin =</span> release_spin_rate <span class="sc">*</span> <span class="fu">sin</span>(spin_axis)</span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a>imp0 <span class="ot">&lt;-</span> <span class="fu">mice</span>(pitches, <span class="at">m =</span> <span class="dv">1</span>, <span class="at">maxit =</span> <span class="dv">0</span>, <span class="at">method =</span> <span class="st">"pmm"</span>)</span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> imp0<span class="sc">$</span>method</span>
+<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"spin_axis"</span>] <span class="ot">&lt;-</span> <span class="st">"bpnreg"</span></span>
+<span id="cb12-242"><a href="#cb12-242" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"cos_spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~cos(spin_axis)"</span></span>
+<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"sin_spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~sin(spin_axis)"</span></span>
+<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"cos_2spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~cos(2*spin_axis)"</span></span>
+<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"sin_2spin"</span>] <span class="ot">&lt;-</span> <span class="st">"~sin(2*spin_axis)"</span></span>
+<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a>methods</span>
+<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a>pred_mat <span class="ot">&lt;-</span> imp0<span class="sc">$</span>predictorMatrix</span>
+<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a>pred_mat[,<span class="fu">c</span>(<span class="st">"game_date"</span>, <span class="st">"pitcher"</span>, <span class="st">"batter"</span>, <span class="st">"home_team"</span>, <span class="st">"away_team"</span>, <span class="st">"type"</span>,</span>
+<span id="cb12-250"><a href="#cb12-250" aria-hidden="true" tabindex="-1"></a>            <span class="st">"events"</span>, <span class="st">"player_name"</span>, <span class="st">"description"</span>, <span class="st">"spin_axis"</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-251"><a href="#cb12-251" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="st">"spin_axis"</span>, <span class="fu">c</span>(<span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"cos_2spin"</span>, <span class="st">"sin_2spin"</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="fu">c</span>(<span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"cos_2spin"</span>, <span class="st">"sin_2spin"</span>), ] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="fu">c</span>(<span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"cos_2spin"</span>, <span class="st">"sin_2spin"</span>), <span class="st">"spin_axis"</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a>pred_mat[<span class="fu">c</span>(<span class="st">"spin_axis"</span>, <span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>), <span class="fu">c</span>(<span class="st">"spin_axis"</span>, <span class="st">"cos_spin"</span>, <span class="st">"sin_spin"</span>, <span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>)]</span>
+<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a>After setting up the methods vector and predictor matrix, we can run <span class="in">`mice()`</span>.</span>
+<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-262"><a href="#cb12-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-263"><a href="#cb12-263" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: run-mice-norun</span></span>
+<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(pitches, <span class="at">m =</span> <span class="dv">5</span>, <span class="at">maxit =</span> <span class="dv">5</span>, <span class="at">method =</span> methods,</span>
+<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a>             <span class="at">predictorMatrix =</span> pred_mat, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: run-mice</span></span>
+<span id="cb12-274"><a href="#cb12-274" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb12-275"><a href="#cb12-275" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-277"><a href="#cb12-277" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(pitches, <span class="at">m =</span> <span class="dv">5</span>, <span class="at">maxit =</span> <span class="dv">5</span>, <span class="at">method =</span> methods,</span>
+<span id="cb12-278"><a href="#cb12-278" aria-hidden="true" tabindex="-1"></a>             <span class="at">predictorMatrix =</span> pred_mat, <span class="at">printFlag =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(imps, <span class="st">"data/pitch_imputations.rds"</span>)</span>
+<span id="cb12-281"><a href="#cb12-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-282"><a href="#cb12-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a><span class="fu">### Logistic Regression GLMM with lme4</span></span>
+<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a>The logistic regression mixed effects model is then fit to each of the completed data sets. Estimates and their variances are combined with <span class="in">`broom.mixed`</span>.</span>
+<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit-glmm-imps-norun</span></span>
+<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(imps, lme4<span class="sc">::</span><span class="fu">glmer</span>(strike <span class="sc">~</span> cos_spin <span class="sc">+</span> sin_spin <span class="sc">+</span> cos_2spin <span class="sc">+</span> sin_2spin </span>
+<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_speed <span class="sc">+</span> release_extension </span>
+<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> plate_x <span class="sc">*</span> plate_z <span class="sc">+</span> release_pos_x <span class="sc">*</span> release_pos_z</span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> pitch_type <span class="sc">|</span> player_name),</span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)))</span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a>pooled <span class="ot">&lt;-</span> <span class="fu">pool</span>(fit)</span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pooled)</span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit-glmm-imps</span></span>
+<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/pitch_imputations.rds"</span>)</span>
+<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(imps, lme4<span class="sc">::</span><span class="fu">glmer</span>(strike <span class="sc">~</span> cos_spin <span class="sc">*</span> pitch_type <span class="sc">+</span> sin_spin <span class="sc">*</span> pitch_type </span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> cos_2spin <span class="sc">*</span> pitch_type <span class="sc">+</span> sin_2spin <span class="sc">*</span> pitch_type  </span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_speed <span class="sc">+</span> release_extension </span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> rate_cos_spin <span class="sc">+</span> rate_sin_spin</span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> plate_x <span class="sc">*</span> plate_z <span class="sc">+</span> plate_x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> plate_z<span class="sc">^</span><span class="dv">2</span> </span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_pos_x <span class="sc">*</span> release_pos_z</span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_pos_x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> release_pos_z<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> pitch_type <span class="sc">|</span> player_name),</span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)))</span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(fit, <span class="st">"data/fit-glmm-imps.rds"</span>)</span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-glmm-pooled</span></span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: Pooled summary of the fits for the GLMM.</span></span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/fit-glmm-imps.rds"</span>)</span>
+<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a>pooled <span class="ot">&lt;-</span> <span class="fu">pool</span>(fit)</span>
+<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pooled) <span class="sc">|&gt;</span> </span>
+<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a>        <span class="at">se =</span> std.error,</span>
+<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a>        <span class="at">moe =</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> df) <span class="sc">*</span> se,</span>
+<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a>        <span class="at">u95 =</span> estimate <span class="sc">+</span> moe,</span>
+<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a>        <span class="at">l95 =</span> estimate <span class="sc">-</span> moe</span>
+<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(term, estimate, se, l95, u95) <span class="sc">|&gt;</span></span>
+<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">format =</span> <span class="st">"markdown"</span>, <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a>                    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Term"</span>, <span class="st">"$</span><span class="sc">\\</span><span class="st">hat{</span><span class="sc">\\</span><span class="st">beta}$"</span>, <span class="st">"$se(</span><span class="sc">\\</span><span class="st">hat{</span><span class="sc">\\</span><span class="st">beta})$"</span>,</span>
+<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"LB 95% CI"</span>, <span class="st">"UB 95% CI"</span>))</span>
+<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Modeling with brms --&gt;</span></span>
+<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit-brm-imps-norun</span></span>
+<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a>brm_fit <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(strike <span class="sc">~</span> cos_spin <span class="sc">*</span> pitch_type <span class="sc">+</span> sin_spin <span class="sc">*</span> pitch_type </span>
+<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> cos_2spin <span class="sc">*</span> pitch_type <span class="sc">+</span> sin_2spin <span class="sc">*</span> pitch_type  </span>
+<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_speed <span class="sc">+</span> release_extension </span>
+<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> rate_cos_spin <span class="sc">+</span> rate_sin_spin</span>
+<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> plate_x <span class="sc">*</span> plate_z <span class="sc">+</span> plate_x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> plate_z<span class="sc">^</span><span class="dv">2</span> </span>
+<span id="cb12-365"><a href="#cb12-365" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_pos_x <span class="sc">*</span> release_pos_z</span>
+<span id="cb12-366"><a href="#cb12-366" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_pos_x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> release_pos_z<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> pitch_type <span class="sc">|</span> player_name),</span>
+<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">bernoulli</span>(<span class="at">link =</span> <span class="st">"logit"</span>),</span>
+<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> imps,</span>
+<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a>            <span class="at">cores =</span> <span class="dv">6</span>,</span>
+<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a>            <span class="co"># threads = threading(6),</span></span>
+<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a>            <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a>            <span class="at">refresh =</span> <span class="dv">100</span>,</span>
+<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a>            <span class="at">save_model =</span> <span class="st">"log-reg-glmm-pitch.stan"</span>)</span>
+<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(brm_fit, <span class="at">file =</span> <span class="st">"data/brms-glmm-fit.rds"</span>)</span>
+<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit-brm-imps-norun</span></span>
+<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-387"><a href="#cb12-387" aria-hidden="true" tabindex="-1"></a>brm_fit <span class="ot">&lt;-</span> <span class="fu">brm_muliple</span>(type <span class="sc">~</span> cos_spin <span class="sc">*</span> pitch_type <span class="sc">+</span> sin_spin <span class="sc">*</span> pitch_type </span>
+<span id="cb12-388"><a href="#cb12-388" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> cos_2spin <span class="sc">*</span> pitch_type <span class="sc">+</span> sin_2spin <span class="sc">*</span> pitch_type  </span>
+<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_speed <span class="sc">+</span> release_extension </span>
+<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> rate_cos_spin <span class="sc">+</span> rate_sin_spin</span>
+<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> plate_x <span class="sc">*</span> plate_z <span class="sc">+</span> plate_x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> plate_z<span class="sc">^</span><span class="dv">2</span> </span>
+<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_pos_x <span class="sc">*</span> release_pos_z</span>
+<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_pos_x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> release_pos_z<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> pitch_type <span class="sc">|</span> player_name),</span>
+<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a>                              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>),</span>
+<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> imps)</span>
+<span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-398"><a href="#cb12-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-401"><a href="#cb12-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-402"><a href="#cb12-402" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-brm-fit</span></span>
+<span id="cb12-403"><a href="#cb12-403" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb12-404"><a href="#cb12-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-405"><a href="#cb12-405" aria-hidden="true" tabindex="-1"></a>brm_fit <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/brms-glmm-fit.rds"</span>)</span>
+<span id="cb12-406"><a href="#cb12-406" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
+
 
 
 
