@@ -1,13 +1,17 @@
 ---
 title: "How to Use imputeangles"
 author: "Ben Stockton"
+date: 2024-02-21
 editor: visual
 format: 
     html:
         code-fold: show
         code-tools: true
+        number-depth: 3
         toc: true
         toc-location: left
+        toc-expand: 2
+        toc-depth: 3
         link-external-newwindow: true
         citations-hover: true
 bibliography: references.bib
@@ -16,11 +20,11 @@ cache: true
 
 In this post, I will provide a brief introduction to using multiple imputation (MI) and then share an example analysis of pitch movement using my `imputeangles` package.
 
-Most statistical analysis methods are designed with complete data in mind, however real-world data is often incomplete with observations missing due to nonresponse, censoring, or measurement issues. The incomplete data cannot be directly analyzed with the complete data statistical methods. While there are methods designed to model the incomplete data with a modified method, the convenience and widely available of implementations it would be highly beneficial to complete the incomplete data. This could be accomplished by removing incomplete cases and performing complete case analysis (CCA), but this could throw out lots of useful data [@schafer2002].
+Most statistical analysis methods are designed with complete data in mind, however, real-world data is often incomplete with observations missing due to nonresponse, censoring, or measurement issues. The incomplete data cannot be directly analyzed with the complete data statistical methods. While there are specialized methods designed to model incomplete data, due to the convenience and wide availability of complete data methods it would be highly beneficial to complete the incomplete data. This could be accomplished by removing incomplete cases and performing complete case analysis (CCA), but this could throw out lots of useful data [@schafer2002].
 
 ## Multiple Imputation
 
-Imputation is the process of replacing the missing values with values deterministically calculated by the observed data or with values drawn from a probability distribution shaped by the observed data. Two common, but not theoretically valid way to do this are mean imputation (replace with the sample mean or regression predicted values) [@schafer1999multiple] or last observation carried forward (LOCF) for time series or longitudinal data [@moritz2022]. These methods are performed a single time to create a singly imputed (SI) data set. Alternatively, we could with random draws from the observed data or from a predictive distribution based on the observed data. These imputations are worse in terms of providing accurate predictions for the missing value, however they do reflect the uncertainty of the missing value. So repeatedly imputing the missing values to create multiple imputed data sets can propagate the uncertainty to the analysis.
+Imputation is the process of replacing the missing values with values deterministically calculated by the observed data or with values drawn from a probability distribution shaped by the observed data. Two common, but not theoretically valid, ways to do this are mean imputation (replace with the sample mean or regression predicted values) [@schafer1999multiple] or last observation carried forward (LOCF) for time series or longitudinal data [@moritz2022]. These methods are performed a single time to create a singly imputed (SI) data set. Alternatively, we could impute the missing values with random draws from the observed data or from a predictive distribution based on the observed data. These imputations are worse in terms of providing accurate predictions for the missing value, however, they do reflect the uncertainty of the missing value. Repeatedly imputing the missing values to create multiple imputed data sets can propagate the uncertainty to the analysis.
 
 This process is called by Multiple Imputation (MI) and was initially developed by Donald Rubin in the 1970s and 1980s for nonresponse in surveys [@rubin1978, @rubin1987], and then extended to more analysis contexts since the 1990s [@li2006analysis, @harel2003strategies]. The foundation of MI is a three stage process.
 
@@ -39,13 +43,17 @@ This process is called by Multiple Imputation (MI) and was initially developed b
     \end{align*}
     ```
 
-Under a set of assumptions[^1], the inferences produced by MI will be unbiased, more efficient than CCA, and confidence valid. These combination rules have been developed for sample means, sample mean differences, regression coefficients, correlation coefficients, and more [@buuren2018 Sec. 5.2].
+Under a set of assumptions[^1], the inferences produced by MI will be unbiased, more efficient than CCA, and confidence valid. Rubin's rules have been developed for sample means, sample mean differences, regression coefficients, correlation coefficients, and more [@buuren2018 Sec. 5.2].
 
 [^1]: Without making modifications to the core MI procedure, we have to assume normality for $\hat{Q}$, ignorability (missing at random and independent priors for the missingness mechanism and data model), and that all assumptions for the imputation procedure are satisfied.
 
 ## Pitch Movement
 
-### Loading Pitch Data
+In baseball, highly-skilled pitchers are able to impart different rates and axis of spin on the pitched ball resulting in varying movements (or lack thereof) on the pitch as it travels to the catcher. Modeling these characteristics has been a central development to coaching pitchers in the past decade[^2]. In the following illustrative analysis, we'll use pitch-level data collected by MLB to predict whether a non-batted pitch will be swung at and missed.
+
+[^2]: See Driveline Baseball and Tread Athletics as well as the numerous pitching labs run by Major League teams.
+
+## Loading Pitch Data
 
 ```{r}
 #| label: load-pitch-data-no-run
@@ -173,7 +181,7 @@ pitches |>
 
 ```
 
-Now we'll take a look at an example of how to perform MI in practice in comparison to CCA. We have a data set of $N =$ `r nrow(pitches)` caught pitches (swing and called strikes, balls, or hit by pitches) pitches from the 2023 MLB season with measurements for the pitch outcome, pitch velocity and spin direction and rate at release, release point, horizontal and vertical break, location at the plate, as well as the identity of the batter, pitcher, and ballpark. We will model the pitch outcome based on the other measurements while using random effects for the batter, pitcher, and ballpark. In this analysis our quantity of interest is the effect of spin rate $\beta_{SpinRate}$ on the pitch outcome given the pitch was not fouled off or put in play which will be estimated using a mixed effects logistic regression model.
+We'll take a look at an example of how to perform MI in practice in comparison to CCA. We have a data set of $N =$ `r nrow(pitches)` caught pitches (swing and called strikes, balls, or hit by pitches) pitches from the 2023 MLB season with measurements for the pitch outcome, pitch velocity and spin direction and rate at release, release point, horizontal and vertical break, location at the plate, as well as the identity of the batter, pitcher, and ballpark. We will model the pitch outcome based on the other measurements while using random effects for the batter, pitcher, and ballpark. In this analysis our quantity of interest is the effect of spin rate $\beta_{SpinRate}$ on the pitch outcome given the pitch was not fouled off or put in play which will be estimated using a mixed effects logistic regression model.
 
 ```{r}
 #| label: pitches-thrown-norun
@@ -203,10 +211,10 @@ pitches |>
               n_offspeed = sum(pitch_type %in% c("CH", "CU", "SL", "ST")),
               n_missing = sum(is.na(pitch_type))) |>
     kableExtra::kable(format = "html", 
-                      colnames = c("Name", "N Pitches", "N Fastball", "N Offspeed", "N Missing"))
+                      col.names = c("Name", "N Pitches", "N Fastball", "N Offspeed", "N Missing"))
 ```
 
-### Imputing Incomplete Pitch Data
+## Imputing Incomplete Pitch Data
 
 Multiple imputation will be performed using the chained equations or fully conditional specification with the `mice` R package [@buuren2010mice] with estimates pooled by the `broom.mixed` R package [@bolkerBroomMixed2022]. The inline data will be imputed by `method = "pmm"` which uses predictive mean matching. The angular data, spin rate, will be imputed by `method = "pnregid"` which uses Bayesian projected normal regression with a constrained covariance matrix $\Sigma$ [@hernandez-stumpfhauser2017] from my `imputeangles` package.
 
@@ -264,7 +272,7 @@ imps <- mice(pitches, m = 5, maxit = 5, method = methods,
 saveRDS(imps, "data/pitch_imputations.rds")
 ```
 
-### Logistic Regression GLMM with lme4
+## Logistic Regression GLMM with lme4
 
 The logistic regression mixed effects model is then fit to each of the completed data sets. Estimates and their variances are combined with `broom.mixed`.
 
@@ -325,54 +333,146 @@ summary(pooled) |>
                                  "LB 95% CI", "UB 95% CI"))
 ```
 
+We can take a look at the effects of the spin axis on the probability that a pitch will be a strike for each pitcher and their pitch types.
+
+```{r}
+#| label: get-avg-pitch-vals
+avg_pitches <- pitches |> 
+    group_by(player_name, pitch_type) |>
+    summarize(
+        cos_spin = mean(cos_spin, na.rm = TRUE),
+        sin_spin = mean(sin_spin, na.rm = TRUE),
+        cos_2spin = mean(cos_2spin, na.rm = TRUE),
+        sin_2spin = mean(sin_2spin, na.rm = TRUE),
+        release_speed = mean(release_speed, na.rm = TRUE),
+        release_extension = mean(release_extension, na.rm = TRUE),
+        rate_cos_spin = mean(release_spin_rate * cos_spin, na.rm = TRUE),
+        rate_sin_spin = mean(release_spin_rate * sin_spin, na.rm = TRUE),
+        plate_x = mean(plate_x, na.rm = TRUE),
+        plate_z = mean(plate_z, na.rm = TRUE),
+        release_pos_x = mean(release_pos_x, na.rm = TRUE),
+        release_pos_z = mean(release_pos_x, na.rm = TRUE),
+        "release_pos_x:release_pos_z" = mean(release_pos_x * release_pos_z, na.rm = TRUE)
+    )
+```
+
+```{r}
+#| label: glmm-fe
+
+
+fe <- coef(fit$analyses[[1]])$player_name
+
+fe$player_name <- row.names(fe)
+
+fe <- fe |>
+    tidyr::pivot_longer(
+        cols = starts_with("pitch_type"),
+        names_to = "pitch_type",
+        values_to = "re"
+    )
+```
+
+```{r}
+#| label: prob-strike-glmm-est
+#| results: hide
+
+p_strike <- avg_pitches |>
+    mutate(
+        pitch_type = paste0("pitch_type", pitch_type)
+    ) |>
+    left_join(fe, by = c("player_name", "pitch_type"), suffix = c("", "_avg")) |>
+    mutate(
+        fe = `(Intercept)` + cos_spin * cos_spin_avg + sin_spin * sin_spin_avg 
+            + cos_2spin * cos_2spin_avg + sin_2spin * sin_2spin_avg 
+            + release_speed * release_speed_avg + release_extension * release_extension_avg 
+            + rate_cos_spin * rate_cos_spin_avg + rate_sin_spin * rate_sin_spin_avg
+            + plate_x * plate_x_avg + plate_z * plate_z_avg
+            + release_pos_x * release_pos_x_avg 
+            + release_pos_z * release_pos_z_avg
+            + `release_pos_x:release_pos_z` * `release_pos_x:release_pos_z_avg`,
+        logit = fe + re,
+        p_strike = plogis(logit)
+    ) |>
+    select(
+        player_name, pitch_type, logit, p_strike
+    ) |>
+    print(n = 10)
+```
+
+```{r}
+#| label: fig-est-p-strike-glmm
+#| fig-cap: Estimated probability that each pitcher's pitch types will be a strike on average. 
+ggplot(p_strike, aes(player_name, p_strike, color = pitch_type)) +
+    geom_point(size = 2) +
+    theme(axis.text.x = element_text(angle = 25, hjust = 1)) +
+    labs(x = "", y = "P(Strike)") +
+    theme_bw()
+```
+
+In @fig-est-p-strike-glmm, the probability that each pitch type thrown by each pitcher will be a strike. We can see that Burnes and Miley are very unlikely to throw strikes. This makes sense for Miley since he tries to get weak contact (very effectively with a the lowest hard hit rate in MLB for SP at 31.1%, but a less stellar FIP of 4.69). In Burnes case, this may be a result of his pitches having a lot of movement resulting in more balls, and worked relatively well (FIP of 3.81 on the year, but 3.07 BB/9). Freddy Peralta and Colin Rea live in the zone with all or most of their pitch types being thrown for strikes on average. This worked well for Freddy in 2023, particularly in the second half of 2023 when he had a FIP of 2.92 (9th out of starters), and less well for Rea who had a FIP of 4.90 on the year. Woodruff and Houser were balanced in their approach.
+
+| Name             | K/9   | BB/9 | FIP  | HardHit% |
+|------------------|-------|------|------|----------|
+| Corbin Burnes    | 9.29  | 3.07 | 3.81 | 32.2%    |
+| Adrian Houser    | 7.76  | 2.75 | 3.99 | 46.4%    |
+| Wade Miley       | 5.91  | 2.84 | 4.69 | 31.1%    |
+| Freddy Peralta   | 11.41 | 2.93 | 3.85 | 37.3%    |
+| Colin Rea        | 7.94  | 2.74 | 4.90 | 43.2%    |
+| Brandon Woodruff | 9.94  | 2.01 | 3.60 | 41.6%    |
+
+: 2023 Results
+
 <!-- ### Modeling with brms -->
 
 ```{r}
 #| label: fit-brm-imps-norun
 #| include: false
 #| eval: false
-library(brms)
-
-brm_fit <- brm_multiple(strike ~ cos_spin * pitch_type + sin_spin * pitch_type 
-                              + cos_2spin * pitch_type + sin_2spin * pitch_type  
-                              + release_speed + release_extension 
-                              + rate_cos_spin + rate_sin_spin
-                              + plate_x * plate_z + plate_x^2 + plate_z^2 
-                              + release_pos_x * release_pos_z
-                              + release_pos_x^2 + release_pos_z^2
-                              + (1 + pitch_type | player_name),
-                              family = bernoulli(link = "logit"),
-            data = imps,
-            cores = 6,
-            # threads = threading(6),
-            chains = 2,
-            refresh = 100,
-            save_model = "log-reg-glmm-pitch.stan")
-
-saveRDS(brm_fit, file = "data/brms-glmm-fit.rds")
+# library(brms)
+# 
+# brm_fit <- brm_multiple(strike ~ cos_spin * pitch_type + sin_spin * pitch_type 
+#                               + cos_2spin * pitch_type + sin_2spin * pitch_type  
+#                               + release_speed + release_extension 
+#                               + rate_cos_spin + rate_sin_spin
+#                               + plate_x * plate_z + plate_x^2 + plate_z^2 
+#                               + release_pos_x * release_pos_z
+#                               + release_pos_x^2 + release_pos_z^2
+#                               + (1 + pitch_type | player_name),
+#                               family = bernoulli(link = "logit"),
+#             data = imps,
+#             cores = 6,
+#             # threads = threading(6),
+#             chains = 2,
+#             refresh = 100,
+#             save_model = "log-reg-glmm-pitch.stan")
+# 
+# saveRDS(brm_fit, file = "data/brms-glmm-fit.rds")
 ```
 
 ```{r}
-#| label: fit-brm-imps-norun
+#| label: fit-brm-imps
+#| include: false
 #| echo: false
 #| eval: false
-library(brms)
-
-brm_fit <- brm_muliple(type ~ cos_spin * pitch_type + sin_spin * pitch_type 
-                              + cos_2spin * pitch_type + sin_2spin * pitch_type  
-                              + release_speed + release_extension 
-                              + rate_cos_spin + rate_sin_spin
-                              + plate_x * plate_z + plate_x^2 + plate_z^2 
-                              + release_pos_x * release_pos_z
-                              + release_pos_x^2 + release_pos_z^2
-                              + (1 + pitch_type | player_name),
-                              family = binomial(link = "logit"),
-            data = imps)
+# library(brms)
+# 
+# brm_fit <- brm_muliple(type ~ cos_spin * pitch_type + sin_spin * pitch_type 
+#                               + cos_2spin * pitch_type + sin_2spin * pitch_type  
+#                               + release_speed + release_extension 
+#                               + rate_cos_spin + rate_sin_spin
+#                               + plate_x * plate_z + plate_x^2 + plate_z^2 
+#                               + release_pos_x * release_pos_z
+#                               + release_pos_x^2 + release_pos_z^2
+#                               + (1 + pitch_type | player_name),
+#                               family = binomial(link = "logit"),
+#             data = imps)
 ```
 
 ```{r}
 #| label: load-brm-fit
+#| include: false
 #| echo: false
+#| eval: false
 
-brm_fit <- readRDS("data/brms-glmm-fit.rds")
+# brm_fit <- readRDS("data/brms-glmm-fit.rds")
 ```
