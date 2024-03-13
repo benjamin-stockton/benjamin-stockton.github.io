@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -164,14 +164,20 @@ div.csl-indent {
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="2" role="list">
-<div id="ref-sidiAcceptedNoninferiorityClinical2024" class="csl-entry" role="listitem">
-Sidi, Y., <strong>Stockton, B.</strong>, &amp; Harel, O. (2024). (Accepted) <span class="nocase">Non-inferiority</span> clinical trials: Treating margin as missing information. <em>New England Journal of Statistics in Data Science</em>, <em>000</em>(000).
+<div id="ref-sidiSubmittedNewEngland2023" class="csl-entry" role="listitem">
+Sidi, Y., <strong>Stockton, B.</strong>, &amp; Harel, O. (2024). (Accepted by New England Journal of Statistics in Data Science) <span class="nocase">Non-inferiority</span> clinical trials: Treating margin as missing information. <em>New England Journal of Statistics in Data Science</em>, <em>000</em>(000).
+</div>
+<div id="ref-stocktonInProgressCh1" class="csl-entry" role="listitem">
+<strong>Stockton, B.</strong>, &amp; Harel, O. (2024). <em><span class="nocase">(Submitted to the Journal of Computational and Graphical Statistics)</span> <span class="nocase">Regression analysis of incomplete data with novel imputation methods for angular predictors</span></em>.
+</div>
+<div id="ref-stocktonInProgressCrim2" class="csl-entry" role="listitem">
+Strange, C. C., <strong>Stockton, B.</strong>, Zvonkovich, J., &amp; Harel, O. (2024). <em><span class="nocase">(Submitted to Justic Quarterly)</span> multiple imputation using pattern-mixture modeling to assess the sensitivity of race/ethnicity effect estimates in sentencing given non-ignorable incomplete data</em>.
 </div>
 <div id="ref-stocktonNowYouSee2023" class="csl-entry" role="listitem">
 <strong>Stockton, B.</strong>, Strange, C. C., &amp; Harel, O. (2023). Now You See It, Now You Don’t: A Simulation and Illustration of the Importance of Treating Incomplete Data in Estimating Race Effects in Sentencing. <em>Journal of Quantitative Criminology</em>. <a href="https://doi.org/10.1007/s10940-023-09577-w" class="uri">https://doi.org/10.1007/s10940-023-09577-w</a>
 </div>
-<div id="ref-stocktonImputationAngularMissing2023" class="csl-entry" role="listitem">
-<strong>Stockton, B.</strong>, &amp; Harel, O. (2023). <em>(In Progress) <span class="nocase">Imputation of Angular Missing Data</span> by Bayesian Projected Normal Regression</em>. <em>000</em>(000).
+<div id="ref-stocktonInProgressCh2" class="csl-entry" role="listitem">
+<strong>Stockton, B.</strong>, &amp; Harel, O. (2023). <em>(In Progress) Imputation of Incomplete Angular Time Series Data</em>.
 </div>
 </div>
 
@@ -258,6 +264,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/benjamin-stockton\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -292,7 +316,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
