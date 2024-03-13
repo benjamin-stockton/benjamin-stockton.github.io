@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -100,7 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -109,6 +116,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -118,28 +126,49 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Ben Stockton’s Stats Site - How to Use imputeangles">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://benjamin-stockton.github.io/posts/imputeangles/index_files/figure-html/fig-miss-map-1.png">
-<meta property="og:site-name" content="Ben Stockton's Stats Site">
-<meta property="og:image:height" content="960">
-<meta property="og:image:width" content="1344">
+<meta property="og:site_name" content="Ben Stockton's Stats Site">
 <meta name="twitter:title" content="Ben Stockton’s Stats Site - How to Use imputeangles">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://benjamin-stockton.github.io/posts/imputeangles/index_files/figure-html/fig-miss-map-1.png">
-<meta name="twitter:image-height" content="960">
-<meta name="twitter:image-width" content="1344">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Ben Stockton’s Stats Site</span>
     </a>
@@ -151,37 +180,37 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html" rel="" target="">
- <span class="menu-text">Blog Posts</span></a>
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../projects.html" rel="" target="">
- <span class="menu-text">Projects</span></a>
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/benjamin-stockton" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/benjamin-stockton"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://linkedin.com/in/benjamin-stockton-329507160/" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://linkedin.com/in/benjamin-stockton-329507160/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -216,7 +245,7 @@ div.csl-indent {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
     <h2 id="toc-title">On this page</h2>
    
@@ -229,12 +258,13 @@ div.csl-indent {
   </ul>
 </nav>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
 
 
 
@@ -265,7 +295,7 @@ div.csl-indent {
 <section id="loading-pitch-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-pitch-data">Loading Pitch Data</h2>
 <div class="cell" data-hash="index_cache/html/load-pitch-data-no-run_41e64dc5395dfb016c564cc6ae3ade89">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Amelia)</span>
@@ -334,7 +364,7 @@ div.csl-indent {
 </details>
 </div>
 <div class="cell" data-hash="index_cache/html/fig-miss-map_70cdbbd8318ef3665629ca71ed776c97">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pitches <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
@@ -344,17 +374,21 @@ div.csl-indent {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    VIM<span class="sc">::</span><span class="fu">matrixplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-miss-map" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-miss-map-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Missinginess matrix plot where red indicates missingness in that observation.</figcaption>
+<div id="fig-miss-map" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-miss-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-miss-map-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-miss-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Missinginess matrix plot where red indicates missingness in that observation.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>We’ll take a look at an example of how to perform MI in practice in comparison to CCA. We have a data set of <span class="math inline">\(N =\)</span> 10544 caught pitches (swing and called strikes, balls, or hit by pitches) pitches from the 2023 MLB season with measurements for the pitch outcome, pitch velocity and spin direction and rate at release, release point, horizontal and vertical break, location at the plate, as well as the identity of the batter, pitcher, and ballpark. We will model the pitch outcome based on the other measurements while using random effects for the batter, pitcher, and ballpark. In this analysis our quantity of interest is the effect of spin rate <span class="math inline">\(\beta_{SpinRate}\)</span> on the pitch outcome given the pitch was not fouled off or put in play which will be estimated using a mixed effects logistic regression model.</p>
 <div class="cell" data-hash="index_cache/html/pitches-thrown-norun_6f72abb74a9142b014a5d2676006a60e">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pitches <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name) <span class="sc">|&gt;</span></span>
@@ -365,10 +399,15 @@ div.csl-indent {
 </details>
 </div>
 <div class="cell" data-hash="index_cache/html/tbl-pitches-thrown_6ced5887488548aea5a0e74edc4d196f">
+<div id="tbl-pitches-thrown" class="cell quarto-float anchored" data-hash="index_cache/html/tbl-pitches-thrown_6ced5887488548aea5a0e74edc4d196f">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pitches-thrown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Number of pitches thrown by each starting pitcher.
+</figcaption>
+<div aria-describedby="tbl-pitches-thrown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-pitches-thrown" class="anchored">
-<table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<caption>Table&nbsp;1: Number of pitches thrown by each starting pitcher.</caption>
+<div>
+<table class="do-not-create-environment cell table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Name</th>
@@ -423,9 +462,12 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+
+
 </div>
-
-
+</div>
+</div>
+</figure>
 </div>
 </div>
 </section>
@@ -434,7 +476,7 @@ div.csl-indent {
 <p>Multiple imputation will be performed using the chained equations or fully conditional specification with the <code>mice</code> R package <span class="citation" data-cites="buuren2010mice">(<a href="#ref-buuren2010mice" role="doc-biblioref">S. van Buuren and Groothuis-Oudshoorn 2010</a>)</span> with estimates pooled by the <code>broom.mixed</code> R package <span class="citation" data-cites="bolkerBroomMixed2022">(<a href="#ref-bolkerBroomMixed2022" role="doc-biblioref">Bolker and Robinson 2022</a>)</span>. The inline data will be imputed by <code>method = "pmm"</code> which uses predictive mean matching. The angular data, spin rate, will be imputed by <code>method = "pnregid"</code> which uses Bayesian projected normal regression with a constrained covariance matrix <span class="math inline">\(\Sigma\)</span> <span class="citation" data-cites="hernandez-stumpfhauser2017">(<a href="#ref-hernandez-stumpfhauser2017" role="doc-biblioref">Hernandez-Stumpfhauser, Breidt, and Woerd 2017</a>)</span> from my <code>imputeangles</code> package.</p>
 <p>To impute with the projected normal regression, we have to specify to <code>mice</code> which variable is angular and which variables are the <span class="math inline">\(\cos\)</span> and <span class="math inline">\(\sin\)</span> of the angular variable. We can do this by doing an empty run of <code>mice()</code> by setting the maximum number of cycles to 0. Then we extract the methods vector and predictor matrix to modify and then pass to our actual run of <code>mice()</code> with <span class="math inline">\(M = 5\)</span> imputations and <span class="math inline">\(c = 10\)</span> cycles.</p>
 <div class="cell" data-hash="index_cache/html/set-up-mice_ca2bcfa006de2b6a89b45be092f6fe1b">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pitches[,<span class="fu">c</span>(<span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>, <span class="st">"release_spin_rate"</span>)] <span class="ot">&lt;-</span> <span class="fu">scale</span>(pitches[,<span class="fu">c</span>(<span class="st">"release_speed"</span>, <span class="st">"release_extension"</span>, <span class="st">"release_spin_rate"</span>)])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pitches <span class="ot">&lt;-</span> pitches <span class="sc">|&gt;</span></span>
@@ -448,7 +490,7 @@ div.csl-indent {
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Number of logged events: 6</code></pre>
 </div>
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> imp0<span class="sc">$</span>method</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>methods[<span class="st">"spin_axis"</span>] <span class="ot">&lt;-</span> <span class="st">"bpnreg"</span></span>
@@ -472,7 +514,7 @@ div.csl-indent {
           cos_2spin           sin_2spin       rate_cos_spin       rate_sin_spin 
 "~cos(2*spin_axis)" "~sin(2*spin_axis)"               "pmm"               "pmm" </code></pre>
 </div>
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pred_mat <span class="ot">&lt;-</span> imp0<span class="sc">$</span>predictorMatrix</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pred_mat[,<span class="fu">c</span>(<span class="st">"game_date"</span>, <span class="st">"pitcher"</span>, <span class="st">"batter"</span>, <span class="st">"home_team"</span>, <span class="st">"away_team"</span>, <span class="st">"type"</span>,</span>
@@ -492,7 +534,7 @@ sin_spin          1        0        0             0                 0</code></pr
 </div>
 <p>After setting up the methods vector and predictor matrix, we can run <code>mice()</code>.</p>
 <div class="cell" data-hash="index_cache/html/run-mice-norun_e224cebb058cf84205fa44a43b303879">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(pitches, <span class="at">m =</span> <span class="dv">5</span>, <span class="at">maxit =</span> <span class="dv">5</span>, <span class="at">method =</span> methods,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">predictorMatrix =</span> pred_mat, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -503,7 +545,7 @@ sin_spin          1        0        0             0                 0</code></pr
 <h2 class="anchored" data-anchor-id="logistic-regression-glmm-with-lme4">Logistic Regression GLMM with lme4</h2>
 <p>The logistic regression mixed effects model is then fit to each of the completed data sets. Estimates and their variances are combined with <code>broom.mixed</code>.</p>
 <div class="cell" data-hash="index_cache/html/fit-glmm-imps-norun_2b39a50566de727b0c4ef1a5d3ab4b91">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">with</span>(imps, lme4<span class="sc">::</span><span class="fu">glmer</span>(strike <span class="sc">~</span> cos_spin <span class="sc">+</span> sin_spin <span class="sc">+</span> cos_2spin <span class="sc">+</span> sin_2spin </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">+</span> release_speed <span class="sc">+</span> release_extension </span>
@@ -517,10 +559,14 @@ sin_spin          1        0        0             0                 0</code></pr
 </details>
 </div>
 <div class="cell" data-hash="index_cache/html/tbl-glmm-pooled_e23eaeb087f294af42cef2293433ba05">
+<div id="tbl-glmm-pooled" class="cell quarto-float anchored" data-hash="index_cache/html/tbl-glmm-pooled_e23eaeb087f294af42cef2293433ba05">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-glmm-pooled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Pooled summary of the fits for the GLMM.
+</figcaption>
+<div aria-describedby="tbl-glmm-pooled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-glmm-pooled" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Table&nbsp;2: Pooled summary of the fits for the GLMM.</caption>
+<table class="do-not-create-environment cell table table-sm table-striped small">
 <colgroup>
 <col style="width: 35%">
 <col style="width: 17%">
@@ -647,10 +693,12 @@ sin_spin          1        0        0             0                 0</code></pr
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>We can take a look at the effects of the spin axis on the probability that a pitch will be a strike for each pitcher and their pitch types.</p>
 <div class="cell" data-hash="index_cache/html/get-avg-pitch-vals_0a952eb88974c5af3bc1d1a71853f32d">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>avg_pitches <span class="ot">&lt;-</span> pitches <span class="sc">|&gt;</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(player_name, pitch_type) <span class="sc">|&gt;</span></span>
@@ -676,7 +724,7 @@ sin_spin          1        0        0             0                 0</code></pr
 </div>
 </div>
 <div class="cell" data-hash="index_cache/html/glmm-fe_06a39d1e2d5c7ba8cac2647de54f0b06">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fe <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit<span class="sc">$</span>analyses[[<span class="dv">1</span>]])<span class="sc">$</span>player_name</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -691,7 +739,7 @@ sin_spin          1        0        0             0                 0</code></pr
 </details>
 </div>
 <div class="cell" data-hash="index_cache/html/prob-strike-glmm-est_9331daa7c56aa0740bcbb2c3649dc567">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>p_strike <span class="ot">&lt;-</span> avg_pitches <span class="sc">|&gt;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
@@ -717,7 +765,7 @@ sin_spin          1        0        0             0                 0</code></pr
 </details>
 </div>
 <div class="cell" data-hash="index_cache/html/fig-est-p-strike-glmm_41a443b9429c8f645eaa703b27952e63">
-<details open="">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_strike, <span class="fu">aes</span>(player_name, p_strike, <span class="at">color =</span> pitch_type)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
@@ -729,15 +777,19 @@ sin_spin          1        0        0             0                 0</code></pr
 <pre><code>Warning: Removed 6 rows containing missing values (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="fig-est-p-strike-glmm" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-est-p-strike-glmm-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Estimated probability that each pitcher’s pitch types will be a strike on average.</figcaption>
+<div id="fig-est-p-strike-glmm" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-est-p-strike-glmm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-est-p-strike-glmm-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-est-p-strike-glmm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Estimated probability that each pitcher’s pitch types will be a strike on average.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In <a href="#fig-est-p-strike-glmm">Figure&nbsp;2</a>, the probability that each pitch type thrown by each pitcher will be a strike. We can see that Burnes and Miley are very unlikely to throw strikes. This makes sense for Miley since he tries to get weak contact (very effectively with a the lowest hard hit rate in MLB for SP at 31.1%, but a less stellar FIP of 4.69). In Burnes case, this may be a result of his pitches having a lot of movement resulting in more balls, and worked relatively well (FIP of 3.81 on the year, but 3.07 BB/9). Freddy Peralta and Colin Rea live in the zone with all or most of their pitch types being thrown for strikes on average. This worked well for Freddy in 2023, particularly in the second half of 2023 when he had a FIP of 2.92 (9th out of starters), and less well for Rea who had a FIP of 4.90 on the year. Woodruff and Houser were balanced in their approach.</p>
+<p>In <a href="#fig-est-p-strike-glmm" class="quarto-xref">Figure&nbsp;2</a>, the probability that each pitch type thrown by each pitcher will be a strike. We can see that Burnes and Miley are very unlikely to throw strikes. This makes sense for Miley since he tries to get weak contact (very effectively with a the lowest hard hit rate in MLB for SP at 31.1%, but a less stellar FIP of 4.69). In Burnes case, this may be a result of his pitches having a lot of movement resulting in more balls, and worked relatively well (FIP of 3.81 on the year, but 3.07 BB/9). Freddy Peralta and Colin Rea live in the zone with all or most of their pitch types being thrown for strikes on average. This worked well for Freddy in 2023, particularly in the second half of 2023 when he had a FIP of 2.92 (9th out of starters), and less well for Rea who had a FIP of 4.90 on the year. Woodruff and Houser were balanced in their approach.</p>
 <table class="table">
 <caption>2023 Results</caption>
 <thead>
@@ -803,7 +855,7 @@ sin_spin          1        0        0             0                 0</code></pr
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-bolkerBroomMixed2022" class="csl-entry" role="listitem">
 Bolker, Ben, and David Robinson. 2022. <em>Broom.mixed: Tidying Methods for Mixed Models</em>. <a href="https://CRAN.R-project.org/package=broom.mixed">https://CRAN.R-project.org/package=broom.mixed</a>.
 </div>
@@ -974,10 +1026,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/benjamin-stockton\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -987,8 +1056,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1001,6 +1079,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1044,6 +1241,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1069,6 +1267,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1126,20 +1350,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/benjamin-stockton\.github\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -1623,6 +1833,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+
 
 
 

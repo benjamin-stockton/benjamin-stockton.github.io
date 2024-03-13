@@ -8,7 +8,7 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Ben Stockton">
   <meta name="dcterms.date" content="2023-11-16">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -99,6 +99,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -241,7 +242,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -404,11 +406,10 @@
       margin-right: 0; 
     }
   </style>
-  
   <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <meta property="og:title" content="Ben Stockton’s Stats Site - Getting to Know Stan">
-<meta property="og:site-name" content="Ben Stockton's Stats Site">
+<meta property="og:site_name" content="Ben Stockton's Stats Site">
 <meta name="twitter:title" content="Ben Stockton’s Stats Site - Getting to Know Stan">
 <meta name="twitter:card" content="summary">
 </head>
@@ -449,18 +450,18 @@ Ben Stockton
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="|1,2,3,5|8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("cmdstanr",</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#                  repos = c("https://mc-stan.org/r-packages/",</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#                            getOption("repos")))</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(cmdstanr)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># cmdstanr::install_cmdstan()</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_version</span>()</span>
-<span id="cb1-7"><a href="#cb1-7"></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_path</span>()</span>
-<span id="cb1-8"><a href="#cb1-8"></a>cmdstanr<span class="sc">::</span><span class="fu">check_cmdstan_toolchain</span>(<span class="at">fix =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># install.packages(c("bayesplot", "ggplot2", "posterior"))</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">set.seed</span>(<span class="dv">98463</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1" data-code-line-numbers="|1,2,3,5|8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># install.packages("cmdstanr",</span></span>
+<span id="cb1-2"><a></a><span class="co">#                  repos = c("https://mc-stan.org/r-packages/",</span></span>
+<span id="cb1-3"><a></a><span class="co">#                            getOption("repos")))</span></span>
+<span id="cb1-4"><a></a><span class="fu">library</span>(cmdstanr)</span>
+<span id="cb1-5"><a></a><span class="co"># cmdstanr::install_cmdstan()</span></span>
+<span id="cb1-6"><a></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_version</span>()</span>
+<span id="cb1-7"><a></a>cmdstanr<span class="sc">::</span><span class="fu">cmdstan_path</span>()</span>
+<span id="cb1-8"><a></a>cmdstanr<span class="sc">::</span><span class="fu">check_cmdstan_toolchain</span>(<span class="at">fix =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="co"># install.packages(c("bayesplot", "ggplot2", "posterior"))</span></span>
+<span id="cb1-11"><a></a></span>
+<span id="cb1-12"><a></a><span class="fu">set.seed</span>(<span class="dv">98463</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2.33.1"
@@ -574,7 +575,7 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>ncaaw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"Data/NCAAW-freethrows-threes-2022-2023.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>ncaaw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"Data/NCAAW-freethrows-threes-2022-2023.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>In the 2022-2023 season there were <span class="math inline">\(N = 350\)</span> teams.</p>
@@ -584,19 +585,23 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">ggplot</span>(ncaaw, <span class="fu">aes</span>(FG3pct, W)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2022-23 NCAAW Wins by 3pt%"</span>, </span>
-<span id="cb4-5"><a href="#cb4-5"></a>         <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"r = "</span>, <span class="fu">round</span>(<span class="fu">cor</span>(ncaaw<span class="sc">$</span>W, ncaaw<span class="sc">$</span>FG3pct), <span class="dv">3</span>)),</span>
-<span id="cb4-6"><a href="#cb4-6"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a></a><span class="fu">ggplot</span>(ncaaw, <span class="fu">aes</span>(FG3pct, W)) <span class="sc">+</span></span>
+<span id="cb4-3"><a></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2022-23 NCAAW Wins by 3pt%"</span>, </span>
+<span id="cb4-5"><a></a>         <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"r = "</span>, <span class="fu">round</span>(<span class="fu">cor</span>(ncaaw<span class="sc">$</span>W, ncaaw<span class="sc">$</span>FG3pct), <span class="dv">3</span>)),</span>
+<span id="cb4-6"><a></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-scatter" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-scatter-1.png" width="960"></p>
-<figcaption>Figure&nbsp;1: Scatter plot of the Total Wins by 3 pt Field Goal %.</figcaption>
+<div id="fig-scatter" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-scatter-1.png" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Scatter plot of the Total Wins by 3 pt Field Goal %.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -632,12 +637,12 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1,2,3,4|8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>fit_ml <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> FG3pct, <span class="at">data =</span> ncaaw)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>(beta_ml <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit_ml))</span>
-<span id="cb5-3"><a href="#cb5-3"></a>smry_ml <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_ml)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>(sigma_ml <span class="ot">&lt;-</span> smry_ml<span class="sc">$</span>sigma)</span>
-<span id="cb5-5"><a href="#cb5-5"></a>mles <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Parameters =</span> <span class="fu">c</span>(<span class="st">"beta_0"</span>, <span class="st">"beta_1"</span>, <span class="st">"sigma"</span>),</span>
-<span id="cb5-6"><a href="#cb5-6"></a>                   <span class="at">Estimates =</span> <span class="fu">c</span>(beta_ml, sigma_ml))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1,2,3,4|8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>fit_ml <span class="ot">&lt;-</span> <span class="fu">lm</span>(W <span class="sc">~</span> FG3pct, <span class="at">data =</span> ncaaw)</span>
+<span id="cb5-2"><a></a>(beta_ml <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit_ml))</span>
+<span id="cb5-3"><a></a>smry_ml <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_ml)</span>
+<span id="cb5-4"><a></a>(sigma_ml <span class="ot">&lt;-</span> smry_ml<span class="sc">$</span>sigma)</span>
+<span id="cb5-5"><a></a>mles <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Parameters =</span> <span class="fu">c</span>(<span class="st">"beta_0"</span>, <span class="st">"beta_1"</span>, <span class="st">"sigma"</span>),</span>
+<span id="cb5-6"><a></a>                   <span class="at">Estimates =</span> <span class="fu">c</span>(beta_ml, sigma_ml))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)      FG3pct 
@@ -650,19 +655,23 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(ncaaw, <span class="fu">aes</span>(FG3pct, W)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2022-23 NCAAW Wins by 3pt%"</span>, </span>
-<span id="cb7-5"><a href="#cb7-5"></a>         <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"r = "</span>, <span class="fu">round</span>(<span class="fu">cor</span>(ncaaw<span class="sc">$</span>W, ncaaw<span class="sc">$</span>FG3pct), <span class="dv">3</span>)),</span>
-<span id="cb7-6"><a href="#cb7-6"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">ggplot</span>(ncaaw, <span class="fu">aes</span>(FG3pct, W)) <span class="sc">+</span></span>
+<span id="cb7-2"><a></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"2022-23 NCAAW Wins by 3pt%"</span>, </span>
+<span id="cb7-5"><a></a>         <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"r = "</span>, <span class="fu">round</span>(<span class="fu">cor</span>(ncaaw<span class="sc">$</span>W, ncaaw<span class="sc">$</span>FG3pct), <span class="dv">3</span>)),</span>
+<span id="cb7-6"><a></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-scatter-fitted" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-scatter-fitted-1.png" width="960"></p>
-<figcaption>Figure&nbsp;2: Now the OLS regression line is super-imposed in blue.</figcaption>
+<div id="fig-scatter-fitted" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-scatter-fitted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-scatter-fitted-1.png" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-fitted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Now the OLS regression line is super-imposed in blue.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -730,46 +739,46 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 <div class="code-with-filename-file">
 <pre><strong>non-informative-regression.stan</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-code-line-numbers="1-6|8-16|18-23|25-32|34-40"><pre class="sourceCode numberSource stan code-overflow-wrap number-lines code-with-copy"><code class="sourceCode stan"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">// The input data is two vectors 'y' and 'X' of length 'N'.</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">data</span> {</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="dt">vector</span>[N] y;</span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="dt">vector</span>[N] x;</span>
-<span id="cb8-6"><a href="#cb8-6"></a>}</span>
-<span id="cb8-7"><a href="#cb8-7"></a></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">transformed data</span> {</span>
-<span id="cb8-9"><a href="#cb8-9"></a>    <span class="dt">matrix</span>[N, <span class="dv">2</span>] X_c = append_col(rep_vector(<span class="dv">1</span>, N), x);</span>
-<span id="cb8-10"><a href="#cb8-10"></a>    <span class="dt">matrix</span>[<span class="dv">2</span>,<span class="dv">2</span>] XtX_inv = inverse(X_c' * X_c);</span>
-<span id="cb8-11"><a href="#cb8-11"></a></span>
-<span id="cb8-12"><a href="#cb8-12"></a>    <span class="dt">vector</span>[<span class="dv">2</span>] beta_hat = XtX_inv * X_c' * y;</span>
-<span id="cb8-13"><a href="#cb8-13"></a>    <span class="dt">vector</span>[N] y_hat = X_C * beta_hat;</span>
-<span id="cb8-14"><a href="#cb8-14"></a>    </span>
-<span id="cb8-15"><a href="#cb8-15"></a>    <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; s_2 = <span class="dv">1</span> / (N - <span class="dv">2</span>) * (y - y_hat)' * (y - y_hat);</span>
-<span id="cb8-16"><a href="#cb8-16"></a>}</span>
-<span id="cb8-17"><a href="#cb8-17"></a></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">// The parameters accepted by the model. Our model</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="co">// accepts two parameters 'beta' and 'sigma'.</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="kw">parameters</span> {</span>
-<span id="cb8-21"><a href="#cb8-21"></a>  <span class="dt">vector</span>[<span class="dv">2</span>] beta;</span>
-<span id="cb8-22"><a href="#cb8-22"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma; <span class="co">// Note that this is the variance</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a>}</span>
-<span id="cb8-24"><a href="#cb8-24"></a></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="co">// The model to be estimated. We model the output</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a><span class="co">// 'y' ~ N(x beta, sigma) by specifying the analytic</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="co">// posterior defined above.</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a><span class="kw">model</span> {</span>
-<span id="cb8-29"><a href="#cb8-29"></a>  beta ~ multi_normal(beta_hat, sigma^<span class="dv">2</span> * XtX_inv);</span>
-<span id="cb8-30"><a href="#cb8-30"></a>  </span>
-<span id="cb8-31"><a href="#cb8-31"></a>  sigma^<span class="dv">2</span> ~ scaled_inv_chi_square(N<span class="dv">-2</span>, sqrt(s_2));</span>
-<span id="cb8-32"><a href="#cb8-32"></a>}</span>
-<span id="cb8-33"><a href="#cb8-33"></a></span>
-<span id="cb8-34"><a href="#cb8-34"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb8-35"><a href="#cb8-35"></a>    <span class="dt">vector</span>[N] y_ppd;</span>
-<span id="cb8-36"><a href="#cb8-36"></a>    </span>
-<span id="cb8-37"><a href="#cb8-37"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
-<span id="cb8-38"><a href="#cb8-38"></a>        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span>
-<span id="cb8-39"><a href="#cb8-39"></a>    }</span>
-<span id="cb8-40"><a href="#cb8-40"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-filename="non-informative-regression.stan" data-code-line-numbers="1-6|8-16|18-23|25-32|34-40"><pre class="sourceCode numberSource stan code-overflow-wrap number-lines code-with-copy"><code class="sourceCode stan"><span id="cb8-1"><a></a><span class="co">// The input data is two vectors 'y' and 'X' of length 'N'.</span></span>
+<span id="cb8-2"><a></a><span class="kw">data</span> {</span>
+<span id="cb8-3"><a></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
+<span id="cb8-4"><a></a>  <span class="dt">vector</span>[N] y;</span>
+<span id="cb8-5"><a></a>  <span class="dt">vector</span>[N] x;</span>
+<span id="cb8-6"><a></a>}</span>
+<span id="cb8-7"><a></a></span>
+<span id="cb8-8"><a></a><span class="kw">transformed data</span> {</span>
+<span id="cb8-9"><a></a>    <span class="dt">matrix</span>[N, <span class="dv">2</span>] X_c = append_col(rep_vector(<span class="dv">1</span>, N), x);</span>
+<span id="cb8-10"><a></a>    <span class="dt">matrix</span>[<span class="dv">2</span>,<span class="dv">2</span>] XtX_inv = inverse(X_c' * X_c);</span>
+<span id="cb8-11"><a></a></span>
+<span id="cb8-12"><a></a>    <span class="dt">vector</span>[<span class="dv">2</span>] beta_hat = XtX_inv * X_c' * y;</span>
+<span id="cb8-13"><a></a>    <span class="dt">vector</span>[N] y_hat = X_C * beta_hat;</span>
+<span id="cb8-14"><a></a>    </span>
+<span id="cb8-15"><a></a>    <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; s_2 = <span class="dv">1</span> / (N - <span class="dv">2</span>) * (y - y_hat)' * (y - y_hat);</span>
+<span id="cb8-16"><a></a>}</span>
+<span id="cb8-17"><a></a></span>
+<span id="cb8-18"><a></a><span class="co">// The parameters accepted by the model. Our model</span></span>
+<span id="cb8-19"><a></a><span class="co">// accepts two parameters 'beta' and 'sigma'.</span></span>
+<span id="cb8-20"><a></a><span class="kw">parameters</span> {</span>
+<span id="cb8-21"><a></a>  <span class="dt">vector</span>[<span class="dv">2</span>] beta;</span>
+<span id="cb8-22"><a></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma; <span class="co">// Note that this is the variance</span></span>
+<span id="cb8-23"><a></a>}</span>
+<span id="cb8-24"><a></a></span>
+<span id="cb8-25"><a></a><span class="co">// The model to be estimated. We model the output</span></span>
+<span id="cb8-26"><a></a><span class="co">// 'y' ~ N(x beta, sigma) by specifying the analytic</span></span>
+<span id="cb8-27"><a></a><span class="co">// posterior defined above.</span></span>
+<span id="cb8-28"><a></a><span class="kw">model</span> {</span>
+<span id="cb8-29"><a></a>  beta ~ multi_normal(beta_hat, sigma^<span class="dv">2</span> * XtX_inv);</span>
+<span id="cb8-30"><a></a>  </span>
+<span id="cb8-31"><a></a>  sigma^<span class="dv">2</span> ~ scaled_inv_chi_square(N<span class="dv">-2</span>, sqrt(s_2));</span>
+<span id="cb8-32"><a></a>}</span>
+<span id="cb8-33"><a></a></span>
+<span id="cb8-34"><a></a><span class="kw">generated quantities</span> {</span>
+<span id="cb8-35"><a></a>    <span class="dt">vector</span>[N] y_ppd;</span>
+<span id="cb8-36"><a></a>    </span>
+<span id="cb8-37"><a></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb8-38"><a></a>        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span>
+<span id="cb8-39"><a></a>    }</span>
+<span id="cb8-40"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <ul>
@@ -806,28 +815,26 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="1-5|7|8|10-19|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
-<span id="cb9-3"><a href="#cb9-3"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct</span>
-<span id="cb9-5"><a href="#cb9-5"></a>)</span>
-<span id="cb9-6"><a href="#cb9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7"></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"non-informative-regression.stan"</span>)</span>
-<span id="cb9-8"><a href="#cb9-8"></a>non_inf_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file)</span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a>fit1 <span class="ot">&lt;-</span> non_inf_model<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb9-11"><a href="#cb9-11"></a>    <span class="at">data =</span> data_list,</span>
-<span id="cb9-12"><a href="#cb9-12"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb9-13"><a href="#cb9-13"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
-<span id="cb9-14"><a href="#cb9-14"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
-<span id="cb9-16"><a href="#cb9-16"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb9-17"><a href="#cb9-17"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-18"><a href="#cb9-18"></a>    <span class="co"># show_exceptions = FALSE</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="1-5|7|8|10-19|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>data_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb9-2"><a></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb9-3"><a></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb9-4"><a></a>    <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct</span>
+<span id="cb9-5"><a></a>)</span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"non-informative-regression.stan"</span>)</span>
+<span id="cb9-8"><a></a>non_inf_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file)</span>
+<span id="cb9-9"><a></a></span>
+<span id="cb9-10"><a></a>fit1 <span class="ot">&lt;-</span> non_inf_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb9-11"><a></a>    <span class="at">data =</span> data_list,</span>
+<span id="cb9-12"><a></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb9-13"><a></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb9-14"><a></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb9-15"><a></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb9-16"><a></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb9-17"><a></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-18"><a></a>    <span class="co"># show_exceptions = FALSE</span></span>
+<span id="cb9-19"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell fragment" data-filename="intro-to-stan.R">
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
@@ -897,7 +904,7 @@ Total execution time: 1.0 seconds.</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>fit1<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>fit1<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$num_divergent
@@ -910,65 +917,74 @@ $ebfmi
 [1] 1.158642 1.141270</code></pre>
 </div>
 </div>
-<div id="fig-traceplots-non-info" class="cell quarto-layout-panel">
-<figure>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-traceplots-non-info" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-traceplots-non-info-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(bayesplot)</span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">mcmc_trace</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="fu">mcmc_dens_overlay</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="fu">mcmc_acf_bar</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a><span class="fu">mcmc_trace</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb13-4"><a></a><span class="fu">mcmc_dens_overlay</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb13-5"><a></a><span class="fu">mcmc_acf_bar</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-non-info" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-traceplots-non-info-1" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-traceplots-non-info-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-1.png" data-ref-parent="fig-traceplots-non-info" width="576">
 </div>
-<p></p><figcaption>Figure&nbsp;3: <strong>?(caption)</strong></figcaption><p></p>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-traceplots-non-info-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Traceplots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
 </figure>
 </div>
-
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-non-info" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-traceplots-non-info-2" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-traceplots-non-info-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-2.png" data-ref-parent="fig-traceplots-non-info" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-traceplots-non-info-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-non-info" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-traceplots-non-info-3" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-traceplots-non-info-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-3.png" data-ref-parent="fig-traceplots-non-info" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-traceplots-non-info-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Autocorrelation Function (ACF) plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-traceplots-non-info-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Diagnostic plots from the <code>bayesplot</code> package.
+</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="model-1-diagnostics-output" class="slide level2 output-location-slide"><h2>Model #1 Diagnostics</h2><div class="cell output-location-slide quarto-layout-panel" data-filename="intro-to-stan.R">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-traceplots-non-info-1" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-1.png" width="576"></p>
-<figcaption>Figure&nbsp;4: Traceplots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-traceplots-non-info-2" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-2.png" width="576"></p>
-<figcaption>Figure&nbsp;5: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-traceplots-non-info-3" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-3.png" width="576"></p>
-<figcaption>Figure&nbsp;6: Autocorrelation Function (ACF) plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p>Diagnostic plots from the <code>bayesplot</code> package.</p>
-</div>
-</div>
-</div></section><section id="model-1-inference" class="slide level2">
+<section id="model-1-inference" class="slide level2">
 <h2>Model #1 Inference</h2>
 <ul>
-<li><p>The summary statistics are displayed in <a href="#/model-1-inference">Table&nbsp;1</a>.</p></li>
+<li><p>The summary statistics are displayed in <a href="#/model-1-inference" class="quarto-xref">Table&nbsp;1</a>.</p></li>
 <li><p>The statistics <code>rhat</code>, <code>ess_bulk</code>, and <code>ess_tail</code> are additional diagnostics.</p></li>
 </ul>
 <div class="cell">
@@ -976,15 +992,18 @@ $ebfmi
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb14-2"><a href="#cb14-2"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell fragment" data-filename="intro-to-stan.R">
+<div id="tbl-non-info-inf" class="cell quarto-float" data-output-location="fragment">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-non-info-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
+<div aria-describedby="tbl-non-info-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-non-info-inf">
-<table data-quarto-postprocess="true">
-<caption>Table&nbsp;1: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</caption>
+<div>
+<table class="do-not-create-environment cell" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
@@ -1038,21 +1057,32 @@ $ebfmi
 </tr>
 </tbody>
 </table>
-</div>
 
 
 </div>
 </div>
-<div class="cell columns column-output-location" data-filename="intro-to-stan.R">
-<div class="column">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>mles <span class="sc">|&gt;</span> </span>
-<span id="cb15-2"><a href="#cb15-2"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb15-3"><a href="#cb15-3"></a>                    <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>intro-to-stan.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>mles <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb15-3"><a></a>                    <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tbl-mle-res-1" class="cell quarto-float" data-output-location="column-fragment">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mle-res-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: MLE estimates for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
+<div aria-describedby="tbl-mle-res-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-mle-res-1">
-<table data-quarto-postprocess="true">
-<caption>Table&nbsp;2: MLE estimates for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</caption>
+<div>
+<table class="do-not-create-environment cell" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1078,55 +1108,67 @@ $ebfmi
 </tr>
 </tbody>
 </table>
-</div>
 
 
 </div>
+</div>
+</div>
+</figure>
 </div>
 </div>
 </section>
 <section id="model-1-graphical-summaries" class="slide level2">
 <h2>Model #1 Graphical Summaries</h2>
 <ul>
-<li><p><a href="#/model-1-graphical-summaries">Figure&nbsp;8</a> displays 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in <a href="#/model-1-graphical-summaries">Figure&nbsp;9</a>.</p></li>
+<li><p><a href="#/model-1-graphical-summaries" class="quarto-xref">Figure&nbsp;4 (a)</a> displays 50% (thick bar) and 95% (thin bar) credible intervals with the posterior mean displayed as a point. The densities are plotted in ridgelines in <a href="#/model-1-graphical-summaries" class="quarto-xref">Figure&nbsp;4 (b)</a>.</p></li>
 <li><p>Plots were made using the <code>bayesplot</code> package.</p></li>
 </ul>
-<div id="fig-non-info-ci" class="cell quarto-layout-panel">
-<figure>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-non-info-ci" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-non-info-ci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">mcmc_intervals</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">mcmc_areas_ridges</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
-<span id="cb16-3"><a href="#cb16-3"></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">mcmc_intervals</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb16-2"><a></a><span class="fu">mcmc_areas_ridges</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)),</span>
+<span id="cb16-3"><a></a>                  <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-non-info-ci-1" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-non-info-ci-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-1.png" data-ref-parent="fig-non-info-ci" width="576">
 </div>
-<p></p><figcaption>Figure&nbsp;7: <strong>?(caption)</strong></figcaption><p></p>
-</figure>
-</div>
-<div class="cell fragment quarto-layout-panel" data-filename="intro-to-stan.R">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-non-info-ci-1" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-1.png" width="576"></p>
-<figcaption>Figure&nbsp;8: Interval plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-non-info-ci-2" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-2.png" width="576"></p>
-<figcaption>Figure&nbsp;9: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> in a ridgeline plot.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-non-info-ci-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Interval plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-non-info-ci-2" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-non-info-ci-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-2.png" data-ref-parent="fig-non-info-ci" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-non-info-ci-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> in a ridgeline plot.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-non-info-ci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4
+</figcaption>
+</figure>
 </div>
 </section>
 <section id="model-1-posterior-predictive-checks" class="slide level2">
@@ -1146,16 +1188,16 @@ $ebfmi
 <div class="code-with-filename-file">
 <pre><strong>non-informative-regression.stan</strong></pre>
 </div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource stan code-overflow-wrap number-lines code-with-copy"><code class="sourceCode stan"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb17-2"><a href="#cb17-2"></a>    <span class="co">// create a vector of N new observations</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>    <span class="dt">vector</span>[N] y_ppd; </span>
-<span id="cb17-4"><a href="#cb17-4"></a>    </span>
-<span id="cb17-5"><a href="#cb17-5"></a>    <span class="co">// for each observation, sample from the regression likelihod</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a>    <span class="co">// using the posterior draws</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
-<span id="cb17-8"><a href="#cb17-8"></a>        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span>
-<span id="cb17-9"><a href="#cb17-9"></a>    }</span>
-<span id="cb17-10"><a href="#cb17-10"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17" data-filename="non-informative-regression.stan"><pre class="sourceCode numberSource stan code-overflow-wrap number-lines code-with-copy"><code class="sourceCode stan"><span id="cb17-1"><a></a><span class="kw">generated quantities</span> {</span>
+<span id="cb17-2"><a></a>    <span class="co">// create a vector of N new observations</span></span>
+<span id="cb17-3"><a></a>    <span class="dt">vector</span>[N] y_ppd; </span>
+<span id="cb17-4"><a></a>    </span>
+<span id="cb17-5"><a></a>    <span class="co">// for each observation, sample from the regression likelihod</span></span>
+<span id="cb17-6"><a></a>    <span class="co">// using the posterior draws</span></span>
+<span id="cb17-7"><a></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb17-8"><a></a>        y_ppd[i] = normal_rng(X_c[i,] * beta, sigma);</span>
+<span id="cb17-9"><a></a>    }</span>
+<span id="cb17-10"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>Say at the beginning of the slide that this doesn’t need to be copied</p>
@@ -1173,51 +1215,56 @@ $ebfmi
 </section>
 <section id="model-1-posterior-predictive-plots" class="slide level2">
 <h2>Model #1 Posterior Predictive Plots</h2>
-<div id="fig-non-info-ppc" class="cell quarto-layout-panel">
-<figure>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-non-info-ppc" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-non-info-ppc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="|1|2|3-4|5-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(posterior)</span>
-<span id="cb18-2"><a href="#cb18-2"></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W, y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>, <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W, y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>], <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
-<span id="cb18-7"><a href="#cb18-7"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-code-line-numbers="|1|2|3-4|5-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">library</span>(posterior)</span>
+<span id="cb18-2"><a></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit1<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
+<span id="cb18-3"><a></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W, y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb18-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>, <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb18-5"><a></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W, y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>], <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb18-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb18-7"><a></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-non-info-ppc-1" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-non-info-ppc-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-1.png" data-ref-parent="fig-non-info-ppc" width="960">
 </div>
-<p></p><figcaption>Figure&nbsp;10: <strong>?(caption)</strong></figcaption><p></p>
-</figure>
-</div>
-<div class="cell fragment quarto-layout-panel" data-filename="intro-to-stan.R">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-non-info-ppc-1" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-1.png" width="960"></p>
-<figcaption>Figure&nbsp;11: PPD densities for the wins given 3pt%.</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-non-info-ppc-2" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-2.png" width="960"></p>
-<figcaption>Figure&nbsp;12: PPD intervals for the wins plotted by 3pt%.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-non-info-ppc-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) PPD densities for the wins given 3pt%.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Posterior Predictive Check plots from <code>bayesplot</code>.</p>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-non-info-ppc-2" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-non-info-ppc-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-2.png" data-ref-parent="fig-non-info-ppc" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-non-info-ppc-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) PPD intervals for the wins plotted by 3pt%.
+</figcaption>
+</figure>
 </div>
 </div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-non-info-ppc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Posterior Predictive Check plots from <code>bayesplot</code>.
+</figcaption>
+</figure>
 </div>
 </section></section>
 <section>
@@ -1264,51 +1311,51 @@ $ebfmi
 <div class="code-with-filename-file">
 <pre><strong>conjugate-regression.stan</strong></pre>
 </div>
-<div class="sourceCode" id="cb19" data-code-line-numbers="1-12|15-19|21-26|28-36|38-45"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">// The input data is a vector 'y' of length 'N'.</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">data</span> {</span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; K;</span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="dt">vector</span>[N] y;</span>
-<span id="cb19-6"><a href="#cb19-6"></a>  <span class="dt">matrix</span>[N, K] X;</span>
-<span id="cb19-7"><a href="#cb19-7"></a>  </span>
-<span id="cb19-8"><a href="#cb19-8"></a>  <span class="co">// hyperparameters</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>  <span class="dt">real</span> beta_0;</span>
-<span id="cb19-10"><a href="#cb19-10"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; lambda_0;</span>
-<span id="cb19-11"><a href="#cb19-11"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; nu_0;</span>
-<span id="cb19-12"><a href="#cb19-12"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; s_02;</span>
-<span id="cb19-13"><a href="#cb19-13"></a>}</span>
-<span id="cb19-14"><a href="#cb19-14"></a></span>
-<span id="cb19-15"><a href="#cb19-15"></a><span class="kw">transformed data</span> {</span>
-<span id="cb19-16"><a href="#cb19-16"></a>    <span class="dt">matrix</span>[N, K+<span class="dv">1</span>] X_mat = append_col(rep_vector(<span class="dv">1</span>, N), X);</span>
-<span id="cb19-17"><a href="#cb19-17"></a>    <span class="dt">vector</span>[K+<span class="dv">1</span>] beta_0_vec = rep_vector(beta_0, K+<span class="dv">1</span>);</span>
-<span id="cb19-18"><a href="#cb19-18"></a>    <span class="dt">matrix</span>[K+<span class="dv">1</span>, K+<span class="dv">1</span>] Lambda_0 = lambda_0 * identity_matrix(K+<span class="dv">1</span>);</span>
-<span id="cb19-19"><a href="#cb19-19"></a>}</span>
-<span id="cb19-20"><a href="#cb19-20"></a></span>
-<span id="cb19-21"><a href="#cb19-21"></a><span class="co">// The parameters accepted by the model. Our model</span></span>
-<span id="cb19-22"><a href="#cb19-22"></a><span class="co">// accepts two parameters 'mu' and 'sigma'.</span></span>
-<span id="cb19-23"><a href="#cb19-23"></a><span class="kw">parameters</span> {</span>
-<span id="cb19-24"><a href="#cb19-24"></a>  <span class="dt">vector</span>[K+<span class="dv">1</span>] beta;</span>
-<span id="cb19-25"><a href="#cb19-25"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma2;</span>
-<span id="cb19-26"><a href="#cb19-26"></a>}</span>
-<span id="cb19-27"><a href="#cb19-27"></a></span>
-<span id="cb19-28"><a href="#cb19-28"></a><span class="co">// The model to be estimated. We model the output</span></span>
-<span id="cb19-29"><a href="#cb19-29"></a><span class="co">// 'y' to be normally distributed with mean 'mu'</span></span>
-<span id="cb19-30"><a href="#cb19-30"></a><span class="co">// and standard deviation 'sigma'.</span></span>
-<span id="cb19-31"><a href="#cb19-31"></a><span class="kw">model</span> {</span>
-<span id="cb19-32"><a href="#cb19-32"></a>  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);</span>
-<span id="cb19-33"><a href="#cb19-33"></a>  sigma2 ~ scaled_inv_chi_square(nu_0, sqrt(s_02));</span>
-<span id="cb19-34"><a href="#cb19-34"></a>  </span>
-<span id="cb19-35"><a href="#cb19-35"></a>  y ~ normal(X_mat * beta, sqrt(sigma2));</span>
-<span id="cb19-36"><a href="#cb19-36"></a>}</span>
-<span id="cb19-37"><a href="#cb19-37"></a></span>
-<span id="cb19-38"><a href="#cb19-38"></a><span class="kw">generated quantities</span> {</span>
-<span id="cb19-39"><a href="#cb19-39"></a>    <span class="dt">real</span> sigma = sqrt(sigma2);</span>
-<span id="cb19-40"><a href="#cb19-40"></a>    <span class="dt">vector</span>[N] y_ppd;</span>
-<span id="cb19-41"><a href="#cb19-41"></a>    </span>
-<span id="cb19-42"><a href="#cb19-42"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
-<span id="cb19-43"><a href="#cb19-43"></a>        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));</span>
-<span id="cb19-44"><a href="#cb19-44"></a>    }</span>
-<span id="cb19-45"><a href="#cb19-45"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19" data-filename="conjugate-regression.stan" data-code-line-numbers="1-12|15-19|21-26|28-36|38-45"><pre class="sourceCode numberSource stan number-lines code-with-copy"><code class="sourceCode stan"><span id="cb19-1"><a></a><span class="co">// The input data is a vector 'y' of length 'N'.</span></span>
+<span id="cb19-2"><a></a><span class="kw">data</span> {</span>
+<span id="cb19-3"><a></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
+<span id="cb19-4"><a></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; K;</span>
+<span id="cb19-5"><a></a>  <span class="dt">vector</span>[N] y;</span>
+<span id="cb19-6"><a></a>  <span class="dt">matrix</span>[N, K] X;</span>
+<span id="cb19-7"><a></a>  </span>
+<span id="cb19-8"><a></a>  <span class="co">// hyperparameters</span></span>
+<span id="cb19-9"><a></a>  <span class="dt">real</span> beta_0;</span>
+<span id="cb19-10"><a></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; lambda_0;</span>
+<span id="cb19-11"><a></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; nu_0;</span>
+<span id="cb19-12"><a></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; s_02;</span>
+<span id="cb19-13"><a></a>}</span>
+<span id="cb19-14"><a></a></span>
+<span id="cb19-15"><a></a><span class="kw">transformed data</span> {</span>
+<span id="cb19-16"><a></a>    <span class="dt">matrix</span>[N, K+<span class="dv">1</span>] X_mat = append_col(rep_vector(<span class="dv">1</span>, N), X);</span>
+<span id="cb19-17"><a></a>    <span class="dt">vector</span>[K+<span class="dv">1</span>] beta_0_vec = rep_vector(beta_0, K+<span class="dv">1</span>);</span>
+<span id="cb19-18"><a></a>    <span class="dt">matrix</span>[K+<span class="dv">1</span>, K+<span class="dv">1</span>] Lambda_0 = lambda_0 * identity_matrix(K+<span class="dv">1</span>);</span>
+<span id="cb19-19"><a></a>}</span>
+<span id="cb19-20"><a></a></span>
+<span id="cb19-21"><a></a><span class="co">// The parameters accepted by the model. Our model</span></span>
+<span id="cb19-22"><a></a><span class="co">// accepts two parameters 'mu' and 'sigma'.</span></span>
+<span id="cb19-23"><a></a><span class="kw">parameters</span> {</span>
+<span id="cb19-24"><a></a>  <span class="dt">vector</span>[K+<span class="dv">1</span>] beta;</span>
+<span id="cb19-25"><a></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; sigma2;</span>
+<span id="cb19-26"><a></a>}</span>
+<span id="cb19-27"><a></a></span>
+<span id="cb19-28"><a></a><span class="co">// The model to be estimated. We model the output</span></span>
+<span id="cb19-29"><a></a><span class="co">// 'y' to be normally distributed with mean 'mu'</span></span>
+<span id="cb19-30"><a></a><span class="co">// and standard deviation 'sigma'.</span></span>
+<span id="cb19-31"><a></a><span class="kw">model</span> {</span>
+<span id="cb19-32"><a></a>  beta ~ multi_normal(beta_0_vec, sigma2 * Lambda_0);</span>
+<span id="cb19-33"><a></a>  sigma2 ~ scaled_inv_chi_square(nu_0, sqrt(s_02));</span>
+<span id="cb19-34"><a></a>  </span>
+<span id="cb19-35"><a></a>  y ~ normal(X_mat * beta, sqrt(sigma2));</span>
+<span id="cb19-36"><a></a>}</span>
+<span id="cb19-37"><a></a></span>
+<span id="cb19-38"><a></a><span class="kw">generated quantities</span> {</span>
+<span id="cb19-39"><a></a>    <span class="dt">real</span> sigma = sqrt(sigma2);</span>
+<span id="cb19-40"><a></a>    <span class="dt">vector</span>[N] y_ppd;</span>
+<span id="cb19-41"><a></a>    </span>
+<span id="cb19-42"><a></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N) {</span>
+<span id="cb19-43"><a></a>        y_ppd[i] = normal_rng(X_mat[i,] * beta, sqrt(sigma2));</span>
+<span id="cb19-44"><a></a>    }</span>
+<span id="cb19-45"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <ul>
@@ -1343,35 +1390,33 @@ $ebfmi
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>data_list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb20-2"><a href="#cb20-2"></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
-<span id="cb20-3"><a href="#cb20-3"></a>    <span class="at">K =</span> <span class="dv">1</span>,</span>
-<span id="cb20-4"><a href="#cb20-4"></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
-<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">X =</span> <span class="fu">as.matrix</span>(ncaaw<span class="sc">$</span>FG3pct, <span class="at">nrow =</span> <span class="fu">nrow</span>(ncaaw)),</span>
-<span id="cb20-6"><a href="#cb20-6"></a>    </span>
-<span id="cb20-7"><a href="#cb20-7"></a>    <span class="co"># hyperparameters</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a>    <span class="at">beta_0 =</span> <span class="dv">0</span>,</span>
-<span id="cb20-9"><a href="#cb20-9"></a>    <span class="at">lambda_0 =</span> <span class="fl">0.5</span>,</span>
-<span id="cb20-10"><a href="#cb20-10"></a>    <span class="at">nu_0 =</span> <span class="dv">1</span>,</span>
-<span id="cb20-11"><a href="#cb20-11"></a>    <span class="at">s_02 =</span> <span class="dv">47</span></span>
-<span id="cb20-12"><a href="#cb20-12"></a>)</span>
-<span id="cb20-13"><a href="#cb20-13"></a></span>
-<span id="cb20-14"><a href="#cb20-14"></a>file2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"conjugate-regression.stan"</span>)</span>
-<span id="cb20-15"><a href="#cb20-15"></a>conj_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file2)</span>
-<span id="cb20-16"><a href="#cb20-16"></a></span>
-<span id="cb20-17"><a href="#cb20-17"></a>fit2 <span class="ot">&lt;-</span> conj_model<span class="sc">$</span><span class="fu">sample</span>(</span>
-<span id="cb20-18"><a href="#cb20-18"></a>    <span class="at">data =</span> data_list2,</span>
-<span id="cb20-19"><a href="#cb20-19"></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
-<span id="cb20-20"><a href="#cb20-20"></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
-<span id="cb20-21"><a href="#cb20-21"></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb20-22"><a href="#cb20-22"></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
-<span id="cb20-23"><a href="#cb20-23"></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb20-24"><a href="#cb20-24"></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb20-25"><a href="#cb20-25"></a>    <span class="co"># show_exceptions = FALSE</span></span>
-<span id="cb20-26"><a href="#cb20-26"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>data_list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb20-2"><a></a>    <span class="at">N =</span> <span class="fu">nrow</span>(ncaaw),</span>
+<span id="cb20-3"><a></a>    <span class="at">K =</span> <span class="dv">1</span>,</span>
+<span id="cb20-4"><a></a>    <span class="at">y =</span> ncaaw<span class="sc">$</span>W,</span>
+<span id="cb20-5"><a></a>    <span class="at">X =</span> <span class="fu">as.matrix</span>(ncaaw<span class="sc">$</span>FG3pct, <span class="at">nrow =</span> <span class="fu">nrow</span>(ncaaw)),</span>
+<span id="cb20-6"><a></a>    </span>
+<span id="cb20-7"><a></a>    <span class="co"># hyperparameters</span></span>
+<span id="cb20-8"><a></a>    <span class="at">beta_0 =</span> <span class="dv">0</span>,</span>
+<span id="cb20-9"><a></a>    <span class="at">lambda_0 =</span> <span class="fl">0.5</span>,</span>
+<span id="cb20-10"><a></a>    <span class="at">nu_0 =</span> <span class="dv">1</span>,</span>
+<span id="cb20-11"><a></a>    <span class="at">s_02 =</span> <span class="dv">47</span></span>
+<span id="cb20-12"><a></a>)</span>
+<span id="cb20-13"><a></a></span>
+<span id="cb20-14"><a></a>file2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"conjugate-regression.stan"</span>)</span>
+<span id="cb20-15"><a></a>conj_model <span class="ot">&lt;-</span> <span class="fu">cmdstan_model</span>(file2)</span>
+<span id="cb20-16"><a></a></span>
+<span id="cb20-17"><a></a>fit2 <span class="ot">&lt;-</span> conj_model<span class="sc">$</span><span class="fu">sample</span>(</span>
+<span id="cb20-18"><a></a>    <span class="at">data =</span> data_list2,</span>
+<span id="cb20-19"><a></a>    <span class="at">iter_warmup =</span> <span class="dv">1000</span>,</span>
+<span id="cb20-20"><a></a>    <span class="at">iter_sampling =</span> <span class="dv">1000</span>,</span>
+<span id="cb20-21"><a></a>    <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb20-22"><a></a>    <span class="at">refresh =</span> <span class="dv">500</span>,</span>
+<span id="cb20-23"><a></a>    <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb20-24"><a></a>    <span class="at">show_messages =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb20-25"><a></a>    <span class="co"># show_exceptions = FALSE</span></span>
+<span id="cb20-26"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell fragment" data-filename="intro-to-stan.R">
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
@@ -1405,7 +1450,7 @@ Total execution time: 1.2 seconds.</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>fit2<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>fit2<span class="sc">$</span><span class="fu">diagnostic_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$num_divergent
@@ -1418,78 +1463,95 @@ $ebfmi
 [1] 1.059917 1.022045</code></pre>
 </div>
 </div>
-<div id="fig-traceplots-conj" class="cell quarto-layout-panel">
-<figure>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-traceplots-conj" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-traceplots-conj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">mcmc_trace</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">mcmc_dens_overlay</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="fu">mcmc_acf_bar</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">mcmc_trace</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb24-2"><a></a><span class="fu">mcmc_dens_overlay</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb24-3"><a></a><span class="fu">mcmc_acf_bar</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-conj" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-traceplots-conj-1" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-traceplots-conj-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-1.png" data-ref-parent="fig-traceplots-conj" width="576">
 </div>
-<p></p><figcaption>Figure&nbsp;13: <strong>?(caption)</strong></figcaption><p></p>
-</figure>
-</div>
-<div class="cell fragment quarto-layout-panel" data-filename="intro-to-stan.R">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-traceplots-conj-1" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-1.png" width="576"></p>
-<figcaption>Figure&nbsp;14: Traceplots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-traceplots-conj-2" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-2.png" width="576"></p>
-<figcaption>Figure&nbsp;15: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-traceplots-conj-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Traceplots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-traceplots-conj-3" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-3.png" width="576"></p>
-<figcaption>Figure&nbsp;16: ACF plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-conj" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-traceplots-conj-2" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-traceplots-conj-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-2.png" data-ref-parent="fig-traceplots-conj" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-traceplots-conj-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-conj" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-traceplots-conj-3" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-traceplots-conj-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-3.png" data-ref-parent="fig-traceplots-conj" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-traceplots-conj-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) ACF plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-traceplots-conj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6
+</figcaption>
+</figure>
 </div>
 </section>
 <section id="model-2-inference" class="slide level2">
 <h2>Model #2 Inference</h2>
 <ul>
 <li><p>Estimates are similar to Model #1, but regression coefficients are shrunk slightly to zero and variance is slightly higher</p></li>
-<li><p><a href="#/model-2-graphical-summaries">Figure&nbsp;18</a> displayes credible intervals and densities are plotted as ridgelines in <a href="#/model-2-graphical-summaries">Figure&nbsp;19</a>.</p></li>
+<li><p><a href="#/model-2-graphical-summaries" class="quarto-xref">Figure&nbsp;7 (a)</a> displayes credible intervals and densities are plotted as ridgelines in <a href="#/model-2-graphical-summaries" class="quarto-xref">Figure&nbsp;7 (b)</a>.</p></li>
 </ul>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mles,</span>
-<span id="cb25-2"><a href="#cb25-2"></a>  fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
-<span id="cb25-3"><a href="#cb25-3"></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mcmc_summary,</span>
-<span id="cb25-4"><a href="#cb25-4"></a>  fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
-<span id="cb25-5"><a href="#cb25-5"></a><span class="fu">colnames</span>(mcmc_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"MLE"</span>, <span class="st">"Non-info Est"</span>, <span class="st">"Non-info SD"</span>, <span class="st">"Conj Est"</span>, <span class="st">"Conj SD"</span>)</span>
-<span id="cb25-6"><a href="#cb25-6"></a></span>
-<span id="cb25-7"><a href="#cb25-7"></a>mcmc_summary <span class="sc">|&gt;</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r code-overflow-wrap number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mles,</span>
+<span id="cb25-2"><a></a>  fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
+<span id="cb25-3"><a></a>mcmc_summary <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mcmc_summary,</span>
+<span id="cb25-4"><a></a>  fit2<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>))[,<span class="fu">c</span>(<span class="st">"mean"</span>, <span class="st">"sd"</span>)])</span>
+<span id="cb25-5"><a></a><span class="fu">colnames</span>(mcmc_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"MLE"</span>, <span class="st">"Non-info Est"</span>, <span class="st">"Non-info SD"</span>, <span class="st">"Conj Est"</span>, <span class="st">"Conj SD"</span>)</span>
+<span id="cb25-6"><a></a></span>
+<span id="cb25-7"><a></a>mcmc_summary <span class="sc">|&gt;</span></span>
+<span id="cb25-8"><a></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell fragment" data-filename="intro-to-stan.R">
+<div id="tbl-conj-inf" class="cell quarto-float" data-output-location="fragment">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-conj-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
+<div aria-describedby="tbl-conj-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-conj-inf">
-<table data-quarto-postprocess="true">
-<caption>Table&nbsp;3: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</caption>
+<div>
+<table class="do-not-create-environment cell" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1531,95 +1593,115 @@ $ebfmi
 </tr>
 </tbody>
 </table>
+
+
 </div>
-
-
+</div>
+</div>
+</figure>
 </div>
 </div>
 </section>
 <section id="model-2-graphical-summaries" class="slide level2">
 <h2>Model #2 Graphical Summaries</h2>
-<div id="fig-conj-ci" class="cell quarto-layout-panel">
-<figure>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-conj-ci" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-conj-ci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">mcmc_intervals</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">mcmc_areas_ridges</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)), <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">mcmc_intervals</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)))</span>
+<span id="cb26-2"><a></a><span class="fu">mcmc_areas_ridges</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)), <span class="at">prob_outer =</span> <span class="fl">0.95</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-conj-ci-1" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-conj-ci-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-1.png" data-ref-parent="fig-conj-ci" width="960">
 </div>
-<p></p><figcaption>Figure&nbsp;17: <strong>?(caption)</strong></figcaption><p></p>
-</figure>
-</div>
-<div class="cell fragment quarto-layout-panel" data-filename="intro-to-stan.R">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-conj-ci-1" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-1.png" width="960"></p>
-<figcaption>Figure&nbsp;18: Interval plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-conj-ci-2" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-2.png" width="960"></p>
-<figcaption>Figure&nbsp;19: Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> in a ridgeline plot.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-conj-ci-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Interval plots for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p>Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>. Plots were made using the <code>bayesplot</code> package.</p>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-conj-ci-2" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-conj-ci-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-2.png" data-ref-parent="fig-conj-ci" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-conj-ci-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Approximate posterior densities for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> in a ridgeline plot.
+</figcaption>
+</figure>
 </div>
 </div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-conj-ci-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Plots for the 50% Credible Interval (inner band) and 95% Credible Interval (outer band) for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>. Plots were made using the <code>bayesplot</code> package.
+</figcaption>
+</figure>
 </div>
 </section>
 <section id="model-2-posterior-predictive-distribution" class="slide level2">
 <h2>Model #2 Posterior Predictive Distribution</h2>
-<div id="fig-conj-ppc" class="cell quarto-layout-panel">
-<figure>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-conj-ppc" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-conj-ppc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W, y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>, <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
-<span id="cb27-5"><a href="#cb27-5"></a>              y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>], <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
-<span id="cb27-7"><a href="#cb27-7"></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>y_ppd <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">as_draws_df</span>(fit2<span class="sc">$</span><span class="fu">draws</span>(<span class="at">variables =</span> <span class="st">"y_ppd"</span>)))</span>
+<span id="cb27-2"><a></a><span class="fu">ppc_dens_overlay</span>(ncaaw<span class="sc">$</span>W, y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>]) <span class="sc">+</span></span>
+<span id="cb27-3"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins"</span>, <span class="at">x =</span> <span class="st">"Wins"</span>)</span>
+<span id="cb27-4"><a></a><span class="fu">ppc_intervals</span>(ncaaw<span class="sc">$</span>W,</span>
+<span id="cb27-5"><a></a>              y_ppd[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">350</span>], <span class="at">x =</span> ncaaw<span class="sc">$</span>FG3pct) <span class="sc">+</span></span>
+<span id="cb27-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of PPD Draws of NCAAW Wins by 3pt%"</span>,</span>
+<span id="cb27-7"><a></a>         <span class="at">x =</span> <span class="st">"3pt%"</span>, <span class="at">y =</span> <span class="st">"Wins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-conj-ppc-1" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-1.png" data-ref-parent="fig-conj-ppc" width="960"></p>
-<figcaption>(a) PPD densities for the wins given 3pt%.</figcaption>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-conj-ppc-1" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-conj-ppc-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-1.png" data-ref-parent="fig-conj-ppc" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-conj-ppc-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) PPD densities for the wins given 3pt%.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-conj-ppc-2" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-2.png" data-ref-parent="fig-conj-ppc" width="960"></p>
-<figcaption>(b) PPD intervals for the wins plotted by 3pt%.</figcaption>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-conj-ppc-2" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-conj-ppc-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-2.png" data-ref-parent="fig-conj-ppc" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-conj-ppc-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) PPD intervals for the wins plotted by 3pt%.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption>Figure&nbsp;20: <strong>?(caption)</strong></figcaption><p></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-conj-ppc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8
+</figcaption>
 </figure>
 </div>
 </section></section>
@@ -1684,8 +1766,8 @@ $ebfmi
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>ncaaw_i <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/ncaaw-individuals.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">head</span>(ncaaw_i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>ncaaw_i <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/ncaaw-individuals.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-2"><a></a><span class="fu">head</span>(ncaaw_i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Name Pos_jr Pos_sr G_jr G_sr PPG_jr PPG_sr Cl_jr
@@ -1702,19 +1784,21 @@ $ebfmi
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(ncaaw_i, <span class="fu">aes</span>(PPG_jr, PPG_sr, <span class="at">color =</span> G_jr)) <span class="sc">+</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>    <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"G - Jr"</span>) <span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PPG - Jr"</span>, <span class="at">y =</span> <span class="st">"PPG - Sr"</span>) <span class="sc">+</span></span>
-<span id="cb30-5"><a href="#cb30-5"></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">ggplot</span>(ncaaw_i, <span class="fu">aes</span>(PPG_jr, PPG_sr, <span class="at">color =</span> G_jr)) <span class="sc">+</span></span>
+<span id="cb30-2"><a></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb30-3"><a></a>    <span class="fu">scale_color_viridis_c</span>(<span class="at">name =</span> <span class="st">"G - Jr"</span>) <span class="sc">+</span></span>
+<span id="cb30-4"><a></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"PPG - Jr"</span>, <span class="at">y =</span> <span class="st">"PPG - Sr"</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell fragment" data-filename="intro-to-stan.R">
 <div class="cell-output-display">
-<div id="fig-ppg-jr-sr" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-ppg-jr-sr-1.png" width="960"></p>
-<figcaption>Figure&nbsp;21: Points per game (PPG) from Junior and Senior seasons.</figcaption>
+<div id="fig-ppg-jr-sr" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-ppg-jr-sr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-ppg-jr-sr-1.png" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ppg-jr-sr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Points per game (PPG) from Junior and Senior seasons.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1729,21 +1813,23 @@ $ebfmi
 <ul>
 <li>For example, imputing <span class="math inline">\(PPG_{jr}\)</span> will be done by regressing on <span class="math inline">\(PPG_{sr}, G_{jr}, G_{sr}\)</span>.</li>
 </ul></li>
-<li><p><span class="math inline">\(PPG_{jr}\)</span> and <span class="math inline">\(G_{jr}\)</span> are incomplete for <span class="math inline">\(n_{mis} = 176\)</span> players while <span class="math inline">\(n_{obs} = 98\)</span> players have stats from both years as displayed in <a href="#/fig-miss-patt">Figure&nbsp;22</a>.</p></li>
+<li><p><span class="math inline">\(PPG_{jr}\)</span> and <span class="math inline">\(G_{jr}\)</span> are incomplete for <span class="math inline">\(n_{mis} = 176\)</span> players while <span class="math inline">\(n_{obs} = 98\)</span> players have stats from both years as displayed in <a href="#/fig-miss-patt" class="quarto-xref">Figure&nbsp;10</a>.</p></li>
 </ul>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># install.packages(c("mice", "brms"))</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">library</span>(mice)</span>
-<span id="cb31-4"><a href="#cb31-4"></a>m_pat <span class="ot">&lt;-</span> <span class="fu">md.pattern</span>(ncaaw_i, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="co"># install.packages(c("mice", "brms"))</span></span>
+<span id="cb31-2"><a></a></span>
+<span id="cb31-3"><a></a><span class="fu">library</span>(mice)</span>
+<span id="cb31-4"><a></a>m_pat <span class="ot">&lt;-</span> <span class="fu">md.pattern</span>(ncaaw_i, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </div>
-<img data-src="stan_pres_files/figure-revealjs/fig-miss-patt-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;22: Missing data patterns for the NCAA women’s basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons.</p></section>
+<img data-src="stan_pres_files/figure-revealjs/fig-miss-patt-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">
+Figure&nbsp;10: Missing data patterns for the NCAA women’s basketball players from 2020-2023 who played in their junior and senior year. The red boxes correspond to missing values, so there are 176 players who recorded full senior seasons (played in &gt;75% of total games) but missing or shortened junior seasons.
+</p></section>
 <section id="multiple-imputation-with-mice" class="slide level2">
 <h2>Multiple Imputation with mice</h2>
 <p>First, we’ll impute before model fitting using <code>mice</code>.</p>
@@ -1758,13 +1844,11 @@ $ebfmi
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(brms)</span>
-<span id="cb32-2"><a href="#cb32-2"></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(ncaaw_i, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"norm"</span>, <span class="at">maxit =</span> <span class="dv">10</span>, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb32-3"><a href="#cb32-3"></a>fit_brm_mice <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(PPG_sr <span class="sc">~</span> G_jr <span class="sc">*</span> PPG_jr, <span class="at">data =</span> imps, <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">refresh =</span> <span class="dv">0</span>)</span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="fu">summary</span>(fit_brm_mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">library</span>(brms)</span>
+<span id="cb32-2"><a></a>imps <span class="ot">&lt;-</span> <span class="fu">mice</span>(ncaaw_i, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"norm"</span>, <span class="at">maxit =</span> <span class="dv">10</span>, <span class="at">printFlag =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb32-3"><a></a>fit_brm_mice <span class="ot">&lt;-</span> <span class="fu">brm_multiple</span>(PPG_sr <span class="sc">~</span> G_jr <span class="sc">*</span> PPG_jr, <span class="at">data =</span> imps, <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">refresh =</span> <span class="dv">0</span>)</span>
+<span id="cb32-4"><a></a><span class="fu">summary</span>(fit_brm_mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell fragment" data-filename="intro-to-stan.R" data-hash="stan_pres_cache/revealjs/mice-fit_0d6ab59c772465a13194eaf1d7a582bd">
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
@@ -1800,18 +1884,21 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li>The model must be constructed uniquely for each analysis scenario.</li>
 </ol></li>
 </ul>
-<div class="cell columns column-output-location" data-filename="intro-to-stan.R" data-hash="stan_pres_cache/revealjs/brm-mi-fit_90f86b01ea69f026782f8b7272e21e4d">
-<div class="column">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>bform <span class="ot">&lt;-</span> <span class="fu">bf</span>(PPG_sr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> <span class="fu">mi</span>(G_jr) <span class="sc">*</span> <span class="fu">mi</span>(PPG_jr)) <span class="sc">+</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>    <span class="fu">bf</span>(PPG_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a>    <span class="fu">bf</span>(G_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span> <span class="fu">set_rescor</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb34-4"><a href="#cb34-4"></a>fit_brm_mi <span class="ot">&lt;-</span> <span class="fu">brm</span>(bform, <span class="at">data =</span> ncaaw_i, </span>
-<span id="cb34-5"><a href="#cb34-5"></a>                  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">thin =</span> <span class="dv">1</span>,</span>
-<span id="cb34-6"><a href="#cb34-6"></a>                  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7"></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">show_exceptions =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb34-8"><a href="#cb34-8"></a>                  <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb34-9"><a href="#cb34-9"></a><span class="fu">summary</span>(fit_brm_mi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+<div class="cell" data-hash="stan_pres_cache/revealjs/brm-mi-fit_90f86b01ea69f026782f8b7272e21e4d">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>intro-to-stan.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>bform <span class="ot">&lt;-</span> <span class="fu">bf</span>(PPG_sr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> <span class="fu">mi</span>(G_jr) <span class="sc">*</span> <span class="fu">mi</span>(PPG_jr)) <span class="sc">+</span></span>
+<span id="cb34-2"><a></a>    <span class="fu">bf</span>(PPG_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span></span>
+<span id="cb34-3"><a></a>    <span class="fu">bf</span>(G_jr <span class="sc">|</span> <span class="fu">mi</span>() <span class="sc">~</span> G_sr <span class="sc">+</span> PPG_sr) <span class="sc">+</span> <span class="fu">set_rescor</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb34-4"><a></a>fit_brm_mi <span class="ot">&lt;-</span> <span class="fu">brm</span>(bform, <span class="at">data =</span> ncaaw_i, </span>
+<span id="cb34-5"><a></a>                  <span class="at">refresh =</span> <span class="dv">500</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">thin =</span> <span class="dv">1</span>,</span>
+<span id="cb34-6"><a></a>                  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb34-7"><a></a>                  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">show_exceptions =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb34-8"><a></a>                  <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb34-9"><a></a><span class="fu">summary</span>(fit_brm_mi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: MV(gaussian, gaussian, gaussian) 
   Links: mu = identity; sigma = identity
@@ -1859,11 +1946,10 @@ and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
-</div>
 </section>
 <section id="diagnostics" class="slide level2">
 <h2>Diagnostics</h2>
-<p>Since <code>brms</code> is built on Stan we can also take a look at the traceplots of the samples in <a href="#/diagnostics">Figure&nbsp;23</a>.</p>
+<p>Since <code>brms</code> is built on Stan we can also take a look at the traceplots of the samples in <a href="#/diagnostics" class="quarto-xref">Figure&nbsp;11</a>.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -1871,13 +1957,17 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-brm-mi-trace" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-1.png" width="960"></p>
-<figcaption>Figure&nbsp;23: Traceplots of brms analysis model parameters.</figcaption>
+<div id="fig-brm-mi-trace" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-brm-mi-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-1.png" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brm-mi-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Traceplots of brms analysis model parameters.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1888,13 +1978,17 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-brm-mi-trace-imp" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-imp-1.png" width="960"></p>
-<figcaption>Figure&nbsp;24: Traceplots of brms imputation model parameters.</figcaption>
+<div id="fig-brm-mi-trace-imp" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-brm-mi-trace-imp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-imp-1.png" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brm-mi-trace-imp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Traceplots of brms imputation model parameters.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1904,44 +1998,56 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </section>
 <section id="comparison-of-estimated-effects" class="slide level2">
 <h2>Comparison of Estimated Effects</h2>
-<div id="fig-brm-mi-cond-eff" class="cell quarto-layout-panel">
-<figure>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-brm-mi-cond-eff" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-brm-mi-cond-eff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>intro-to-stan.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mice, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mi, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mice, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span>
+<span id="cb38-2"><a></a><span class="fu">plot</span>(brms<span class="sc">::</span><span class="fu">conditional_effects</span>(fit_brm_mi, <span class="st">"PPG_jr:G_jr"</span>, <span class="at">resp =</span> <span class="st">"PPGsr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-brm-mi-cond-eff-1" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-1.png" data-ref-parent="fig-brm-mi-cond-eff" width="576"></p>
-<figcaption>(a) Estimates after MICE imputation</figcaption>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-brm-mi-cond-eff" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-brm-mi-cond-eff-1" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-brm-mi-cond-eff-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-1.png" data-ref-parent="fig-brm-mi-cond-eff" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-brm-mi-cond-eff-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Estimates after MICE imputation
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-brm-mi-cond-eff-2" class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-2.png" data-ref-parent="fig-brm-mi-cond-eff" width="576"></p>
-<figcaption>(b) Estimates with joint model</figcaption>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-brm-mi-cond-eff" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-brm-mi-cond-eff-2" class="quarto-figure quarto-figure-center quarto-float">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-brm-mi-cond-eff-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-2.png" data-ref-parent="fig-brm-mi-cond-eff" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-brm-mi-cond-eff-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Estimates with joint model
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption>Figure&nbsp;25: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.</figcaption><p></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brm-mi-cond-eff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: The estimated conditional effects of PPG as a junior and junior-year Games played on PPG as a senior.
+</figcaption>
 </figure>
 </div>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-bürkner2018" class="csl-entry" role="listitem">
 Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the R Package Brms.”</span> <em>The R Journal</em> 10 (1): 395. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
 </div>
@@ -1980,8 +2086,10 @@ Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference A
 </div>
 </div>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
 
@@ -2011,7 +2119,6 @@ Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference A
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -2310,10 +2417,9 @@ Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference A
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -2323,8 +2429,17 @@ Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference A
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

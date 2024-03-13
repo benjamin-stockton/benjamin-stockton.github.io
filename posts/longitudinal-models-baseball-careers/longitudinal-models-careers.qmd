@@ -1,0 +1,170 @@
+---
+title: "Longitudinal Models for MLB Careers"
+author: "Ben Stockton"
+date: 2024-02-29
+editor: visual
+format: 
+    html:
+        code-fold: show
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+bibliography: references.bib
+draft: true
+cache: true
+---
+
+```{r}
+library(baseballr)
+library(dplyr)
+library(ggplot2)
+
+dat <- lapply(2015:2023, function(yr) {statcast_leaderboards(leaderboard = "expected_statistics", year = yr, min_pa = 25)}) |>
+    bind_rows()
+
+dat
+```
+
+```{r}
+dat |>
+    filter(
+        pa >= 100
+    ) |>
+    ggplot(aes(woba, est_woba, color = est_woba_minus_woba_diff, alpha = 1 - 1/pa)) +
+        geom_point() +
+        geom_abline(slope = 1, color = "red", linetype = "dashed")
+```
+
+```{r}
+top_batters <- dat |>
+    group_by(player_id, `last_name, first_name`) |>
+    summarize(
+        total_pa = sum(pa)
+    ) |>
+    arrange(desc(total_pa)) |>
+    head(25)
+```
+
+```{r}
+
+dat <- dat |>
+    mutate(
+        t = year - 2016,
+        tsq = (t - 3.5)^2,
+        woba_l1 = lag(woba)
+    )
+
+dat2 <- left_join(top_batters, dat, by = c("player_id", "last_name, first_name"))
+
+s <- sample(length(unique(dat$player_id)), size = floor(length(unique(dat$player_id)) * 0.75))
+dat_train <- dat |>
+    filter(
+        # player_id %in% top_batters$player_id[s],
+        year >= 2016,
+        pa >= 150
+    )
+
+dat_test <- dat |>
+    filter(
+        # player_id %in% top_batters$player_id[-s],
+        year >= 2016,
+        pa >= 150
+    )
+```
+
+```{r}
+dat2 |>
+    ggplot(aes(year, est_woba)) +
+        geom_point() +
+        geom_smooth(method = "lm", se = FALSE) +
+        facet_wrap(player_id~.) +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+
+```
+
+```{r}
+library(lme4)
+
+
+fit1 <- lmer(woba ~ woba_l1 + est_woba + (t | player_id), data = dat_train)
+fit3 <- lmer(woba ~ woba_l1 + est_woba + (t + tsq | player_id), data = dat_train)
+# fit4 <- lmer(woba ~ woba_l1 + (splines::bs(t) | player_id), data = dat_train)
+
+summary(fit3)
+```
+
+```{r}
+AIC(fit1)
+AIC(fit3)
+# AIC(fit4)
+```
+
+```{r}
+library(lattice)
+dotplot(ranef(fit3))
+```
+
+```{r}
+plot(fit3)
+```
+
+```{r}
+#| label: fig-fitted-lmm
+#| fig-height: 8
+#| fig-width: 6
+# Predict on training set
+preds  <- merTools::predictInterval(fit3, newdata = dat_train, n.sims = 100, returnSims = TRUE, seed = 657, level = 0.95) %>%
+  as.data.frame()
+ 
+dat3 <- bind_cols(dat_train, preds)
+ 
+dat3$group <- "train"
+ 
+# Predict on test set with 90% prediction intervals
+test_preds  <- merTools::predictInterval(fit3, newdata = dat_test, n.sims = 100, returnSims = TRUE, seed = 657, level = 0.95) %>%
+  as.data.frame()
+
+dat4 <- bind_cols(dat_test, test_preds)
+
+dat4$group <- "test"
+
+# Combine the data together
+combined_dat <- bind_rows(dat3, dat4) %>%
+  arrange(player_id)
+
+## Plot the time series of predictions and observed data
+combined_dat |>
+    filter(
+        player_id %in% top_batters$player_id
+    ) |>
+    mutate(group = factor(group, levels = c("train", "test"))) |>
+    ggplot(aes(x = t, y = woba)) +
+      geom_ribbon(aes(ymin = lwr,
+                      ymax = upr),
+                  fill = "light grey",
+                  alpha = 0.8) +
+      geom_line(aes(y = fit),
+                col = "red",
+                size = 1) +
+      geom_point(aes(fill = group),
+                 size = 3,
+                 shape = 21) +
+      geom_line() +
+      facet_wrap(~player_id) +
+      theme(strip.background = element_rect(fill = "black"),
+            strip.text = element_text(face = "bold", color = "white"),
+            legend.position = "right") +
+      labs(x = "t",
+           y = "wOBA",
+           title = "wOBA over 2016-2023") +
+      theme_bw()
+```
+

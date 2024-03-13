@@ -2,38 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2024-02-23T02:28:30.101Z</lastmod>
+    <lastmod>2024-03-13T19:01:51.684Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
-    <lastmod>2024-02-23T02:28:28.716Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
-    <lastmod>2024-02-23T02:28:25.832Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/index.html</loc>
-    <lastmod>2024-02-23T02:28:20.758Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/about.html</loc>
-    <lastmod>2024-02-23T02:28:19.239Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/blog.html</loc>
-    <lastmod>2024-02-23T02:28:20.195Z</lastmod>
+    <lastmod>2023-09-17T20:45:47.690Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/imputeangles/index.html</loc>
-    <lastmod>2024-02-23T02:28:22.828Z</lastmod>
+    <lastmod>2024-02-23T02:24:59.850Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/blog.html</loc>
+    <lastmod>2023-09-17T20:44:16.713Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/about.html</loc>
+    <lastmod>2023-12-05T16:38:26.730Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/index.html</loc>
+    <lastmod>2023-11-16T19:46:39.844Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
+    <lastmod>2023-11-16T19:27:43.005Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/stan-pres-swosc/stan_pres.html</loc>
-    <lastmod>2024-02-23T02:28:28.122Z</lastmod>
+    <lastmod>2023-11-16T19:27:55.845Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/projects.html</loc>
-    <lastmod>2024-02-23T02:28:29.392Z</lastmod>
+    <lastmod>2023-12-05T16:38:26.735Z</lastmod>
   </url>
 </urlset>
