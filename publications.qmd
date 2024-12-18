@@ -3,12 +3,30 @@
 ::: {#list}
 :::
 
-::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-stocktonInProgressCh1 .csl-entry}
+**Stockton, B.**, & Harel, O. (2025). *(In Progress) [Multiple Imputation
+for Analyzing Spatial Data with Incomplete Angular
+Predictors]{.nocase}*.
+:::
+
+::: {#ref-stocktonInProgressCrim2 .csl-entry}
+Strange, C. C., **Stockton, B.**, Zvonkovich, J., & Harel, O. (2025). *(In
+Progress) multiple imputation using pattern-mixture modeling to assess
+the sensitivity of race/ethnicity effect estimates in sentencing given
+non-ignorable incomplete data*.
+:::
+
 ::: {#ref-sidiNoninferiorityClinicalTrials2024 .csl-entry}
 Sidi, Y., **Stockton, B.**, & Harel, O. (2024). Non-inferiority Clinical
 Trials: Treating Margin as Missing Information. *The New England Journal
 of Statistics in Data Science*, 1--8.
 <https://doi.org/10.51387/24-NEJSDS57>
+:::
+
+::: {#ref-stocktonInProgressCh2 .csl-entry}
+**Stockton, B.**, & Harel, O. (2024). *(In Progress) Imputation of
+Incomplete Angular Time Series Data*.
 :::
 
 ::: {#ref-stocktonNowYouSee2023 .csl-entry}
@@ -17,9 +35,4 @@ You Don't: A Simulation and Illustration of the Importance of Treating
 Incomplete Data in Estimating Race Effects in Sentencing. *Journal of
 Quantitative Criminology*. <https://doi.org/10.1007/s10940-023-09577-w>
 :::
-
-::: {#ref-stocktonImputationAngularMissing2023 .csl-entry}
-**Stockton, B.**, & Harel, O. (2023). *Imputation of Angular Missing Data by
-Bayesian Projected Normal Regression*. *000*(000).
-:::
-:::
+::::::::

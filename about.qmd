@@ -1,4 +1,4 @@
----
+# ---
 title: ""
 about:
     template: trestles
@@ -16,7 +16,9 @@ about:
 
 ## Bio
 
-I am a PhD candidate in Statistics in my fifth year at the University of Connecticut under the supervision of Prof. Ofer Harel who serves as my major advisor. At UConn, I have served as a Teaching Assistant and Research Assistant. I graduated from the University of Wisconsin-Whitewater with a BS in mathematics (emphasis in statistics) and minor in computer science in the spring of 2015. I am originally from Fort Atkinson, WI.
+I am a postdoctoral fellow in the Division of Biostatistics at the NYU Langone Grossman School of Medicine. My research is in relation to public policy, trial design, missing data, Bayesian methods, and angular data. 
+
+I completed my PhD in Statistics at the University of Connecticut in 2024 under the supervision of Prof. Ofer Harel. At UConn, I have served as a Teaching Assistant and Research Assistant. I graduated from the University of Wisconsin-Whitewater with a BS in mathematics (emphasis in statistics) and minor in computer science in the spring of 2019. I am originally from Fort Atkinson, WI.
 
 ## CV & Other Files
 

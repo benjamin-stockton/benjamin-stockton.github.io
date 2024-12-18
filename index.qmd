@@ -17,11 +17,15 @@ about:
 
 ## Welcome!
 
-I am a 5th year PhD Candidate in the Department of Statistics at the University of Connecticut.
+I am a postdoctoral fellow in the Division of Biostatistics at the NYU Langone Grossman School of Medicine.
 
 ## Research Interests
 
 -   Missing data
+
+-   Public health & public health policy
+
+-   Trial design
 
 -   Air pollution
 
@@ -37,7 +41,7 @@ I am a 5th year PhD Candidate in the Department of Statistics at the University 
 
 University of Connecticut | Storrs, CT
 
-- PhD in Statistics (2019-Present)
+- PhD in Statistics (2019-2024s)
 
 ### Undergraduate
 

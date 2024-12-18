@@ -6,6 +6,8 @@ title: "Projects"
 
 -   imputeangles - [GitHub](https://github.com/benjamin-stockton/imputeangles){target="_blank"}
 
+-   pnregstan - [GitHub](https://github.com/benjamin-stockton/pnregstan){target="_blank"}
+
 -   Projected Normal Multiple Imputation - [GitHub](https://github.com/benjamin-stockton/Projected_Normal_MI){target="_blank"}
 
 -   Missing Data in Sentencing Research - [GitHub](https://github.com/benjamin-stockton/missing-data-criminology){target="_blank"}

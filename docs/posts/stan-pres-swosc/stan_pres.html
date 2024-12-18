@@ -8,11 +8,11 @@
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.550">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Ben Stockton">
   <meta name="dcterms.date" content="2023-11-16">
-  <title>Ben Stockton’s Stats Site - Getting to Know Stan</title>
+  <title>Ben Stockton's Stats Site – Getting to Know Stan</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -71,7 +71,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -85,7 +85,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -408,9 +408,9 @@
   </style>
   <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<meta property="og:title" content="Ben Stockton’s Stats Site - Getting to Know Stan">
+<meta property="og:title" content="Getting to Know Stan – Ben Stockton’s Stats Site">
 <meta property="og:site_name" content="Ben Stockton's Stats Site">
-<meta name="twitter:title" content="Ben Stockton’s Stats Site - Getting to Know Stan">
+<meta name="twitter:title" content="Getting to Know Stan – Ben Stockton’s Stats Site">
 <meta name="twitter:card" content="summary">
 </head>
 <body class="quarto-light">
@@ -468,8 +468,7 @@ Ben Stockton
 [1] "C:/Users/stocb/OneDrive/Documents/.cmdstan/cmdstan-2.33.1"</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <ul>
 <li><p>Run the install here and hopefully it’ll finish by the time we get to running code</p></li>
@@ -541,8 +540,7 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 </ul>
 </div><div class="column" style="width:30%;">
 <p><img data-src="stan_logo.png"></p>
-</div>
-</div>
+</div></div>
 </section></section>
 <section>
 <section id="example-time" class="title-slide slide level1 center">
@@ -594,7 +592,7 @@ p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(
 <span id="cb4-7"><a></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-scatter" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-scatter" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-scatter-1.png" width="960">
@@ -606,8 +604,7 @@ Figure&nbsp;1: Scatter plot of the Total Wins by 3 pt Field Goal %.
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <ul>
 <li>The data are 2022-2023 season NCAA women’s basketball team 3pt % and Wins</li>
@@ -664,7 +661,7 @@ Figure&nbsp;1: Scatter plot of the Total Wins by 3 pt Field Goal %.
 <span id="cb7-7"><a></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-scatter-fitted" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-scatter-fitted" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-scatter-fitted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-scatter-fitted-1.png" width="960">
@@ -676,8 +673,7 @@ Figure&nbsp;2: Now the OLS regression line is super-imposed in blue.
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <ul>
 <li>We’ll do the MLE fit with the lm() and keep the point estimates for comparison</li>
@@ -858,8 +854,7 @@ Mean chain execution time: 0.4 seconds.
 Total execution time: 1.0 seconds.</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <ul>
 <li><p>Discuss the code in depth</p></li>
@@ -934,7 +929,7 @@ $ebfmi
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-non-info" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-traceplots-non-info-1" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-traceplots-non-info-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-traceplots-non-info-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-1.png" data-ref-parent="fig-traceplots-non-info" width="576">
@@ -946,7 +941,7 @@ $ebfmi
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-non-info" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-traceplots-non-info-2" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-traceplots-non-info-2" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-traceplots-non-info-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-2.png" data-ref-parent="fig-traceplots-non-info" width="576">
@@ -960,7 +955,7 @@ $ebfmi
 </div>
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-non-info" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-traceplots-non-info-3" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-traceplots-non-info-3" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-traceplots-non-info-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-traceplots-non-info-3.png" data-ref-parent="fig-traceplots-non-info" width="576">
@@ -978,8 +973,7 @@ Figure&nbsp;3: Diagnostic plots from the <code>bayesplot</code> package.
 </figcaption>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="model-1-inference" class="slide level2">
 <h2>Model #1 Inference</h2>
@@ -995,15 +989,14 @@ Figure&nbsp;3: Diagnostic plots from the <code>bayesplot</code> package.
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>fit1<span class="sc">$</span><span class="fu">summary</span>(<span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"beta"</span>, <span class="st">"sigma"</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-non-info-inf" class="cell quarto-float" data-output-location="fragment">
+<div id="tbl-non-info-inf" class="cell quarto-float quarto-figure quarto-figure-center" data-output-location="fragment">
 <figure class="quarto-float quarto-float-tbl">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-non-info-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
 </figcaption>
 <div aria-describedby="tbl-non-info-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div>
-<table class="do-not-create-environment cell" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
@@ -1061,7 +1054,6 @@ Table&nbsp;1: Summary statistics for the posterior samples for <span class="math
 
 </div>
 </div>
-</div>
 </figure>
 </div>
 </div>
@@ -1074,15 +1066,14 @@ Table&nbsp;1: Summary statistics for the posterior samples for <span class="math
 <span id="cb15-2"><a></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb15-3"><a></a>                    <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-mle-res-1" class="cell quarto-float" data-output-location="column-fragment">
+<div id="tbl-mle-res-1" class="cell quarto-float quarto-figure quarto-figure-center" data-output-location="column-fragment">
 <figure class="quarto-float quarto-float-tbl">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mle-res-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: MLE estimates for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
 </figcaption>
 <div aria-describedby="tbl-mle-res-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div>
-<table class="do-not-create-environment cell" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1112,7 +1103,6 @@ Table&nbsp;2: MLE estimates for <span class="math inline">\(\beta\)</span> and <
 
 </div>
 </div>
-</div>
 </figure>
 </div>
 </div>
@@ -1138,7 +1128,7 @@ Table&nbsp;2: MLE estimates for <span class="math inline">\(\beta\)</span> and <
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-non-info-ci-1" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-non-info-ci-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-non-info-ci-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-1.png" data-ref-parent="fig-non-info-ci" width="576">
@@ -1152,7 +1142,7 @@ Table&nbsp;2: MLE estimates for <span class="math inline">\(\beta\)</span> and <
 </div>
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-non-info-ci-2" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-non-info-ci-2" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-non-info-ci-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-non-info-ci-2.png" data-ref-parent="fig-non-info-ci" width="576">
@@ -1234,7 +1224,7 @@ Figure&nbsp;4
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-non-info-ppc-1" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-non-info-ppc-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-non-info-ppc-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-1.png" data-ref-parent="fig-non-info-ppc" width="960">
@@ -1248,7 +1238,7 @@ Figure&nbsp;4
 </div>
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-non-info-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-non-info-ppc-2" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-non-info-ppc-2" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-non-info-ppc-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-non-info-ppc-2.png" data-ref-parent="fig-non-info-ppc" width="960">
@@ -1440,8 +1430,7 @@ Mean chain execution time: 0.5 seconds.
 Total execution time: 1.2 seconds.</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="model-2-diagnostics" class="slide level2">
 <h2>Model #2 Diagnostics</h2>
@@ -1478,7 +1467,7 @@ $ebfmi
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-conj" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-traceplots-conj-1" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-traceplots-conj-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-traceplots-conj-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-1.png" data-ref-parent="fig-traceplots-conj" width="576">
@@ -1490,7 +1479,7 @@ $ebfmi
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-conj" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-traceplots-conj-2" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-traceplots-conj-2" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-traceplots-conj-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-2.png" data-ref-parent="fig-traceplots-conj" width="576">
@@ -1504,7 +1493,7 @@ $ebfmi
 </div>
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-traceplots-conj" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-traceplots-conj-3" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-traceplots-conj-3" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-traceplots-conj-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-traceplots-conj-3.png" data-ref-parent="fig-traceplots-conj" width="576">
@@ -1543,15 +1532,14 @@ Figure&nbsp;6
 <span id="cb25-7"><a></a>mcmc_summary <span class="sc">|&gt;</span></span>
 <span id="cb25-8"><a></a>    kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">format =</span> <span class="st">"html"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-conj-inf" class="cell quarto-float" data-output-location="fragment">
+<div id="tbl-conj-inf" class="cell quarto-float quarto-figure quarto-figure-center" data-output-location="fragment">
 <figure class="quarto-float quarto-float-tbl">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-conj-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3: Summary statistics for the posterior samples for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>.
 </figcaption>
 <div aria-describedby="tbl-conj-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div>
-<table class="do-not-create-environment cell" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1597,7 +1585,6 @@ Table&nbsp;3: Summary statistics for the posterior samples for <span class="math
 
 </div>
 </div>
-</div>
 </figure>
 </div>
 </div>
@@ -1618,7 +1605,7 @@ Table&nbsp;3: Summary statistics for the posterior samples for <span class="math
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-conj-ci-1" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-conj-ci-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-conj-ci-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-1.png" data-ref-parent="fig-conj-ci" width="960">
@@ -1632,7 +1619,7 @@ Table&nbsp;3: Summary statistics for the posterior samples for <span class="math
 </div>
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ci" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-conj-ci-2" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-conj-ci-2" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-conj-ci-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-conj-ci-2.png" data-ref-parent="fig-conj-ci" width="960">
@@ -1672,7 +1659,7 @@ Figure&nbsp;7: Plots for the 50% Credible Interval (inner band) and 95% Credible
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-conj-ppc-1" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-conj-ppc-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-conj-ppc-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-1.png" data-ref-parent="fig-conj-ppc" width="960">
@@ -1686,7 +1673,7 @@ Figure&nbsp;7: Plots for the 50% Credible Interval (inner band) and 95% Credible
 </div>
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-conj-ppc" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-conj-ppc-2" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-conj-ppc-2" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-conj-ppc-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-conj-ppc-2.png" data-ref-parent="fig-conj-ppc" width="960">
@@ -1735,8 +1722,7 @@ Figure&nbsp;8
 <li><p><a href="https://arxiv.org/pdf/1909.11827.pdf">Convergence Diagnostics for MCMC</a></p></li>
 <li><p><a href="https://discourse.mc-stan.org/">Official Stan Forum</a></p></li>
 </ul>
-</div>
-</div>
+</div></div>
 <aside><ol class="aside-footnotes"><li id="fn3"><p>Works best with <code>rstanarm</code> but can work with <code>cmdstanr</code> too.</p></li></ol></aside></section></section>
 <section>
 <section id="bonus" class="title-slide slide level1 center">
@@ -1791,7 +1777,7 @@ Figure&nbsp;8
 <span id="cb30-5"><a></a>    <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-ppg-jr-sr" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-ppg-jr-sr" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-ppg-jr-sr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-ppg-jr-sr-1.png" width="960">
@@ -1803,8 +1789,7 @@ Figure&nbsp;9: Points per game (PPG) from Junior and Senior seasons.
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="incomplete-data-structure-imputation-model" class="slide level2">
 <h2>Incomplete Data Structure &amp; Imputation Model</h2>
@@ -1960,7 +1945,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGsr"</span>, <span class="st">"bsp_"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-brm-mi-trace" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-brm-mi-trace" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-brm-mi-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-1.png" width="960">
@@ -1981,7 +1966,7 @@ Figure&nbsp;11: Traceplots of brms analysis model parameters.
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">plot</span>(fit_brm_mi, <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"b_PPGjr"</span>, <span class="st">"b_Gjr"</span>), <span class="at">regex =</span> <span class="cn">TRUE</span>, <span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">N =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
-<div id="fig-brm-mi-trace-imp" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-brm-mi-trace-imp" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-brm-mi-trace-imp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-trace-imp-1.png" width="960">
@@ -1993,8 +1978,7 @@ Figure&nbsp;12: Traceplots of brms imputation model parameters.
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="comparison-of-estimated-effects" class="slide level2">
 <h2>Comparison of Estimated Effects</h2>
@@ -2012,7 +1996,7 @@ Figure&nbsp;12: Traceplots of brms imputation model parameters.
 </div>
 </div>
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-brm-mi-cond-eff" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-brm-mi-cond-eff-1" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-brm-mi-cond-eff-1" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-brm-mi-cond-eff-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-1.png" data-ref-parent="fig-brm-mi-cond-eff" width="576">
@@ -2026,7 +2010,7 @@ Figure&nbsp;12: Traceplots of brms imputation model parameters.
 </div>
 <div class="quarto-layout-row">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-brm-mi-cond-eff" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-brm-mi-cond-eff-2" class="quarto-figure quarto-figure-center quarto-float">
+<div id="fig-brm-mi-cond-eff-2" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-subfloat-fig">
 <div aria-describedby="fig-brm-mi-cond-eff-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="stan_pres_files/figure-revealjs/fig-brm-mi-cond-eff-2.png" data-ref-parent="fig-brm-mi-cond-eff" width="576">
@@ -2373,18 +2357,7 @@ Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference A
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -2416,7 +2389,47 @@ Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference A
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/benjamin-stockton\.github\.io");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -2453,7 +2466,11 @@ Zhou, Xiang, and Jerome P. Reiter. 2010. <span>“A Note on Bayesian Inference A
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
