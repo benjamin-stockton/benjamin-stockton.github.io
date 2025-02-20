@@ -1,5 +1,5 @@
-# ---
-title: ""
+---
+title: "About"
 about:
     template: trestles
     image: "campsite.jpg"
@@ -11,8 +11,6 @@ about:
           text: LinkedIn
           href: https://www.linkedin.com/in/benjamin-stockton-329507160/
 ---
-
-# About
 
 ## Bio
 

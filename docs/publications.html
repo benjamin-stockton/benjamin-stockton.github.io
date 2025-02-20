@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -55,10 +55,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-79738a6259eca0376d8e1d15bd672c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +126,7 @@ div.csl-indent {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">—</span></a>
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -153,7 +153,7 @@ div.csl-indent {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
@@ -167,14 +167,14 @@ div.csl-indent {
 <div id="ref-stocktonInProgressCh1" class="csl-entry" role="listitem">
 <strong>Stockton, B.</strong>, &amp; Harel, O. (2025). <em>(In Progress) <span class="nocase">Multiple Imputation for Analyzing Spatial Data with Incomplete Angular Predictors</span></em>.
 </div>
+<div id="ref-stocktonInProgressCh2" class="csl-entry" role="listitem">
+<strong>Stockton, B.</strong>, &amp; Harel, O. (2025). <em><span class="nocase">(Submitted to Journal of Applied Statistics)</span> Imputation of Incomplete Angular Time Series Data</em>.
+</div>
 <div id="ref-stocktonInProgressCrim2" class="csl-entry" role="listitem">
 Strange, C. C., <strong>Stockton, B.</strong>, Zvonkovich, J., &amp; Harel, O. (2025). <em>(In Progress) multiple imputation using pattern-mixture modeling to assess the sensitivity of race/ethnicity effect estimates in sentencing given non-ignorable incomplete data</em>.
 </div>
 <div id="ref-sidiNoninferiorityClinicalTrials2024" class="csl-entry" role="listitem">
 Sidi, Y., <strong>Stockton, B.</strong>, &amp; Harel, O. (2024). Non-inferiority Clinical Trials: Treating Margin as Missing Information. <em>The New England Journal of Statistics in Data Science</em>, 1–8. <a href="https://doi.org/10.51387/24-NEJSDS57" class="uri">https://doi.org/10.51387/24-NEJSDS57</a>
-</div>
-<div id="ref-stocktonInProgressCh2" class="csl-entry" role="listitem">
-<strong>Stockton, B.</strong>, &amp; Harel, O. (2024). <em>(In Progress) Imputation of Incomplete Angular Time Series Data</em>.
 </div>
 <div id="ref-stocktonNowYouSee2023" class="csl-entry" role="listitem">
 <strong>Stockton, B.</strong>, Strange, C. C., &amp; Harel, O. (2023). Now You See It, Now You Don’t: A Simulation and Illustration of the Importance of Treating Incomplete Data in Estimating Race Effects in Sentencing. <em>Journal of Quantitative Criminology</em>. <a href="https://doi.org/10.1007/s10940-023-09577-w" class="uri">https://doi.org/10.1007/s10940-023-09577-w</a>
@@ -267,8 +267,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -379,7 +377,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

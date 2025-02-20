@@ -1,0 +1,516 @@
+---
+title: Missingness Mechanisms
+author: Ben
+date: 2025-02-20
+format: 
+    html:
+        code-fold: true
+        code-summary: "Show code"
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+cache: true
+lightbox: true
+bibliography: references.bib
+---
+
+In this post, I will go through some brief simulations demonstrating how to induce bias in complete case analysis (CCA) for regression coefficient estimates with incomplete data based on the results noted in [@oberman2023 Section 2.3; @vanbuuren2018 Section 2.7 and Section 3.2.4]. Please refer to these great resources for further details.
+
+## How to Get Biased Estimates with CCA
+
+[@oberman2023] notes that you don't always get biased estimates with CCA. In fact there are special cases where a seemingly MAR mechanism can function in practice as MCAR during simulations or where CCA is super-efficient while MI is biased under certain MNAR mechanisms. They discuss one condition in particular that is required for bias: the variable to be amputed must be correlated with the probability of being missing.
+
+Other conditions and cases are discussed in [@vanbuuren2018 Section 2.7].
+
+-   In single predictor regression of $Y = X\beta + \epsilon,$ the CCA is equivalent to MI if only $Y$ is incomplete when estimating regression coefficients.
+
+    -   If $X$ is also incomplete or there are other variables to include in an imputation model, then MI is preferred.
+
+-   If missingness does not depend on $Y,$ then the regression coefficients are unbiased under CCA with missing data on either (or both) $X$ and $Y.$
+
+-   Logistic regression is unbiased under CCA with missing data on only $Y$ or only $X,$ but not both.
+
+So to get a biased estimate with CCA we need:
+
+1.  An association between $X$ and $Y; \beta \neq 0.$
+2.  $Y$ must be associated with $P(R = 0)$ where $R = 0$ indicates missingness.
+3.  The to-be-amputed variable must be associated with $P(R = 0).$
+4.  Missingness on the predictors $X.$
+5.  For MI to be more effective than CCA, more than $Y$ must be related to the amputed variable.
+
+## Some Univariate Missingness Mechanisms
+
+Consider a data set with a response denoted by $Y$ and predictors denoted by $X_1, \dots, X_3$ respectively. We want to analyze the data using a standard multiple linear regression model,
+
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon,
+$$ {#eq-model}
+
+where $\epsilon$ is an iid normally distributed error term $\epsilon \overset{iid}{\sim} N(0, \sigma^2_\epsilon).$ Let $R$ be an indicator for whether the observation for $X_1$ is observed; $R = 1$ means $X_1$ is observed and $R = 0$ means it is missing.
+
+Three mechanisms inspired by [@vanbuuren2018 Section 3.2.4] include:
+
+1.  MAR Right: $\mathrm{logit}(P(R = 0)) = -\alpha_0 + Y$
+2.  MAR Mid: $\mathrm{logit}(P(R = 0)) = -\alpha_0 - |Y - \tilde{Y}|$ where $\tilde{Y}$ is the median of $Y.$
+3.  MAR Tail: $\mathrm{logit}(P(R = 0)) = -\alpha_0 + |Y - \tilde{Y}|$
+
+where $\alpha_0$ is set in each case to guarantee the simulated missingness matches the desired proportion $p_{miss}; ~~\alpha_0 = - \bar{U} - \log(1 / p_{miss} - 1)$ and $\bar{U} = \frac{1}{n} \sum_{i=1}^n U_i$ and $U_i = 3Y_i; ~-|Y_i - \tilde{Y}|; \mathrm{~ or ~~} |Y_i - \tilde{Y}|$ respectively.
+
+## On to the Simulation!
+
+With these simulations, I am trying to induce bias in the CCA estimate of the regression coefficient corresponding to $X_1$ when predicting the response $Y.$ I will run these simulations over a range of missingness proportions with each of the three mechanisms, but also over several values of $\beta.$
+
+```{r}
+#| label: set-up
+#| results: hold
+library(compositions, quietly = TRUE, warn.conflicts = FALSE)
+library(mice, quietly = TRUE, warn.conflicts = FALSE)
+library(zCompositions, quietly = TRUE, warn.conflicts = FALSE)
+library(zoo, quietly = TRUE, warn.conflicts = FALSE)
+library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
+library(generics, quietly = TRUE, warn.conflicts = FALSE)
+library(readr, quietly = TRUE, warn.conflicts = FALSE)
+library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
+
+theme_set(theme_classic())
+```
+
+### Data Generation
+
+The data are generated from the linear model in @eq-model. There's a pre-set intercept of $\beta_0 = 5$ but we can change any of the other coefficients as desired.
+
+```{r}
+#| label: generate-data-fn
+
+generate_data <- function(N = 100, beta = c(1, 2, 3)) {
+  X <- matrix(rnorm(N * 3), nrow = N, ncol = 3)
+  df <- as.data.frame(X)
+  colnames(df) <- paste0("X", 1:3)
+
+  df$Y <- (5 + as.matrix(df[,1:3]) %*% beta + rnorm(N, 0, 1))[,1]
+  return(df)
+}
+```
+
+### Missingness Mechanism
+
+We can use any of the three missingness mechanisms described above. Their shapes are plotted in @fig-miss-mech.
+
+```{r}
+#| label: impose-miss-fn
+impose_missing <- function(df, p_miss = 0.5, alpha = NULL, mech = NULL) {
+    
+  U <- df$Y
+  if (!is.null(mech)) {
+    if (mech == "MCAR") {
+        U <- rep(0, nrow(df))
+    }
+    else if (mech == "MAR_MID") {
+        U <- -abs(df$Y - mean(df$Y))
+    }
+    else if (mech == "MAR_TAIL") {
+        U <- abs(df$Y - mean(df$Y))
+    }
+    else if (mech == "MAR_RIGHT") {
+        U <- df$Y
+    }
+    else if (mech == "MNAR") {
+        U <- abs(df$X1 - median(df$X1, na.rm = TRUE))
+    }
+  }
+  
+  alpha0 <- -mean(U) - log(1 / p_miss - 1)
+  
+  mis_p <- boot::inv.logit(alpha0 + U)
+  mis_ind <- sample(1:nrow(df), size = floor(p_miss * nrow(df)),
+                    replace = FALSE, prob = mis_p)
+  R <- rep(0, nrow(df))
+  R[mis_ind] <- 1
+  
+  df_inc <- df
+  df_inc$R <- R
+  df_inc$p_miss <- mis_p
+  df_inc$X1_inc <- df$X1
+  df_inc$X1_inc[mis_ind] <- NA
+  return(df_inc)
+}
+```
+
+```{r}
+#| label: fig-miss-mech
+#| fig-cap: "Missingness mechanism as function of Y."
+sim_dat <- generate_data(N = 250,
+                         beta = c(1, 2, 3))
+
+df_inc_mid <- impose_missing(sim_dat, p_miss = 0.5, mech = "MAR_MID")
+df_inc_tail <- impose_missing(sim_dat, p_miss = 0.5, mech = "MAR_TAIL")
+df_inc_right <- impose_missing(sim_dat, p_miss = 0.5, mech = "MAR_RIGHT")
+
+sim_dat$p_miss_MID <- df_inc_mid$p_miss
+sim_dat$p_miss_TAIL <- df_inc_tail$p_miss
+sim_dat$p_miss_RIGHT <- df_inc_right$p_miss
+sim_dat |>
+  ggplot(aes(Y, p_miss_MID)) +
+  geom_line() +
+  geom_line(aes(Y, p_miss_TAIL), color = "tomato", linetype = "dotted") +
+  geom_line(aes(Y, p_miss_RIGHT), color = "dodgerblue", linetype = "dashed") +
+    annotate(geom = "text", x = 10, y = 0.7,
+             label = "MAR MID") +
+    annotate(geom = "text", x = -1, y = 0.5,
+             label = "MAR TAIL",
+             color = "tomato") +
+    annotate(geom = "text", x = 7, y = 0.25,
+             label = "MAR RIGHT",
+             color = "dodgerblue") + 
+    labs(y = "Pr(R = 0)")
+```
+
+```{r}
+#| label: fig-miss-sim
+#| fig-cap: "Associations between X1 and P(R=0) and between X1 and Y. Red is missing and blue is observed."
+#| warning: false
+#| include: false
+plot_miss_mech <- function(sim_dat, p_miss = 0.5, mech = "MAR_RIGHT") {
+  df_inc <- impose_missing(sim_dat, p_miss = p_miss, mech = mech)
+  df_inc$X1 <- sim_dat$X1
+  rho <- round(cor(df_inc$p_miss, df_inc$X1), 3)
+  
+  p1 <- ggplot(df_inc, aes(X1, p_miss)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    labs(title = mech,
+         subtitle = paste0("cor(X1, p_miss) = ", rho))
+  
+  p2 <- ggplot(df_inc, aes(X1, Y)) +
+    geom_point(color = "dodgerblue") +
+    geom_smooth(method = "lm", se = FALSE, color = "blue") +
+    geom_point(aes(X1_inc, Y), color = "darkred") +
+    geom_smooth(aes(X1_inc, Y), method = "lm", color = "tomato", se = FALSE) +
+    labs(title = mech,
+         subtitle = paste0("cor(X1, p_miss) = ", rho))
+  
+  plt <- cowplot::plot_grid(p1, p2, nrow = 1)
+  return(plt)
+}
+
+p1 <- plot_miss_mech(sim_dat, p_miss = 0.5, mech = "MAR_RIGHT")
+p1
+```
+
+### Analysis Model
+
+The analysis model stays the same as @eq-model. I will fit model to the complete data and analyze the incomplete data with CCA and MI (performed by `mice` with $M = 15$ imputations) [@buuren2010mice].
+
+```{r}
+#| label: single-run-fits
+#| warning: false
+## Complete data
+df_inc <- impose_missing(sim_dat, p_miss = 0.5, mech = "MAR_RIGHT")
+fit <- lm(Y ~ X1 + X2 + X3, data = sim_dat)
+
+smry1 <- summary(fit)
+# smry1
+
+## CCA
+fit <- lm(Y ~ X1_inc + X2 + X3, data = df_inc)
+smry2 <- summary(fit)
+# smry2
+
+## MI
+imp <- mice::mice(df_inc[, c("Y", "X1_inc", "X2", "X3")], 
+                  m = 15, maxit = 10, method = "norm", printFlag = FALSE)
+fit <- with(imp, lm(Y ~ X1_inc + X2 + X3))
+smry3 <- summary(pool(fit))
+
+c("complete" = smry1$coefficients["X1", "Estimate"],
+  "cca" = smry2$coefficients["X1_inc", "Estimate"],
+  "mi" = smry3[which(smry3$term == "X1_inc"), "estimate"])
+```
+
+### Simulation Structure
+
+The simulation follows the same Monte Carlo set-up as usual.
+
+1.  Generate the data.
+2.  Impose missingness.
+3.  Fit the model using the complete data, CCA, and/or MI.
+4.  Collect results and format.
+
+```{r}
+#| label: simulate-fn
+simulate_lm_cca <- function(sim_setting, N_sim, data, methods = c("cca")) {
+  sim_res <- lapply(1:nrow(sim_setting), function(i) {
+    # print(paste0("Setting: ", i))
+    lapply(1:N_sim, function(q) {
+      N <- sim_setting$N[i]
+      mech <- sim_setting$mech[i]
+      beta_X1 <- sim_setting$beta[i]
+      beta_vec <- c(5, beta_X1, 2, 1)
+      p_miss <- sim_setting$p_miss[i]
+      ## Generate data
+      sim_dat <- generate_data(N = N, beta = beta_vec[2:4]) 
+      
+      ## Impose Missingness
+      df_inc <- impose_missing(sim_dat, p_miss = p_miss, mech = mech)
+      
+      # Calculate association between Y and probability X1 is missing
+      smry_mm <- summary(glm(R ~ Y, data = df_inc,
+                             family = binomial(link = "logit")))
+      
+      z_mm <- smry_mm$coefficients[2, 3]
+      
+      ## Fit Complete Data Model
+      fit <- lm(Y ~ X1 + X2 + X3,
+                data = sim_dat)
+      smry <- summary(fit)
+      coef <- as.data.frame(smry$coefficients)
+      coef$Variable <- rownames(coef)
+      coef$true <- beta_vec
+      rownames(coef) <- NULL
+      coef$method <- "complete"
+      for (method in methods) {
+        
+        if (method == "cca") {
+          ## Fit the CCA Model
+          tmp <- stats::na.omit(df_inc)
+          fit <- lm(Y ~ X1_inc + X2 + X3,
+                    data = tmp)
+          smry <- summary(fit)
+          coef2 <- as.data.frame(smry$coefficients)
+          
+          coef2$Variable <- rownames(coef2)
+          rownames(coef2) <- NULL
+          
+          mean_Y_inc <- mean(tmp$Y)
+        }
+        else if (method == "mi") {
+          ## Fit the MI model
+          # print("running mi")
+          tmp <- df_inc |>
+            select(Y, X1_inc, X2, X3)
+          
+          # Impute 5 times (not enough, but a start)
+          imp <- mice::mice(tmp, m = 5, method = "norm",
+                            printFlag = FALSE, maxit = 5)
+          fit <- with(imp, lm(Y ~ X1_inc + X2 + X3))
+          coef2 <- summary(pool(fit))
+          coef2 <- coef2 |>
+            mutate(
+              Estimate = estimate,
+              `Std. Error` = std.error,
+              `t value` = statistic,
+              `Pr(>|t|)` = p.value,
+              Variable = term
+            ) |>
+            select(Estimate, `Std. Error`, `t value`, `Pr(>|t|)`, Variable)
+        }
+        coef2$true <- beta_vec[1:nrow(coef2)]
+        coef2$method <- method
+        
+        coef <- bind_rows(coef, coef2)
+      }
+      coef$iter <- q + (i - 1) * N_sim
+      coef$beta1 <- beta_X1
+      coef$z_Y_mm <- z_mm
+      coef$p_miss <- p_miss
+      coef$mech <- mech
+      coef$diff_X1_mean <- mean(sim_dat$X1) - mean(df_inc$X1, na.rm = TRUE)
+      coef$diff_Y_mean <- mean(sim_dat$Y) - mean_Y_inc
+      coef$cor_pmiss_X1 <- cor(df_inc$p_miss, sim_dat$X1, use = "everything")
+      return(coef)
+    }) |>
+      dplyr::bind_rows()
+  }) |> 
+    dplyr::bind_rows()
+  
+  return(sim_res)
+}
+```
+
+```{r}
+#| label: tbl-sim-settings
+sim_setting <- expand.grid(
+  N = seq(from = 100, to = 1000, length.out = 1),
+  p_miss = seq(from = 0.25, to = 0.75, length.out = 5),
+  beta = seq(from = -5, to = 5, length.out = 5),
+  mech = c("MAR_MID", "MAR_TAIL", "MAR_RIGHT")
+) 
+# sim_setting |>
+#     kableExtra::kbl(format = "markdown")
+```
+
+```{r}
+#| label: simulate
+#| cache: true
+#| warning: false
+N_sim <- 250
+start <- Sys.time()
+
+sim_res <- simulate_lm_cca(sim_setting = sim_setting, N_sim = N_sim,
+                           data = dat, methods = c("cca", "mi"))
+
+print(Sys.time() - start)
+```
+
+```{r}
+#| label: fig-boxplot-cor
+#| fig-cap: "Boxplots of the correlations between X1 and P(R=0)."
+sim_res |>
+  mutate(
+    beta_label = stringr::str_c("beta_1 = ", round(beta1, 2))
+  ) |>
+  filter(stringr::str_detect(Variable, "X1_inc")) |>
+  ggplot(aes(as.factor(round(p_miss, 2)), cor_pmiss_X1, fill = mech)) +
+  geom_boxplot() +
+  facet_wrap(beta_label~Variable, ncol = 5) +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+    labs(x = latex2exp::TeX("$p_{miss}$"),
+         y = latex2exp::TeX("$cor(p_{miss}, X_1)$"))
+```
+
+```{r}
+#| label: sim-res
+#| warning: false
+sum_sim <- sim_res |>
+  mutate(
+    beta_label = stringr::str_c("beta_1 = ", round(true, 2))
+  ) |>
+  filter(stringr::str_detect(Variable, "X1")) |>
+  group_by(Variable, method, mech, beta_label, beta1, p_miss) |>
+  summarize(
+    n = n(),
+    mean_est = mean(Estimate),
+    sd_est = sd(Estimate),
+    mean_bias = mean(Estimate - true), 
+    sd_bias = sd_est,
+    mean_abs_bias = mean(abs(Estimate - true)),
+    sd_abs_bias = sd(abs(Estimate - true)),
+    mean_rel_bias = mean((Estimate - true) / abs(true)),
+    mean_se = mean(`Std. Error`),
+    sd_se = sd(`Std. Error`),
+    mse = mean((Estimate - true)^2),
+    sd_mse = sqrt(1/(N_sim - 1) * mean(((Estimate - true)^2 - mse)^2)),
+    mean_cor = mean(cor_pmiss_X1),
+    prop_sig_z_mm = mean(abs(z_Y_mm) > 1.96)
+  ) |>
+  ungroup()
+
+sum_sim$beta_label <- forcats::fct_reorder(sum_sim$beta_label, sum_sim$beta1)
+sum_sim$method <- forcats::fct_relevel(sum_sim$method, c("complete", "cca", "mi"))
+```
+
+```{r}
+#| label: bias-plt
+
+biasplt <- sum_sim |>
+  ggplot(aes(p_miss, mean_bias, color = method)) +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed") +
+  geom_point(aes(shape = method)) +
+  geom_line(aes(linetype = method), alpha = 0.5) +
+  geom_errorbar(aes(x = p_miss,
+                    ymin = mean_bias - 2 * sd_bias,
+                    ymax = mean_bias + 2 * sd_bias,
+                    color = method),
+                width = 0.05, alpha = 0.35) +
+  facet_grid(mech ~ beta_label, scales = "free") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1),
+          legend.position = "bottom") +
+    labs(x = latex2exp::TeX("$p_{miss}"),
+         y = "Bias")
+```
+
+```{r}
+#| label: abs-bias-plt
+#| include: false
+absbiasplt <- sum_sim |>
+  ggplot(aes(p_miss, mean_abs_bias, color = method)) +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed") +
+  geom_point(aes(shape = method)) +
+  geom_line(aes(linetype = method), alpha = 0.5) +
+  geom_errorbar(aes(x = p_miss,
+                    ymin = mean_abs_bias - 2 * sd_abs_bias,
+                    ymax = mean_abs_bias + 2 * sd_abs_bias,
+                    color = method),
+                width = 0.05, alpha = 0.35) +
+  facet_grid(mech ~ beta_label, scales = "free") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1),
+          legend.position = "bottom") +
+    labs(x = latex2exp::TeX("$p_{miss}"),
+         y = "Absolute Bias")
+```
+
+```{r}
+#| label: rel-bias-plt
+relbiasplt <- sum_sim |>
+  ggplot(aes(p_miss, mean_rel_bias, color = method)) +
+  geom_hline(yintercept = 0, color = "black", linetype = "dashed") +
+  geom_point(aes(shape = method)) +
+  geom_line(aes(linetype = method), alpha = 0.5) +
+  # geom_errorbar(aes(x = p_miss,
+  #                   ymin = mean_abs_bias - 2 * sd_abs_bias,
+  #                   ymax = mean_abs_bias + 2 * sd_abs_bias,
+  #                   color = method),
+  #               width = 0.05, alpha = 0.35) +
+  facet_grid(mech ~ beta_label, scales = "free") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1),
+          legend.position = "bottom") +
+    labs(x = latex2exp::TeX("$p_{miss}"),
+         y = "Relative Bias")
+```
+
+```{r}
+mseplt <- sum_sim |>
+  ggplot(aes(p_miss, mse, color = method)) +
+  geom_point(aes(shape = method)) +
+  geom_line(aes(linetype = method), alpha = 0.5) +
+  geom_errorbar(aes(x = p_miss,
+                    ymin = mse - 2 * sd_mse,
+                    ymax = mse + 2 * sd_mse,
+                    color = method),
+                width = 0.05, alpha = 0.35) +
+  facet_grid(mech ~ beta_label, scales = "free") +
+    theme(axis.text.x = element_text(angle = 60, hjust = 1),
+          legend.position = "bottom") +
+    labs(x = latex2exp::TeX("$p_{miss}"),
+         y = "MSE")
+```
+
+```{r}
+#| label: fig-sim-res
+#| fig-cap: Simulation results.
+#| fig-subcap: true
+
+biasplt
+mseplt
+```
+
+```{r}
+#| label: fig-sim-res-alt
+#| include: false
+
+cowplot::plot_grid(biasplt, absbiasplt, relbiasplt, mseplt, nrow = 4)
+```
+
+```{r}
+#| label: tbl-sim-res
+#| include: false
+sum_sim |>
+  select(method, n, beta1, mech, p_miss, mean_est,
+         mean_bias, mse, mean_cor, prop_sig_z_mm) |>
+  arrange(desc(abs(mean_bias)), desc(mse)) |>
+    kableExtra::kbl(format = "markdown", digits = 2)
+```
+
+## References {.unnumbered}
+
+::: {#refs}
+:::
+
+```{r}
+sessionInfo()
+```

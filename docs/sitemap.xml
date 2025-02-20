@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
-    <lastmod>2024-10-09T13:45:49.604Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/posts/imputeangles/index.html</loc>
-    <lastmod>2024-10-09T13:45:49.595Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/projects.html</loc>
-    <lastmod>2024-12-18T21:11:04.284Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/index.html</loc>
-    <lastmod>2024-12-18T21:10:17.320Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/about.html</loc>
-    <lastmod>2024-12-18T21:07:56.372Z</lastmod>
-  </url>
-  <url>
     <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2024-12-18T21:21:19.613Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/blog.html</loc>
-    <lastmod>2024-10-09T13:45:49.530Z</lastmod>
+    <lastmod>2025-02-20T21:13:01.272Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
     <lastmod>2024-10-09T13:45:49.973Z</lastmod>
   </url>
   <url>
+    <loc>https://benjamin-stockton.github.io/posts/miss-mech-notes/miss-mech-notes.html</loc>
+    <lastmod>2025-02-20T20:05:20.042Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
+    <lastmod>2024-10-09T13:45:49.604Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/index.html</loc>
+    <lastmod>2025-02-20T16:35:20.767Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/about.html</loc>
+    <lastmod>2025-02-20T21:12:57.289Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/blog.html</loc>
+    <lastmod>2024-10-09T13:45:49.530Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/imputeangles/index.html</loc>
+    <lastmod>2025-02-20T16:37:22.218Z</lastmod>
+  </url>
+  <url>
     <loc>https://benjamin-stockton.github.io/posts/stan-pres-swosc/stan_pres.html</loc>
     <lastmod>2024-10-09T13:45:49.771Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/projects.html</loc>
+    <lastmod>2024-12-18T21:11:04.284Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/longitudinal-models-baseball-careers/longitudinal-models-careers.html</loc>
+    <lastmod>2024-10-09T13:45:49.716Z</lastmod>
   </url>
 </urlset>

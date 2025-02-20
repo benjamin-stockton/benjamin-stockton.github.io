@@ -34,14 +34,12 @@ This process is called by Multiple Imputation (MI) and was initially developed b
 
 3.  Combine - Use Rubin's Rules to combine the estimates and variances to perform inference on the quantity of interest $Q$.
 
-    ```{=tex}
     \begin{align*} \label{eq-rubins-rules}
         \bar{Q} &= \frac{1}{M} \sum_{m=1}^M \hat{Q}_m \\
         \bar{U} &= \frac{1}{M} \sum_{m=1}^M U_m \\
         B &= \frac{1}{M-1} \sum_{m=1}^M (\hat{Q}_m - \bar{Q})^2 \\
         T &= \bar{U} + (1 + \frac{1}{M}) B
     \end{align*}
-    ```
 
 Under a set of assumptions[^1], the inferences produced by MI will be unbiased, more efficient than CCA, and confidence valid. Rubin's rules have been developed for sample means, sample mean differences, regression coefficients, correlation coefficients, and more [@buuren2018 Sec. 5.2].
 

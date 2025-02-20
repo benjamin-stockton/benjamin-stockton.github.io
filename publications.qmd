@@ -10,6 +10,12 @@ for Analyzing Spatial Data with Incomplete Angular
 Predictors]{.nocase}*.
 :::
 
+::: {#ref-stocktonInProgressCh2 .csl-entry}
+**Stockton, B.**, & Harel, O. (2025). *[(Submitted to Journal of Applied
+Statistics)]{.nocase} Imputation of Incomplete Angular Time Series
+Data*.
+:::
+
 ::: {#ref-stocktonInProgressCrim2 .csl-entry}
 Strange, C. C., **Stockton, B.**, Zvonkovich, J., & Harel, O. (2025). *(In
 Progress) multiple imputation using pattern-mixture modeling to assess
@@ -22,11 +28,6 @@ Sidi, Y., **Stockton, B.**, & Harel, O. (2024). Non-inferiority Clinical
 Trials: Treating Margin as Missing Information. *The New England Journal
 of Statistics in Data Science*, 1--8.
 <https://doi.org/10.51387/24-NEJSDS57>
-:::
-
-::: {#ref-stocktonInProgressCh2 .csl-entry}
-**Stockton, B.**, & Harel, O. (2024). *(In Progress) Imputation of
-Incomplete Angular Time Series Data*.
 :::
 
 ::: {#ref-stocktonNowYouSee2023 .csl-entry}

@@ -2,10 +2,11 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/miss-mech-notes/miss-mech-notes.html",
       "/posts/longitudinal-models-baseball-careers/longitudinal-models-careers.html",
       "/posts/imputeangles/index.html",
-      "/posts/stan-pres-swosc/stan_pres.html",
       "/posts/intro-to-stan/intro_to_stan.html",
+      "/posts/stan-pres-swosc/stan_pres.html",
       "/posts/welcome/index.html"
     ]
   }
