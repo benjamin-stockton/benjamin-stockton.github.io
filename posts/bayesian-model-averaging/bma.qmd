@@ -1,0 +1,25 @@
+---
+title: Bayesian Model Averaging with Interrupted Time Series
+author: Ben
+date: 2026-02-03
+format: 
+    html:
+        code-fold: true
+        code-summary: "Show code"
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+draft: true
+cache: true
+lightbox: true
+categories: [bayesian-analysis, interrupted-time-series, tutorial]
+editor: source
+---
+
+In this post, I am going to go over a brief example of how to do Bayesian Model Averaging for nuisance interruptions in an interrupted time series analysis. 
+

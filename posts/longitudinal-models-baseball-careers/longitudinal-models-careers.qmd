@@ -17,6 +17,7 @@ format:
 bibliography: references.bib
 draft: true
 cache: true
+categories: [baseball, example]
 ---
 
 ```{r}
@@ -167,4 +168,3 @@ combined_dat |>
            title = "wOBA over 2016-2023") +
       theme_bw()
 ```
-

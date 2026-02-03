@@ -13,19 +13,28 @@ website:
   site-url: https://benjamin-stockton.github.io
   navbar:
     left:
+      - about.qmd
       - blog.qmd
       - projects.qmd
       - publications.qmd
       # - text: CV
       #   href: "_site/2023_NSF_Resume_20230207.pdf"
-      - about.qmd
     right:
       - icon: github
         href: https://github.com/benjamin-stockton
       - icon: linkedin
         href: https://linkedin.com/in/benjamin-stockton-329507160/
-  page-footer: 
+  page-footer:
     left: ""
+  drafts:
+    - posts/air-pollution-wind/air-pollution-wind.qmd
+    - posts/directions-data-vis/directions-data-vis.qmd
+    - posts/longitudinal-models-baseball-careers/longitudinal-models-baseball-careers.qmd
+    - posts/stan-pres-swosc/stan_pres.qmd
+    - posts/bayesian-model-averaging/bma.qmd
+  draft-mode: unlinked
+  repo-url: https://github.com/benjamin-stockton/benjamin-stockton.github.io
+  repo-actions: [edit, source, issue]
 
 format:
   html:

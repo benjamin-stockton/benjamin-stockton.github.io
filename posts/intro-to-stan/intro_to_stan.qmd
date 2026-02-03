@@ -12,6 +12,7 @@ format:
         citations-hover: true
 editor: visual
 bibliography: swosc-stan.bib
+categories: [bayesian-analysis, computation, tutorial]
 ---
 
 ![](stan_logo.png)
@@ -135,14 +136,13 @@ Let's consider the simple regression model $E(Y_i | X_i, \boldsymbol{\beta}, \si
 2.  **The (Data) Likelihood:** $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$
 3.  **The Posterior:**
 
-```{=tex}
 \begin{align*}
     p(\boldsymbol{\beta}, \sigma^2 | \mathbf{y}) &= p(\boldsymbol{\beta} | \sigma^2, \mathbf{y}) \times p(\sigma^2 | \mathbf{y}) \\
         &= N_2(\boldsymbol{\beta} | \hat{\boldsymbol{\beta}}, \sigma^2 (X'X)^{-1}) \times Inv-\chi^2 (\sigma^2 | N-2, s^2) \\
     \hat{\boldsymbol{\beta}} &= (X'X)^{-1} X'\mathbf{y} \\
     s^2 &= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   
 \end{align*}
-```
+
 First we write the Stan code in a separate file. See the [Stan User's Guide Part 1.1](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section) for programming this model without the analytic posteriors. ([Download the file here](non-informative-regression.stan){target="_blank"})
 
 ``` {.stan filename="non-informative-regression.stan"}

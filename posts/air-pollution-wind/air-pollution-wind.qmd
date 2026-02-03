@@ -1,0 +1,33 @@
+---
+title: Air Pollution and the Wind
+author: Ben
+date: 2025-08-12
+format: 
+    html:
+        code-fold: true
+        code-summary: "Show code"
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+draft: true
+cache: true
+lightbox: true
+categories: [bayesian-analysis, missing-data, angular-data, example]
+---
+
+In this post, I'm going to go over a brief review of what I've seen in the statistical literature on modeling air pollution and wind.
+
+## Time Series Analysis
+
+This section will be brief as this is an inherently spatial process.
+
+## Spatial and Spatio-Temporal Analysis
+
+A central feature of wind and air pollution modeling is an anisotropic spatial covariance function (link to anisotropic functions; ref). How we define that covariance function is then key to how the model accounts for the transport of energy or pollution from one location to another in a spatio-temporal setting.
+
+One of the more interesting series of papers I've come across is on the creation, transport, and deposition of SO4 and SO2 from coal-fired power plants (refs). These papers pull together all of the interesting components of the physical interaction between the wind and pollutants as well as the chemical processes that co-occur as SO4 changes into SO2.

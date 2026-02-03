@@ -46,3 +46,5 @@ flycheck_*.el
 *.csv
 /posts/*/index_cache
 /posts/*/index_files
+
+/.luarc.json

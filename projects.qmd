@@ -2,15 +2,36 @@
 title: "Projects"
 ---
 
+![](/manhattan_skyline.jpg)
+
 ## Research Projects
+
+- Misclassification in the Sequential Parallel Comparisons Design
+
+- Interrupted Time Series Analysis for Count Data with Nuisance Interruptions
+
+- Projected Gaussian Process Imputation for Incomplete Angular Spatial Data - [GitHub](https://github.com/benjamin-stockton/inc-spatial-angles){target="_blank"}
+
+- Projected Normal Autoregressive Imputation for Incomplete Angular Time Series - [GitHub](https://github.com/benjamin-stockton/incomplete-angular-times-series){target="_blank"}
+
+-   Projected Normal Multiple Imputation for Angular Data - [GitHub](https://github.com/benjamin-stockton/Projected_Normal_MI){target="_blank"}
+
+-   Missing Data in Sentencing Research - [GitHub](https://github.com/benjamin-stockton/missing-data-criminology){target="_blank"}
+
+### R Packages
 
 -   imputeangles - [GitHub](https://github.com/benjamin-stockton/imputeangles){target="_blank"}
 
 -   pnregstan - [GitHub](https://github.com/benjamin-stockton/pnregstan){target="_blank"}
 
--   Projected Normal Multiple Imputation - [GitHub](https://github.com/benjamin-stockton/Projected_Normal_MI){target="_blank"}
 
--   Missing Data in Sentencing Research - [GitHub](https://github.com/benjamin-stockton/missing-data-criminology){target="_blank"}
+## Presentations
+
+- JSM 2025 - "Incomplete Angular Time Series Imputation with a Projected Normal Autoregressive Process and Exogenous Predictors" ([pdf](Stockton_Benjamin_JSM_2025_Pres%20copy.pdf){target="_blank"})
+- NESS 2025 - "Estimating Policy Effects with Interrupted Time Series Following a Nuisance Interruption" ([pdf](ness_2025%20copy.pdf){target="_blank"})
+- Student Workshop on Statistical Computing - "Getting to Know Stan" ([post](docs/posts/intro-to-stan.html){target="_blank"})
+- NESS 2023 - "Multiple Imputation with Angular Covariates" ([pdf](StocktonBenjamin_ENAR_Presentation2023 - Final.pdf){target="_blank"})
+- ENAR 2023 - "Multiple Imputation with Angular Covariates" ([pdf](NESS_Presentation - Edits - BS2023-06-05.pdf){target="_blank"})
 
 ## Course Projects
 
@@ -20,13 +41,6 @@ title: "Projects"
 
 -   Intro to Time Series Analysis - Analysis of Ultra-long Traffic Data with Distributed ARIMA - [GitHub](https://github.com/benjamin-stockton/STAT_5825_Project){target="_blank"}
 
-## Other Projects
+<!-- ## Other Projects -->
 
 <!-- -   openWAR - RE24 update for 2022 - [GitHub]() -->
-
-
-## Presentations
-
-- Student Workshop on Statistical Computing - "Getting to Know Stan" ([post](docs/posts/intro-to-stan.html){target="_blank"})
-- NESS 2023 - "Multiple Imputation with Angular Covariates" ([pdf](StocktonBenjamin_ENAR_Presentation2023 - Final.pdf){target="_blank"})
-- ENAR 2023 - "Multiple Imputation with Angular Covariates" ([pdf](NESS_Presentation - Edits - BS2023-06-05.pdf){target="_blank"})

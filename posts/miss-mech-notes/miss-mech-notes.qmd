@@ -17,6 +17,7 @@ format:
 cache: true
 lightbox: true
 bibliography: references.bib
+categories: [missing-data, statistics, example]
 ---
 
 In this post, I will go through some brief simulations demonstrating how to induce bias in complete case analysis (CCA) for regression coefficient estimates with incomplete data based on the results noted in [@oberman2023 Section 2.3; @vanbuuren2018 Section 2.7 and Section 3.2.4]. Please refer to these great resources for further details.

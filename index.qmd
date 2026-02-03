@@ -1,5 +1,5 @@
 ---
-image: toronto-photo.jpg
+image: skye_ben.JPG
 about:
   template: marquee
   links:
@@ -12,43 +12,26 @@ about:
     - icon: github
       text: Github
       href: https://github.com/benjamin-stockton
-
+repro-actions: false
 ---
 
 ## Welcome!
 
-I am a postdoctoral fellow in the Division of Biostatistics at the NYU Langone Grossman School of Medicine.
-
-## Research Interests
-
--   Missing data
-
--   Public health & public health policy
-
--   Trial design
-
--   Air pollution
-
--   Directional statistics
-
--   Spatial statistics
-
--   Causal inference
+I am a postdoctoral fellow in the Division of Biostatistics at the NYU Grossman School of Medicine. My research interests include missing data, public health and public health policy, trial design, air pollution, directional statistics, spatial statistics, and causal inference.
 
 ## Education
 
-### Graduate
+- (2019-2024) PhD in Statistics | University of Connecticut | Storrs, CT
+  - Advised by Dr. Ofer Harel
 
-University of Connecticut | Storrs, CT
+- (2016-2019) BS in Mathematics (emp. Statistics) - Minor in Computer Science | University of Wisconsin-Whitewater | Whitewater, WI
 
-- PhD in Statistics (2019-2024)
+- Undeclared (2015-2016) | University of Wisconsin-Madison | Madison, WI
 
-### Undergraduate
+## Experience
 
-University of Wisconsin-Whitewater | Whitewater, WI
+- (2024-Present) Postdoctoral Fellow | Division of Biostatistics, Department of Population Health | New York University Grossman School of Medicine | New York, NY
 
-- BS in Mathematics (emp. Statistics) with a minor in computer science (2016-2019)
+- (2019-2024) Graduate Assistant | Department of Statistics | University of Connecticut | Storrs, CT
 
-University of Wisconsin-Madison | Madison, WI
-
-- Undeclared (2015-2016)
+- (2020-2020) Data Science Leadership Development Program Intern | Travelers Insurance Co. | Hartford, CT 

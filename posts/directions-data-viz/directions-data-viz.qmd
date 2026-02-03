@@ -1,0 +1,335 @@
+---
+title: Visualizing Directional Data
+author: Ben
+date: 2025-08-12
+format: 
+    html:
+        code-fold: show
+        code-summary: "Show code"
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+        df-print: paged
+draft: true
+cache: true
+lightbox: true
+categories: [data-viz, missing-data, angular-data]
+---
+
+Visualizing directional or angular data has been a challenge while writing my dissertation and preparing presentations for the related research. There are a few tools out there for preparing directional data plots in R (see `circular`, mixtures of VMF `movMF`, etc.) but these largely don't integrate well with modern tools like `ggplot2` and the angular functionality in `ggplot2` doesn't always behave as desired for directional data. In this post, I'll share some of the basic directional data plots and tricks I've learned or used with `ggplot2`; some of these are just adaptations of existing methods, I am not claiming to be the original developer of any of these graphics.
+
+In this post, I will point out where I wrote wrapper functions for a visualization in my `pnregstan` and `imputeangles` packages, but I will make all of the visualizations with the full `ggplot2` code.
+
+```{r}
+#| label: set-up
+#| warnings: false
+library(dplyr, warn.conflicts = FALSE, quietly = TRUE)
+library(ggplot2, warn.conflicts = FALSE, quietly = TRUE)
+library(ggthemes, warn.conflicts = FALSE, quietly = TRUE)
+library(ggforce, warn.conflicts = FALSE, quietly = TRUE)
+library(latex2exp, warn.conflicts = FALSE, quietly = TRUE)
+library(imputeangles, warn.conflicts = FALSE, quietly = TRUE)
+library(pnregstan, warn.conflicts = FALSE, quietly = TRUE)
+
+theme_set(theme_classic())
+```
+
+I'll start by generating some data from a projected normal regression model.
+
+```{r}
+#| label: tbl-sim-dat
+#| tbl-cap: "Simulated data from a projected normal regression model."
+N <- 50
+beta <- c(0, 2.5, 0, 2.5)
+B <- matrix(beta, ncol = 2)
+sigma_mat <- c(1,0,0,1)
+X <- matrix(seq(from = -2, to = 2, length.out = N))
+
+sim_data <- pnregstan::pnreg_sim_data(N = N, 
+                         B = beta, 
+                         Sigma_theta = sigma_mat,
+                         X = X) |>
+    mutate(
+        theta = case_when(
+            theta < 0 ~ theta + 2*pi,
+            TRUE ~ theta
+        )
+    )
+
+sim_data
+```
+
+I'm also going to create two scale functions to help plot angles with color or fill such that $\theta = 0$ and $\theta = 2\pi$ have the same color.
+
+```{r}
+#| label: scales-fn
+
+scale_color_angles <- function(colors = list(low = "magenta", mid = "dodgerblue", high = "magenta"), color_name = "Angle", midpoint = 0, limits = c(-pi, pi)) {
+    scale_color_gradient2(low = colors$low, mid = colors$mid, high = colors$high,
+                          na.value = "gray90", name = color_name,
+                          midpoint = midpoint, limits = limits)
+}
+
+scale_fill_angles <- function(colors = list(low = "magenta", mid = "dodgerblue", high = "magenta"), fill_name = "Angle", midpoint = 0, limits = c(-pi, pi)) {
+    scale_fill_gradient2(low = colors$low, mid = colors$mid, high = colors$high,
+                          na.value = "gray90", name = fill_name,
+                          midpoint = midpoint, limits = limits)
+}
+```
+
+## Density Diagrams and Dot Plots
+
+```{r}
+#| label: fig-density
+#| fig-cap: A circular density plot
+#| fig-height: 5
+#| fig-width: 5
+#| include: false
+
+ggplot(sim_data, aes(theta)) +
+    geom_circle(aes(x0 = 0, y0 = 0, r = 1), 
+                linetype = "dotted", 
+                color = "lightgray") +
+    geom_density() +
+    coord_fixed()
+```
+
+```{r}
+#| label: fig-dotplot
+#| fig-cap: A circular dotplot plot
+#| fig-height: 5
+#| fig-width: 5
+ggplot(sim_data, aes(x = U1, y = U2, color = theta)) +
+    geom_circle(aes(x0 = 0, y0 = 0, r = 1), 
+                linetype = "dotted", 
+                color = "lightgray") +
+    annotate(
+        geom = "point",
+        x = 0, y = 0, 
+        color = "lightgray", shape = "+", size = 3
+    ) +
+    geom_point() +
+    scale_color_angles() +
+    coord_fixed()
+```
+
+## Wrapped Scatterplots
+
+```{r}
+#| label: fig-scatterplot
+#| fig-cap: A wrapped circular-linear scatterplot.
+
+sim_data_2 <- sim_data |>
+    mutate(
+        theta = case_when(
+            theta < pi ~ theta + 2*pi,
+            theta >= pi ~ theta - 2*pi,
+            TRUE ~ theta
+        ),
+        original = FALSE
+    )
+sim_data$original = TRUE
+
+ggplot(bind_rows(sim_data, sim_data_2), 
+       aes(x = X, y = theta, shape = original, color = theta)) +
+    geom_hline(yintercept = c(0, 2*pi), 
+              linetype = "dotted",
+              linewidth = 0.85,
+              color = "lightgray") +
+    geom_point() +
+    scale_shape_manual(name = "Original", values = c(1, 16)) +
+    scale_color_angles() +
+    labs(y = TeX("$\\theta$"))
+```
+
+## Angular Time Series (Two Ways)
+
+```{r}
+#| label: sim-pn-arx-process
+
+set.seed(65433)
+mu_0 <- c(1, 0)
+# Sigma <- matrix(c(1, 0.5, 0.5, 1), nrow = 2)
+Sigma <- diag(2)
+N <- 100
+X1 <- arima.sim(n = N, list(ar = c(0.24)))
+X2 <- arima.sim(n = N, list(ar = c(0.75), ma = c(-0.25, 0.25)))
+Phi <- c(0.25, 0.02, 0.02, 0.25)
+beta <- c(2, -.1)
+
+B <- matrix(beta, nrow = 2)
+Psi <- matrix(Phi, nrow = 2)
+
+X_mat <- cbind(X1, X2)
+
+mu <- X_mat %*% B
+
+Y <- matrix(NA, nrow = N, ncol = 2)
+U <- matrix(NA, nrow = N, ncol = 2)
+eps_0 <- mvtnorm::rmvnorm(1, rep(0,2), Sigma)
+Y[1,] <- mu_0 + mu[1,] + eps_0
+U[1,] <- Y[1,] / sqrt(Y[1,1]^2 + Y[1,2]^2)
+for (i in 2:N) {
+eps_i <- mvtnorm::rmvnorm(1, rep(0,2), Sigma)
+Y[i,] <- mu_0 + Y[i-1,] %*% Psi + mu[i,] + eps_i
+U[i,] <- Y[i,] / sqrt(Y[i,1]^2 + Y[i,2]^2)
+}
+
+theta <- atan2(U[,2], U[,1])
+
+df_ts <- data.frame(t = 1:N,
+                    Y1 = Y[,1],
+                    Y2 = Y[,2],
+                    U1 = U[,1],
+                    U2 = U[,2],
+                    theta = theta,
+                    X1 = as.numeric(X1),
+                    X2 = as.numeric(X2))
+
+df_ts
+```
+
+First,
+
+```{r}
+#| label: fig-ts-1
+#| fig-cap: Angular time series.
+#| fig-width: 8
+#| fig-height: 3
+
+rad <- 1
+ggplot(df_ts, aes(t, theta, color = theta)) +
+  # geom_point(size = 0.5, alpha = 0.5) +
+  geom_segment(aes(x = t, y = theta, 
+                   xend = t + 8/3*rad * U1, 
+                   yend = theta + 3/8*rad * U2),
+              arrow = arrow(length = unit(0.15,"cm")),
+                  linewidth = 0.9) +
+  scale_color_angles() +
+  theme_bw() +
+  labs(x = "t",
+       y = TeX("$\\theta$"))
+```
+
+Second,
+
+```{r}
+#| label: fig-ts-2
+#| fig-cap: Angular time series.
+```
+
+## Vector Fields
+
+```{r}
+#| label: create-grid-3
+
+N <- 10
+loc <- expand.grid(long = 1:N, lat = 1:N)
+
+N2 <- 23
+loc2 <- expand.grid(long = 1:N2 * (N/N2), lat = 1:N2* (N/N2))
+```
+
+```{r}
+#| label: sim-pgp-reg
+#| results: hide
+#| warning: false
+set.seed(6541)
+
+mu_dir <- 0
+sim_list <- list(
+  N = N^2,
+  P = 1,
+  loc = as.matrix(loc),
+  sigma_w = 1,
+  rho_w = 0,
+  rho = 1/6,
+  mu0 = 3*c(cos(mu_dir), sin(mu_dir)),
+  B = matrix(c(-.25, 1), nrow = 1)
+)
+
+df_spat <- pnregstan::gp_geostat_sim_data(
+    N = 10, 
+    M = 10, 
+    sigma = 1, 
+    rho = 5, 
+    alpha = 1)
+df_spat <- pnregstan::pgp_geostat_reg_sim_data(
+    loc = loc, 
+    X = df_spat$X,
+    sigma_w = sim_list$sigma_w, 
+    rho_w = sim_list$rho_w, 
+    rho = sim_list$rho,
+    B = sim_list$B, 
+    mu0 = sim_list$mu0)
+df_spat$theta <- circular::minusPiPlusPi(circular::circular(df_spat$theta)) |> as.numeric()
+```
+
+```{r}
+gg_vector_field <- function(df, long, lat, theta, color_name = "Dir", fill_name = "Dir", 
+                            colors = list(low = "magenta", mid = "dodgerblue", high = "magenta", vector = "gray90"), 
+                            rad = 0.5, midpoint = 0, limits = c(-pi, pi)) {
+    ggplot(df, aes({{long}}, {{lat}}, color = {{theta}})) +
+        geom_raster(aes({{long}}, {{lat}}, fill = {{theta}}), 
+                    interpolate = FALSE, alpha = 0.75) +
+        geom_point() +
+        geom_segment(aes(x = {{long}}, y = {{lat}},
+                         xend = {{long}} + rad * cos({{theta}}),
+                         yend = {{lat}} + rad * sin({{theta}})),
+                     arrow = arrow(angle = 45, length = unit(1, "mm")),
+                     color = colors$vector) +
+        scale_color_angles(colors = colors, color_name = color_name, midpoint = midpoint, limits = limits) +
+        scale_fill_angles(colors = colors, fill_name = fill_name, midpoint = midpoint, limits = limits) 
+}
+```
+
+```{r}
+#| label: fig-vec-field
+#| fig-cap: Vector field for spatial angular data. All vectors are scaled to unit size.
+
+rad <- 1/2
+gg_vector_field(df_spat, long, lat, theta, rad = rad)
+```
+
+## Imputation Figures
+
+```{r}
+#| label: tbl-sim-missing
+#| tbl-cap: Simulated incomplete data
+set.seed(10239)
+N <- 50
+beta <- c(0, 2.5, 0, 2.5)
+B <- matrix(beta, ncol = 2)
+sigma_mat <- c(1,0,0,1)
+X <- matrix(seq(from = -2, to = 2, length.out = N))
+
+sim_data <- pnregstan::pnreg_sim_data(N = N, 
+                         B = beta, 
+                         Sigma_theta = sigma_mat,
+                         X = X)
+
+# Simulate a MCAR response indicator
+sim_data$R <- sample(c(1, 0), size = N,
+                     prob = c(0.65, 0.35),
+                     replace = TRUE)
+sim_data <- sim_data |>
+    mutate(
+        theta = case_when(
+            theta < 0 ~ theta + 2*pi,
+            TRUE ~ theta
+        ),
+        theta_inc = case_when(
+            R == 1 ~ theta,
+            R == 0 ~ NA,
+            TRUE ~ NA
+        )
+    )
+
+
+sim_data
+```

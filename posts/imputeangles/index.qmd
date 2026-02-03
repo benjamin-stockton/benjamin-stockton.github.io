@@ -16,6 +16,7 @@ format:
         citations-hover: true
 bibliography: references.bib
 cache: true
+categories: [r-package, tutorial, bayesian-analysis, missing-data, angular-data]
 ---
 
 In this post, I will provide a brief introduction to using multiple imputation (MI) and then share an example analysis of pitch movement using my `imputeangles` package.

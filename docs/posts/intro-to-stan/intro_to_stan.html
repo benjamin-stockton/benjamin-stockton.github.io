@@ -188,6 +188,10 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog Posts</span></a>
   </li>  
@@ -198,10 +202,6 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../publications.html"> 
 <span class="menu-text">Publications</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -227,7 +227,12 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <div class="quarto-title-block"><div><h1 class="title">Getting to know Stan - SWOSC</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
-                      </div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">bayesian-analysis</div>
+                <div class="quarto-category">computation</div>
+                <div class="quarto-category">tutorial</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -273,7 +278,7 @@ window.Quarto = {
   <li><a href="#imputation-during-model-fitting" id="toc-imputation-during-model-fitting" class="nav-link" data-scroll-target="#imputation-during-model-fitting">Imputation During Model Fitting</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/benjamin-stockton/benjamin-stockton.github.io/edit/main/posts/intro-to-stan/intro_to_stan.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/benjamin-stockton/benjamin-stockton.github.io/blob/main/posts/intro-to-stan/intro_to_stan.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/benjamin-stockton/benjamin-stockton.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -2359,137 +2364,137 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="co">        citations-hover: true</span></span>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
 <span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> swosc-stan.bib</span></span>
-<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a><span class="al">![](stan_logo.png)</span></span>
-<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
-<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>To get started, we'll head over to Stan's <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://mc-stan.org/)</span> to see how to get set up in R. For this presentation, I'll use the CmdStan toolchain that's implemented in R by the <span class="in">`cmdstanr`</span> <span class="co">[</span><span class="ot">package</span><span class="co">](https://mc-stan.org/cmdstanr/)</span> <span class="co">[</span><span class="ot">@gabry2023</span><span class="co">]</span>. There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <span class="co">[</span><span class="ot">CmdStanPy</span><span class="co">](https://github.com/stan-dev/cmdstanpy)</span> <span class="co">[</span><span class="ot">@cmdstanp</span><span class="co">]</span>.</span>
-<span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: set-up</span></span>
-<span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
-<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(98463)</span></span>
-<span id="cb65-28"><a href="#cb65-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-29"><a href="#cb65-29" aria-hidden="true" tabindex="-1"></a><span class="in"># install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))</span></span>
-<span id="cb65-30"><a href="#cb65-30" aria-hidden="true" tabindex="-1"></a><span class="in">library(cmdstanr)</span></span>
-<span id="cb65-31"><a href="#cb65-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-32"><a href="#cb65-32" aria-hidden="true" tabindex="-1"></a><span class="in"># cmdstanr::install_cmdstan()</span></span>
-<span id="cb65-33"><a href="#cb65-33" aria-hidden="true" tabindex="-1"></a><span class="in">cmdstanr::cmdstan_version()</span></span>
-<span id="cb65-34"><a href="#cb65-34" aria-hidden="true" tabindex="-1"></a><span class="in">cmdstanr::cmdstan_path()</span></span>
-<span id="cb65-35"><a href="#cb65-35" aria-hidden="true" tabindex="-1"></a><span class="in">cmdstanr::check_cmdstan_toolchain()</span></span>
-<span id="cb65-36"><a href="#cb65-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-37"><a href="#cb65-37" aria-hidden="true" tabindex="-1"></a><span class="in"># install.packages(c("bayesplot", "ggplot2", "posterior"))</span></span>
-<span id="cb65-38"><a href="#cb65-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-39"><a href="#cb65-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-40"><a href="#cb65-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Very Brief Introduction to Bayesian Data Analysis</span></span>
-<span id="cb65-41"><a href="#cb65-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-42"><a href="#cb65-42" aria-hidden="true" tabindex="-1"></a>The broadest conceptual overview of Bayesian data analysis is that this methodology allows us to incorporate prior knowledge about the model/data into our analysis which is based on a posterior distribution that is derived from the prior and likelihood. Bayesian inference treats the parameters of the model as random variables whose distribution we are interested in either deriving analytically or approximating through computation. This is a key distinction from frequentist methods taught in math stat and applied stat where parameters are fixed values and their estimators are functions of a random sample and the sampling distribution of the estimator is used for inference.</span>
-<span id="cb65-43"><a href="#cb65-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-44"><a href="#cb65-44" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb65-45"><a href="#cb65-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bayes Rule</span></span>
-<span id="cb65-46"><a href="#cb65-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-47"><a href="#cb65-47" aria-hidden="true" tabindex="-1"></a>A quick reminder of Bayes Rule.</span>
-<span id="cb65-48"><a href="#cb65-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-49"><a href="#cb65-49" aria-hidden="true" tabindex="-1"></a>Let $\theta$ be a random variable with (prior) distribution $p(\theta)$, $Y$ be a random variable that depends on $\theta$ with conditional distribution or likelihood $p(y | \theta)$. Then their joint distribution is $p(y, \theta) = p(y|\theta) p(\theta)$.</span>
-<span id="cb65-50"><a href="#cb65-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-51"><a href="#cb65-51" aria-hidden="true" tabindex="-1"></a>Bayes rule lets us flip the conditioning from the likelihood to get $p(\theta | y)$</span>
-<span id="cb65-52"><a href="#cb65-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-53"><a href="#cb65-53" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb65-54"><a href="#cb65-54" aria-hidden="true" tabindex="-1"></a>p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(y, \theta) d\theta} \propto p(y|\theta) p(\theta)</span>
-<span id="cb65-55"><a href="#cb65-55" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb65-56"><a href="#cb65-56" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb65-57"><a href="#cb65-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-58"><a href="#cb65-58" aria-hidden="true" tabindex="-1"></a>To be a little more specific, we have three central components to the model. For ease of exposition, let's consider the simple regression model $E(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ where we have $i = 1,\dots,N$ observations of $(Y_i, X_i)'$ from Ch. 14 of Bayesian Data Analysis <span class="co">[</span><span class="ot">@gelman2013bayesian, p. 354-358</span><span class="co">]</span>. From here on I will suppress conditioning on the observed predictor $X_i = x_i$ since we are considering the design matrix $X = (1_N, \mathbf{x})$ to be fixed and known where $\mathbf{x} = (x_1,\dots, x_N)'$.</span>
-<span id="cb65-59"><a href="#cb65-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-60"><a href="#cb65-60" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The Prior:** a distribution for the parameters that doesn't depend on the data $p(\theta)$.</span>
-<span id="cb65-61"><a href="#cb65-61" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** a model for the data that depends on the parameters $p(y | \theta)$.</span>
-<span id="cb65-62"><a href="#cb65-62" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**The Posterior:** a distribution that uses Bayes rule to define distribution of the parameters given the data $p(\theta|y)$.</span>
-<span id="cb65-63"><a href="#cb65-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-64"><a href="#cb65-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Stan?</span></span>
-<span id="cb65-65"><a href="#cb65-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-66"><a href="#cb65-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Stan is one of several ways to run MCMC for Bayesian inference</span>
-<span id="cb65-67"><a href="#cb65-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-68"><a href="#cb65-68" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Nimble and OpenBUGS are two other languages dedicated to probabilistic programming</span>
-<span id="cb65-69"><a href="#cb65-69" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>R, Rcpp, Julia, and Python are other more general purpose options for writing the sampler from scratch</span>
-<span id="cb65-70"><a href="#cb65-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-71"><a href="#cb65-71" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Other methods use combinations of Gibbs, Metropolis-Hastings, and slice sampling; Stan uses Hamiltonian Monte Carlo and the No-U-Turn Sampler (NUTS) which is more efficient and typically requires less thinning</span>
-<span id="cb65-72"><a href="#cb65-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-73"><a href="#cb65-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Stan only allows for continuous parameters</span>
-<span id="cb65-74"><a href="#cb65-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-75"><a href="#cb65-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some examples in Stan</span></span>
-<span id="cb65-76"><a href="#cb65-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-77"><a href="#cb65-77" aria-hidden="true" tabindex="-1"></a>We'll continue with the single predictor regression model to model NCAA Women's Basketball team's total wins by their 3 point field goal percentage from the 2022-2023 season. Data collected from <span class="co">[</span><span class="ot">NCAA</span><span class="co">](https://stats.ncaa.org/rankings?sport_code=WBB&amp;division=2)</span>.</span>
-<span id="cb65-78"><a href="#cb65-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-79"><a href="#cb65-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-80"><a href="#cb65-80" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: load-data</span></span>
-<span id="cb65-81"><a href="#cb65-81" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
-<span id="cb65-82"><a href="#cb65-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-83"><a href="#cb65-83" aria-hidden="true" tabindex="-1"></a><span class="in">ncaaw &lt;- readr::read_csv(file = "Data/NCAAW-freethrows-threes-2022-2023.csv")</span></span>
-<span id="cb65-84"><a href="#cb65-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-85"><a href="#cb65-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-86"><a href="#cb65-86" aria-hidden="true" tabindex="-1"></a>In the 2022-2023 season there were $N = 350$ teams. The relationship between their wins and three point percentage is displayed in @fig-scatter.</span>
-<span id="cb65-87"><a href="#cb65-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-88"><a href="#cb65-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-89"><a href="#cb65-89" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-scatter</span></span>
-<span id="cb65-90"><a href="#cb65-90" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
-<span id="cb65-91"><a href="#cb65-91" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: Scatter plot of the Total Wins by 3 pt Field Goal %. </span></span>
-<span id="cb65-92"><a href="#cb65-92" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
-<span id="cb65-93"><a href="#cb65-93" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(ncaaw, aes(FG3pct, W)) +</span></span>
-<span id="cb65-94"><a href="#cb65-94" aria-hidden="true" tabindex="-1"></a><span class="in">    geom_point() +</span></span>
-<span id="cb65-95"><a href="#cb65-95" aria-hidden="true" tabindex="-1"></a><span class="in">    labs(title = "2022-23 NCAAW Wins by 3pt%", </span></span>
-<span id="cb65-96"><a href="#cb65-96" aria-hidden="true" tabindex="-1"></a><span class="in">         subtitle = paste0("r = ", round(cor(ncaaw$W, ncaaw$FG3pct), 3)),</span></span>
-<span id="cb65-97"><a href="#cb65-97" aria-hidden="true" tabindex="-1"></a><span class="in">         x = "3pt%",</span></span>
-<span id="cb65-98"><a href="#cb65-98" aria-hidden="true" tabindex="-1"></a><span class="in">         y = "Wins")</span></span>
-<span id="cb65-99"><a href="#cb65-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-100"><a href="#cb65-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-101"><a href="#cb65-101" aria-hidden="true" tabindex="-1"></a>As a baseline, we'll find the maximum likelihood estimates for the regression parameters and variance.</span>
-<span id="cb65-102"><a href="#cb65-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-103"><a href="#cb65-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-104"><a href="#cb65-104" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: lm-fit</span></span>
-<span id="cb65-105"><a href="#cb65-105" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
-<span id="cb65-106"><a href="#cb65-106" aria-hidden="true" tabindex="-1"></a><span class="in">fit_ml &lt;- lm(W ~ FG3pct, data = ncaaw)</span></span>
-<span id="cb65-107"><a href="#cb65-107" aria-hidden="true" tabindex="-1"></a><span class="in">(beta_ml &lt;- coef(fit_ml))</span></span>
-<span id="cb65-108"><a href="#cb65-108" aria-hidden="true" tabindex="-1"></a><span class="in">smry_ml &lt;- summary(fit_ml)</span></span>
-<span id="cb65-109"><a href="#cb65-109" aria-hidden="true" tabindex="-1"></a><span class="in">(sigma_ml &lt;- smry_ml$sigma)</span></span>
-<span id="cb65-110"><a href="#cb65-110" aria-hidden="true" tabindex="-1"></a><span class="in">mles &lt;- data.frame(Parameters = c("beta_0", "beta_1", "sigma"),</span></span>
-<span id="cb65-111"><a href="#cb65-111" aria-hidden="true" tabindex="-1"></a><span class="in">                   Estimates = c(beta_ml, sigma_ml))</span></span>
-<span id="cb65-112"><a href="#cb65-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-113"><a href="#cb65-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-114"><a href="#cb65-114" aria-hidden="true" tabindex="-1"></a>The fitted line is displayed in @fig-scatter-ols.</span>
-<span id="cb65-115"><a href="#cb65-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-116"><a href="#cb65-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
-<span id="cb65-117"><a href="#cb65-117" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-scatter-ols</span></span>
-<span id="cb65-118"><a href="#cb65-118" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
-<span id="cb65-119"><a href="#cb65-119" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: Now the OLS regression line is super-imposed in blue.</span></span>
-<span id="cb65-120"><a href="#cb65-120" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
-<span id="cb65-121"><a href="#cb65-121" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(ncaaw, aes(FG3pct, W)) +</span></span>
-<span id="cb65-122"><a href="#cb65-122" aria-hidden="true" tabindex="-1"></a><span class="in">    geom_point() +</span></span>
-<span id="cb65-123"><a href="#cb65-123" aria-hidden="true" tabindex="-1"></a><span class="in">    geom_smooth(method = "lm", se = FALSE) +</span></span>
-<span id="cb65-124"><a href="#cb65-124" aria-hidden="true" tabindex="-1"></a><span class="in">    labs(title = "2022-23 NCAAW Wins by 3pt%", </span></span>
-<span id="cb65-125"><a href="#cb65-125" aria-hidden="true" tabindex="-1"></a><span class="in">         subtitle = paste0("r = ", round(cor(ncaaw$W, ncaaw$FG3pct), 3)),</span></span>
-<span id="cb65-126"><a href="#cb65-126" aria-hidden="true" tabindex="-1"></a><span class="in">         x = "3pt%",</span></span>
-<span id="cb65-127"><a href="#cb65-127" aria-hidden="true" tabindex="-1"></a><span class="in">         y = "Wins")</span></span>
-<span id="cb65-128"><a href="#cb65-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb65-129"><a href="#cb65-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-130"><a href="#cb65-130" aria-hidden="true" tabindex="-1"></a><span class="fu">### Non-informative Prior Regression Model</span></span>
-<span id="cb65-131"><a href="#cb65-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-132"><a href="#cb65-132" aria-hidden="true" tabindex="-1"></a>Let's consider the simple regression model $E(Y_i | X_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ <span class="co">[</span><span class="ot">@gelman2013bayesian, p. 354-358</span><span class="co">]</span>.</span>
-<span id="cb65-133"><a href="#cb65-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-134"><a href="#cb65-134" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The Prior:** $p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$</span>
-<span id="cb65-135"><a href="#cb65-135" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
-<span id="cb65-136"><a href="#cb65-136" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**The Posterior:**</span>
-<span id="cb65-137"><a href="#cb65-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-138"><a href="#cb65-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{=tex}</span></span>
-<span id="cb65-139"><a href="#cb65-139" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{align*}</span></span>
-<span id="cb65-140"><a href="#cb65-140" aria-hidden="true" tabindex="-1"></a><span class="in">    p(\boldsymbol{\beta}, \sigma^2 | \mathbf{y}) &amp;= p(\boldsymbol{\beta} | \sigma^2, \mathbf{y}) \times p(\sigma^2 | \mathbf{y}) \\</span></span>
-<span id="cb65-141"><a href="#cb65-141" aria-hidden="true" tabindex="-1"></a><span class="in">        &amp;= N_2(\boldsymbol{\beta} | \hat{\boldsymbol{\beta}}, \sigma^2 (X'X)^{-1}) \times Inv-\chi^2 (\sigma^2 | N-2, s^2) \\</span></span>
-<span id="cb65-142"><a href="#cb65-142" aria-hidden="true" tabindex="-1"></a><span class="in">    \hat{\boldsymbol{\beta}} &amp;= (X'X)^{-1} X'\mathbf{y} \\</span></span>
-<span id="cb65-143"><a href="#cb65-143" aria-hidden="true" tabindex="-1"></a><span class="in">    s^2 &amp;= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   </span></span>
-<span id="cb65-144"><a href="#cb65-144" aria-hidden="true" tabindex="-1"></a><span class="in">\end{align*}</span></span>
-<span id="cb65-145"><a href="#cb65-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [bayesian-analysis, computation, tutorial]</span></span>
+<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a><span class="al">![](stan_logo.png)</span></span>
+<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
+<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a>To get started, we'll head over to Stan's <span class="co">[</span><span class="ot">documentation</span><span class="co">](https://mc-stan.org/)</span> to see how to get set up in R. For this presentation, I'll use the CmdStan toolchain that's implemented in R by the <span class="in">`cmdstanr`</span> <span class="co">[</span><span class="ot">package</span><span class="co">](https://mc-stan.org/cmdstanr/)</span> <span class="co">[</span><span class="ot">@gabry2023</span><span class="co">]</span>. There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <span class="co">[</span><span class="ot">CmdStanPy</span><span class="co">](https://github.com/stan-dev/cmdstanpy)</span> <span class="co">[</span><span class="ot">@cmdstanp</span><span class="co">]</span>.</span>
+<span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: set-up</span></span>
+<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
+<span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-28"><a href="#cb65-28" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(98463)</span></span>
+<span id="cb65-29"><a href="#cb65-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-30"><a href="#cb65-30" aria-hidden="true" tabindex="-1"></a><span class="in"># install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))</span></span>
+<span id="cb65-31"><a href="#cb65-31" aria-hidden="true" tabindex="-1"></a><span class="in">library(cmdstanr)</span></span>
+<span id="cb65-32"><a href="#cb65-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-33"><a href="#cb65-33" aria-hidden="true" tabindex="-1"></a><span class="in"># cmdstanr::install_cmdstan()</span></span>
+<span id="cb65-34"><a href="#cb65-34" aria-hidden="true" tabindex="-1"></a><span class="in">cmdstanr::cmdstan_version()</span></span>
+<span id="cb65-35"><a href="#cb65-35" aria-hidden="true" tabindex="-1"></a><span class="in">cmdstanr::cmdstan_path()</span></span>
+<span id="cb65-36"><a href="#cb65-36" aria-hidden="true" tabindex="-1"></a><span class="in">cmdstanr::check_cmdstan_toolchain()</span></span>
+<span id="cb65-37"><a href="#cb65-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-38"><a href="#cb65-38" aria-hidden="true" tabindex="-1"></a><span class="in"># install.packages(c("bayesplot", "ggplot2", "posterior"))</span></span>
+<span id="cb65-39"><a href="#cb65-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-40"><a href="#cb65-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-41"><a href="#cb65-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Very Brief Introduction to Bayesian Data Analysis</span></span>
+<span id="cb65-42"><a href="#cb65-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-43"><a href="#cb65-43" aria-hidden="true" tabindex="-1"></a>The broadest conceptual overview of Bayesian data analysis is that this methodology allows us to incorporate prior knowledge about the model/data into our analysis which is based on a posterior distribution that is derived from the prior and likelihood. Bayesian inference treats the parameters of the model as random variables whose distribution we are interested in either deriving analytically or approximating through computation. This is a key distinction from frequentist methods taught in math stat and applied stat where parameters are fixed values and their estimators are functions of a random sample and the sampling distribution of the estimator is used for inference.</span>
+<span id="cb65-44"><a href="#cb65-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-45"><a href="#cb65-45" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb65-46"><a href="#cb65-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bayes Rule</span></span>
+<span id="cb65-47"><a href="#cb65-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-48"><a href="#cb65-48" aria-hidden="true" tabindex="-1"></a>A quick reminder of Bayes Rule.</span>
+<span id="cb65-49"><a href="#cb65-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-50"><a href="#cb65-50" aria-hidden="true" tabindex="-1"></a>Let $\theta$ be a random variable with (prior) distribution $p(\theta)$, $Y$ be a random variable that depends on $\theta$ with conditional distribution or likelihood $p(y | \theta)$. Then their joint distribution is $p(y, \theta) = p(y|\theta) p(\theta)$.</span>
+<span id="cb65-51"><a href="#cb65-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-52"><a href="#cb65-52" aria-hidden="true" tabindex="-1"></a>Bayes rule lets us flip the conditioning from the likelihood to get $p(\theta | y)$</span>
+<span id="cb65-53"><a href="#cb65-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-54"><a href="#cb65-54" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb65-55"><a href="#cb65-55" aria-hidden="true" tabindex="-1"></a>p(\theta | y) = \frac{p(y, \theta)}{p(y)} = \frac{p(y|\theta) p(\theta)}{\int p(y, \theta) d\theta} \propto p(y|\theta) p(\theta)</span>
+<span id="cb65-56"><a href="#cb65-56" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb65-57"><a href="#cb65-57" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb65-58"><a href="#cb65-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-59"><a href="#cb65-59" aria-hidden="true" tabindex="-1"></a>To be a little more specific, we have three central components to the model. For ease of exposition, let's consider the simple regression model $E(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ where we have $i = 1,\dots,N$ observations of $(Y_i, X_i)'$ from Ch. 14 of Bayesian Data Analysis <span class="co">[</span><span class="ot">@gelman2013bayesian, p. 354-358</span><span class="co">]</span>. From here on I will suppress conditioning on the observed predictor $X_i = x_i$ since we are considering the design matrix $X = (1_N, \mathbf{x})$ to be fixed and known where $\mathbf{x} = (x_1,\dots, x_N)'$.</span>
+<span id="cb65-60"><a href="#cb65-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-61"><a href="#cb65-61" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The Prior:** a distribution for the parameters that doesn't depend on the data $p(\theta)$.</span>
+<span id="cb65-62"><a href="#cb65-62" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** a model for the data that depends on the parameters $p(y | \theta)$.</span>
+<span id="cb65-63"><a href="#cb65-63" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**The Posterior:** a distribution that uses Bayes rule to define distribution of the parameters given the data $p(\theta|y)$.</span>
+<span id="cb65-64"><a href="#cb65-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-65"><a href="#cb65-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Stan?</span></span>
+<span id="cb65-66"><a href="#cb65-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-67"><a href="#cb65-67" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Stan is one of several ways to run MCMC for Bayesian inference</span>
+<span id="cb65-68"><a href="#cb65-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-69"><a href="#cb65-69" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>Nimble and OpenBUGS are two other languages dedicated to probabilistic programming</span>
+<span id="cb65-70"><a href="#cb65-70" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>R, Rcpp, Julia, and Python are other more general purpose options for writing the sampler from scratch</span>
+<span id="cb65-71"><a href="#cb65-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-72"><a href="#cb65-72" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Other methods use combinations of Gibbs, Metropolis-Hastings, and slice sampling; Stan uses Hamiltonian Monte Carlo and the No-U-Turn Sampler (NUTS) which is more efficient and typically requires less thinning</span>
+<span id="cb65-73"><a href="#cb65-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-74"><a href="#cb65-74" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Stan only allows for continuous parameters</span>
+<span id="cb65-75"><a href="#cb65-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-76"><a href="#cb65-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some examples in Stan</span></span>
+<span id="cb65-77"><a href="#cb65-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-78"><a href="#cb65-78" aria-hidden="true" tabindex="-1"></a>We'll continue with the single predictor regression model to model NCAA Women's Basketball team's total wins by their 3 point field goal percentage from the 2022-2023 season. Data collected from <span class="co">[</span><span class="ot">NCAA</span><span class="co">](https://stats.ncaa.org/rankings?sport_code=WBB&amp;division=2)</span>.</span>
+<span id="cb65-79"><a href="#cb65-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-80"><a href="#cb65-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-81"><a href="#cb65-81" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: load-data</span></span>
+<span id="cb65-82"><a href="#cb65-82" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
+<span id="cb65-83"><a href="#cb65-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-84"><a href="#cb65-84" aria-hidden="true" tabindex="-1"></a><span class="in">ncaaw &lt;- readr::read_csv(file = "Data/NCAAW-freethrows-threes-2022-2023.csv")</span></span>
+<span id="cb65-85"><a href="#cb65-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-86"><a href="#cb65-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-87"><a href="#cb65-87" aria-hidden="true" tabindex="-1"></a>In the 2022-2023 season there were $N = 350$ teams. The relationship between their wins and three point percentage is displayed in @fig-scatter.</span>
+<span id="cb65-88"><a href="#cb65-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-89"><a href="#cb65-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-90"><a href="#cb65-90" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-scatter</span></span>
+<span id="cb65-91"><a href="#cb65-91" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
+<span id="cb65-92"><a href="#cb65-92" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: Scatter plot of the Total Wins by 3 pt Field Goal %. </span></span>
+<span id="cb65-93"><a href="#cb65-93" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb65-94"><a href="#cb65-94" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(ncaaw, aes(FG3pct, W)) +</span></span>
+<span id="cb65-95"><a href="#cb65-95" aria-hidden="true" tabindex="-1"></a><span class="in">    geom_point() +</span></span>
+<span id="cb65-96"><a href="#cb65-96" aria-hidden="true" tabindex="-1"></a><span class="in">    labs(title = "2022-23 NCAAW Wins by 3pt%", </span></span>
+<span id="cb65-97"><a href="#cb65-97" aria-hidden="true" tabindex="-1"></a><span class="in">         subtitle = paste0("r = ", round(cor(ncaaw$W, ncaaw$FG3pct), 3)),</span></span>
+<span id="cb65-98"><a href="#cb65-98" aria-hidden="true" tabindex="-1"></a><span class="in">         x = "3pt%",</span></span>
+<span id="cb65-99"><a href="#cb65-99" aria-hidden="true" tabindex="-1"></a><span class="in">         y = "Wins")</span></span>
+<span id="cb65-100"><a href="#cb65-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-101"><a href="#cb65-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-102"><a href="#cb65-102" aria-hidden="true" tabindex="-1"></a>As a baseline, we'll find the maximum likelihood estimates for the regression parameters and variance.</span>
+<span id="cb65-103"><a href="#cb65-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-104"><a href="#cb65-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-105"><a href="#cb65-105" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: lm-fit</span></span>
+<span id="cb65-106"><a href="#cb65-106" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
+<span id="cb65-107"><a href="#cb65-107" aria-hidden="true" tabindex="-1"></a><span class="in">fit_ml &lt;- lm(W ~ FG3pct, data = ncaaw)</span></span>
+<span id="cb65-108"><a href="#cb65-108" aria-hidden="true" tabindex="-1"></a><span class="in">(beta_ml &lt;- coef(fit_ml))</span></span>
+<span id="cb65-109"><a href="#cb65-109" aria-hidden="true" tabindex="-1"></a><span class="in">smry_ml &lt;- summary(fit_ml)</span></span>
+<span id="cb65-110"><a href="#cb65-110" aria-hidden="true" tabindex="-1"></a><span class="in">(sigma_ml &lt;- smry_ml$sigma)</span></span>
+<span id="cb65-111"><a href="#cb65-111" aria-hidden="true" tabindex="-1"></a><span class="in">mles &lt;- data.frame(Parameters = c("beta_0", "beta_1", "sigma"),</span></span>
+<span id="cb65-112"><a href="#cb65-112" aria-hidden="true" tabindex="-1"></a><span class="in">                   Estimates = c(beta_ml, sigma_ml))</span></span>
+<span id="cb65-113"><a href="#cb65-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-114"><a href="#cb65-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-115"><a href="#cb65-115" aria-hidden="true" tabindex="-1"></a>The fitted line is displayed in @fig-scatter-ols.</span>
+<span id="cb65-116"><a href="#cb65-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-117"><a href="#cb65-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{r filename="intro-to-stan.R"}</span></span>
+<span id="cb65-118"><a href="#cb65-118" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-scatter-ols</span></span>
+<span id="cb65-119"><a href="#cb65-119" aria-hidden="true" tabindex="-1"></a><span class="in">#| results: hold</span></span>
+<span id="cb65-120"><a href="#cb65-120" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: Now the OLS regression line is super-imposed in blue.</span></span>
+<span id="cb65-121"><a href="#cb65-121" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb65-122"><a href="#cb65-122" aria-hidden="true" tabindex="-1"></a><span class="in">ggplot(ncaaw, aes(FG3pct, W)) +</span></span>
+<span id="cb65-123"><a href="#cb65-123" aria-hidden="true" tabindex="-1"></a><span class="in">    geom_point() +</span></span>
+<span id="cb65-124"><a href="#cb65-124" aria-hidden="true" tabindex="-1"></a><span class="in">    geom_smooth(method = "lm", se = FALSE) +</span></span>
+<span id="cb65-125"><a href="#cb65-125" aria-hidden="true" tabindex="-1"></a><span class="in">    labs(title = "2022-23 NCAAW Wins by 3pt%", </span></span>
+<span id="cb65-126"><a href="#cb65-126" aria-hidden="true" tabindex="-1"></a><span class="in">         subtitle = paste0("r = ", round(cor(ncaaw$W, ncaaw$FG3pct), 3)),</span></span>
+<span id="cb65-127"><a href="#cb65-127" aria-hidden="true" tabindex="-1"></a><span class="in">         x = "3pt%",</span></span>
+<span id="cb65-128"><a href="#cb65-128" aria-hidden="true" tabindex="-1"></a><span class="in">         y = "Wins")</span></span>
+<span id="cb65-129"><a href="#cb65-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb65-130"><a href="#cb65-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-131"><a href="#cb65-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### Non-informative Prior Regression Model</span></span>
+<span id="cb65-132"><a href="#cb65-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-133"><a href="#cb65-133" aria-hidden="true" tabindex="-1"></a>Let's consider the simple regression model $E(Y_i | X_i, \boldsymbol{\beta}, \sigma^2) = \beta_0 + \beta_1 X_i$ and $Var(Y_i | X_i = x_i, \boldsymbol{\beta}, \sigma^2) = \sigma^2$ <span class="co">[</span><span class="ot">@gelman2013bayesian, p. 354-358</span><span class="co">]</span>.</span>
+<span id="cb65-134"><a href="#cb65-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-135"><a href="#cb65-135" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The Prior:** $p(\boldsymbol{\beta}, \log\sigma) = 1 \equiv p(\boldsymbol{\beta}, \sigma^2) \propto \sigma^{-2}$</span>
+<span id="cb65-136"><a href="#cb65-136" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**The (Data) Likelihood:** $\mathbf{Y} | \boldsymbol{\beta}, \sigma^2 \sim N_N(X\boldsymbol{\beta}, \sigma^2 I_N).$</span>
+<span id="cb65-137"><a href="#cb65-137" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**The Posterior:**</span>
+<span id="cb65-138"><a href="#cb65-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-139"><a href="#cb65-139" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb65-140"><a href="#cb65-140" aria-hidden="true" tabindex="-1"></a>    p(\boldsymbol{\beta}, \sigma^2 | \mathbf{y}) &amp;= p(\boldsymbol{\beta} | \sigma^2, \mathbf{y}) \times p(\sigma^2 | \mathbf{y}) <span class="sc">\\</span></span>
+<span id="cb65-141"><a href="#cb65-141" aria-hidden="true" tabindex="-1"></a>        &amp;= N_2(\boldsymbol{\beta} | \hat{\boldsymbol{\beta}}, \sigma^2 (X'X)^{-1}) \times Inv-\chi^2 (\sigma^2 | N-2, s^2) <span class="sc">\\</span></span>
+<span id="cb65-142"><a href="#cb65-142" aria-hidden="true" tabindex="-1"></a>    \hat{\boldsymbol{\beta}} &amp;= (X'X)^{-1} X'\mathbf{y} <span class="sc">\\</span></span>
+<span id="cb65-143"><a href="#cb65-143" aria-hidden="true" tabindex="-1"></a>    s^2 &amp;= \frac{1}{N-2} (\mathbf{y} - X\hat{\boldsymbol{\beta}})' (\mathbf{y} - X\hat{\boldsymbol{\beta}})   </span>
+<span id="cb65-144"><a href="#cb65-144" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb65-145"><a href="#cb65-145" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-146"><a href="#cb65-146" aria-hidden="true" tabindex="-1"></a>First we write the Stan code in a separate file. See the <span class="co">[</span><span class="ot">Stan User's Guide Part 1.1</span><span class="co">](https://mc-stan.org/docs/stan-users-guide/linear-regression.html#vectorization.section)</span> for programming this model without the analytic posteriors. (<span class="co">[</span><span class="ot">Download the file here</span><span class="co">](non-informative-regression.stan)</span>{target="_blank"})</span>
 <span id="cb65-147"><a href="#cb65-147" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-148"><a href="#cb65-148" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.stan filename="non-informative-regression.stan"}</span></span>
@@ -3023,4 +3028,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/benjamin-stockton/benjamin-stockton.github.io/edit/main/posts/intro-to-stan/intro_to_stan.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/benjamin-stockton/benjamin-stockton.github.io/blob/main/posts/intro-to-stan/intro_to_stan.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/benjamin-stockton/benjamin-stockton.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

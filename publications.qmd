@@ -3,24 +3,66 @@
 ::: {#list}
 :::
 
-:::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
-::: {#ref-stocktonInProgressCh1 .csl-entry}
+:::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-stocktonClarifyingIdentificationEstimation2025 .csl-entry}
+**Stockton, B.**, Santacatterina, M., Mandal, S., Cleland, C. M., Hade, E.
+M., Illenberger, N., Meropol, S., Troxel, A. B., Petkova, E., Yu, C., &
+Tarpey, T. (2026). *Clarifying the role of placebo response
+classification in the analysis of the Sequential Parallel Comparison
+Design*. *arXiv:2511.19677*. <https://doi.org/10.48550/arXiv.2511.19677>
+:::
+
+::: {#ref-stocktonCommentaryAJE2026 .csl-entry}
+**Stockton, B.**, & Harel, O. (2026). [(Submitted to [American Journal of
+Epidemiology]{.nocase}: Commentary on Resurrecting Complete-Case
+Analysis: A Defense -- The loss of information remains
+unresolved]{.nocase}. *American Journal of Epidemiology*.
+:::
+
+::: {#ref-guptaCompData2025 .csl-entry}
+Gupta, S., **Stockton, B.**, & Harel, O. (2025). [Adapting Multiple
+Imputation for Compositional Survey Data]{.nocase}. *American Journal of
+Undergraduate Research*, *22*, 13--29.
+<https://doi.org/10.33697/ajur.2025.146>
+:::
+
+::: {#ref-stocktonSubmittedSDL .csl-entry}
+**Stockton, B.**, Gupta, S., Harel, O., & Sinharay, S. (Ed.). (2025). *[Data
+Confidentiality, Differential Privacy, and Statistical Disclosure
+Control.]{.nocase} [Encyclopedia of Social Measurement]{.nocase}* (2nd
+Edition). Elsevier.
+:::
+
+::: {#ref-stocktonInProgressCh13 .csl-entry}
 **Stockton, B.**, & Harel, O. (2025). *(In Progress) [Multiple Imputation
 for Analyzing Spatial Data with Incomplete Angular
 Predictors]{.nocase}*.
 :::
 
 ::: {#ref-stocktonInProgressCh2 .csl-entry}
-**Stockton, B.**, & Harel, O. (2025). *[(Submitted to Journal of Applied
-Statistics)]{.nocase} Imputation of Incomplete Angular Time Series
-Data*.
+**Stockton, B.**, & Harel, O. (2025). *[(Submitted to [Journal of Applied
+Statistics]{.nocase}: Under Third Review)]{.nocase} [Incomplete Angular
+Time Series Imputation with a Projected Normal Autoregressive Process
+and Exogenous Predictors]{.nocase}*.
+:::
+
+::: {#ref-stocktonInProgressCountITS .csl-entry}
+**Stockton, B.**, Kahn, L., Mehta-Lee, S., & Hade, E. (2025). *(In Progress)
+[Assessing the Impacts of Texas's Six-Week Abortion Ban on Maternal
+Morbiity Using Electronic Health Records]{.nocase}*.
+:::
+
+::: {#ref-stocktonInProgressTexasBan .csl-entry}
+**Stockton, B.**, Kahn, L., Mehta-Lee, S., & Hade, E. (2025). *(In Progress)
+[Interrupted Count Time Series Analysis with Nuisance
+Interruptions]{.nocase}*.
 :::
 
 ::: {#ref-stocktonInProgressCrim2 .csl-entry}
 Strange, C. C., **Stockton, B.**, Zvonkovich, J., & Harel, O. (2025). *(In
-Progress) multiple imputation using pattern-mixture modeling to assess
-the sensitivity of race/ethnicity effect estimates in sentencing given
-non-ignorable incomplete data*.
+Progress) [Multiple Imputation Using Pattern-mixture Modeling]{.nocase}
+to Assess the Sensitivity of Race/Ethnicity Effect Estimates in
+[Sentencing Given Non-ignorable Incomplete Data]{.nocase}*.
 :::
 
 ::: {#ref-sidiNoninferiorityClinicalTrials2024 .csl-entry}
@@ -31,9 +73,10 @@ of Statistics in Data Science*, 1--8.
 :::
 
 ::: {#ref-stocktonNowYouSee2023 .csl-entry}
-**Stockton, B.**, Strange, C. C., & Harel, O. (2023). Now You See It, Now
-You Don't: A Simulation and Illustration of the Importance of Treating
-Incomplete Data in Estimating Race Effects in Sentencing. *Journal of
-Quantitative Criminology*. <https://doi.org/10.1007/s10940-023-09577-w>
+**Stockton, B.**, Strange, C. C., & Harel, O. (2023). Now You See It, [Now
+You Don't]{.nocase}: A Simulation and Illustration of the Importance of
+Treating Incomplete Data in Estimating Race Effects in Sentencing.
+*Journal of Quantitative Criminology*, *40*, 563--590.
+<https://doi.org/10.1007/s10940-023-09577-w>
 :::
-::::::::
+::::::::::::::
