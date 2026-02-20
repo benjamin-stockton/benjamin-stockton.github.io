@@ -2,38 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2026-02-03T18:33:40.420Z</lastmod>
+    <lastmod>2026-02-20T21:44:31.568Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
-    <lastmod>2026-02-03T18:33:40.413Z</lastmod>
+    <lastmod>2026-02-20T21:44:31.561Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/miss-mech-notes/miss-mech-notes.html</loc>
-    <lastmod>2026-02-03T18:33:40.174Z</lastmod>
+    <lastmod>2026-02-20T21:44:31.295Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
-    <lastmod>2026-02-03T18:33:40.075Z</lastmod>
+    <lastmod>2026-02-20T21:44:31.186Z</lastmod>
   </url>
   <url>
-    <loc>https://benjamin-stockton.github.io/blog.html</loc>
-    <lastmod>2026-02-03T18:33:39.935Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/about.html</loc>
-    <lastmod>2026-02-03T18:33:39.935Z</lastmod>
+    <loc>https://benjamin-stockton.github.io/posts/imp-data-viz/imp-data-viz.html</loc>
+    <lastmod>2026-02-20T21:44:31.155Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/index.html</loc>
-    <lastmod>2026-02-03T18:33:40.034Z</lastmod>
+    <lastmod>2026-02-20T21:44:31.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/about.html</loc>
+    <lastmod>2026-02-20T21:44:30.994Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/blog.html</loc>
+    <lastmod>2026-02-20T21:44:30.995Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/directions-data-viz/directions-data-viz.html</loc>
+    <lastmod>2026-02-20T21:44:31.140Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/imputeangles/index.html</loc>
-    <lastmod>2026-02-03T18:33:40.056Z</lastmod>
+    <lastmod>2026-02-20T21:44:31.166Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/projects.html</loc>
-    <lastmod>2026-02-03T18:33:40.420Z</lastmod>
+    <lastmod>2026-02-20T21:44:31.568Z</lastmod>
   </url>
 </urlset>
