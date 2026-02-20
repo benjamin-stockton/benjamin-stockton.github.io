@@ -1,0 +1,607 @@
+---
+title: Data Visualizations and Diagnostics for Imputed Directional Data
+author: Ben
+date: 2026-02-20
+format: 
+    html:
+        code-fold: true
+        code-summary: "Show code"
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+        df-print: paged
+cache: true
+freeze: true
+lightbox: true
+categories: [data-viz, missing-data, angular-data]
+---
+
+This post is a follow-up to my [first post](../directions-data-viz/directions-data-viz.qmd) on `ggplot2`-based data visualization for angular data. In that post, I shared some basic visualizations for angular data that I used in my dissertation and other research projects. Here, I'll share some visualizations for imputed angular data that combine ideas from the previous post with some of the standard diagnostics from `mice`. 
+
+```{r}
+#| label: set-up
+#| warnings: false
+#| code-summary: "Load Packages"
+library(dplyr, warn.conflicts = FALSE, quietly = TRUE)
+library(ggplot2, warn.conflicts = FALSE, quietly = TRUE)
+library(ggthemes, warn.conflicts = FALSE, quietly = TRUE)
+library(ggforce, warn.conflicts = FALSE, quietly = TRUE)
+library(circular, warn.conflicts = FALSE, quietly = TRUE)
+# devtools::install_github(repo = "marcpabst/ggcircular")
+library(ggcircular, warn.conflicts = FALSE, quietly = TRUE)
+library(latex2exp, warn.conflicts = FALSE, quietly = TRUE)
+library(imputeangles, warn.conflicts = FALSE, quietly = TRUE)
+library(pnregstan, warn.conflicts = FALSE, quietly = TRUE)
+
+theme_set(theme_classic())
+```
+
+## Simulated Data
+
+I'll start by generating data from a projected normal regression model. The data are displayed in @tbl-sim-data and @fig-scatterplot-comp.
+
+```{r}
+#| label: sim-dat
+#| code-fold: show
+set.seed(10239)
+N <- 50
+beta <- c(0, 2.5, 0, 2.5)
+B <- matrix(beta, ncol = 2)
+sigma_mat <- c(1,0,0,1)
+X <- matrix(seq(from = -2, to = 2, length.out = N))
+
+sim_data <- pnregstan::pnreg_sim_data(N = N, 
+                         B = beta, 
+                         Sigma_theta = sigma_mat,
+                         X = X) |>
+    mutate(
+        theta = case_when(
+            theta < 0 ~ theta + 2*pi,
+            TRUE ~ theta
+        )
+    )
+```
+
+To create a data set to demonstrate the imputation figures, I'll mask some of the angular observations in the simulated data by simulating a missingness indicator $R$ such that the angle $\theta$ is MCAR for 35% of the observations. The incomplete data are displayed in @tbl-sim-missing and @fig-scatterplot-inc.
+
+```{r}
+#| label: sim-inc
+#| code-fold: show
+# Simulate a MCAR response indicator
+sim_data$R <- sample(c(1, 0), size = N,
+                     prob = c(0.65, 0.35),
+                     replace = TRUE)
+
+mis_ind <- which(sim_data$R == 0)
+
+inc_data <- sim_data |>
+    mutate(
+        theta = case_when(
+            R == 1 ~ theta,
+            R == 0 ~ NA,
+            TRUE ~ NA
+        ),
+        U1 = case_when(is.na(theta) ~ NA, TRUE ~ U1),
+        U2 = case_when(is.na(theta) ~ NA, TRUE ~ U2)
+    ) |> 
+    select(theta, U1, U2, X)
+```
+
+::: {.panel-tabset}
+## Complete Data
+
+```{r}
+#| label: scales-fn
+#| code-fold: true
+#| code-summary: "Color Scales Functions"
+
+scale_color_angles <- function(colors = list(low = "magenta", mid = "dodgerblue", high = "magenta"), color_name = "Angle", midpoint = 0, limits = c(-pi, pi)) {
+    scale_color_gradient2(low = colors$low, mid = colors$mid, high = colors$high,
+                          na.value = "gray70", name = color_name,
+                          midpoint = midpoint, limits = limits)
+}
+
+scale_fill_angles <- function(colors = list(low = "magenta", mid = "dodgerblue", high = "magenta"), fill_name = "Angle", midpoint = 0, limits = c(-pi, pi)) {
+    scale_fill_gradient2(low = colors$low, mid = colors$mid, high = colors$high,
+                          na.value = "gray70", name = fill_name,
+                          midpoint = midpoint, limits = limits)
+}
+```
+
+```{r}
+#| label: fig-scatterplot-comp
+#| fig-cap: A wrapped circular-linear scatterplot.
+#| code-fold: true
+
+sim_data_2 <- sim_data |>
+    mutate(
+        theta = case_when(
+            theta < pi ~ theta + 2*pi,
+            theta >= pi ~ theta - 2*pi,
+            TRUE ~ theta
+        ),
+        original = FALSE
+    )
+sim_data$original = TRUE
+
+ggplot(bind_rows(sim_data, sim_data_2), 
+       aes(x = X, y = theta, shape = original, color = theta)) +
+    geom_hline(yintercept = c(0, 2*pi), 
+              linetype = "dotted",
+              linewidth = 0.85,
+              color = "gray50") +
+    geom_point() +
+    scale_shape_manual(name = "Original", values = c(1, 16)) +
+    scale_color_angles(limits = c(0, 2*pi), midpoint = pi) +
+    labs(y = TeX("$\\theta$")) +
+    theme_classic()
+```
+
+```{r}
+#| label: tbl-sim-data
+#| tbl-cap: Simulated complete data
+
+sim_data
+```
+
+## Incomplete Data
+
+```{r}
+#| label: fig-scatterplot-inc
+#| fig-cap: A wrapped circular-linear scatterplot of the incomplete data. Incomplete observations have the true masked value marked with a red "x" and are highlighted with a gray vertical band.
+#| warning: false
+#| code-fold: true
+
+inc_data_plt <- inc_data
+inc_data_plt$true_theta <- sim_data$theta
+
+inc_data_2 <- inc_data_plt |>
+    mutate(
+        theta = case_when(
+            theta < pi ~ theta + 2*pi,
+            theta >= pi ~ theta - 2*pi,
+            TRUE ~ theta
+        ),
+        true_theta = case_when(
+            true_theta < pi ~ true_theta + 2*pi,
+            true_theta >= pi ~ true_theta - 2*pi,
+            TRUE ~ true_theta
+        ),
+        original = FALSE
+    )
+inc_data_plt$original = TRUE
+
+inc_data_dbl <- bind_rows(inc_data_plt, inc_data_2)
+
+ggplot(inc_data_dbl, 
+       aes(x = X, y = theta, shape = original, color = theta)) +
+    annotate("rect",
+        xmin = inc_data[mis_ind, "X"] - 0.025, 
+        xmax = inc_data[mis_ind, "X"] + 0.025,
+        ymin = -Inf, ymax = Inf,
+        fill = "black", 
+        alpha = 0.15) +
+    geom_hline(yintercept = c(0, 2*pi), 
+              linetype = "dotted",
+              linewidth = 0.85,
+              color = "gray50") +
+    geom_point() +
+    geom_point(data = inc_data_dbl[which(is.na(inc_data_dbl$theta) & inc_data_dbl$original),], 
+        aes(x = X, y = true_theta), shape = 4, color = "red") +
+    scale_shape_manual(name = "Original", values = c(1, 16)) +
+    scale_color_angles(limits = c(0, 2*pi), midpoint = pi) +
+    labs(y = TeX("$\\theta$")) +
+    theme_classic()
+
+```
+
+```{r}
+#| label: tbl-sim-missing
+#| tbl-cap: Simulated incomplete data
+
+inc_data
+```
+:::
+
+## Impute the Missing Angular Data
+
+Next, the data needs to be passed to the `mice()` function with some customized arguments (and with the `imputeangles` and `pnregstan` packages loaded). 
+
+- A generic `mids` object is created by setting the max. iterations to 0. We use this obejct to get placeholders for the methods vector and the predictor indicator matrix.
+- The predictor matrix is modified to turn off the unit vector components from being used to impute the missing angular observations.
+- The methods vector is modified to impute the unit vector components using functions of the imputed angle. 
+
+```{r}
+#| label: mice-set-up
+#| code-fold: show
+library(mice)
+
+M <- 5
+
+imp0 <- mice(inc_data, maxit = 0, method = "pnregid")
+pred_mat <- imp0$predictorMatrix
+mthds <- imp0$method
+pred_mat["theta",c("U1", "U2")] <- 0
+mthds["U1"] <- "~cos(theta)"
+mthds["U2"] <- "~sin(theta)"
+```
+
+Then we run `mice()` with these modified arguments.
+
+```{r}
+#| label: mice-no-run
+#| echo: true
+#| eval: false
+#| code-fold: show
+
+imps <- mice(inc_data, method = mthds, predictorMatrix = pred_mat,
+             m = M, maxit = 10, printFlag = FALSE)
+```
+
+```{r}
+#| label: mice
+#| echo: false
+#| eval: false
+imps <- mice(inc_data, method = mthds, predictorMatrix = pred_mat,
+             m = M, maxit = 10, printFlag = FALSE)
+
+root_dir <- "~/Documents/GitHub/benjamin-stockton.github.io/posts/imp-data-viz/data/"
+
+saveRDS(imps, paste0(root_dir, "imps.rds"))
+```
+
+```{r}
+#| label: load-mice
+#| echo: false
+
+root_dir <- "~/Documents/GitHub/benjamin-stockton.github.io/posts/imp-data-viz/data/"
+imps <- readRDS(paste0(root_dir, "imps.rds"))
+```
+
+## Imputation Figures
+
+Finally, we can look at the imputation diagnostic plots. They allow us to check how much variation there is in the imputations for each observation and how they compare to the observed parts of the data set.
+
+::: {.panel-tabset}
+## By Observation
+
+```{r}
+#| label: fig-imp-ob
+#| fig-cap: Visualize the imputations for each incomplete angular observation. This is a function from `imputeangles`.
+#| 
+imputeangles::plot_angular_imputations(imps, 
+    r = 0.75, by_id = TRUE)
+```
+
+## Overlaid
+
+```{r}
+#| label: fig-imp-overlay
+#| fig-cap: Use dotplots to see how the distributions of each imputed data set compare to the observed. This is a function from `imputeangles`.
+#| 
+imputeangles::plot_angular_imputations(imps, 
+    r = 0.45, by_id = FALSE, overlay = TRUE)
+```
+
+## Built-in MICE Stripplot
+
+```{r}
+#| label: fig-mice
+#| fig-cap: Built-in Stripplot from MICE.
+
+stripplot(imps, theta ~ X | .imp)
+```
+:::
+
+Additional diagnostic plots can be created after converting the imputations from `mids` format to a long imputation data frame format.
+
+```{r}
+#| label: long-imps
+
+long_imp <- complete(imps, "long", include = TRUE) |>
+    mutate(
+        theta = case_when(
+            theta < 0 ~ theta + 2*pi,
+            TRUE ~ theta
+        )
+    )
+
+long_imp
+```
+
+::: {.panel-tabset}
+## Density Plot
+
+```{r}
+#| label: fig-imps-dens
+#| fig-cap: Diagnostic plots after imputation with MICE. Density plots of the imputed data in pink and observed data in blue.
+#| fig-height: 3
+#| fig-width: 7
+
+long_imp  |>
+    mutate(
+        imp_color = case_when(
+            .imp == 0 ~ "blue",
+            .imp > 0 ~ "magenta",
+            TRUE ~ "black"
+        )
+    ) |>
+    tidyr::pivot_longer(
+        theta:U2,
+        names_to = "variable",
+        values_to = "value"
+    ) |>
+    ggplot(aes(value, color = imp_color, group = .imp)) +
+    geom_density() +
+    scale_color_manual(values = c("#006CC2B3", "#B61A51B3"), 
+                       labels = c("Observed", "Completed")) +
+    facet_wrap(.~variable, nrow = 1,
+               scales = "free") +
+    labs(x = "") +
+    theme(panel.background = element_rect(fill = "white", colour = "black"),
+           panel.grid = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks.length.y = unit(0, "cm"),
+          legend.position = "none")
+```
+
+## Wrapped Scatterplot
+
+```{r}
+#| label: fig-imp-close-up
+#| fig-cap: A zoomed in look at the imputed time series for times 150 to 200. Red rectangles correspond to missing observations.
+#| code-fold: true
+#| fig-height: 3
+#| fig-width: 7
+long_imp <- long_imp |> 
+    mutate(
+        missing_imp = .id %in% mis_ind & .imp >= 1,
+        obs_noimp = !(.id %in% mis_ind) & .imp == 0,
+        original = TRUE
+    ) |>
+    filter(
+        missing_imp | obs_noimp
+    )
+
+long_imp2 <- long_imp |>
+    mutate(
+        theta = case_when(
+            theta < pi ~ theta + 2*pi,
+            theta >= pi ~ theta - 2*pi,
+            TRUE ~ theta
+        ),
+        original = FALSE
+    )
+
+
+ggplot(rbind(long_imp, long_imp2), aes(X, theta, color = as.factor(.imp), shape = original)) +
+    geom_hline(yintercept = c(0, 2*pi), 
+              linetype = "dotted",
+              linewidth = 0.85,
+              color = "gray50") +
+    geom_point() +
+    scale_shape_manual(name = "Original", values = c(1, 16)) +
+    annotate("rect",
+                xmin = inc_data[mis_ind, "X"] - 0.025, 
+                xmax = inc_data[mis_ind, "X"] + 0.025,
+                ymin = -Inf, ymax = Inf,
+                fill = "black", alpha = 0.15) +
+        labs(x = "t", y = TeX("$\\theta$")) +
+    scale_color_manual(name = "Imp",
+            values = c("black", "magenta", "tomato", "orange", "purple",
+                        "goldenrod", "dodgerblue", "forestgreen", "green"),
+            labels = c("Observed", paste0("Imp ", 1:M))) +
+    scale_y_continuous(breaks  = c(seq(-pi, pi, pi)), 
+            labels = c(TeX("$-\\pi$"), "0", TeX("$\\pi$"))) +
+    theme(panel.background = element_rect(fill = "white", colour = "black"),
+           panel.grid = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks.length.y = unit(0, "cm"),
+          legend.position = "right")
+```
+:::
+
+### Imputation Convergence Figures
+
+Spaghetti plots and traceplots with angular data are very useful for assessing convergence of the imputations, but more complex to create. These figures use line plots color coded by imputation with the cycles along the x-axis. 
+
+Traceplots are built-in with `mice` for conventional inline data like $X$ in our simulation. But the traceplots in @fig-traceplot display the mean and standard deviation of the imputations at each iteration, and these statistics are not valid for angular data. 
+
+```{r}
+#| label: fig-traceplot
+#| fig-cap: The traceplot built-in to `mice`. This figure does not calculate appropriate summary statistics for the angular variable `theta`.
+plot(imps)
+```
+
+Instead we should be calculating the circular mean, circular standard deviation, and circular auto-correlation function. To do so, we need to modify the `mice` imputation procedure to save the imputations at each cycle in order to calculate our own summary statistics. The corrected traceplot is displayed in @fig-imp-conv. 
+
+Lastly, we can also check spaghetti plots with the cycles along the x-axis as in @fig-imp-spaghetti. This lets us check to see if the individual imputations are stationary. There is not a built-in version with `mice`.
+
+### Extending MICE
+
+When `mice()` is run and a `mids` object is created, the imputed values, original data, summary statistics for each iteration's imputations, and meta data are stored. The imputations that occur at each iteration of the algorithm are discarded. In order to save each iterations set of imputations, we need to modify how the imputation procedure is run. The `mice.mids()` function makes this possible as it creates new imputations starting from where an existing `mids` object left off. The `mids` object can be extended either with more imputations `M` or by increasing the number of iterations `maxit`.
+
+```{r}
+#| label: fit-parallel-imps
+#| echo: true
+#| eval: false
+#| code-fold: true
+#| code-summary: "Extending MICE"
+
+M <- 5
+maxit <- 25
+
+imp_m <- lapply(1:M, function(m) {
+    print(paste0("Imputation ", m, "; iteration ", 1))
+    imp_m <- mice(inc_data, m = 1, maxit = 1, 
+            method = mthds, 
+            predictorMatrix = pred_mat, 
+            printFlag = FALSE,
+            .imp = m, .it = 1)
+    c_imp_i <- complete(imp_m, "all", include = FALSE)
+    c_imp_i <- c_imp_i[[1]]
+    c_imp_i$it <- 1
+    c_imp_i$m <- m
+    c_imp_i$.id <- 1:nrow(c_imp_i)
+    readr::write_csv(c_imp_i, paste0(root_dir, "imp-", m, "-it-", 1, "-imp-df.csv"))
+    for (it in 2:maxit) {
+        print(paste0("Imputation ", m, "; iteration ", it))
+        imp_m <- mice::mice.mids(imp_m, maxit = 1, printFlag = FALSE, .it = it, .imp = m)
+        c_imp_i <- complete(imp_m, "all", include = FALSE)
+        c_imp_i <- c_imp_i[[1]]
+        c_imp_i$it <- it
+        c_imp_i$m <- m
+        c_imp_i$.id <- 1:nrow(c_imp_i)
+        readr::write_csv(c_imp_i, paste0(root_dir, "imp-", m, "-it-", it, "-imp-df.csv"))
+    }
+    return(imp_m)
+})
+
+imp <- imp_m[[1]]
+for (m in 2:M) {
+    imp <- mice::ibind(imp, imp_m[[m]])
+}
+
+saveRDS(imp, paste0(root_dir, "imps2.rds"))
+```
+
+```{r}
+#| label: m-maxit
+#| echo: false
+M <- 5
+maxit <- 25
+```
+
+```{r}
+#| label: cor-fns
+#| code-fold: true
+#| code-summary: "Auto-Correlation Functions"
+
+c_auto_cor <- function(theta, k = 1) {
+    
+    sum_determinants <- function(X1, X2) {
+        s <- lapply(1:(N-k), function(t) {
+                return(det(t(X1[t,]) %*% X2[t,]))
+            }) |>
+            unlist() |>
+            sum()
+        return(s)
+    }
+    
+    N <- length(theta)
+    U <- cbind(cos(theta), sin(theta))
+    
+    U_lag_k <- U[1:(N - k),]
+    U_no_lag <- U[(k+1):N,]
+    
+    num <- sum_determinants(U_lag_k, U_no_lag)
+    denom <- sum_determinants(U_lag_k, U_lag_k) * sum_determinants(U_no_lag, U_no_lag)
+    return(num / sqrt(denom))
+}
+my_acf <- function(x) {
+    acf(x, lag.max = 1, plot = FALSE)$acf[2,,1]
+}
+```
+
+```{r}
+#| label: load-iter-data
+#| code-fold: true
+#| code-summary: "Post-processing imputations"
+longer_imp <- lapply(1:M, function(m) {
+    tmp <- lapply(1:maxit, function(it) {
+        readr::read_csv(paste0(root_dir, "imp-", m, "-it-", it, "-imp-df.csv"),
+                        show_col_types = FALSE, progress = FALSE)
+    }) |>
+        dplyr::bind_rows()
+}) |>
+    dplyr::bind_rows()
+
+auto_cor_mat <- longer_imp |>
+    group_by(m, it) |>
+    summarise(
+        theta_mean = atan2(mean(sin(theta)), mean(cos(theta))),
+        theta_sd = sqrt(1 - sqrt(mean(cos(theta))^2 + mean(sin(theta))^2)),
+        u1_mean = mean(U1),
+        u1_sd = sd(U1),
+        u2_mean = mean(U2),
+        u2_sd = sd(U2),
+        theta_ac = c_auto_cor(theta, k = 1),
+        u1_ac = my_acf(U1),
+        u2_ac = my_acf(U2)
+    )
+```
+
+```{r}
+#| label: fig-imp-conv
+#| fig-cap: Traceplots of the imputed values means and standard deviations.
+#| fig-height: 5
+#| fig-width: 7
+
+auto_cor_mat |>
+    tidyr::pivot_longer(
+        !c(m, it),
+        names_to = c("parameter", "stat"),
+        names_pattern = "(.*)_(.*)",
+        values_to = "value"
+    ) |>
+    mutate(
+        parameter2 = case_when(
+            parameter == "u1" ~ "cos(theta)",
+            parameter == "u2" ~ "sin(theta)",
+            TRUE ~ parameter
+        ), 
+        stat2 = case_when(
+            stat == "ac" ~ "acf(1)",
+            TRUE ~ stringr::str_to_title(stat)
+        )
+    ) |>
+    ggplot(aes(it, value, color = as.factor(m))) +
+    geom_line(alpha = 0.85) +
+    scale_color_colorblind(name = "Imp") +
+    facet_grid(parameter2~stat2, labeller = label_parsed, scales = "free") +
+    theme(legend.position = "none") +
+    labs(x = "MICE Cycle",
+         y = "Value")  +
+    theme(panel.background = element_rect(fill = "white", colour = "black"),
+           panel.grid = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks.length.y = unit(0, "cm"),
+          legend.position = "right")
+```
+
+```{r}
+#| label: fig-imp-spaghetti
+#| fig-cap: Imputation spaghetti plot.
+hghlt <- sample(mis_ind, size = 5, replace = FALSE)
+longer_imp |>
+    mutate(
+        imped = case_when(
+            .id %in% mis_ind ~ "Imp",
+            TRUE ~ "Obs"
+        ),
+        highlight = case_when(
+            .id %in% hghlt ~ "Select",
+            TRUE ~ "Nope"
+        )
+    ) |>
+    filter(
+        imped == "Imp"
+    ) |>
+    ggplot(aes(it, theta, group = .id, color = highlight, alpha = highlight)) +
+    geom_line() +
+    scale_color_manual(values = c("black", "red")) +
+    scale_alpha_manual(values = c(0.25, 0.5)) +
+    facet_wrap(.~m, nrow = 2) +
+    theme(legend.position = "none")  +
+    theme(panel.background = element_rect(fill = "white", colour = "black"),
+           panel.grid = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks.length.y = unit(0, "cm"),
+          legend.position = "none")
+```
+
