@@ -1,0 +1,56 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Exporting Obsidian Markdown to PDF with LaTeX Templates\n",
+        "author: Ben\n",
+        "date: 2026-04-16\n",
+        "format: \n",
+        "    html:\n",
+        "        code-fold: show\n",
+        "        code-summary: \"Show code\"\n",
+        "        code-tools: true\n",
+        "        number-depth: 3\n",
+        "        toc: true\n",
+        "        toc-location: left\n",
+        "        toc-expand: 2\n",
+        "        toc-depth: 3\n",
+        "        link-external-newwindow: true\n",
+        "        citations-hover: true\n",
+        "        df-print: paged\n",
+        "cache: true\n",
+        "freeze: true\n",
+        "lightbox: true\n",
+        "categories: [workflow]\n",
+        "---\n",
+        "\n",
+        "\n",
+        "Over the course of my dissertation and post-doc, I've used Obsidian extensively to take notes, organize my thoughts, and keep track of projects. I haven't used it for typesetting documents hardly at all despite using Markdown for job statements, letters, abstracts, and parts of this website. When I need to share these Markdown files with my advisors or peers, I'd follow this convoluted process because I don't care for Obsidian's heavy-handed automated pdf template:\n",
+        "\n",
+        "1. Write a `.md` file in Obsidian.\n",
+        "2. Open VS Code/Positron and write a `bash` script to compile the `.md` file with Pandoc.\n",
+        "\n",
+        "```{sh}\n",
+        "\n",
+        "```\n",
+        "\n",
+        "3. Check the output and go back to Obsidian to revise.\n",
+        "\n",
+        "That worked ok until I needed to include citations"
+      ],
+      "id": "0a494645"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

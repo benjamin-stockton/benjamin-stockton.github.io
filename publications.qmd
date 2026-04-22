@@ -13,10 +13,17 @@ Design*. *arXiv:2511.19677*. <https://doi.org/10.48550/arXiv.2511.19677>
 :::
 
 ::: {#ref-stocktonCommentaryAJE2026 .csl-entry}
-**Stockton, B.**, & Harel, O. (2026). [(Submitted to [American Journal of
-Epidemiology]{.nocase}: Commentary on Resurrecting Complete-Case
+**Stockton, B.**, & Harel, O. (2026). [(Accepted by the [American Journal of
+Epidemiology]{.nocase}): Commentary on Resurrecting Complete-Case
 Analysis: A Defense -- The loss of information remains
 unresolved]{.nocase}. *American Journal of Epidemiology*.
+:::
+
+::: {#ref-stocktonInProgressCh2 .csl-entry}
+**Stockton, B.**, & Harel, O. (2026). [(Accepted by the [Journal of Applied
+Statistics]{.nocase})]{.nocase} [Incomplete Angular Time Series
+Imputation with a Projected Normal Autoregressive Process and Exogenous
+Predictors]{.nocase}. *Journal of Applied Statistics*.
 :::
 
 ::: {#ref-guptaCompData2025 .csl-entry}
@@ -37,13 +44,6 @@ Edition). Elsevier.
 **Stockton, B.**, & Harel, O. (2025). *(In Progress) [Multiple Imputation
 for Analyzing Spatial Data with Incomplete Angular
 Predictors]{.nocase}*.
-:::
-
-::: {#ref-stocktonInProgressCh2 .csl-entry}
-**Stockton, B.**, & Harel, O. (2025). *[(Submitted to [Journal of Applied
-Statistics]{.nocase}: Under Third Review)]{.nocase} [Incomplete Angular
-Time Series Imputation with a Projected Normal Autoregressive Process
-and Exogenous Predictors]{.nocase}*.
 :::
 
 ::: {#ref-stocktonInProgressCountITS .csl-entry}

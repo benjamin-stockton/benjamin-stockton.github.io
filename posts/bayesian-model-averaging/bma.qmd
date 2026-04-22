@@ -1,7 +1,7 @@
 ---
-title: Bayesian Model Averaging with Interrupted Time Series
+title: "Ensemble Learning: Bayesian Model Averaging, Superlearner, Stacking, and BART"
 author: Ben
-date: 2026-02-03
+date: 2026-04-22
 format: 
     html:
         code-fold: true
@@ -14,12 +14,127 @@ format:
         toc-depth: 3
         link-external-newwindow: true
         citations-hover: true
-draft: true
 cache: true
 lightbox: true
-categories: [bayesian-analysis, interrupted-time-series, tutorial]
+categories: [bayesian-analysis, ensemble-learning]
 editor: source
+bibliography: ref.bib
 ---
 
-In this post, I am going to go over a brief example of how to do Bayesian Model Averaging for nuisance interruptions in an interrupted time series analysis. 
+In my research, ensemble learning keeps popping up in different ways and in different forms. In this post, I'll talk about ensemble learning in general and three types in particular, Bayesian model averaging (BMA), Super Learner, Bayesian Stacking, and Bayesian additive regression trees (BART). <!-- I also have a comment on a connection to multiple imputation at the very end. -->
 
+## Ensemble Learning
+
+Ensemble learning is all about taking individual (weak) models and combining their predictions or outputs in a clever way to get a better prediction from a (strong) ensemble model [@breimanStackedRegressions1996; @hoetingBayesianModelAveraging1999]. This fits in with the ideas of model selection and regularization as well [@piironenSparsityInformationRegularization2017], but in an opposite direction; rather than trying to choose a single model, we try to combine many models. 
+
+In early versions of ensemble learning, like BMA, the component models were typical regression models belonging to a specified model space [@breimanStackedRegressions1996; @hoetingBayesianModelAveraging1999], or simple learners such as the decision trees in Random Forests [@breimanRandomForests2001]. The model predictions were then combined based on some predictive loss function. While, the idea of combining predictions according to a loss function has remained, in modern machine or statistical learning ensembles, the consitutent weak learners have become weaker such as the shallow regression trees in BART. With more weak learners, greater flexibility can be achieved in aggregate with the ensemble allowing the models to capture nonlinear relationships that can be missed with earlier ensemble methods [@tanBayesianAdditiveRegression2019].
+
+There are many other machine or statistical learning ensemble models including bagging, boosting, random forests, etc. For brevity, I'm only going to discuss these four methods that have continuously shown up in my research.
+
+### Bayesian Model Averaging (BMA)
+
+BMA has been around theoretically for a long time, but computationally feasible only in the past 25 years or so with consumer desktops and laptops only really powerful enough to be useful for BMA in the past decade or so [@breimanStackedRegressions1996; @hoetingBayesianModelAveraging1999; @clarkeComparingBayesModel2003]. 
+
+In BMA, $K$ models are fit to data set $y$ with specified models $M_k$ (to borrow notation from @yaoUsingStackingAverage2018). The weights $\mathbf{w} = (w_1,\dots, w_K)'$ for each model are the marginal posterior probabilities for each model, 
+
+$$
+w_k = p(M_k | y) = \frac{p(y|M_k) p(M_k)}{\sum_{k=1}^K p(y|M_k)p(M_k)},
+$$
+
+where $p(y|M_k)$ is the marginal likelihood of each model and $p(M_k)$ is the prior probability of each model. 
+
+The goal is to estimate the posterior of a quantity of interest (e.g. a parameter) $\theta$ by averaging over the posteriors from each model weighted by each model's posterior probability,
+
+$$
+p(\theta | y) = \sum_{k=1}^K w_k p(\theta | M_k, y) = \sum_{k=1}^K \left(\frac{p(y|M_k) p(M_k)}{\sum_{k=1}^K p(y|M_k)p(M_k)} \right) \times p(\theta | M_k, y).
+$$
+
+### Stacking and Super Learner
+
+Stacking on the other hand is an alternative approach focused on making predictions. Stacking [@breimanStackedRegressions1996; @yaoUsingStackingAverage2018] minimizes a leave-one-out (LOO) cross validated loss function in order to generate model weights. As originally proposed, stacking used a mean squared error loss function which only facilitates point predictions averaged over the model set.
+
+Super Learner generalizes the original version of stacking by allowing any loss function and any set of learners to be included [@vanderlaanSuperLearner2007; @naimiStackedGeneralizationIntroduction2018]. However, rather than using LOO cross validation, Super Learner uses $V$ folds (borrowing notation from @vanderlaanSuperLearner2007). 
+
+Let $L$ be a loss function such as mean squared error, $L(y, \hat{y}) = (y - \hat{y})^2$. The algorithm is as follows:
+
+1. Split the data into $V$ folds. Let $V(v)$ be the $v$-th validation set.
+2. For each fold $v = 1,\dots, V$, fit each model to the training set ($y_{-V(v)}$), obtain predictions $\hat{y}_{V(v)}^k$ for the validation set for each learner, and calculate the risk for each fold for each learner, $\hat{L}(y_{V(v)}, \hat{y}_{V(v)}^k) = \frac{1}{n/V} \sum_{i \in V(v)} (y_i - \hat{y}_i^k)^2$.
+3. Average the risks for each learner across the folds $\hat{R}^k = \frac{1}{V} \sum_{v} \hat{L}(y_{V(v)}, \hat{y}_{V(v)}^k).$
+4. Estimate the non-negative least squares model $E(Y|\hat{y}^1, \dots, \hat{y}^K) = \sum_{k=1}^K w_k \hat{y}^k_{CV}$ where $\mathbf{w} = (w_1,\dots, w_K)' \in \mathcal{S}^K_1$ and $\hat{y}^k_{CV}$ is the $k$-th learner's cross validated prediction for $y$.
+5. Fit each learner on the entire sample, generate predictions $\hat{y}^k$ for each learner, and calculate weighted averages of the predictions to generate the Super Learner prediction $\hat{y}_{SL} = \sum_k w_k \hat{y}^k$.
+
+Note that unlike BMA, Super Learner does not estimate a posterior or a predictive distribution.
+
+Super Learner is available in the `superlearner` R package[^3].
+
+[^3]: Link to [superlearner](https://cran.r-project.org/web/packages/SuperLearner/index.html).
+
+### Bayesian Stacking
+
+@yaoUsingStackingAverage2018 developed an alternative Bayesian generalization of stacking allowing the same technique to apply to posterior predictive distributions rather than just point predictions. 
+
+To estimate the weights for each model, a proper scoring rule (or divergence) is maximized (or minimized) in the weights. The weights are subject to a simplex constraint, $\mathbf{w} \in \mathcal{S}_1^K = \{s_k : s_k \geq 0, \sum_k s_k = 1\}$. For example predictive stacking is performed by minimizing the Kullback-Leibler divergence[^1]:
+
+$$
+\mathbf{\hat{w}} = \mathrm{arg} \underset{\mathbf{w}\in \mathcal{S}_1^K}{\min} \frac{1}{n} \sum_{i=1}^n \log \sum_{k=1}^K w_k p(y_i | y_{-i}, M_k),
+$$
+
+where $p(y_i | y_{-i}, M_k)$ is the LOO predictive distribution of the $i$-th observation with the $k$-th model. The stacked predictive density is 
+$$
+p(\tilde{y}|y) = \sum_{k}^K \hat{w}_k p(\tilde{y}|y, M_k).
+$$
+
+In conjunction with developments in Bayesian computation, namely Pareto-smoothed importance sampling for LOO cross validation, stacking for predictive distributions has become much more accessible. Implementations for off-the-shelf stacking (and BMA) are now readily available with `brms` and `loo`[^2] using Stan [@yaoUsingStackingAverage2018; @vehtariPracticalBayesianModel2017; @burknerAdvancedBayesianMultilevel2018; @stanStanModelingLanguage2023].
+
+[^1]: Link to the [Kullback-Leibler wikipedia entry](https://en.wikipedia.org/wiki/Kullback–Leibler_divergence).
+
+[^2]: Links to the packages: [brms](https://cran.r-project.org/web/packages/brms/index.html) and [loo](https://cran.r-project.org/web/packages/loo/index.html). Link to a vignette using `loo` to get stacking weights for BMA: [vignette](https://cran.r-project.org/web/packages/loo/vignettes/loo2-weights.html).
+
+
+### Bayesian Additive Regression Trees (BART)
+
+BART takes on the challenge of modeling an unknown functional relationship between an outcome $y$ and predictors $x$ using a sum-of-trees model [@chipmanBartBayesianAdditive2010]. The sum-of-trees structure is where BART, and most other ensemble learning methods, diverges from the other methods I've mentioned. Rather than combining models (or predictions from models) that could be useful on their own, BART combines many weak, shallow regression trees with the combination at the center of the model through a strong regularization prior on tree depth and the parameters in each tree leaf.
+
+ The goal with BART is to estimate a nonlinear relationship between predictors and the outcome using a sum of regression trees function with additive error $\epsilon$. Let $T_j$ be the $j$-th binary tree structure and $M_j$ be the leaf parameters of tree $j$, then the sum of trees is $\sum_{j=1}^m g(x; T_j, M_j)$,
+
+and 
+$$
+y = \sum_{j=1}^m g(x; T_j, M_j) + \epsilon.
+$$
+
+The regularization prior is what allows BART to learn complex nonlinear relationships between $x$ and $y$. To simplify the prior structure, @chipmanBartBayesianAdditive2010 assumed prior independence and symmetry between the tree structure, conditional means, and residual standard deviation:
+$$
+p((T_1,M_1),\dots, (T_m, M_m), \sigma) = p(\sigma) \times \prod_j \left(\prod_i p(\mu_{ij}|T_j) \right)p(T_j)
+$$
+
+where $\mu_{ij}$ is the conditional mean of $Y |x$ in the $i$-th leaf of the $j$-th tree. While the priors for $\mu_{ij}$ and $\sigma$ can be specified as independent normal and inverse-gamma priors, the tree structure prior is where weak learners are enforced [@tanBayesianAdditiveRegression2019]. I'll refer readers to @tanBayesianAdditiveRegression2019 for further technical details on the tree prior.
+
+Unlike stacking or BMA where the component weak learners are distinct from each other and require weighting according to predictive ability, the weak learners in BART (and other methods like bagging, boosting, and random forest) are assumed to be exchangeable in terms of predictive power so that weighting is not required. 
+
+BART has implementations on CRAN as well.[^4]
+
+[^4]: Link to [BayesTree](https://cran.r-project.org/web/packages/BayesTree/index.html) and for multilevel models with Stan [stan4bart](https://cran.r-project.org/web/packages/stan4bart/index.html) [@dorieStanBARTCausal2022].
+
+## Some comments
+
+While BMA, stacking, Super Learner, and BART have slightly different goals, all can be viewed as methods for obtaining better predictions than what you can get from a single simple model. The literature's recommendations on which method to use has changed over time with stacking/Super Learner supplanting BMA, and BART proving useful in particularly complex settings. 
+
+BMA and stacking methods require a model-space to defined and many models from that space to be fit to the data. This is a more model-first approach to creating an ensemble learner. BART, like other statistical learning methods, is data-first with the weak learners (regression trees) shaped and estimated by the data and prior. While I think there is more flexibility and less risk of researcher bias or error in the data-first approach taken by BART, it is not yet suitable to settings with serially correlated observations. 
+
+<!-- ## Connections to Multiple Imputation
+
+I'll first mention that ensemble learning can of course be used to fit the imputation model and generate imputations [@laqueurSuperMICEEnsembleMachine2022]. Imputation is, at its core, a prediction task, something these statistical learning models excel at. However, this approach runs the risk of losing a valid joint model between the individual imputation models in a chained equations set-up, and with the substantive analysis model. 
+
+Second, I think a more interesting connection between ensemble methods and multiple imputation comes in the context of Bayesian analysis models. @zhouNoteBayesianInference2010 proposed using posterior stacking of analysis model MCMC draws after fitting the analysis model to each of the imputed datasets instead of applying Rubin's rules to the posterior summaries. This technique captures the uncertainty in the posterior due to the missing data by combining the posteriors from each fit, with equal weight given to each fit.
+
+If we let the $m$-th imputed dataset be $D^{(m)}$ with analysis model $f(D | \theta)$ and parameters $\theta \in \mathbb{R}^P$ for $m = 1,\dots,M$ imputations, then let $\tilde{\theta}^{(m)}$ be the posterior draws of $\theta$ after fitting $f$ with imputed data $D^{(m)}$. The draws are in a matrix with dimension $N_{MCMC} \times P$. The "stacked" posterior combining $\theta^{(1)}, \dots, \theta^{(M)}$ is simply the matrix stacking all of these draws vertically,
+
+$$
+\tilde{\theta} = \begin{pmatrix} \tilde{\theta}^{(1)} \\ \tilde{\theta}^{(2)} \\ \vdots \\ \tilde{\theta}^{(M)} \\ \end{pmatrix} = \begin{pmatrix} \tilde{\theta}^{(1)}_{1,1} & \dots & \tilde{\theta}^{(1)}_{1,P} \\ \vdots & \ddots & \vdots \\ \tilde{\theta}^{(1)}_{N_{MCMC},1}  & \dots & \tilde{\theta}^{(1)}_{N_{MCMC},P} \\ \vdots & \vdots & \vdots \\ \tilde{\theta}^{(M)}_{1,1} & \dots & \tilde{\theta}^{(M)}_{1,P} \\ \vdots & \ddots & \vdots \\ \tilde{\theta}^{(M)}_{N_{MCMC},1}  & \dots & \tilde{\theta}^{(M)}_{N_{MCMC},P}  \end{pmatrix}
+$$
+
+so that $\tilde{\theta}$ is a $MN_{MCMC} \times P$ matrix. 
+
+If we think about this per-model, we are obtaining an estimate $\tilde{\theta}^{(m)}$, but each model should be expected to contribute equally to the final "ensemble" posterior so each estimate would be weighted with $w_i = \frac{1}{M}$. Instead of literally stacking the posterior draws, we could instead use stacking in the BMA sense of making $N_{MCMC}$ draws from the $M$ model fits with each model weighted with $w_i = \frac{1}{M}$.
+
+The goal here is likely to make inference on the posterior rather than make predictions as with stacking, but a similar procedure underlies both techniques. -->
