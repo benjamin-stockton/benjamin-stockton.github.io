@@ -30,7 +30,6 @@ website:
     - posts/air-pollution-wind/air-pollution-wind.qmd
     - posts/longitudinal-models-baseball-careers/longitudinal-models-baseball-careers.qmd
     - posts/stan-pres-swosc/stan_pres.qmd
-    - posts/bayesian-model-averaging/bma.qmd
   draft-mode: unlinked
   repo-url: https://github.com/benjamin-stockton/benjamin-stockton.github.io
   repo-actions: [edit, source, issue]

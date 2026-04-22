@@ -16,10 +16,13 @@ format:
         citations-hover: true
 cache: true
 lightbox: true
+freeze: true
 categories: [bayesian-analysis, ensemble-learning]
 editor: source
 bibliography: ref.bib
 ---
+
+![Cherry blossoms at the West Haven Train Station.](cherry_blossoms.jpg)
 
 In my research, ensemble learning keeps popping up in different ways and in different forms. In this post, I'll talk about ensemble learning in general and three types in particular, Bayesian model averaging (BMA), Super Learner, Bayesian Stacking, and Bayesian additive regression trees (BART). <!-- I also have a comment on a connection to multiple imputation at the very end. -->
 

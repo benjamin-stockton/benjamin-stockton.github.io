@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2026-03-17T20:13:56.042Z</lastmod>
+    <lastmod>2026-04-22T18:33:27.653Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
@@ -27,6 +27,10 @@
   <url>
     <loc>https://benjamin-stockton.github.io/index.html</loc>
     <lastmod>2026-03-17T20:15:22.102Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/bayesian-model-averaging/bma.html</loc>
+    <lastmod>2026-04-22T18:44:59.989Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/imp-data-viz/imp-data-viz.html</loc>
