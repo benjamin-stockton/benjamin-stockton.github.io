@@ -2,46 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2026-04-22T18:28:52.906Z</lastmod>
+    <lastmod>2026-04-22T18:45:37.145Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
-    <lastmod>2026-04-22T18:28:52.900Z</lastmod>
+    <lastmod>2026-04-22T18:45:37.139Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/imputeangles/index.html</loc>
-    <lastmod>2026-04-22T18:28:52.530Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.803Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/directions-data-viz/directions-data-viz.html</loc>
-    <lastmod>2026-04-22T18:28:52.506Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.780Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/blog.html</loc>
-    <lastmod>2026-04-22T18:28:52.366Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.647Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/about.html</loc>
-    <lastmod>2026-04-22T18:28:52.366Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.647Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/index.html</loc>
-    <lastmod>2026-04-22T18:28:52.485Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.758Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/bayesian-model-averaging/bma.html</loc>
+    <lastmod>2026-04-22T18:45:36.778Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/imp-data-viz/imp-data-viz.html</loc>
-    <lastmod>2026-04-22T18:28:52.520Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.793Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
-    <lastmod>2026-04-22T18:28:52.550Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.821Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/miss-mech-notes/miss-mech-notes.html</loc>
-    <lastmod>2026-04-22T18:28:52.649Z</lastmod>
+    <lastmod>2026-04-22T18:45:36.913Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/projects.html</loc>
-    <lastmod>2026-04-22T18:28:52.906Z</lastmod>
+    <lastmod>2026-04-22T18:45:37.145Z</lastmod>
   </url>
 </urlset>

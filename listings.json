@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/bayesian-model-averaging/bma.html",
       "/posts/imp-data-viz/imp-data-viz.html",
       "/posts/directions-data-viz/directions-data-viz.html",
       "/posts/miss-mech-notes/miss-mech-notes.html",
