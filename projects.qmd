@@ -1,5 +1,6 @@
 ---
 title: "Projects"
+link-external-newwindow: true
 ---
 
 ![](/manhattan_skyline.jpg)

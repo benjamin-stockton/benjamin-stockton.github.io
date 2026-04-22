@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - /images/*.jpg
+    - /images/*.JPG
+    - /files/*.pdf
+    - /files/*.md
   render:
     - "*.qmd"
 
@@ -36,7 +41,11 @@ website:
 
 format:
   html:
+    respect-user-color-scheme: true
     theme: 
-      - sandstone
-      - custom.scss
+      light: [sandstone, custom.scss]
+      dark: [darkly, custom-dark.scss]
     css: styles.css
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
