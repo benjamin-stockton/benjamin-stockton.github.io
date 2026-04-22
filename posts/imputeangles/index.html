@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>How to Use imputeangles – Ben Stockton’s Stats Site</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -61,7 +64,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,15 +91,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-56eb8400b17eecf7b22d62b571160367.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4663897137e11189205c1514baf6eb5d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -127,7 +128,7 @@ div.csl-indent {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -160,7 +161,7 @@ window.Quarto = {
 <meta property="og:title" content="How to Use imputeangles – Ben Stockton’s Stats Site">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://benjamin-stockton.github.io/posts/imputeangles/index_files/figure-html/fig-miss-map-1.png">
-<meta property="og:site_name" content="Ben Stockton's Stats Site">
+<meta property="og:site_name" content="Ben Stockton’s Stats Site">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
 <meta name="twitter:title" content="How to Use imputeangles – Ben Stockton’s Stats Site">
@@ -286,10 +287,10 @@ window.Quarto = {
 
 
 <p>In this post, I will provide a brief introduction to using multiple imputation (MI) and then share an example analysis of pitch movement using my <code>imputeangles</code> package.</p>
-<p>Most statistical analysis methods are designed with complete data in mind, however, real-world data is often incomplete with observations missing due to nonresponse, censoring, or measurement issues. The incomplete data cannot be directly analyzed with the complete data statistical methods. While there are specialized methods designed to model incomplete data, due to the convenience and wide availability of complete data methods it would be highly beneficial to complete the incomplete data. This could be accomplished by removing incomplete cases and performing complete case analysis (CCA), but this could throw out lots of useful data <span class="citation" data-cites="schafer2002">(<a href="#ref-schafer2002" role="doc-biblioref">Joseph L. Schafer and Graham 2002</a>)</span>.</p>
+<p>Most statistical analysis methods are designed with complete data in mind, however, real-world data is often incomplete with observations missing due to nonresponse, censoring, or measurement issues. The incomplete data cannot be directly analyzed with the complete data statistical methods. While there are specialized methods designed to model incomplete data, due to the convenience and wide availability of complete data methods it would be highly beneficial to complete the incomplete data. This could be accomplished by removing incomplete cases and performing complete case analysis (CCA), but this could throw out lots of useful data <span class="citation" data-cites="schafer2002">(<a href="#ref-schafer2002" role="doc-biblioref">Schafer and Graham 2002</a>)</span>.</p>
 <section id="multiple-imputation" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-imputation">Multiple Imputation</h2>
-<p>Imputation is the process of replacing the missing values with values deterministically calculated by the observed data or with values drawn from a probability distribution shaped by the observed data. Two common, but not theoretically valid, ways to do this are mean imputation (replace with the sample mean or regression predicted values) <span class="citation" data-cites="schafer1999multiple">(<a href="#ref-schafer1999multiple" role="doc-biblioref">Joseph L. Schafer 1999</a>)</span> or last observation carried forward (LOCF) for time series or longitudinal data <span class="citation" data-cites="moritz2022">(<a href="#ref-moritz2022" role="doc-biblioref">Moritz et al. 2022</a>)</span>. These methods are performed a single time to create a singly imputed (SI) data set. Alternatively, we could impute the missing values with random draws from the observed data or from a predictive distribution based on the observed data. These imputations are worse in terms of providing accurate predictions for the missing value, however, they do reflect the uncertainty of the missing value. Repeatedly imputing the missing values to create multiple imputed data sets can propagate the uncertainty to the analysis.</p>
+<p>Imputation is the process of replacing the missing values with values deterministically calculated by the observed data or with values drawn from a probability distribution shaped by the observed data. Two common, but not theoretically valid, ways to do this are mean imputation (replace with the sample mean or regression predicted values) <span class="citation" data-cites="schafer1999multiple">(<a href="#ref-schafer1999multiple" role="doc-biblioref">Schafer 1999</a>)</span> or last observation carried forward (LOCF) for time series or longitudinal data <span class="citation" data-cites="moritz2022">(<a href="#ref-moritz2022" role="doc-biblioref">Moritz et al. 2022</a>)</span>. These methods are performed a single time to create a singly imputed (SI) data set. Alternatively, we could impute the missing values with random draws from the observed data or from a predictive distribution based on the observed data. These imputations are worse in terms of providing accurate predictions for the missing value, however, they do reflect the uncertainty of the missing value. Repeatedly imputing the missing values to create multiple imputed data sets can propagate the uncertainty to the analysis.</p>
 <p>This process is called by Multiple Imputation (MI) and was initially developed by Donald Rubin in the 1970s and 1980s for nonresponse in surveys <span class="citation" data-cites="rubin1978">Rubin (<a href="#ref-rubin1987" role="doc-biblioref">1987</a>)</span>, and then extended to more analysis contexts since the 1990s <span class="citation" data-cites="li2006analysis">Harel (<a href="#ref-harel2003strategies" role="doc-biblioref">2009</a>)</span>. The foundation of MI is a three stage process.</p>
 <ol type="1">
 <li><p>Impute - Fill in the missing values with random samples from a predictive distribution (posterior predictive draws theoretically preferred) to create <span class="math inline">\(M\)</span> completed data sets.</p></li>
@@ -302,7 +303,7 @@ window.Quarto = {
     T &amp;= \bar{U} + (1 + \frac{1}{M}) B
 \end{align*}\]</span></li>
 </ol>
-<p>Under a set of assumptions<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the inferences produced by MI will be unbiased, more efficient than CCA, and confidence valid. Rubin’s rules have been developed for sample means, sample mean differences, regression coefficients, correlation coefficients, and more <span class="citation" data-cites="buuren2018">(<a href="#ref-buuren2018" role="doc-biblioref">Stef van Buuren 2018, sec. 5.2</a>)</span>.</p>
+<p>Under a set of assumptions<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the inferences produced by MI will be unbiased, more efficient than CCA, and confidence valid. Rubin’s rules have been developed for sample means, sample mean differences, regression coefficients, correlation coefficients, and more <span class="citation" data-cites="buuren2018">(<a href="#ref-buuren2018" role="doc-biblioref">Buuren 2018, sec. 5.2</a>)</span>.</p>
 </section>
 <section id="pitch-movement" class="level2">
 <h2 class="anchored" data-anchor-id="pitch-movement">Pitch Movement</h2>
@@ -422,7 +423,7 @@ Table&nbsp;1: Number of pitches thrown by each starting pitcher.
 </figcaption>
 <div aria-describedby="tbl-pitches-thrown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<table class="cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Name</th>
@@ -485,7 +486,7 @@ Table&nbsp;1: Number of pitches thrown by each starting pitcher.
 </section>
 <section id="imputing-incomplete-pitch-data" class="level2">
 <h2 class="anchored" data-anchor-id="imputing-incomplete-pitch-data">Imputing Incomplete Pitch Data</h2>
-<p>Multiple imputation will be performed using the chained equations or fully conditional specification with the <code>mice</code> R package <span class="citation" data-cites="buuren2010mice">(<a href="#ref-buuren2010mice" role="doc-biblioref">S. van Buuren and Groothuis-Oudshoorn 2010</a>)</span> with estimates pooled by the <code>broom.mixed</code> R package <span class="citation" data-cites="bolkerBroomMixed2022">(<a href="#ref-bolkerBroomMixed2022" role="doc-biblioref">Bolker and Robinson 2022</a>)</span>. The inline data will be imputed by <code>method = "pmm"</code> which uses predictive mean matching. The angular data, spin rate, will be imputed by <code>method = "pnregid"</code> which uses Bayesian projected normal regression with a constrained covariance matrix <span class="math inline">\(\Sigma\)</span> <span class="citation" data-cites="hernandez-stumpfhauser2017">(<a href="#ref-hernandez-stumpfhauser2017" role="doc-biblioref">Hernandez-Stumpfhauser, Breidt, and Woerd 2017</a>)</span> from my <code>imputeangles</code> package.</p>
+<p>Multiple imputation will be performed using the chained equations or fully conditional specification with the <code>mice</code> R package <span class="citation" data-cites="buuren2010mice">(<a href="#ref-buuren2010mice" role="doc-biblioref">Buuren and Groothuis-Oudshoorn 2010</a>)</span> with estimates pooled by the <code>broom.mixed</code> R package <span class="citation" data-cites="bolkerBroomMixed2022">(<a href="#ref-bolkerBroomMixed2022" role="doc-biblioref">Bolker and Robinson 2022</a>)</span>. The inline data will be imputed by <code>method = "pmm"</code> which uses predictive mean matching. The angular data, spin rate, will be imputed by <code>method = "pnregid"</code> which uses Bayesian projected normal regression with a constrained covariance matrix <span class="math inline">\(\Sigma\)</span> <span class="citation" data-cites="hernandez-stumpfhauser2017">(<a href="#ref-hernandez-stumpfhauser2017" role="doc-biblioref">Hernandez-Stumpfhauser et al. 2017</a>)</span> from my <code>imputeangles</code> package.</p>
 <p>To impute with the projected normal regression, we have to specify to <code>mice</code> which variable is angular and which variables are the <span class="math inline">\(\cos\)</span> and <span class="math inline">\(\sin\)</span> of the angular variable. We can do this by doing an empty run of <code>mice()</code> by setting the maximum number of cycles to 0. Then we extract the methods vector and predictor matrix to modify and then pass to our actual run of <code>mice()</code> with <span class="math inline">\(M = 5\)</span> imputations and <span class="math inline">\(c = 10\)</span> cycles.</p>
 <div class="cell" data-hash="index_cache/html/set-up-mice_ca2bcfa006de2b6a89b45be092f6fe1b">
 <details open="" class="code-fold">
@@ -578,7 +579,7 @@ Table&nbsp;2: Pooled summary of the fits for the GLMM.
 </figcaption>
 <div aria-describedby="tbl-glmm-pooled-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<table class="cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 35%">
 <col style="width: 17%">
@@ -867,7 +868,7 @@ Figure&nbsp;2: Estimated probability that each pitcher’s pitch types will be a
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bolkerBroomMixed2022" class="csl-entry" role="listitem">
 Bolker, Ben, and David Robinson. 2022. <em>Broom.mixed: Tidying Methods for Mixed Models</em>. <a href="https://CRAN.R-project.org/package=broom.mixed">https://CRAN.R-project.org/package=broom.mixed</a>.
 </div>
@@ -890,10 +891,10 @@ Li, Xiaoming, Devan V Mehrotra, and John Barnard. 2006. <span>“Analysis of Inc
 Moritz, Steffen, Sebastian Gatscha, Earo Wang, and Ron Hause. 2022. <em>imputeTS: Time Series Missing Value Imputation</em>. <a href="https://CRAN.R-project.org/package=imputeTS">https://CRAN.R-project.org/package=imputeTS</a>.
 </div>
 <div id="ref-rubin1978" class="csl-entry" role="listitem">
-Rubin, Donald B. 1978. <span>“Multiple Imputation in Sample Surveys - A Phenomenological Bayesian Approach to Nonresponse.”</span> <em>Proceedings of the Survey Research Methods Section of Hte American Statistical Association</em> 1: 9.
+Rubin, Donald B. 1978. <span>“Multiple Imputation in Sample Surveys - a Phenomenological Bayesian Approach to Nonresponse.”</span> <em>Proceedings of the Survey Research Methods Section of Hte American Statistical Association</em> 1: 9.
 </div>
 <div id="ref-rubin1987" class="csl-entry" role="listitem">
-———. 1987. <em>Multiple Imputation for Nonresponse in Surveys | Wiley Series in Probability and Statistics</em>. Wiley series in probability and mathematical statistics : Applied probability and statistics. New York: Wiley. <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696</a>.
+Rubin, Donald B. 1987. <em>Multiple Imputation for Nonresponse in Surveys | Wiley Series in Probability and Statistics</em>. Wiley series in probability and mathematical statistics : Applied probability and statistics. Wiley. <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696</a>.
 </div>
 <div id="ref-schafer1999multiple" class="csl-entry" role="listitem">
 Schafer, Joseph L. 1999. <span>“Multiple Imputation: A Primer.”</span> <em>Statistical Methods in Medical Research</em> 8 (1): 315.

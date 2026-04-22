@@ -6,8 +6,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
 
   <meta name="author" content="Ben Stockton">
   <meta name="dcterms.date" content="2023-11-16">
@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -99,7 +102,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -116,7 +118,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-5f66212b01f094180b8d10b5b9960144.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-e7615ae3f47a09451c723600273e2044.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -211,7 +213,7 @@
   <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <meta property="og:title" content="Getting to Know Stan – Ben Stockton’s Stats Site">
-<meta property="og:site_name" content="Ben Stockton's Stats Site">
+<meta property="og:site_name" content="Ben Stockton’s Stats Site">
 <meta name="twitter:title" content="Getting to Know Stan – Ben Stockton’s Stats Site">
 <meta name="twitter:card" content="summary">
 </head>
@@ -242,8 +244,8 @@ Ben Stockton
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>I’ll use the CmdStan toolchain in R with the <code>cmdstanr</code> <a href="https://mc-stan.org/cmdstanr/">package</a> <span class="citation" data-cites="gabry2023">(<a href="#/references" role="doc-biblioref" onclick="">Gabry, Češnovar, and Johnson 2023</a>)</span>.</p></li>
-<li><p>There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <a href="https://github.com/stan-dev/cmdstanpy">CmdStanPy</a> <span class="citation" data-cites="cmdstanp">(<a href="#/references" role="doc-biblioref" onclick=""><span>“Cmdstanpy <span></span> Python Interface to CmdStan <span></span> CmdStanPy 1.1.0 Documentation,”</span> n.d.</a>)</span>.</p></li>
+<li><p>I’ll use the CmdStan toolchain in R with the <code>cmdstanr</code> <a href="https://mc-stan.org/cmdstanr/">package</a> <span class="citation" data-cites="gabry2023">(<a href="#/references" role="doc-biblioref" onclick="">Gabry et al. 2023</a>)</span>.</p></li>
+<li><p>There are also Python, command line, Matlab, Julia, and Stata interfaces to Stan and a Python interface for cmdstan called <a href="https://github.com/stan-dev/cmdstanpy">CmdStanPy</a> <span class="citation" data-cites="cmdstanp">(<a href="#/references" role="doc-biblioref" onclick=""><em>Cmdstanpy <span></span> Python Interface to CmdStan <span></span> CmdStanPy 1.1.0 Documentation</em>, n.d.</a>)</span>.</p></li>
 <li><p>You need to have Rtools installed to then install CmdStan and <code>brms</code>.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -798,7 +800,7 @@ Table&nbsp;1: Summary statistics for the posterior samples for <span class="math
 </figcaption>
 <div aria-describedby="tbl-non-info-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top">
+<table class="cell caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">variable</th>
@@ -873,7 +875,7 @@ Table&nbsp;2: MLE estimates for <span class="math inline">\(\beta\)</span> and <
 </figcaption>
 <div aria-describedby="tbl-mle-res-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top">
+<table class="cell caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1337,7 +1339,7 @@ Table&nbsp;3: Summary statistics for the posterior samples for <span class="math
 </figcaption>
 <div aria-describedby="tbl-conj-inf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top">
+<table class="cell caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -1532,7 +1534,7 @@ Figure&nbsp;8
 <li><p>Incomplete data analysis ranges from complete case analysis to multiple imputation, joint modeling, and EM algorithm <span class="citation" data-cites="schafer2002">(<a href="#/references" role="doc-biblioref" onclick="">Schafer and Graham 2002</a>)</span>.<sup>1</sup></p></li>
 <li><p>We’re going to use <code>mice</code> <span class="citation" data-cites="buuren2010mice">(<a href="#/references" role="doc-biblioref" onclick="">Buuren and Groothuis-Oudshoorn 2010</a>)</span> and <code>brms</code> <span class="citation" data-cites="bürkner2018">(<a href="#/references" role="doc-biblioref" onclick="">Bürkner 2018</a>)</span> to demonstrate the imputation and fitting Bayesian regression models.</p></li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn4"><p>See <span class="citation" data-cites="rubin1976">White, Royston, and Wood (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span> for more details on incomplete data analysis.</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn4"><p>See <span class="citation" data-cites="rubin1976">White et al. (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span> for more details on incomplete data analysis.</p></li></ol></aside></section>
 <section id="ncaa-womens-basketball-players-junior-and-senior-years" class="slide level2">
 <h2>NCAA Women’s Basketball Player’s Junior and Senior Years</h2>
 <div class="columns">
@@ -1827,15 +1829,15 @@ Figure&nbsp;13: The estimated conditional effects of PPG as a junior and junior-
 </section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bürkner2018" class="csl-entry" role="listitem">
-Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the R Package Brms.”</span> <em>The R Journal</em> 10 (1): 395. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
+Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the r Package Brms.”</span> <em>The R Journal</em> 10 (1): 395. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
 </div>
 <div id="ref-buuren2010mice" class="csl-entry" role="listitem">
 Buuren, S van, and Karin Groothuis-Oudshoorn. 2010. <span>“Mice: Multivariate Imputation by Chained Equations in r.”</span> <em>Journal of Statistical Software</em>, 168.
 </div>
 <div id="ref-cmdstanp" class="csl-entry" role="listitem">
-<span>“Cmdstanpy <span></span> Python Interface to CmdStan <span></span> CmdStanPy 1.1.0 Documentation.”</span> n.d. <a href="https://mc-stan.org/cmdstanpy/index.html">https://mc-stan.org/cmdstanpy/index.html</a>.
+<em>Cmdstanpy <span></span> Python Interface to CmdStan <span></span> CmdStanPy 1.1.0 Documentation</em>. n.d. <a href="https://mc-stan.org/cmdstanpy/index.html">https://mc-stan.org/cmdstanpy/index.html</a>.
 </div>
 <div id="ref-dempster1977" class="csl-entry" role="listitem">
 Dempster, A. P., Martin Schatzoff, and Nanny Wermuth. 1977. <span>“A Simulation Study of Alternatives to Ordinary Least Squares.”</span> <em>Journal of the American Statistical Association</em> 72 (357): 77–91. <a href="https://doi.org/10.2307/2286909">https://doi.org/10.2307/2286909</a>.
@@ -1853,7 +1855,7 @@ Harel, Ofer, and Xiao-Hua Zhou. 2007. <span>“Multiple Imputation: Review of Th
 Rubin, Donald B. 1976. <span>“Inference and Missing Data.”</span> <em>Biometrika</em> 63 (3): 581–92. <a href="https://www.jstor.org/stable/2335739">https://www.jstor.org/stable/2335739</a>.
 </div>
 <div id="ref-rubin1987" class="csl-entry" role="listitem">
-———. 1987. <em>Multiple Imputation for Nonresponse in Surveys | Wiley Series in Probability and Statistics</em>. Wiley series in probability and mathematical statistics : Applied probability and statistics. New York: Wiley. <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696</a>.
+Rubin, Donald B. 1987. <em>Multiple Imputation for Nonresponse in Surveys | Wiley Series in Probability and Statistics</em>. Wiley series in probability and mathematical statistics : Applied probability and statistics. Wiley. <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470316696</a>.
 </div>
 <div id="ref-schafer2002" class="csl-entry" role="listitem">
 Schafer, Joseph L., and John W. Graham. 2002. <span>“Missing Data: Our View of the State of the Art.”</span> <em>Psychological Methods</em> 7 (2): 147–77. <a href="https://doi.org/10.1037/1082-989X.7.2.147">https://doi.org/10.1037/1082-989X.7.2.147</a>.
