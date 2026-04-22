@@ -3,7 +3,7 @@ title: "Projects"
 link-external-newwindow: true
 ---
 
-![](/manhattan_skyline.jpg)
+![](/images/manhattan_skyline.jpg)
 
 ## Research Projects
 
@@ -28,11 +28,11 @@ link-external-newwindow: true
 
 ## Presentations
 
-- JSM 2025 - "Incomplete Angular Time Series Imputation with a Projected Normal Autoregressive Process and Exogenous Predictors" ([pdf](Stockton_Benjamin_JSM_2025_Pres%20copy.pdf){target="_blank"})
-- NESS 2025 - "Estimating Policy Effects with Interrupted Time Series Following a Nuisance Interruption" ([pdf](ness_2025%20copy.pdf){target="_blank"})
+- JSM 2025 - "Incomplete Angular Time Series Imputation with a Projected Normal Autoregressive Process and Exogenous Predictors" ([pdf](/files/Stockton_Benjamin_JSM_2025_Pres%20copy.pdf){target="_blank"})
+- NESS 2025 - "Estimating Policy Effects with Interrupted Time Series Following a Nuisance Interruption" ([pdf](/files/ness_2025%20copy.pdf){target="_blank"})
 - Student Workshop on Statistical Computing - "Getting to Know Stan" ([post](docs/posts/intro-to-stan.html){target="_blank"})
-- NESS 2023 - "Multiple Imputation with Angular Covariates" ([pdf](StocktonBenjamin_ENAR_Presentation2023 - Final.pdf){target="_blank"})
-- ENAR 2023 - "Multiple Imputation with Angular Covariates" ([pdf](NESS_Presentation - Edits - BS2023-06-05.pdf){target="_blank"})
+- NESS 2023 - "Multiple Imputation with Angular Covariates" ([pdf](/files/StocktonBenjamin_ENAR_Presentation2023 - Final.pdf){target="_blank"})
+- ENAR 2023 - "Multiple Imputation with Angular Covariates" ([pdf](/files/NESS_Presentation - Edits - BS2023-06-05.pdf){target="_blank"})
 
 ## Course Projects
 

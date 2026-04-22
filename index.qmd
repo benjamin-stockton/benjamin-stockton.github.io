@@ -1,5 +1,5 @@
 ---
-image: skye_ben.JPG
+image: /images/skye_ben.JPG
 about:
   template: marquee
   links:

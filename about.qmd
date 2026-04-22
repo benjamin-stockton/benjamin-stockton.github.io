@@ -2,7 +2,7 @@
 title: "About"
 about:
     template: trestles
-    image: "urquhart-ben.JPG"
+    image: /images/urquhart-ben.JPG
     links:
         - icon: github
           text: GitHub
@@ -20,9 +20,9 @@ I completed my PhD in Statistics at the University of Connecticut in 2024 under 
 
 ## CV & Other Files
 
--   [CV](Benjamin_Stockton_CV.pdf){target="_blank"}
+-   [CV](/files/Benjamin_Stockton_CV.pdf){target="_blank"}
 
--   [List of Statistics Journals](list_of_journals.pdf){target="_blank"} for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic
+-   [List of Statistics Journals](/files/list_of_journals.pdf){target="_blank"} for the aims and scopes of Statistics and Statistics-adjacent journals organized by general topic
 
 <!-- -   Research statement -->
 
