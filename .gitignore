@@ -48,3 +48,5 @@ flycheck_*.el
 /posts/*/index_files
 
 /.luarc.json
+
+**/*.quarto_ipynb

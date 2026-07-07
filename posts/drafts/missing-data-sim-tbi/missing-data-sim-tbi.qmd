@@ -1,0 +1,167 @@
+---
+title: "Missing Data Simulations for TBI Data with Treatment Trajectories"
+author: "Ben Stockton"
+date: 2026-06-04
+editor: source
+format: 
+    html:
+        code-fold: show
+        code-summary: "Show code"
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+        df-print: paged
+draft: true
+cache: true
+freeze: true
+categories: [missing-data, simulation]
+---
+
+TBI patients are enrolled in the study upon entering in-patient rehab. The patients are indexed by $i = 1,\dots, N$. The data follow this general structure:
+
+- Baseline time-invariant covariates (read: demographics like age, sex, SES, etc.): $X$
+- Baseline condition: $Y_0 \in \mathbb{R}$
+- Multi-point Treatment Protocol: $\tilde{A}_a = (d_{1a}, \dots, d_{T_i a})'$ and $\tilde{A}_c = (d_{1c}, \dots, d_{T_i c})'$ where $t$ is the days since the baseline assessment and $d_a \geq 0,~~ d_c \geq 0$ such that $d_a$ and $d_c$ are the time spent (duration) on advanced and contextualized therapy at time point $t$.
+- Condition at discharge: $Y_{T_i} \in \mathbb{R}$
+- Condition at six-months: $Y_{T + 180} \in \mathbb{R}$
+- Condition at twelve-months: $Y_{T+365} \in \mathbb{R}$
+
+The estimand of interest is either $\Delta_{180} = E(Y_{T+180}(\tilde{A})) - E(Y_{T+180}(0))$ or $\Delta_{365} = E(Y_{T+365}(\tilde{A})) - E(Y_{T+365}(0))$. 
+
+The outcome at six months is missing for roughly 10-15% of participants, and at twelve months for 25-30% of patients. We can suppose this is MAR, but that's almost certainly not true. Additionally, we assume $Y_0$, $Y_{T_i}$, and $\tilde{A}$ are always observed because they are observed during in-patient rehab. The baseline covariates $X$ could be missing with for a small number of participants (<10%).
+
+**The goal of these simulations are to approximate the impacts of missingness on the bias in estimating $\Delta_{T+k}$.**
+
+For the simulation, the data will be generated as follows:
+
+1. $X_i = (X_{i1}, X_{i2})'$ is drawn from independent binomial and normal distributions: $X_{i1} \sim Bin(1, 0.65)$ and $X_{i2} \sim N(0, 10^2)$.
+2. $Y_{i0} \sim N(100 + \alpha X_i, 10^2)$.
+4. $T_i \sim Bin(28, 0.5)$
+3. $\tilde{A}_{ia} = (d_{i1a}, \dots, d_{iT_i a})'$ and $\tilde{A}_{ic} = (d_{i1c}, \dots, d_{iT_i c})'$ where $d_{ita} \sim Beta(0.5, 0.5)$, $u_{it} \sim \Beta(1,1)$, and $d_{itc} = u_{it}(1 - d_{ita})$.
+4. $Y_{i T_i} \sim N(Y_{i0} * (28 - T_i) / 28 + \beta_{ia} \tilde{A}_{ia} + \beta_{ic} \tilde{A}_{ic}, 5^2)$ where $\beta_{iak} \sim N(0.1, 0.1^2)$ for $k = 1,\dots, T_i$ and $\beta_{ick} \sim N(0.25, 0.1^2)$ for $k = 1,\dots, T_i$.
+5. $Y_{i T_i + 180} \sim N(Y_{i T_i} * (28 - T_i) / 28, 10^2)$.
+6. $Y_{i T_i + 365} \sim N(Y_{i T_i+180} * (28 - T_i) / 28, 12.5^2)$.
+
+```{r}
+# Load necessary packages (assuming these are installed)
+library(tidyverse)
+
+# --- Simulation Parameters and Functions ---
+
+# Define simulation parameters
+N <- 100 # <<< Set the number of patients here
+alpha <- 5       # Assuming a plausible value for alpha to shift baseline condition mean based on X_i1
+T_max <- 28      # Maximum treatment time point
+
+# Simulate data for a single patient
+simulate_patient_data <- function(i, alpha, T_max = 28) {
+  
+  # 1. Generate Baseline Covariates X_i
+  X1 <- rbinom(1, 1, 0.65) # Binomial distribution (prob=0.65)
+  X2 <- rnorm(1, 0, 10)    # Normal distribution N(0, 10^2)
+  X <- c(X1, X2)
+
+  # 2. Generate Baseline Condition Y_i0
+  mu_Y0 <- 100 + alpha * X1
+  Y0 <- rnorm(1, mu_Y0, 10) # N(mu_Y0, 10^2)
+
+  # 3. Generate Treatment Protocol duration T_i
+  T_i <- rbinom(1, 28, 0.5) # Binomial distribution (n=28, p=0.5)
+
+  # Generate Beta distributions and treatment durations
+  T_i_vec <- 1:T_i # Time points if T_i is the actual duration
+  
+  # Beta distributions parameters for coefficients generation (per time point)
+  Beta_init <- 0.5
+  Beta_Trevised <- 0.5
+
+  # Treatment durations (d_ita and d_itc)
+  d_ta <- rbeta(T_max, Beta_init, Beta_init) # d_{ita} ~ Beta(0.5, 0.5)
+  u_t <- runif(T_max, 0, 1)                  # u_{it} ~ Beta(1, 1) = Uniform(0, 1)
+  d_tc <- u_t * (1 - d_ta)                 # d_{itc} = u_{it}(1 - d_{ita})
+
+  # Coefficient generation (Beta_coefficients are vectors of length T_i)
+  beta_ia <- rnorm(T_max, 2, 0.5) # N(2, 0.5^2)
+  beta_ic <- rnorm(T_max, 1, 0.1) # N(1, 0.1^2)
+
+  if (T_i < T_max) {
+    unobs_i <- (T_i+1):T_max
+    d_ta[unobs_i] <- NA
+    d_tc[unobs_i] <- NA
+    beta_ia[unobs_i] <- NA
+    beta_ic[unobs_i] <- NA
+  }
+  
+  A_ia <- d_ta
+  A_ic <- d_tc
+  
+  # Generate condition at discharge Y_i T_i (Y_T):
+  # Y_T = N(Y0 * (28 - T_i) / 28 + sum_{k=1}^{T_i} (beta_ia[k] * d_ta[k] + beta_ic[k] * d_tc[k]), 5^2)
+
+  # Generate subsequent outcomes (assuming the decay/progression factor remains constant: (28 - T_i)/28)
+  decay_factor <- (T_max - T_i) / T_max
+
+  mean_Yt <- 1.5 * Y0 + sum(beta_ia * d_ta, na.rm = TRUE) + sum(beta_ic * d_tc, na.rm = TRUE)
+  Yt <- rnorm(1, mean_Yt, 5) # N(mean_Yt, 5^2)
+  
+  # Condition at six-months (Y_T + 180)
+  mu_Y180 <- Yt * decay_factor
+  Y180 <- rnorm(1, mu_Y180, 10) # N(mu_Yt * decay_factor, 10^2)
+  
+  # Condition at twelve-months (Y_T + 365)
+  mu_Y365 <- Y180 * decay_factor
+  Y365 <- rnorm(1, mu_Y365, 12.5) # N(mu_Yt+180 * decay_factor, 12.5^2)
+
+  Tx <- tibble(
+    .id = i, 
+    t = 1:T_max, 
+    da = d_ta, 
+    dc = d_tc
+    ) |>
+    pivot_wider(names_from = "t", values_from = c("da", "dc"))
+
+  df <- tibble(
+    .id = i,
+    X1 = X1,
+    X2 = X2,
+    Y0 = Y0,
+    T_i = T_i,
+    Yt = Yt, # Discharge condition
+    Y180 = Y180, 
+    Y365 = Y365,
+    sum_da = sum(d_ta, na.rm = TRUE),
+    sum_dc = sum(d_tc, na.rm = TRUE)
+  )
+
+  df <- left_join(df, Tx, by = ".id")
+
+  return(df)
+}
+
+# --- Run Simulation for N Patients ---
+set.seed(42) # For reproducibility
+sim_df <- lapply(1:100, function(i) {simulate_patient_data(i = i, alpha = 5, T_max = 28)}) |>
+    bind_rows()
+
+# Display the structure of the generated data for one patient
+sim_df
+```
+
+```{r}
+ggplot(sim_df, aes(T_i, Y180 - Yt, color = sum_da)) +
+    geom_point() +
+    scale_color_viridis_c()
+
+ggplot(sim_df, aes(sum_da / T_i, Y180 - Yt, color = sum_da)) +
+    geom_point() +
+    scale_color_viridis_c()
+
+ggplot(sim_df, aes(sum_dc / T_i, Y180 - Yt, color = sum_da)) +
+    geom_point() +
+    scale_color_viridis_c()
+```

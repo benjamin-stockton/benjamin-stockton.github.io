@@ -1,0 +1,655 @@
+---
+title: "Tidymodels for Classification"
+author: "Ben Stockton"
+format: 
+    html:
+        theme: flatly
+        toc: true
+        toc-location: left
+        code-fold: false
+        highlight-style: github
+        fig-align: center
+        number-sections: true
+    revealjs:
+        output-file: tree_class_slides
+        theme: simple
+        slide-number: true
+        chalkboard: true
+        code-fold: false
+        highlight-style: github
+        fig-align: center
+        incremental: false
+# bibliography: references.bib
+# csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: true
+---
+
+# Introduction
+
+This lab explores tree based methods - decision trees and random forest - for classification, i.e. prediction of binary outcome.
+
+## Set-up
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(randomForest)
+library(rpart)
+library(rpart.plot)
+library(tidymodels)
+library(vip)
+```
+
+
+---
+
+## 🫀 Heart Disease (Classification)
+
+**Goal:** Predict `AHD` (Yes/No heart disease) from 13+ clinical
+predictors like age, cholesterol, resting blood pressure, etc.
+
+- **Outcome:** binary (`Yes` / `No`)
+
+```{r}
+#| label: download-data
+# heart <- read.csv("https://www.statlearning.com/s/Heart.csv",
+#                   row.names = 1)
+
+heart <- readr::read_csv("Day 2/Heart.csv") |>
+  select(-1)
+
+heart$AHD <- as.factor(heart$AHD)
+heart <- na.omit(heart) ##remove NA
+head(heart)
+# # A tibble: 6 × 14
+#     Age   Sex ChestPain    RestBP  Chol   Fbs RestECG MaxHR ExAng Oldpeak Slope    Ca Thal       AHD  
+#   <dbl> <dbl> <chr>         <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl> <chr>      <fct>
+# 1    63     1 typical         145   233     1       2   150     0     2.3     3     0 fixed      No   
+# 2    67     1 asymptomatic    160   286     0       2   108     1     1.5     2     3 normal     Yes  
+# 3    67     1 asymptomatic    120   229     0       2   129     1     2.6     2     2 reversable Yes  
+# 4    37     1 nonanginal      130   250     0       0   187     0     3.5     3     0 normal     No   
+# 5    41     0 nontypical      130   204     0       2   172     0     1.4     1     0 normal     No   
+# 6    56     1 nontypical      120   236     0       0   178     0     0.8     1     0 normal     No 
+  
+table(heart$AHD)
+```
+
+
+```{r}
+heart |>
+    summarize(
+        across(everything(), ~mean(is.na(.x)), .names = "{.col}_p_miss")
+    )
+```
+
+## Train-test Split
+
+We will evaluate the performance of the fully trained/cross-validated models on this hold out test set (20\%) of the data.
+
+I'll try setting up a recipe
+
+```{r}
+heart_split <- heart |> initial_split(prop = 0.8, strata = AHD)
+
+heart_split
+
+heart_rec <- recipe(
+    AHD ~ .,
+    data = training(heart_split)
+) |>
+    step_normalize(all_numeric_predictors()) |>
+
+heart_train <- bake(heart_rec, new_data = NULL)
+heart_test <- bake(heart_rec, new_data = testing(heart_split))
+```
+
+
+```{r}
+train_cv <- vfold_cv(heart_train, v = 5)
+
+train_cv
+```
+
+# Decision Tree w/ `rpart` via `parsnip`
+
+```{r}
+DT_spec <- decision_tree(
+    cost_complexity = tune(),
+    tree_depth = tune(),
+    min_n = tune()
+) |> # rpart is the default engine
+    set_mode("classification")
+```
+
+```{r}
+DT_grid <- grid_space_filling(
+  tree_depth(),
+  min_n(),
+  cost_complexity(),
+  size = 100
+)
+
+DT_grid
+```
+
+```{r}
+DT_wf <- workflow() |>
+  add_formula(AHD ~ .) |>
+  add_model(DT_spec)
+
+DT_wf
+```
+
+```{r}
+doParallel::registerDoParallel(cores = 4)
+
+set.seed(123958)
+
+DT_res <- tune_grid(
+  DT_wf,
+  resamples = train_cv,
+  grid = DT_grid,
+  control = control_grid(save_pred = TRUE)
+)
+
+DT_res
+```
+
+```{r}
+collect_metrics(DT_res)
+
+DT_res |>
+  collect_metrics() |>
+  filter(.metric == "accuracy") |>
+  select(mean, cost_complexity:min_n) |>
+  pivot_longer(cost_complexity:min_n,
+               values_to = "value",
+               names_to = "parameter"
+  ) |>
+  ggplot(aes(value, mean, color = parameter)) +
+  geom_point(alpha = 0.8, show.legend = FALSE) +
+  facet_wrap(~parameter, scales = "free_x") +
+  labs(x = NULL, y = "Accuracy")
+```
+
+```{r}
+show_best(DT_res, metric = "accuracy")
+best_DT <- select_best(DT_res, metric = "accuracy")
+best_DT
+```
+
+```{r}
+DT_final_wf <- finalize_workflow(
+  DT_wf,
+  best_DT
+)
+DT_final_wf
+
+DT_final <- DT_final_wf |>
+  fit(data = heart_train)
+
+DT_final |>
+  pull_workflow_fit() |> 
+  vip(geom = "point")
+```
+
+
+```{r}
+DT_final |> predict(type = "prob", new_data = heart_test)
+```
+
+```{r}
+DT_pred_train <- predict(DT_final, new_data = heart_train)
+DT_pred_train_YN <- DT_pred_train$.pred_class |> factor()
+DT_pred <- predict(DT_final, new_data = heart_test)
+DT_pred_YN <- DT_pred$.pred_class |> factor()
+
+# Confusion Matrix
+conf_matrix_DT <- confusionMatrix(DT_pred_YN, heart_test$AHD)
+print(conf_matrix_DT)
+```
+
+# Random Forest
+
+```{r}
+RF_spec <- rand_forest(
+    mtry = tune(),
+    trees = tune(),
+    min_n = tune()
+) |> 
+    set_engine("ranger", keep.inbag = TRUE) |>
+    set_mode("classification")
+```
+
+```{r}
+RF_grid <- grid_space_filling(
+  finalize(mtry(), heart_train),
+  min_n(),
+  trees(),
+  size = 100
+)
+
+RF_grid
+```
+
+```{r}
+RF_wf <- workflow() |>
+  add_formula(AHD ~ .) |>
+  add_model(RF_spec)
+
+RF_wf
+```
+
+```{r}
+doParallel::registerDoParallel(cores = 4)
+
+set.seed(123958)
+
+RF_res <- tune_grid(
+  RF_wf,
+  resamples = train_cv,
+  grid = RF_grid,
+  control = control_grid(save_pred = TRUE)
+)
+
+RF_res
+```
+
+```{r}
+collect_metrics(RF_res)
+
+RF_res |>
+  collect_metrics() |>
+  filter(.metric == "accuracy") |>
+  select(mean, mtry:min_n) |>
+  pivot_longer(mtry:min_n,
+               values_to = "value",
+               names_to = "parameter"
+  ) |>
+  ggplot(aes(value, mean, color = parameter)) +
+  geom_point(alpha = 0.8, show.legend = FALSE) +
+  facet_wrap(~parameter, scales = "free_x") +
+  labs(x = NULL, y = "Accuracy")
+```
+
+```{r}
+show_best(RF_res, metric = "accuracy")
+best_RF <- select_best(RF_res, metric = "accuracy")
+best_RF
+```
+
+```{r}
+RF_final_wf <- finalize_workflow(
+  RF_wf,
+  best_RF
+)
+RF_final_wf
+
+RF_final <- RF_final_wf |>
+  fit(data = heart_train, 
+      )
+```
+
+
+```{r}
+RF_final |> predict(type = "prob", new_data = heart_test)
+```
+
+```{r}
+RF_pred_train <- predict(RF_final, new_data = heart_train)
+RF_pred_train_YN <- RF_pred_train$.pred_class |> factor()
+RF_pred <- predict(RF_final, new_data = heart_test)
+RF_pred_YN <- RF_pred$.pred_class |> factor()
+
+# Confusion Matrix
+conf_matrix_RF <- confusionMatrix(RF_pred_YN, heart_test$AHD)
+print(conf_matrix_RF)
+```
+
+# BART
+
+```{r}
+BART_spec <- bart(
+    trees = tune(),
+    prior_terminal_node_coef = tune(),
+    prior_terminal_node_expo = tune(),
+    prior_outcome_range = tune()
+) |> # rpart is the default engine
+    set_mode("classification")
+```
+
+```{r}
+BART_grid <- grid_space_filling(
+  trees(c(100, 1000)),
+  prior_terminal_node_coef(range = c(0,1)),
+  prior_terminal_node_expo(range = c(0,1)),
+  prior_outcome_range(range = c(0,1)),
+  size = 100
+)
+
+BART_grid
+```
+
+```{r}
+BART_wf <- workflow() |>
+  add_formula(AHD ~ .) |>
+  add_model(BART_spec)
+
+BART_wf
+```
+
+```{r}
+doParallel::registerDoParallel(cores = 4)
+
+set.seed(123958)
+
+BART_res <- tune_grid(
+  BART_wf,
+  resamples = train_cv,
+  grid = BART_grid,
+  control = control_grid(save_pred = TRUE)
+)
+
+BART_res
+```
+
+```{r}
+collect_metrics(BART_res)
+
+BART_res |>
+  collect_metrics() |>
+  filter(.metric == "accuracy") |>
+  select(mean, trees:prior_outcome_range) |>
+  pivot_longer(trees:prior_outcome_range,
+               values_to = "value",
+               names_to = "parameter"
+  ) |>
+  ggplot(aes(value, mean, color = parameter)) +
+  geom_point(alpha = 0.8, show.legend = FALSE) +
+  facet_wrap(~parameter, scales = "free_x") +
+  labs(x = NULL, y = "Accuracy")
+```
+
+```{r}
+show_best(BART_res, metric = "accuracy")
+best_BART <- select_best(BART_res, metric = "accuracy")
+best_BART
+```
+
+```{r}
+BART_final_wf <- finalize_workflow(
+  BART_wf,
+  best_BART
+)
+BART_final_wf
+
+BART_final <- BART_final_wf |>
+  fit(data = heart_train)
+
+BART_final |>
+  pull_workflow_fit() |> 
+  vip(geom = "point")
+```
+
+
+```{r}
+BART_final |> predict(type = "prob", new_data = heart_test)
+```
+
+```{r}
+BART_pred_train <- predict(BART_final, new_data = heart_train)
+BART_pred_train_YN <- BART_pred_train$.pred_class |> factor()
+BART_pred <- predict(BART_final, new_data = heart_test)
+BART_pred_YN <- BART_pred$.pred_class |> factor()
+
+# Confusion Matrix
+conf_matrix_BART <- confusionMatrix(BART_pred_YN, heart_test$AHD)
+print(conf_matrix_BART)
+```
+
+
+
+# Trying out XGBoost with `tidymodels`
+
+## Tuning XGBoost with `tidymodels` and CV
+
+```{r}
+xgb_spec <- boost_tree(
+  trees = 1000,
+  tree_depth = tune(),
+  min_n = tune(),
+  loss_reduction = tune(),
+  sample_size = tune(),
+  mtry = tune(),
+  learn_rate = tune()
+) |>
+  set_engine("xgboost") |>
+  set_mode("classification")
+
+xgb_spec
+```
+
+```{r}
+xgb_grid <- grid_space_filling(
+  tree_depth(),
+  min_n(),
+  loss_reduction(),
+  sample_size = sample_prop(),
+  finalize(mtry(), heart_train),
+  learn_rate(),
+  size = 100
+)
+
+xgb_grid
+```
+
+```{r}
+xgb_wf <- workflow() |>
+  add_formula(AHD ~ .) |>
+  add_model(xgb_spec)
+
+xgb_wf
+```
+
+```{r}
+set.seed(123958)
+
+xgb_res <- tune_grid(
+  xgb_wf,
+  resamples = train_cv,
+  grid = xgb_grid,
+  control = control_grid(save_pred = TRUE)
+)
+
+xgb_res
+```
+
+```{r}
+collect_metrics(xgb_res)
+```
+
+```{r}
+xgb_res |>
+  collect_metrics() |>
+  filter(.metric == "accuracy") |>
+  select(mean, mtry:sample_size) |>
+  pivot_longer(mtry:sample_size,
+               values_to = "value",
+               names_to = "parameter"
+  ) |>
+  ggplot(aes(value, mean, color = parameter)) +
+  geom_point(alpha = 0.8, show.legend = FALSE) +
+  facet_wrap(~parameter, scales = "free_x") +
+  labs(x = NULL, y = "Accuracy")
+```
+
+```{r}
+show_best(xgb_res, metric = "accuracy")
+best_auc <- select_best(xgb_res, metric = "accuracy")
+best_auc
+```
+
+```{r}
+XGB_final_wf <- finalize_workflow(
+  xgb_wf,
+  best_auc
+)
+XGB_final_wf
+```
+
+```{r}
+XGB_final <- XGB_final_wf |>
+  fit(data = heart_train)
+
+XGB_final |>
+  pull_workflow_fit() |> 
+  vip(geom = "point")
+```
+
+
+```{r}
+XGB_final |> predict(type = "prob", new_data = heart_test)
+```
+
+```{r}
+xgb_pred_train <- predict(XGB_final, new_data = heart_train)
+xgb_pred_train_YN <- xgb_pred_train$.pred_class |> factor()
+xgb_pred <- predict(XGB_final, new_data = heart_test)
+xgb_pred_YN <- xgb_pred$.pred_class |> factor()
+
+# Confusion Matrix
+conf_matrix_xgb <- confusionMatrix(xgb_pred_YN, heart_test$AHD)
+print(conf_matrix_xgb)
+```
+
+
+# Model Comparison
+
+## Visualise Predictions vs. Actuals
+
+```{r}
+# Proportion of cases
+pred_dt_train <- predict(tree_pruned)
+head(pred_dt_train) ##note the output is predicted probabilityes
+pred_dt_train <- ifelse(pred_dt_train[,2] > 0.5, "Yes", "No")
+pred_rf_train <- predict(rf_model)
+
+pred_DT <- tibble(
+    Actual = c(heart_train$AHD, heart_test$AHD),
+    Pred = c(pred_dt_train, tree_preds_YN),
+    split = c(rep("train", nrow(heart_train)), rep("test", nrow(heart_test))),
+    model = "DT"
+)
+
+pred_RF <- tibble(
+    Actual = c(heart_train$AHD, heart_test$AHD),
+    Pred = c(pred_rf_train, rf_preds),
+    split = c(rep("train", nrow(heart_train)), rep("test", nrow(heart_test))),
+    model = "RF"
+)
+
+pred_XGB <- tibble(
+    Actual = c(heart_train$AHD, heart_test$AHD),
+    Pred = c(xgb_pred_train_YN, xgb_pred_YN),
+    split = c(rep("train", nrow(heart_train)), rep("test", nrow(heart_test))),
+    model = "XGBoost"
+)
+pred_df <- bind_rows(pred_DT, pred_RF, pred_XGB) |>
+    print(n = 5)
+```
+
+---
+
+```{r}
+pred_metrics <- pred_df |>
+    group_by(split, model) |>
+    summarize(
+        accuracy = mean(Actual == Pred),
+        sensitivity = sum(Actual == "Yes" & Pred == "Yes") / sum(Actual == "Yes"),
+        specificity = sum(Actual == "No" & Pred == "No") / sum(Actual == "No"),
+        pos_pred_value = sum(Actual == "Yes" & Pred == "Yes") / sum(Pred == "Yes"),
+        neg_pred_value = sum(Actual == "No" & Pred == "No") / sum(Pred == "No")
+    ) |>
+    print() |>
+    tidyr::pivot_longer(
+        accuracy:neg_pred_value,
+        names_to = "metric",
+        values_to = "value"
+    )
+```
+
+---
+
+```{r}
+# Plot proportions
+ggplot(pred_df, aes(x = Actual, fill = Pred)) +
+  geom_bar(position = "dodge") +
+  scale_fill_discrete(name = "Pred") +
+  labs(
+    title    = "Random Forest: Proportions of Predicted vs Actual AHD",
+    x = "Actual HD", y = "Proportion"
+  ) +
+  theme_classic() +
+  facet_wrap(split + model~.) +
+  theme_minimal(base_size = 14)
+```
+
+---
+
+```{r}
+ggplot(pred_metrics, aes(metric, value, color = model)) +
+    geom_point(aes(shape = split), size = 2) +
+    facet_wrap(.~split, nrow = 2) +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+
+## Performance Summary Table
+
+```{r comparison-table}
+library(kableExtra)
+
+pred_met_wide <- pred_df |>
+  filter(split == "test") |>
+    group_by(model) |>
+    summarize(
+        accuracy = mean(Actual == Pred),
+        sensitivity = sum(Actual == "Yes" & Pred == "Yes") / sum(Actual == "Yes"),
+        specificity = sum(Actual == "No" & Pred == "No") / sum(Actual == "No"),
+        pos_pred_value = sum(Actual == "Yes" & Pred == "Yes") / sum(Pred == "Yes"),
+        neg_pred_value = sum(Actual == "No" & Pred == "No") / sum(Pred == "No")
+    ) 
+
+pred_met_wide |>
+  mutate(across(c(accuracy, sensitivity), ~ round(., 4))) |>
+  kable(caption = "Test-Set Performance — All Models") |>
+  kable_styling(bootstrap_options = c("striped", "hover"),
+                full_width = FALSE) |>
+  row_spec(which.max(pred_met_wide$accuracy), bold = TRUE,
+           color = "white", background = "#1a9641")
+```
+
+## RMSE Comparison Plot
+
+```{r rmse-plot, fig.height=4}
+pred_met_wide |>
+  mutate(Model = factor(model, levels = model[order(accuracy)])) |>
+  ggplot(aes(x = model, y = accuracy, fill = model)) +
+  geom_hline(yintercept = 1, color = "gray50", linetype = "dashed") +
+  geom_col(alpha = 0.85, width = 0.6) +
+  geom_text(aes(label = round(accuracy, 3)), hjust = -0.1, size = 3.8) +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdYlBu") +
+  labs(title = "Test-Set accuracy by Model",
+       x = NULL, y = "accuracy") +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none") +
+  ylim(0, 1.05)
+```

@@ -1,0 +1,240 @@
+---
+title: "Longitudinal Models for MLB Careers"
+author: "Ben Stockton"
+date: 2024-02-29
+date-modified: 2026-06-04
+editor: source
+format: 
+    html:
+        code-fold: show
+        code-summary: "Show code"
+        code-tools: true
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+        df-print: paged
+bibliography: references.bib
+draft: true
+cache: true
+categories: [baseball, example]
+---
+
+```{r}
+#| label: set-up
+#| warning: false
+library(baseballr, warn.conflicts = FALSE, quietly = TRUE)
+library(dplyr, warn.conflicts = FALSE, quietly = TRUE)
+library(ggplot2, warn.conflicts = FALSE, quietly = TRUE)
+library(tidymodels, warn.conflicts = FALSE, quietly = TRUE)
+library(lme4, warn.conflicts = FALSE, quietly = TRUE)
+library(lattice, warn.conflicts = FALSE, quietly = TRUE)
+theme_set(theme_classic())
+```
+
+```{r}
+#| label: load-data
+
+dat <- lapply(2015:2025, function(yr) {statcast_leaderboards(leaderboard = "expected_statistics", year = yr, min_pa = 25)}) |>
+    bind_rows()
+# fg <- lapply(2015:2025, function(yr) {fg_batter_leaders(startseason = yr, endseason =yr, qual = 25)}) |>
+#     bind_rows() |>
+#     select(Season, xMLBAMID, PlayerName, Age, BABIP)
+dat
+```
+
+```{r}
+dat |>
+    filter(
+        pa >= 100
+    ) |>
+    ggplot(aes(woba, est_woba, color = est_woba_minus_woba_diff, alpha = 1 - 1/pa)) +
+        geom_point() +
+        geom_abline(slope = 1, color = "red", linetype = "dashed") +
+        scale_color_viridis_c(name = "xwOBA - wOBA") + 
+        labs(x = "wOBA", y = "xwOBA")
+```
+
+```{r}
+top_batters <- dat |>
+    group_by(player_id, `last_name, first_name`) |>
+    summarize(
+        total_pa = sum(pa)
+    ) |>
+    arrange(desc(total_pa)) |>
+    head(25)
+```
+
+```{r}
+
+dat <- dat |>
+    mutate(
+        t = year - 2016,
+        tsq = (t - 3.5)^2,
+        woba_l1 = lag(woba),
+        est_woba_l1 = lag(est_woba),
+        diff_woba_l1 = lag(est_woba_minus_woba_diff),
+        pa_l1 = lag(pa) / 162,
+        season2020 = ifelse(year == 2020, 1, 0)
+    )
+
+dat2 <- left_join(top_batters, dat, by = c("player_id", "last_name, first_name")) |>
+    filter(
+        year >= 2016,
+        pa >= 150
+    )
+
+# dat_split <- group_initial_split(dat2, prop = 0.7, group = "player_id")
+
+# dat_train <- training(dat_split)
+# dat_test <- testing(dat_split)
+
+dat_train <- dat2 |>
+    filter(year <= 2023)
+dat_test <- dat2 |>
+    filter(year > 2023)
+```
+
+```{r}
+dat2 |>
+    ggplot(aes(year, est_woba_l1, color = woba, group = player_id)) +
+        geom_point() +
+        geom_smooth(method = "lm", se = FALSE) +
+        facet_wrap(`last_name, first_name`~.) +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+        scale_color_viridis_c(name = "xwOBA_{t-1}") + 
+        labs(x = "Year", y = "xwOBA") +
+        scale_x_continuous(breaks = seq.int(from = 2016, to = 2025, by = 2))
+```
+
+
+```{r}
+fit0 <- lmer(woba ~ diff_woba_l1 + (1 | player_id), data = dat_train)
+fit1 <- lmer(woba ~ woba_l1 + diff_woba_l1 + t + (1 | player_id), data = dat_train)
+fit2 <- lmer(woba ~ pa_l1 * (woba_l1 + diff_woba_l1) + t + (1 | player_id), data = dat_train)
+fit3 <- lmer(woba ~ woba_l1 + est_woba_l1 + t + tsq + (1 | player_id), data = dat_train)
+fit4 <- lmer(woba ~ woba_l1 + diff_woba_l1 + splines::bs(t) + (1 | player_id), data = dat_train)
+
+fit_list <- list(
+    "fit0" = fit0,
+    "fit1" = fit1,
+    "fit2" = fit2,
+    "fit3" = fit3,
+    "fit4" = fit4
+)
+fit_names <- names(fit_list)
+```
+
+```{r}
+lapply(fit_list, AIC) |> unlist()
+```
+
+```{r}
+dotplot(ranef(fit0))
+dotplot(ranef(fit1))
+dotplot(ranef(fit2))
+dotplot(ranef(fit3))
+dotplot(ranef(fit4))
+```
+
+```{r}
+plot(fit0)
+plot(fit1)
+plot(fit2)
+plot(fit3)
+plot(fit4)
+```
+
+```{r}
+#| label: fig-fitted-lmm
+#| fig-height: 8
+#| fig-width: 6
+# Predict on training set
+
+lmer_prediction <- function(fit, fit_name, newdata = NULL, ...) {
+    preds  <- merTools::predictInterval(fit, newdata = newdata, n.sims = 1000, returnSims = TRUE, seed = 657, level = 0.95) %>%
+        as.data.frame()
+    colnames(preds) <- paste0(c("est", "upr", "lwr"), fit_name)
+    return(preds)
+}
+
+preds <- lapply(fit_names, function(f_name) {
+    preds <- lmer_prediction(fit_list[[f_name]], fit_name = paste0("_", f_name),
+        newdata = dat_train)
+    return(preds)
+}) |> 
+    bind_cols()
+
+dat3 <- bind_cols(dat_train, preds)
+ 
+dat3$split_group <- "train"
+ 
+# Predict on test set with 90% prediction intervals
+
+test_preds <- lapply(fit_names, function(f_name) {
+    preds <- lmer_prediction(fit_list[[f_name]], fit_name = paste0("_", f_name),
+        newdata = dat_test)
+    return(preds)
+}) |> 
+    bind_cols()
+
+dat4 <- bind_cols(dat_test, test_preds)
+
+dat4$split_group <- "test"
+
+# Combine the data together
+combined_dat <- bind_rows(dat3, dat4) |>
+  arrange(player_id) |>
+  mutate(split_group = factor(split_group, levels = c("train", "test"))) |>
+  pivot_longer(
+    est_fit0:lwr_fit4,
+    names_to = c("type", "model"),
+    names_pattern = "(.*)_(.*)",
+    values_to = "value"
+  ) |>
+    pivot_wider(
+        names_from = "type",
+        values_from = "value"
+    )
+
+## Plot the time series of predictions and observed data
+combined_dat |>
+    filter(
+        player_id %in% top_batters$player_id
+    ) |>
+    ggplot(aes(x = year, y = woba, group = model)) +
+      geom_ribbon(aes(ymin = lwr,
+                      ymax = upr,
+                      fill = model),
+                #   fill = "light grey",
+                  alpha = 0.25) +
+      geom_line(aes(y = est, color = model),
+                size = 1) +
+      geom_point(aes(fill = split_group),
+                 size = 1.5,
+                 shape = 21) +
+      geom_vline(xintercept = 2023.5, linetype = "dashed") +
+    #   geom_line() +
+      facet_wrap(~`last_name, first_name`) +
+      theme_bw() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1),
+            legend.position = "right") +
+      labs(x = "Year",
+           y = "wOBA",
+           title = "wOBA over 2016-2025") +
+        scale_x_continuous(breaks = seq.int(from = 2016, to = 2025, by = 2))
+```
+
+```{r}
+combined_dat |>
+    ungroup() |>
+    group_by(split_group, model) |> 
+    filter(split_group == "test") |>
+    summarize(
+        rmse = sqrt(mean((woba - est)^2, na.rm = TRUE))
+    ) |>
+    arrange(split_group, rmse)
+```

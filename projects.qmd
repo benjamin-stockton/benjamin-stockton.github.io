@@ -28,6 +28,7 @@ link-external-newwindow: true
 
 ## Presentations
 
+- NESS 2026 - "Limitations of the Sequential Parallel Comparisons Design" ([pdf](/files/ness_2026_Benjamin_Stockton.pdf){target="_blank"})
 - JSM 2025 - "Incomplete Angular Time Series Imputation with a Projected Normal Autoregressive Process and Exogenous Predictors" ([pdf](/files/Stockton_Benjamin_JSM_2025_Pres%20copy.pdf){target="_blank"})
 - NESS 2025 - "Estimating Policy Effects with Interrupted Time Series Following a Nuisance Interruption" ([pdf](/files/ness_2025%20copy.pdf){target="_blank"})
 - Student Workshop on Statistical Computing - "Getting to Know Stan" ([post](docs/posts/intro-to-stan.html){target="_blank"})
