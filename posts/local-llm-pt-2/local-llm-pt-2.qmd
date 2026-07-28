@@ -1,0 +1,169 @@
+---
+title: "A Follow-up on My Short Local Agentic LLM Experiment"
+subtitle: "Part 2: Maybe there is something useful here?"
+author: "Ben Stockton"
+date: 2026-07-28
+editor: source
+format: 
+    html:
+        code-fold: true
+        code-summary: "Show code"
+        code-tools: true
+        code-overflow: wrap
+        number-depth: 3
+        toc: true
+        toc-location: left
+        toc-expand: 2
+        toc-depth: 3
+        link-external-newwindow: true
+        citations-hover: true
+        df-print: paged
+cache: true
+categories: [local-ai, llm, machine-learning]
+---
+
+::: {.callout-warning title="TLDR" icon=true}
+
+Local models are closer to being useful that I thought. It turns out the harness, tools, and how I prompt the agent matter **a lot**. Local models can complete about 80% of the notebook edits I wanted, but I still needed to finish things up to get the final document. They aren't a time-saver yet.
+
+:::
+
+---
+
+[A few weeks ago](/posts/local-lllm-agent-experiment/local-llm-experiment.qmd), I tried using a local LLM on my work issued MacBook Air M2 with 24 GB RAM to reformat and modify an example of a lab session Quarto [notebook](/posts/local-lllm-agent-experiment/_heart_class.qmd) for a machine learning workshop. This notebook was based on one we actually used for a workshop last month, but will never be used in an actual class setting. The reformatting is purely to see if local models are useful. In my previous post, I found that I couldn't get the local model to do anything useful. But I decided to try again because maybe it was just a particular harness, tool, or prompt issue.
+
+---
+
+I'm trying the Heart Classification edits again using a new harness, [OpenCode](https://opencode.ai), the larger [Gemma 26B a4b QAT](https://blog.google/innovation-and-ai/technology/developers-tools/quantization-aware-training-gemma-4/) model, and a new Edit tool from [GitHub](https://github.com/anomalyco/opencode/issues/21850#issuecomment-4685341644). This updated Edit tool that uses line numbers to read in the old lines rather than having the model hallucinate lines. That alone basically fixes 90% of what was preventing the model from doing anything before and conveniently also uses fewer tokens. 
+
+Now the model gets stuck looping through and repeating instructions to itself before *correctly* implementing edits, but that's mostly a matter of being inefficient with tokens and taking too long. (At least this is all local and I'm not paying for it.) Once I get it to do a step, `\compact` can get rid of all of the extraneous looping and notes-to-self by the model.[^1] 
+
+[^1]: The token usage is mostly an issue for working on a laptop; with my desktop the model inference is much faster and I can let the context window fill up without feeling much of a slowdown due to memory usage.
+
+That being said, the agent still struggles with tool use because the line replacements shift line numbers so that it loses track of where the text should be before and after editing. This problem would also be a deal-breaker for any actual use as a programming tool, but it is somewhat addressable by adding the following to the AGENTS.md:
+
+```md
+# Tools
+
+- When using the Edit tool, remember that you must use `startLine` and `endLine` and that making multi-line edits or line deletions will change the line numbers. Be careful and double check whether line numbers have changed after making each edit by inspecting `startLine - 5` to `endLine + 5`.
+
+- Never replace an entire file's contents.
+
+- Ask for help if something is confusing.
+```
+
+and to the prompt:
+```md
+... Be careful with edits and make sure to double check whether lines have changed following the edits. Be precise and only make the minimal changes necessary to achieve the goal in each step. ...
+```
+
+With these added instructions, Gemma 26b a4b QAT was able to nearly one-shot almost all of the edits. It completed steps 2, 3, and 4 one-at-a-time, but then upon asking it to fix a typo in code from step 4, it proceeded to one-shot the rest of the plan. I needed to do some compaction after that long interaction. 
+
+I tried to get the model to do some final clean up (code chunk labels, fixing the final graphic, removing the BART variable importance figure, etc.), but OpenCode or LM Studio cached the entire session and ate the context window. I ended up making a new session and finished the edits on my own. While the agent model made most of the edits and they were functional, actually getting a Quarto document that could render took a little more effort on my part. 
+
+Ultimately, even with the agent fulling working with updated instructions, a better LLM, and updated tool, it still took me another half hour to get a [final notebook](_heart_class_opencode.qmd) on top of an afternoon of my MacBook running the local model to do a partial edit on its own. If/when local models are good enough to run on a MacBook and complete tasks completely and accurately, this could be a very useful tool for speeding up some data science-y tasks like making performance graphics/tables and writing basic boilerplate code. Right now, it still isn't quite there without a ton of hand-holding.
+
+<details>
+<summary>Plan (v2)</summary>
+
+Note that this plan was generated by the OpenCode agent and is far more extensive than the one in the previous post.
+
+```md
+# Plan to update heart_class.qmd
+
+## Allowable Packages
+- `tidymodels` (including `parsnip`, `recipes`, `workflows`, `tune`, etc.)
+- `ggplot2` (graphics)
+- `dplyr` (data manipulation)
+- `purrr` (data manipulation)
+- `tidyr` (data manipulation)
+- `xgboost`
+- `ranger`
+- `bart`
+- `vip`
+- `kableExtra`
+
+## Implementation Steps
+
+1. **Setup**
+   - Duplicate `heart_class.qmd` to `heart_class_opencode.qmd` to use as a template for the new lab.
+
+2. **Data Preparation**
+   - Load the `Heart.csv` dataset.
+   - Preprocess data:
+     - Convert `AHD` to factor.
+     - Handle missing values.
+   - Split data into training and testing sets.
+   - Create a `tidymodels` recipe for preprocessing (e.g., `step_normalize`).
+
+3. **Decision Tree Implementation**
+   - Define a decision tree model specification using `parsnip`.
+   - Implement hyperparameter tuning (e.g., `tree_depth`, `min_n`, `cost_complexity`).
+   - Evaluate performance on the test set.
+
+4. **Random Forest Implementation**
+   - Define a random forest model specification using `parsnip` and `ranger`.
+   - Implement hyperparameter tuning (e.g., `mtry`, `trees`, `min_n`).
+   - Evaluate performance on the test set.
+
+5. **BART Implementation**
+   - Define a BART model specification using `parsnip`.
+   - Implement hyperparameter tuning (e.g., `trees`, `prior_terminal_node_coef`, `prior_terminal_node_expo`, `prior_outcome_range`).
+   - Evaluate performance on the test set.
+
+6. **XGBoost Implementation**
+   - Define an XGBoost model specification using `parsnip`.
+   - Implement hyperparameter tuning (e.g., `trees`, `tree_depth`, `min_n`, `loss_reduction`, `sample_size`, `mtry`, `learn_rate`).
+   - Evaluate performance on the test set.
+
+7. **Student Exercise: Regularized Logistic Regression**
+   - Provide a code scaffold for students to:
+     - Specify a logistic regression model with regularization (e.g., `glmnet`).
+     - Perform hyperparameter tuning for regularization parameters.
+     - Evaluate the model performance.
+
+8. **Model Comparison and Visualization**
+   - Generate a summary table of performance metrics (accuracy, sensitivity, specificity, etc.) using `kableExtra`.
+   - Create visual comparisons of model performances using `ggplot2`.
+```
+
+</details>
+
+<details>
+<summary>Agents.md</summary>
+
+```md
+# Project Context
+- This is an education/ML bootcamp repository.
+- Primary analysis language is **R**.
+- Core data source: `Day 2/Heart.csv`.
+
+# Execution & Data
+- `.qmd` files (Quarto) are the primary reference for models and slide content.
+- `.Rmd` files contain lab notes; do not use them as a reference for model logic or architecture.
+- Ensure R packages used in .qmd files are included when creating new analysis scripts.
+
+# Key Findings
+- Data is primarily handled using `dplyr`, `ggplot2`, and `caret`.
+- Target variable in the heart study: `AHD`.
+- Model evaluation focuses on accuracy and AUC.
+
+# Tools
+- When using the Edit tool, remember that you must use `startLine` and `endLine` and that making multi-line edits or line deletions will change the line numbers. Be careful and double check whether line numbers have changed after making each edit by inspecting `startLine - 5` to `endLine + 5`. 
+- Never replace an entire file's contents.
+- Ask for help if something is confusing.
+- 
+```
+
+</details>
+
+<details>
+<summary>Transcript</summary>
+
+[Session log (~5700 lines)](opencode-session-heart.md)
+
+</details>
+
+```{r}
+sessionInfo()
+```

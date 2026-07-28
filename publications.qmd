@@ -4,19 +4,28 @@
 :::
 
 :::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-stocktonInterruptedTimeSeries2026 .csl-entry}
+**Stockton, B.**, Kahn, L. G., Mehta-Lee, S. S., & Hade, E. M. (2026).
+[(Submitted to *Statistical Methods in Medical Research*)]{.nocase}
+Interrupted time series analysis of count data with nuisance
+interruptions. In *arXiv.org*. arXiv.
+<https://doi.org/10.48550/arXiv.2607.19493>
+:::
+
+::: {#ref-stocktonCommentaryResurrectingCompletecase2026 .csl-entry}
+**Stockton, B.**, & Harel, O. (2026). Commentary on " *Resurrecting*
+*Complete-Case Analysis: A Defense* ": The loss of information remains
+unresolved. *American Journal of Epidemiology*, *195*(6), 1779--1781.
+<https://doi.org/10.1093/aje/kwag068>
+:::
+
 ::: {#ref-stocktonClarifyingIdentificationEstimation2025 .csl-entry}
 **Stockton, B.**, Santacatterina, M., Mandal, S., Cleland, C. M., Hade, E.
 M., Illenberger, N., Meropol, S., Troxel, A. B., Petkova, E., Yu, C., &
-Tarpey, T. (2026). *Clarifying the role of placebo response
+Tarpey, T. (2026). *[(Submitted to *Statistical Methods in Medical
+Research*)]{.nocase} Clarifying the role of placebo response
 classification in the analysis of the Sequential Parallel Comparison
 Design*. *arXiv:2511.19677*. <https://doi.org/10.48550/arXiv.2511.19677>
-:::
-
-::: {#ref-stocktonCommentaryAJE2026 .csl-entry}
-**Stockton, B.**, & Harel, O. (2026). [(Accepted by the [American Journal of
-Epidemiology]{.nocase}): Commentary on Resurrecting Complete-Case
-Analysis: A Defense -- The loss of information remains
-unresolved]{.nocase}. *American Journal of Epidemiology*.
 :::
 
 ::: {#ref-stocktonInProgressCh2 .csl-entry}
@@ -50,12 +59,6 @@ Predictors]{.nocase}*.
 **Stockton, B.**, Kahn, L., Mehta-Lee, S., & Hade, E. (2025). *(In Progress)
 [Assessing the Impacts of Texas's Six-Week Abortion Ban on Maternal
 Morbiity Using Electronic Health Records]{.nocase}*.
-:::
-
-::: {#ref-stocktonInProgressTexasBan .csl-entry}
-**Stockton, B.**, Kahn, L., Mehta-Lee, S., & Hade, E. (2025). *(In Progress)
-[Interrupted Count Time Series Analysis with Nuisance
-Interruptions]{.nocase}*.
 :::
 
 ::: {#ref-stocktonInProgressCrim2 .csl-entry}

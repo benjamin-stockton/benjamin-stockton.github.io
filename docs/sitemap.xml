@@ -2,47 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://benjamin-stockton.github.io/publications.html</loc>
-    <lastmod>2026-04-22T18:33:27.653Z</lastmod>
+    <lastmod>2026-07-28T19:43:36.598Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/welcome/index.html</loc>
     <lastmod>2026-06-30T15:29:29.321Z</lastmod>
   </url>
   <url>
-    <loc>https://benjamin-stockton.github.io/posts/local-lllm-agent-experiment/local-llm-experiment.html</loc>
-    <lastmod>2026-07-07T15:09:55.004Z</lastmod>
+    <loc>https://benjamin-stockton.github.io/posts/local-llm-pt-2/local-llm-pt-2.html</loc>
+    <lastmod>2026-07-28T19:26:41.741Z</lastmod>
   </url>
   <url>
-    <loc>https://benjamin-stockton.github.io/posts/imputeangles/index.html</loc>
-    <lastmod>2026-02-03T15:28:55.396Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/posts/bayesian-model-averaging/bma.html</loc>
-    <lastmod>2026-04-22T18:44:59.989Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/blog.html</loc>
-    <lastmod>2026-06-30T15:28:51.604Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/about.html</loc>
-    <lastmod>2026-06-04T19:57:35.123Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/index.html</loc>
-    <lastmod>2026-04-22T19:45:25.693Z</lastmod>
-  </url>
-  <url>
-    <loc>https://benjamin-stockton.github.io/posts/directions-data-viz/directions-data-viz.html</loc>
-    <lastmod>2026-02-20T21:41:23.626Z</lastmod>
+    <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
+    <lastmod>2026-02-03T15:28:24.650Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/imp-data-viz/imp-data-viz.html</loc>
     <lastmod>2026-02-20T21:38:47.592Z</lastmod>
   </url>
   <url>
-    <loc>https://benjamin-stockton.github.io/posts/intro-to-stan/intro_to_stan.html</loc>
-    <lastmod>2026-02-03T15:28:24.650Z</lastmod>
+    <loc>https://benjamin-stockton.github.io/posts/directions-data-viz/directions-data-viz.html</loc>
+    <lastmod>2026-02-20T21:41:23.626Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/index.html</loc>
+    <lastmod>2026-04-22T19:45:25.693Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/about.html</loc>
+    <lastmod>2026-06-04T19:57:35.123Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/blog.html</loc>
+    <lastmod>2026-06-30T15:28:51.604Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/bayesian-model-averaging/bma.html</loc>
+    <lastmod>2026-04-22T18:44:59.989Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/imputeangles/index.html</loc>
+    <lastmod>2026-02-03T15:28:55.396Z</lastmod>
+  </url>
+  <url>
+    <loc>https://benjamin-stockton.github.io/posts/local-lllm-agent-experiment/local-llm-experiment.html</loc>
+    <lastmod>2026-07-07T15:09:55.004Z</lastmod>
   </url>
   <url>
     <loc>https://benjamin-stockton.github.io/posts/miss-mech-notes/miss-mech-notes.html</loc>

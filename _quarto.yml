@@ -16,6 +16,7 @@ website:
   twitter-card: true
   open-graph: true
   site-url: https://benjamin-stockton.github.io
+  back-to-top-navigation: true
   navbar:
     left:
       - about.qmd
