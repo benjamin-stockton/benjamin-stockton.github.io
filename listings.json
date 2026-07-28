@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/local-llm-pt-2/local-llm-pt-2.html",
       "/posts/local-lllm-agent-experiment/local-llm-experiment.html",
       "/posts/bayesian-model-averaging/bma.html",
       "/posts/imp-data-viz/imp-data-viz.html",

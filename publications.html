@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -59,14 +62,14 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-23d04c7390623e34f5ac5c2a30d27b4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-111d1ff3f67d4d8c991d1acf596e6738.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-23d04c7390623e34f5ac5c2a30d27b4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-333eb367981b9f509117da1a5cd93d75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5bacc5e3415bd444084ef521b6dd3d84.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-333eb367981b9f509117da1a5cd93d75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -345,11 +348,14 @@ div.csl-indent {
 
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="1" data-line-spacing="2" role="list">
-<div id="ref-stocktonClarifyingIdentificationEstimation2025" class="csl-entry" role="listitem">
-<strong>Stockton, B.</strong>, Santacatterina, M., Mandal, S., Cleland, C. M., Hade, E. M., Illenberger, N., Meropol, S., Troxel, A. B., Petkova, E., Yu, C., &amp; Tarpey, T. (2026). <em>Clarifying the role of placebo response classification in the analysis of the Sequential Parallel Comparison Design</em>. <em>arXiv:2511.19677</em>. <a href="https://doi.org/10.48550/arXiv.2511.19677" class="uri">https://doi.org/10.48550/arXiv.2511.19677</a>
+<div id="ref-stocktonInterruptedTimeSeries2026" class="csl-entry" role="listitem">
+<strong>Stockton, B.</strong>, Kahn, L. G., Mehta-Lee, S. S., &amp; Hade, E. M. (2026). <span class="nocase">(Submitted to <em>Statistical Methods in Medical Research</em>)</span> Interrupted time series analysis of count data with nuisance interruptions. In <em>arXiv.org</em>. arXiv. <a href="https://doi.org/10.48550/arXiv.2607.19493" class="uri">https://doi.org/10.48550/arXiv.2607.19493</a>
 </div>
-<div id="ref-stocktonCommentaryAJE2026" class="csl-entry" role="listitem">
-<strong>Stockton, B.</strong>, &amp; Harel, O. (2026). <span class="nocase">(Accepted by the <span class="nocase">American Journal of Epidemiology</span>): Commentary on Resurrecting Complete-Case Analysis: A Defense – The loss of information remains unresolved</span>. <em>American Journal of Epidemiology</em>.
+<div id="ref-stocktonCommentaryResurrectingCompletecase2026" class="csl-entry" role="listitem">
+<strong>Stockton, B.</strong>, &amp; Harel, O. (2026). Commentary on ” <em>Resurrecting</em> <em>Complete-Case Analysis: A Defense</em> “: The loss of information remains unresolved. <em>American Journal of Epidemiology</em>, <em>195</em>(6), 1779–1781. <a href="https://doi.org/10.1093/aje/kwag068" class="uri">https://doi.org/10.1093/aje/kwag068</a>
+</div>
+<div id="ref-stocktonClarifyingIdentificationEstimation2025" class="csl-entry" role="listitem">
+<strong>Stockton, B.</strong>, Santacatterina, M., Mandal, S., Cleland, C. M., Hade, E. M., Illenberger, N., Meropol, S., Troxel, A. B., Petkova, E., Yu, C., &amp; Tarpey, T. (2026). <em><span class="nocase">(Submitted to <em>Statistical Methods in Medical Research</em>)</span> Clarifying the role of placebo response classification in the analysis of the Sequential Parallel Comparison Design</em>. <em>arXiv:2511.19677</em>. <a href="https://doi.org/10.48550/arXiv.2511.19677" class="uri">https://doi.org/10.48550/arXiv.2511.19677</a>
 </div>
 <div id="ref-stocktonInProgressCh2" class="csl-entry" role="listitem">
 <strong>Stockton, B.</strong>, &amp; Harel, O. (2026). <span class="nocase">(Accepted by the <span class="nocase">Journal of Applied Statistics</span>)</span> <span class="nocase">Incomplete Angular Time Series Imputation with a Projected Normal Autoregressive Process and Exogenous Predictors</span>. <em>Journal of Applied Statistics</em>.
@@ -366,9 +372,6 @@ Gupta, S., <strong>Stockton, B.</strong>, &amp; Harel, O. (2025). <span class="n
 <div id="ref-stocktonInProgressCountITS" class="csl-entry" role="listitem">
 <strong>Stockton, B.</strong>, Kahn, L., Mehta-Lee, S., &amp; Hade, E. (2025). <em>(In Progress) <span class="nocase">Assessing the Impacts of Texas’s Six-Week Abortion Ban on Maternal Morbiity Using Electronic Health Records</span></em>.
 </div>
-<div id="ref-stocktonInProgressTexasBan" class="csl-entry" role="listitem">
-<strong>Stockton, B.</strong>, Kahn, L., Mehta-Lee, S., &amp; Hade, E. (2025). <em>(In Progress) <span class="nocase">Interrupted Count Time Series Analysis with Nuisance Interruptions</span></em>.
-</div>
 <div id="ref-stocktonInProgressCrim2" class="csl-entry" role="listitem">
 Strange, C. C., <strong>Stockton, B.</strong>, Zvonkovich, J., &amp; Harel, O. (2025). <em>(In Progress) <span class="nocase">Multiple Imputation Using Pattern-mixture Modeling</span> to Assess the Sensitivity of Race/Ethnicity Effect Estimates in <span class="nocase">Sentencing Given Non-ignorable Incomplete Data</span></em>.
 </div>
@@ -383,7 +386,7 @@ Sidi, Y., <strong>Stockton, B.</strong>, &amp; Harel, O. (2024). Non-inferiority
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
