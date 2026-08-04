@@ -361,14 +361,14 @@
     "href": "projects.html#research-projects",
     "title": "Projects",
     "section": "Research Projects",
-    "text": "Research Projects\n\nMisclassification in the Sequential Parallel Comparisons Design\nInterrupted Time Series Analysis for Count Data with Nuisance Interruptions\nProjected Gaussian Process Imputation for Incomplete Angular Spatial Data - GitHub\nProjected Normal Autoregressive Imputation for Incomplete Angular Time Series - GitHub\nProjected Normal Multiple Imputation for Angular Data - GitHub\nMissing Data in Sentencing Research - GitHub\n\n\nR Packages\n\nimputeangles - GitHub\npnregstan - GitHub"
+    "text": "Research Projects\n\nMisclassification in the Sequential Parallel Comparisons Design\n\narXiv preprint\n\nInterrupted Time Series Analysis for Count Data with Nuisance Interruptions\n\narXiv preprint\n\nProjected Gaussian Process Imputation for Incomplete Angular Spatial Data - GitHub\nProjected Normal Autoregressive Imputation for Incomplete Angular Time Series - GitHub\nProjected Normal Multiple Imputation for Angular Data - GitHub\nMissing Data in Sentencing Research - GitHub\n\n\nR Packages\n\nimputeangles - GitHub\npnregstan - GitHub"
   },
   {
     "objectID": "projects.html#presentations",
     "href": "projects.html#presentations",
     "title": "Projects",
     "section": "Presentations",
-    "text": "Presentations\n\nNESS 2026 - “Limitations of the Sequential Parallel Comparisons Design” (pdf)\nJSM 2025 - “Incomplete Angular Time Series Imputation with a Projected Normal Autoregressive Process and Exogenous Predictors” (pdf)\nNESS 2025 - “Estimating Policy Effects with Interrupted Time Series Following a Nuisance Interruption” (pdf)\nStudent Workshop on Statistical Computing - “Getting to Know Stan” (post)\nNESS 2023 - “Multiple Imputation with Angular Covariates” (pdf)\nENAR 2023 - “Multiple Imputation with Angular Covariates” (pdf)"
+    "text": "Presentations\n\nJSM 2026 - “Clarifying Placebo Response Classification in the Sequential Parallel Comparison Design” (pdf)\nNESS 2026 - “Limitations of the Sequential Parallel Comparisons Design” (pdf)\nJSM 2025 - “Incomplete Angular Time Series Imputation with a Projected Normal Autoregressive Process and Exogenous Predictors” (pdf)\nNESS 2025 - “Estimating Policy Effects with Interrupted Time Series Following a Nuisance Interruption” (pdf)\nStudent Workshop on Statistical Computing - “Getting to Know Stan” (post)\nNESS 2023 - “Multiple Imputation with Angular Covariates” (pdf)\nENAR 2023 - “Multiple Imputation with Angular Covariates” (pdf)"
   },
   {
     "objectID": "projects.html#course-projects",
